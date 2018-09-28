@@ -1,0 +1,41 @@
+<div class="text-page">
+
+        <div class="section">
+            <div class="container">
+                <!-- logo -->
+                <div class="row">
+                    <div class="col-12 text-center">
+                    <h6 class="section-heading">OTP Authentication {{status}}</h6>
+                    <form class="form small-form" name="vm.loginOTP" ng-submit="vm.verifyLoginOTP();" novalidate>
+                            <!-- <div class="form-group">
+                                <label class="form-group-label">Enter OTP code </label>
+                                <input id="sign-in-email" class="form-control marginAuto" type="text" ng-model="vm.authLogin.verifyOTP" autofocus autocomplete="off" name="loginOTP" required ng-change="vm.input2fachanged();" numbr-only>
+                                 <p class="error-msg" ng-if="vm.loginOTP.loginOTP.$error.required && vm.loginOTP.$submitted">Please enter OTP code.</p>
+                            </div> -->
+                            <!-- <div class="form-group mb-5">
+                                <div class="checkbox checkbox-primary"><input type="checkbox" id="keep_me_logged_in"><label for="keep_me_logged_in">Keep me signed in</label></div>
+                            </div> -->
+
+                            <div class="form-group">
+                                        <div class="has-form-group-icon">
+                                            <label class="form-group-label">Enter OTP code <small ng-hide="vm.showSendButton">Resend in <span ng-bind="vm.timer"></span> sec</small></label>
+                                            <input class="form-control marginAuto"  numbr-only ng-model="vm.otp" required name="otp" autocomplete="off" ng-maxLength="6" ng-minLength="6" style="display: inline;">
+                                            <a href=""  ng-show="vm.showSendButton" ng-click="vm.resendCustomerOTP()">{{vm.OTPSent?'Resend':'Send'}} OTP</a>
+                                            </div>
+                                            <p class="error-msg" ng-if="!vm.vm.loginOTP.otp.$valid && (vm.vm.loginOTP.otp.$touched||vm.vm.loginOTP.$submitted)">Please enter valid OTP</p>
+                            </div>
+
+                            <input ng-model="vm.getUser.device_ipAddress" style="display: none">
+                            <input type="hidden" ng-model="vm.getUser.device_os" ng-init="vm.getUser.device_os =  vm.device_os">
+                            <input type="hidden" ng-model="vm.getUser.device_name" ng-init="vm.getUser.device_name =  vm.device_name">
+                            <input type="hidden" ng-model="vm.getUser.device_browser" ng-init="vm.getUser.device_browser =  vm.device_browser">
+                            <input type="submit" class="btn btn-primary" value="SUBMIT" />
+                        </form>
+                   
+                </div>
+                <!-- #reset-password-form -->
+            </div>
+            <!-- /.simple-page-content -->
+        </div>
+        <!-- .simple-page-wrap -->
+</div>

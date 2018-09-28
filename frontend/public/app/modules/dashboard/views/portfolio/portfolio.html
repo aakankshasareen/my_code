@@ -1,0 +1,91 @@
+<h1 class="dashboard-main-heading">Portfolio</h1>
+
+<div class="row">
+<div class="col-lg-8">
+<div class="card">
+    <div class="card-body has-parts inner-portfolio-content">
+        <div class="full-width">
+            <ul class="row card-text-list">
+                <li class="col-md-12 marT10">
+                    <p class="card-text-small marT20 card-header">My Token Portfolio<!-- <small class="pull-right text-right">{{vm.getWalletCrypto[0].cryptoTotalBal | number:2}} USD</small> --></p>
+                </li>
+            </ul>
+            <!-- Table -->
+            <div class="table-responsive">
+                <table class="table portfolio-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 21%; padding-left:2.3rem;">Currency</th>
+                            <th class="text-right">Balance</th>
+                            <th class="text-right">Current Value</th>
+                            <th class="text-right">Total Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="balanceCrypto in vm.getWalletCrypto" ng-if="balanceCrypto.Cryptotype==1">
+                            <td data-label="Currency">
+                                <div class="currency-cell">
+                                    <img class="cell-icon" src="{{balanceCrypto.icon_path}}" alt="" width="20px" height="20px" />
+                                    <a class="cell-link">{{balanceCrypto.name}}</a>
+                                </div>
+                            </td>
+                            <td class="text-right" data-label="Balance">{{balanceCrypto.balance | number:balanceCrypto.Cryptotype==0 ? 2 :8 }} &nbsp; {{balanceCrypto.currency_code}}</td>
+                            <td ng-if="balanceCrypto.currency_code!='FULX'" class="text-right" data-label="Value (USD)">{{balanceCrypto.priceInUSD | number : 2}} USD &nbsp;</td>
+                            <td ng-if="balanceCrypto.currency_code=='FULX'" class="text-right" data-label="Value (USD)">{{2| number:2}} USD &nbsp;</td>
+                            <td ng-if="balanceCrypto.currency_code!='FULX'" class="text-right" data-label="Value (USD)">{{balanceCrypto.priceInUSD*balanceCrypto.balance | number : 2}} USD &nbsp;</td>
+                            <td ng-if="balanceCrypto.currency_code=='FULX'" class="text-right" data-label="Value (USD)">{{2*balanceCrypto.balance | number:2}} USD &nbsp;</td>                        </tr>
+                    </tbody>
+                </table>
+                <ul class="pagination justify-content-end">
+                    <li class="page-item"></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div class="col-lg-4">
+<div class="card">
+    <div class="card-body has-parts inner-portfolio-content">
+        <div class="full-width">
+            <ul class="row card-text-list">
+                <li class="col-md-12 marT10">
+                    <p class="card-text-small marT20 card-header">My Fiat Total Balance</p>
+                </li>
+            </ul>
+            <!-- Table -->
+            <div class="table-responsive">
+                <table class="table portfolio-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50%; padding-left:2.3rem;">Currency</th>
+                            <th class="text-right">Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="balanceCrypto in vm.getWalletCrypto" ng-if="balanceCrypto.Cryptotype!=1" >
+                            
+                            <td data-label="Currency">
+                                <div class="currency-cell">
+                                    <img class="cell-icon" src="{{balanceCrypto.icon_path}}" alt="" width="20px" height="20px" />
+                                    <a class="cell-link">{{balanceCrypto.name}}</a>
+                                </div>
+                            </td>
+                            <td class="text-right" data-label="Balance">{{balanceCrypto.balance | number:balanceCrypto.Cryptotype==0 ? 2 :8 }} &nbsp; {{balanceCrypto.currency_code}}</td>
+                    </tbody>
+                </table>
+                <ul class="pagination justify-content-end">
+                    <li class="page-item"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>

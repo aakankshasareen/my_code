@@ -1,0 +1,166 @@
+<h1 class="dashboard-main-heading">Bank Details</h1>
+<div class="row">
+    <!-- Bank Details Card -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">Bank Details</div>
+                    <div class="col-6 text-right">
+                        <a ui-sref="dashboard.userProfile">Go to Profile</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <form class="form small-form" name="vm.bankDetails" novalidate>
+                    <!-- Form Group -->
+					 <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <label class="form-group-label">Account Holder's Name<sup class="important">*</sup></label>
+                        <input type="text" class="form-control" ng-disabled="vm.bankDetailsUploaded" ng-model="vm.bank.holderName" required name="holderName" pattern="^[ a-zA-Z]*$" autocomplete="off" maxlength="50" />
+                        <p class="error-msg" ng-if="vm.bankDetails.holderName.$error.required && vm.bankDetails.$submitted">Please enter Name</p>
+                        <p class="error-msg" ng-if="vm.bankDetails.holderName.$error.pattern">Please enter valid Name</p>
+                    </div>
+					</div>
+                    <!-- Form Group -->
+                    <!-- Form Group -->
+					 <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <label class="form-group-label">SWIFT / IFSC Code<sup class="important">*</sup></label>
+                        <input type="text" class="form-control" ng-disabled="vm.bankDetailsUploaded" ng-model="vm.bank.ifscCode" required name="ifscCode" pattern="^[0-9a-zA-Z]*$" autocomplete="off" maxlength="15" />
+                        <p class="error-msg" ng-if="vm.bankDetails.ifscCode.$error.required && vm.bankDetails.$submitted">Please enter IFSC code</p>
+                        <p class="error-msg" ng-if="vm.bankDetails.ifscCode.$error.pattern">Please enter valid IFSC code</p>
+                    </div>
+                    </div>
+                    <!-- Form Group -->
+                    <!-- Form Group -->
+					 <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <label class="form-group-label">Bank Name<sup class="important">*</sup></label>
+                        <input type="text" class="form-control" ng-disabled="vm.bankDetailsUploaded" ng-model="vm.bank.bankName" required name="bankName" pattern="^[ a-zA-Z.,&-]*$" autocomplete="off" maxlength="50" />
+                        <p class="error-msg" ng-if="vm.bankDetails.bankName.$error.required && vm.bankDetails.$submitted">Please enter bank name</p>
+                        <p class="error-msg" ng-if="vm.bankDetails.bankName.$error.pattern">Please enter valid bank name</p>
+                    </div>
+                    </div>
+                    <!-- Form Group -->
+                    <!-- Form Group -->
+					 <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <label class="form-group-label">Bank Branch<sup class="important">*</sup></label>
+                        <input type="text" class="form-control" ng-disabled="vm.bankDetailsUploaded" ng-model="vm.bank.bankBranch" required name="bankBranch" pattern="^[ ,.0-9-& _a-zA-Z]*$" autocomplete="off" maxlength="50" />
+                        <p class="error-msg" ng-if="vm.bankDetails.bankBranch.$error.required && vm.bankBranch.$submitted">Please enter bank branch name</p>
+                        <p class="error-msg" ng-if="vm.bankDetails.bankBranch.$error.pattern">Please enter valid branch name</p>
+                    </div>
+                    </div>
+                    <!-- Form Group -->
+                    <!-- Form Group -->
+					 <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <label class="form-group-label">Bank Account Number<sup class="important">*</sup></label>
+                        <input type="text" class="form-control" ng-disabled="vm.bankDetailsUploaded" ng-model="vm.bank.accountNumber" required name="accountNumber" numbr-only autocomplete="off" maxlength="20" />
+                        <p class="error-msg" ng-if="vm.bankDetails.accountNumber.$error.required && vm.bankDetails.$submitted">Please enter account number</p>
+                        <p class="error-msg" ng-if="vm.bankDetails.accountNumber.$error.pattern">Please enter valid account number</p>
+                    </div>
+                    </div>
+					 <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <label class="form-group-label">Confirm Bank Account Number<sup class="important">*</sup></label>
+                        <input type="text" class="form-control" ng-disabled="vm.bankDetailsUploaded" ng-model="vm.bank.accountNumberConf" required name="accountNumberConf" numbr-only autocomplete="off" maxlength="20" />
+                        <p class="error-msg" ng-if="vm.bankDetails.accountNumberConf.$error.required && vm.bankDetails.$submitted">Please confirm account number</p>
+                        <p class="error-msg" ng-if="vm.bank.accountNumber!==vm.bank.accountNumberConf && vm.bankDetails.$submitted">Account number do not match.</p>
+                        <p class="error-msg" ng-if="vm.bankDetails.accountNumberConf.$error.pattern">Please enter valid account number</p>
+                        <!-- <div class="error-msg" id="divCheckPasswordMatch">
+                        </div> -->
+                    </div>
+                    <!-- <script>
+    $('#accountNumber, #accountNumberConf').on('keyup', function () {
+  if ($('#accountNumbeer').val() == $('#accountNumberConf').val()) {
+    $('#message').html('Matching').css('color', 'green');
+  } else 
+    $('#message').html('Not Matching').css('color', 'red');
+});
+</script> -->
+                    </div>
+                    <!-- Form Group -->
+                    <!-- <div class="form-group">
+                                        <label class="form-group-label">Account Type<sup class="important">*</sup></label>
+                                        <input type="text" class="form-control" ng-disabled="vm.bankDetailsUploaded" ng-model="vm.bank.accountType" required name="accountType" pattern="^[ a-zA-Z]*$" autocomplete="off" maxlength="50"/>
+                                        <p class="error-msg" ng-if="vm.bankDetails.accountType.$error.required && vm.bankDetails.$submitted">Please enter account type.</p>
+                                        <p class="error-msg" ng-if="vm.bankDetails.accountType.$error.pattern">Please enter valid account type.</p>
+                                   </div> -->
+								    <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <label class="form-group-label">Account Type</label>
+                        <div class="form-control-wrap">
+                            <select class="custom-select form-control" ng-disabled="vm.bankDetailsUploaded" data-ng-model="vm.bank.accountType" required autocomplete="off" name="mode">
+                                <option style="display:none" value=""></option>
+                                <option value="1">Savings </option>
+                                <option value="2">Current </option>
+                            </select>
+                            <!-- p ng-if="depositForm.amt.$error.pattern && depositForm.amt.$submitted" class="error-msg">Please enter valid amount.</p> -->
+                        </div>
+                        <p class="error-msg" ng-if="vm.bankDetails.accountType.$error.required && vm.bankDetails.$submitted">Please select account type</p>
+                    </div>
+                    </div>
+                    <!-- Form Group -->
+                   <!--  <div class="form-group" ng-hide="vm.bankDetailsUploaded">
+                        <label class="form-group-label">Upload Proof of Bank Account <small style="font-size: 80% !important">&nbsp;&nbsp;(Maximum file upload size : 1MB. Allowed Formats : JPG,PNG,PDF,DOC,DOCX )</small><sup class="important" ng-if="!vm.documents.length">*</sup>
+                        </label>
+                        <div class="file-input-box">
+                            <div class="row">
+                                <div class="col-md-8 file-input-text">
+                                    <div class="custom-input-file marT20">
+                                        <input type="file" class="inputfile" ng-disabled="vm.bankDetailsUploaded" ngf-select ng-model="vm.file" name="file" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-pattern="'.doc,.docx,.pdf,.jpeg,.jpg,.png'" ngf-max-size="1MB" ng-required="!vm.documents.length" style="padding:0px;" />
+                                        <a href="javascript:;" class="btn btn-outline-primary">Upload Image</a>
+                                        <div class="selected-value marT15"><span class="text"></span><span class="input-close">×</span></div>
+                                    </div>
+                                    <!--  <div class="row"><div class="col-12"><small class="text-danger" style="font-size: 80% !important">&nbsp;&nbsp;(Maximum file upload size : 1MB. Allowed Formats : JPG,PNG,PDF,DOC,DOCX )</small></div></div> -->
+                                    <!-- <div class="custom-input-file">
+                                                        <input type="file" class="inputfile" ngf-select ng-model="vm.file" name="file" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-pattern="'.doc,.docx,.pdf,.jpeg,.jpg,.png'" ngf-max-size="1MB" ng-required="!vm.idProofUploaded" style="padding:0px;" />
+                                                        <label>
+                                                            <span class="selected-value"><span class="semibold-font">BROWSE</span></span>
+                                                            <img class="label-icon" src="assets/content/images/file-upload-icon.png" alt="Gallery Icon" />
+                                                        </label>
+                                                    </div> 
+                                    <p class="mt-2 error-msg" ng-if="vm.bankDetails.file.$error.required && vm.bankDetails.$submitted">Please upload ID Proof.</p>
+                                    <p class="mt-2 error-msg" ng-if="vm.bankDetails.file.$error.pattern && vm.bankDetails.file.$touched">Please upload a valid (.jpg, .png, .doc, .docx, .pdf) file only.</p>
+                                    <p class="mt-2 error-msg" ng-if="vm.bankDetails.file.$error.maxSize">Maximum file upload size : 1MB.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- Form Group -->
+					 <div class="col-lg-4 col-md-6">
+                    <div class="form-group text-left" ng-hide="vm.bankDetailsUploaded">
+                        <button type="submit" class="btn btn-primary" ng-click="vm.updateBankDetails()">Submit</button>
+                    </div>
+                    </div>
+					
+                    <!-- Form Group -->
+                </form>
+               
+            </div>
+        </div>
+    </div>
+    <!-- Bank Details Card -->
+    <!-- KYC Card -->
+    <!-- <div class="col-lg-6">
+                        <div class="card full-height">
+                            <div class="card-header">List of Documents Uploaded</div>
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="document in vm.documents"><a href="" ng-click="vm.downloadDoc(document.docURL)"><i class="fa fa-paperclip fs-1rem marR10"></i> {{document.docName}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div> -->
+    <
+    <!-- KYC Card -->
+    <!-- document download form -->
+    <form method="post" name="downloadForm" action="/api/download">
+        <input type="hidden" value={{token}} name="token">
+        <input type="hidden" name="path">
+    </form>
+</div>

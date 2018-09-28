@@ -1,0 +1,48 @@
+@mixin extra-large {
+  @media (min-width: 1600px) {
+    @content;
+  }
+}
+@mixin large {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+@mixin medium {
+  @media (max-width: 1199px) {
+    @content;
+  }
+}
+@mixin small-alt {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+@mixin small {
+  @media (max-width: 991px) {
+    @content;
+  }
+}
+@mixin ipad-portrait {
+  @media (min-width: 768px) and (max-width:786px) {
+    @content;
+  }
+}
+
+@mixin extra-small-alt {
+  @media (min-width: 767px) {
+    @content;
+  }
+}
+
+@mixin extra-small {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin mobile-portrait {
+  @media (max-width: 360px) {
+    @content;
+  }
+}

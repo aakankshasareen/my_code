@@ -1,0 +1,29 @@
+.social-icons {
+    .social-icon {
+        display: block;
+        font-size: 0;
+        background-repeat: no-repeat;
+        background-position: center center;
+        @include square(24px);
+        @include transition(350ms);
+        &:hover {
+            opacity: 0.7;
+            @include translate(0,-5px);
+        }
+        &.facebook-icon {
+            background-image:  url(../images/social-icons/facebook-icon.svg);
+        }
+        &.linkedin-icon {
+            background-image:  url(../images/social-icons/linkedin-icon.svg);
+        }
+        &.medium-icon {
+            background-image:  url(../images/social-icons/medium-icon.svg);
+        }
+        &.twitter-icon {
+            background-image:  url(../images/social-icons/twitter-icon.svg);
+        }
+        &.telegram-icon {
+            background-image:  url(../images/social-icons/telegram-icon.svg);
+        }
+    }
+}

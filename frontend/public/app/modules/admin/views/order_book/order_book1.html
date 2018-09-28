@@ -1,0 +1,90 @@
+<div class="animated fadeIn">
+
+    <!-- <h1 class="page-title">{{vm.pageHeading}} Currency</h1> -->
+     <div class="card orderbook-list">
+       <div class="card-header"> <h4>Order Book</h4></div>
+       <div class="card-body">
+        <div>
+          <ul class="row clean-list call-active">
+            <li class="col-md-3" ng-repeat="currencyPair in vm.currencyPairs" ng-click="vm.updateCurrencyPair(currencyPair)" ng-class="vm.activebar()">
+
+              <div class="card cursor-pointer">
+                <div class="card-body text-center p-0 clearfix">
+                <i class="fa fa-signal bg-primary p-3  float-left ico-color"></i>
+                <div class="h5 text-primary mb-0 pt-3 texto-color">{{currencyPair.from}}/{{currencyPair.to}}</div>
+                </div>
+                </div>
+
+
+            </li>
+
+          </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-6 marB30-xs">
+                <h4 class="widget-title">Sell Orders</h4>
+                <hr>
+                <table class="table table-striped table-hover header-fixed">
+                    <thead>
+                        <tr>
+                            <th class="text-right">Price per {{vm.currencyPair.from}}</th>
+                            <th class="text-right">{{vm.currencyPair.from}} Quantity</th>
+                            <th class="text-right">Total {{vm.currencyPair.to}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- ngRepeat: item in sellOrder -->
+                        <!-- <tr ng-repeat="item in sellOrder" class="text-right" ng-click="vm.selectSellOrder(item);"> -->
+                            <tr ng-repeat="item in sellOrder" class="text-right">
+                            <td>{{item.sell_price}}</td>
+                            <td>
+                                <!-- <img class="icon-image-size-trade" ng-src="{{vm.getCurrencyFromSymbol}}" alt="{{vm.getCurrencyFrom}}"/> -->{{" "+item.quantity}}
+                                <!-- {{vm.getCurrencyFromSymbol+" " + " " +item.quantity}} -->
+                            </td>
+                            <td>
+                                <!-- <img class="icon-image-size-trade" ng-src="{{vm.getCurrencyToSymbol}}" alt="{{vm.getCurrencyTo}}"/> -->{{" "+item.total_price}}
+                                <!-- {{vm.getCurrencyToSymbol+" " + " " +item.total_price}} -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ng-if="sellOrder.length == 0" colspan="8">No Sell Orders </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h4 class="widget-title">Buy Orders</h4>
+                <hr>
+                <table class="table table-striped table-hover header-fixed">
+                    <thead>
+                        <tr>
+                            <th class="text-right">Price Per {{vm.currencyPair.from}}</th>
+                            <th class="text-right">{{vm.currencyPair.from}} Quantity</th>
+                            <th class="text-right">Total {{vm.currencyPair.to}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+<!--                         <tr ng-repeat="item in buyOrder" class="text-right" ng-click="vm.selectBuyOrder(item);">
+ -->                        <tr ng-repeat="item in buyOrder" class="text-right">
+                            <td>{{item.buy_price}}</td>
+                            <td>
+                                <!-- <img class="icon-image-size-trade" ng-src="{{vm.getCurrencyFromSymbol}}" alt="{{vm.getCurrencyFrom}}"/> -->{{" "+item.quantity}}
+                                <!-- {{vm.getCurrencyFromSymbol+" " + " " +item.quantity}} -->
+                            </td>
+                            <td>
+                                <!-- <img class="icon-image-size-trade" ng-src="{{vm.getCurrencyToSymbol}}" alt="{{vm.getCurrencyTo}}"/> -->{{" "+item.total_price}}
+                                <!-- {{vm.getCurrencyToSymbol+" " + " " +item.total_price}} -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td ng-if="buyOrder.length == 0" colspan="8">No Buy Orders </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+       </div>
+    </div>
+</div>
+

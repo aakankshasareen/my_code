@@ -1,0 +1,108 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="pe-7s-note2"></i>
+        </div>
+        <div class="header-title">
+            <h1>{{pageHeading}} Currency</h1>
+            <small>Platform Currency</small>
+            <ol class="breadcrumb">
+                <li><a ui-sref="admin.dashboard"><i class="pe-7s-home"></i> Dashboard</a></li>
+                <li><a ui-sref="admin.currencyList">Currency</a></li>
+                <li class="active">{{pageHeading}}</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- Form controls -->
+            <div class="col-sm-12">
+                <div class="panel panel-bd lobidrag">
+                    <!--                    <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h4>Add Currency</h4>
+                                            </div>
+                                        </div>-->
+
+                    <div class="panel-body">                                    
+
+                        <form autocomplete="off" ng-submit="vm.getCurrency.id ? vm.updateCurrency(currencyForm.$valid) : vm.addCurrency(currencyForm.$valid)" name="vm.currencyForm" enctype="multipart/form-data">                                    
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Currency Name</label>
+                                <sup class="asterik">*</sup>
+                                <input type="text" class="form-control" name="currency_name" required  ng-model="vm.getCurrency.currency_name" aria-describedby="emailHelp" placeholder="Enter Currency Name">                                            
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Currency Code</label>
+                                <sup class="asterik">*</sup>
+                                <input type="text" class="form-control" name="currency_code" required ng-model="vm.getCurrency.currency_code" placeholder="Enter Currency Code">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Symbol</label>
+                                <sup class="asterik">*</sup>
+                                <input type="text" class="form-control" name="currency_symbol" required ng-model="vm.getCurrency.currency_symbol" placeholder="Enter Currency Symbol">
+                            </div>  
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Currency Type</label>
+                                <sup class="asterik">*</sup>
+                                <select name="currency_type" required ng-options="option.name for option in vm.currencyTypes.availableOptions track by option.id" class="form-control" ng-model="vm.getCurrency.currency_type">                                                                                          
+                                    <option value="" style="display: none">Please Select Currency Type</option>
+                                </select>                                  
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Status</label>
+                                <sup class="asterik" >*</sup>
+                                <select name="currency_status" required ng-options="option.name for option in vm.currencyStatus.availableOptions track by option.id" class="form-control" ng-model="vm.getCurrency.currency_status">                                                                                             
+                                    <option value="" style="display: none">Please Select Currency Type</option>        
+                                </select>                                            
+                            </div>    
+                            <div class="row">
+                                
+                            <div class="form-group col-sm-6">
+                                <label for="exampleInputPassword1">Currency Icon</label>
+                                 <sup class="asterik" ng-if="!vm.getCurrency.id" >*</sup>
+                                <input 
+                                    type="file"                                    
+                                    ngf-select 
+                                    ng-model="vm.getCurrency.file" 
+                                    ng-required="!vm.getCurrency.id"
+                                    name="file" 
+                                    ngf-pattern="'image/*'"
+                                    accept="image/*" 
+                                    ngf-max-size="10KB" 
+                                    />
+                                <input type="hidden" ng-model="vm.getCurrency.hidden_currency_icon"  />
+                                <p class="asterik">File size limit 10KB </p>
+                                <span ng-if="vm.getCurrency.file">
+                                Image thumbnail: <img style="width:100px;" ngf-thumbnail="vm.getCurrency.file || '/thumb.jpg'"/>
+                                </span>                                
+                                <i ng-show="vm.currencyForm.file.$error.maxSize">File too large max 10KB</i>                             
+                                <p>{{vm.getCurrency.progress}}</p>
+                            </div> 
+                                <div class="form-group col-sm-6">
+                                    <label for="exampleInputPassword1" ng-if="vm.getCurrency.uploaded_icon">Uploaded Currency Icon</label> 
+                                    <br>
+                                    <input type="hidden" ng-model="vm.getCurrency.uploaded_icon" />
+                                     <span ng-if="vm.getCurrency.uploadedfile">
+                                 <img ng-if="vm.getCurrency.uploadedfile" style="width:100px;" ngf-thumbnail="vm.getCurrency.uploadedfile || '/thumb.jpg'"/>
+                                </span>
+                                </div>
+                            </div>
+                            <input type="hidden" ng-model="vm.getCurrency.id" />
+                            <button type="submit" class="btn btn-primary" ng-disabled="vm.currencyForm.$invalid">Submit</button>
+                            <button type="button" ng-click="vm.cancel()" class="btn btn-primary">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Inline form -->                        
+            <!-- Textual inputs -->                        
+        </div>
+        <!-- Checkboxes & Radios -->
+
+
+    </section> <!-- /.content -->
+</div>

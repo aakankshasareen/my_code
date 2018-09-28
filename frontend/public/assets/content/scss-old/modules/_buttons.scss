@@ -1,0 +1,145 @@
+.btn {
+    font-size: 0.75rem;
+letter-spacing: 0.9px;
+padding: 0.4375rem 0.875rem;
+    position: relative;
+    min-width: 80px;
+    border-color: $theme-color;
+    @include border-radius(1.3rem);
+    &:focus {
+        @include shadow(0 0 0 .2rem rgba(20,137,253,0.5) !important);
+    }
+    &:active {
+      color: #fff;
+        background-color: $theme-color !important;
+    }
+    &.btn-primary {
+        background-color: $theme-color;
+        border: none !important;
+        color: #fff;
+        &:hover {
+            color: #fff;
+        }
+    }
+    &.red-btn {
+        background-color: $error-color;
+        border-color: $error-color;
+        color: #fff;
+    }
+    &.btn-xs {
+        font-size: 0.7rem;
+        padding: 0.5rem 1rem;
+    }
+    &.btn-secondary {
+        background-color: $success-color;
+        border-color: $success-color;
+        &:focus {
+            @include shadow(0 0 0 .2rem rgba(106,196,7,0.5) !important);
+        }
+    }
+    &.btn-info {
+        background-color: $theme-color-light;
+        border-color: $theme-color-light; 
+    }
+    &.btn-outline-primary {
+        border-color: $theme-color;
+        color: $theme-color;
+        &:hover {
+            color: #fff;
+            background-color: $theme-color;
+        }
+    }
+    &.btn-link {
+        color: $theme-color4;
+        padding: 0;
+        border: none !important;
+        background: none !important;
+        @include shadow(none !important);
+    }
+    &.card-btn {
+        min-width: 150px;
+    }
+    &.big-btn {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 1.125rem 1rem;
+        min-width: 300px;
+        @include border-radius(38px);
+        @include media-breakpoint-down(xs) {
+            min-width: 100%;
+        }
+    }
+    &.has-icon {
+        padding-left: 1.5rem;
+        &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            @include square(16px);
+        }
+    }
+}
+
+.deposit-btn:before {
+    background-image: url(../images/deposit-icon.jpg);
+}
+
+.withdraw-btn:before {
+    background-image: url(../images/withdraw-icon.jpg);
+}
+
+.uib-daypicker, .uib-button-bar {
+  .btn {
+    background: $light-gray;
+    border: none;
+    @include border-radius(0);
+  }
+}
+ .uib-button-bar {
+   .btn {
+     background-color: $theme-color;
+     color: #fff;
+   }
+ }
+
+
+ .export-btn {
+    position: absolute !important;
+    top: 0.5rem;
+    right: 1.875rem;
+    @include media-breakpoint-down(lg) {
+        right: 10px;
+        top: -37px;
+    }
+    
+    .btn {
+        @extend .btn-xs;
+        @include media-breakpoint-down(lg) {
+            font-size: 0.65rem;
+            padding: 0.3rem 0.6rem;
+        }
+    }
+    .nav-dropdown {
+        top: 2.875rem;
+        min-width: 150px;
+    }
+}
+
+.uib-daypicker .btn {
+    padding: 0.7rem;
+    @include media-breakpoint-down(sm) {
+        padding: 0.3rem;
+        font-size: 0.7rem;
+    }
+}
+
+.uib-button-bar .btn {
+    @include media-breakpoint-down(sm) {
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+    } 
+}

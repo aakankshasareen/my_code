@@ -1,0 +1,319 @@
+<div class="site-content" ng-cloak>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget site-content-widget">
+                <header class="widget-header row">
+                    <div class="col-lg-6">
+                        <h2 class="page-title">Select Amount &amp; Currency</h2>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <ul class="list-inline widget-header-list">
+                            <li>Wallet Balance : <strong>{{vm.depositWalletBalance}} {{vm.currencySelected.currency_code}}</strong></li>
+                            <li>Min. Limit : <strong>{{vm.minimumDepositAmt}} {{vm.currencySelected.currency_code}}</strong></li>
+                            <li>Max. Limit : <strong>{{vm.maxDepositAmt}} {{vm.currencySelected.currency_code}}</strong></li>
+                        </ul>
+                    </div>
+                </header>
+                <div class="widget-body">
+                    <!-- Form -->
+                    <form name="vm.depositForm" novalidate>
+                        <div class="form select-currency-form">
+                            <div class="form-group">
+                                <input type="text" placeholder="0.000" ng-model="vm.amount" ng-change="vm.changeAmount();" maxlength="100" ng-disabled="vm.currencySelected.type == 1" ng-model-options="{ debounce: 300 }" required id="amt" name="amount" class="form-control" autocomplete="off" ng-pattern="/^\d+(\.\d{1,8})?$/">
+                                <div class="form-dropdown" style="padding:0">
+                                    <select ng-options="item as item.currency_code group by vm.getCurrencyName(item.type) for item in vm.selectCurrency" ng-model="vm.currencySelected" ng-change="vm.clickCurrency(vm.currencySelected)">{{item}}
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Form -->
+                            <p ng-if="vm.depositForm.amount.$error.required && vm.depositForm.$submitted && vm.currencySelected.type == 0" style="color:red">Please enter amount</p>
+                            <p ng-if="vm.depositForm.amount.$error.pattern && vm.currencySelected.type == 0" style="color:red">Please enter correct amount. Decimals permitted upto 8 digits.</p>
+                            <p ng-if="vm.showZeroAmtErr" class="error-msg">Please enter valid amount.</p>
+                            <p ng-if="vm.showMinDepositErr && vm.currencySelected.type == 0" style="color:red">Minimum amount to deposit is {{vm.currencySelected.currency_code + " " + vm.minimumDepositAmt}}</p>
+                            <p ng-if="vm.showMaxDepositErr && vm.currencySelected.type == 0" style="color:red">Maximum amount to deposit is {{vm.currencySelected.currency_code + " " + vm.maxDepositAmt}}</p>
+                            <!-- Tab Content -->
+                            <div class="currency-form-tab-content tab-content" ng-if="vm.currencySelected.type == 0">
+                                <!-- USD Tab Pane -->
+                                <div class="tab-pane active">
+                                    <div class="total-amt">
+                                        <div class="row">
+                                            <div class="col-md-6"><span class="heading" ng-model="vm.totalAmount">Total amount:</span>
+                                                <img class="icon-image-size" alt="{{vm.currencySelected.currency_code}}" ng-src="{{vm.currencySelected.currency_icon_path}}" /> {{vm.totalAmount ? vm.totalAmount : 0}}
+                                                <!-- {{vm.currencySelected.currency_code + " "}}{{vm.totalAmount ? vm.totalAmount : 0}} -->
+                                            </div>
+                                            <div ng-if="!vm.showCommissionAmt" class="col-md-6 text-right commission">Commission: {{vm.minCommissionPercentage}}%</div>
+                                            <div ng-if="vm.showCommissionAmt" class="col-md-6 text-right commission">Commission:
+                                                <img class="icon-image-size" alt="{{vm.currencySelected.currency_code}}" ng-src="{{vm.currencySelected.currency_icon_path}}"> {{vm.minCommissionAmount}}
+                                                <!-- {{vm.currencySelected.currency_code+" "+vm.minCommissionAmount}} -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3 class="widget-title">Payment Method</h3>
+                                    <!-- Accordion -->
+                                    <div class="site-accordion">
+                                        <div class="accordion-block">
+                                            <div class="accordion-block-heading">
+                                                <span class="heading-icon payment-cards-icon"></span>
+                                                <span class="heading-text">Payment Cards</span>
+                                                <span class="heading-arrow fa fa-angle-right"></span>
+                                            </div>
+                                            <div class="accordion-block-content text-center">
+                                                <!-- <h4 class="content-heading">You have not added cards yet</h4> -->
+                                                <h4 class="content-heading">Choose payment card</h4>
+                                                <table class="responsive-table table payment-cards-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Status</th>
+                                                            <th>Name on card</th>
+                                                            <th>Expires on</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="radio radio-primary">
+                                                                    <input id="card1" name="userCard" type="radio">
+                                                                    <label for="card1" class="card-type">
+                                                                        <span class="fa fa-cc-visa card-type-icon"></span> ending with <strong>3232</strong>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td><span class="card-status not-verified">Not Verified</span></td>
+                                                            <td>Ankita Soni</td>
+                                                            <td>06/24</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="radio radio-primary">
+                                                                    <input id="card2" name="userCard" type="radio">
+                                                                    <label for="card2" class="card-type">
+                                                                        <span class="fa fa-cc-mastercard card-type-icon"></span> ending with <strong>3232</strong>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td><span class="card-status verified">Verified</span></td>
+                                                            <td>Ankita Soni</td>
+                                                            <td>06/24</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <ul class="list-inline marT20">
+                                                    <li><a class="btn-primary btn btn-lg">Add a new card</a></li>
+                                                    <li><a class="btn-primary btn btn-lg">Card manager</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-block">
+                                            <div class="accordion-block-heading">
+                                                <span class="heading-icon bank-transfer-icon"></span>
+                                                <span class="heading-text">Bank Transfer</span>
+                                                <span class="heading-arrow fa fa-angle-right"></span>
+                                            </div>
+                                            <div class="accordion-block-content text-center">
+                                                <h4 class="content-heading">Verify your identity to choose this payment method</h4>
+                                                <p>Your account limit will also be increased on successful verification</p>
+                                                <li><a class="btn-primary btn marT40 btn-lg">Start Verification</a></li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Accordion -->
+                                    <!-- Widgets -->
+                                    <div class="row marT40-xs">
+                                        <div class="col-md-4 marT50 marT0-xs">
+                                            <div class="widget no-shadow">
+                                                <div class="widget-body">
+                                                    <div class="big-icon mb-3 indigo-500"><i class="fa fa-5x fa-flash"></i></div>
+                                                    <h5 class="mb-3 bold-font">Fast & Easy</h5>
+                                                    <p>Our Payment Card verification usually takes less than an hour</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 marT50 marT0-xs">
+                                            <div class="widget no-shadow">
+                                                <div class="widget-body">
+                                                    <div class="big-icon mb-3 indigo-500"><i class="fa fa-5x fa-shield"></i></div>
+                                                    <h5 class="mb-3 bold-font">Secure</h5>
+                                                    <p>Our Payment Card verification usually takes less than an hour</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 marT50 marT0-xs">
+                                            <div class="widget no-shadow">
+                                                <div class="widget-body">
+                                                    <div class="big-icon mb-3 indigo-500"><i class="fa fa-5x fa-hotel"></i></div>
+                                                    <h5 class="mb-3 bold-font">Convenient</h5>
+                                                    <p>Our Payment Card verification usually takes less than an hour</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Widgets -->
+                                    <!-- Buttons -->
+                                    <div class="row payments-btn-group">
+                                        <div class="col-md-6">
+                                            <button class="btn btn-primary" ng-click="vm.addNewCard()">Add new Card</button>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <button class="btn btn-primary" ng-click="vm.depositMoney();">Deposit</button>
+                                        </div>
+                                    </div>
+                                    <!-- Buttons -->
+                                </div>
+                                <!-- USD Tab Pane -->
+                            </div>
+                            <!-- Tab Content -->
+                            <div class="currency-form-tab-content tab-content" ng-if="vm.currencySelected.type == 1">
+                                <div class="total-amt">
+                                    <div class="row">
+                                        <div class="col-md-6"><span class="heading">Total amount:</span> <img class="icon-image-size" alt="{{vm.currencySelected.currency_code}}" ng-src="{{vm.currencySelected.currency_icon_path}}"> 0</div>
+                                        <div ng-if="!vm.showCommissionAmt" class="col-md-6 text-right commission">Commission: {{vm.minCommissionPercentage}}%</div>
+                                        <div ng-if="vm.showCommissionAmt" class="col-md-6 text-right commission">Commission:
+                                            <img class="icon-image-size" alt="{{vm.currencySelected.currency_code}}" ng-src="{{vm.currencySelected.currency_icon_path}}">{{vm.minCommissionAmount}}
+                                            <!-- {{vm.currencySelected.currency_code+" "+vm.minCommissionAmount}} -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="widget-title">{{vm.currencySelected.currency_code}} Deposit</h3>
+                                <div ng-if="vm.getCryptoAddress || vm.qrcode">
+                                    <div class="row">
+                                        <div class="col-lg-2 marT20">
+                                            <h4 class="widget-subtitle">Scan QR Code</h4>
+                                            <div ng-bind-html="vm.qrcode"></div>
+                                        </div>
+                                        <div class="col-lg-1 qrcode-img-divider">OR</div>
+                                        <div class="col-lg-9 marT20">
+                                            <h4 class="widget-subtitle">Send funds to the address below</h4>
+                                            <div class="text-wrapper">
+                                                <div class="text-wrapper-value">{{vm.getCryptoAddress}}</div>
+                                                <div class="text-wrapper-action" ngclipboard data-clipboard-text={{vm.getCryptoAddress}}>
+                                                    Copy
+                                                </div>
+                                            </div>
+                                            <h4 class="marB0">Note:</h4>
+                                            <ul class="padL15" ng-if="vm.currencySelected.currency_code == 'ETH'">
+                                                <li class="marB10 fs-16">100 confirmations are required for Ether transactions.</li>
+                                                <li class="marB10 fs-16">Minimum deposit amount is 0.001. If the amount is less than 0.001, the funds will not be credited to your account.</li>
+                                                <li class="marB10 fs-16">We do not support Ethereum transactions generated from smart contracts. Please, send ETH in traditional transactions only.</li>
+                                            </ul>
+                                            <ul class="padL15" ng-if="vm.currencySelected.currency_code == 'BTC'">
+                                                <li class="marB10 fs-16">It might take a few minutes for the network to confirm the transaction.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="!(vm.getCryptoAddress && vm.qrcode)">
+                                    <span style="font-weight:bold; color:#3F51B5;">Wallet Address Not Available. </span>
+                                </div>
+                            </div>
+                            <!-- USD Tab Pane -->
+                    </form>
+                    <div class="widget" style="margin-top:2rem;" ng-if="vm.currencySelected.type == 0">
+                        <header class="widget-header has-header-icon">
+                            <h4 class="widget-title">My Deposit Transaction History</h4><span class="widget-header-icon" data-toggle="tooltip" title="Refresh Transaction Histroy"><i class="fa fa-refresh" aria-hidden="true" ng-click="vm.refreshTxnHistory()"></i>
+                                </span>
+                        </header>
+                        <!-- /.widget-header -->
+                        <hr class="widget-separator">
+                        <div class="widget-body">
+                            <!--  <table class="table table-striped table-hover">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Currency</th>
+                                    <th>Amount</th>
+                                    <th>Fee</th>
+                                    <th>Status</th>
+                                </tr>
+                               
+                                <tr ng-repeat="item in vm.getDepositHistory|orderBy:'item.created_at':true">
+                                    <td>{{item.created_at| date:'MMM d, y h:mm:ss a'}}</td>
+                                    <td>{{item.currency_code}}</td>
+                                    <td>{{item.amount}}</td>
+                                    <td>{{item.platform_value}}</td>
+                                    <td>{{item.status}}</td>
+                                </tr>
+                                <tr>
+                                    <td ng-if="vm.getDepositHistory.length == 0" colspan="8">No Deposits . </td>
+                                </tr>
+                                
+                            </table> -->
+                            <div id="GridCustomId" ui-grid="gridOptions" ui-grid-auto-resize ui-grid-resize-columns class="grid" ng-if="gridOptions.data.length !== 0">
+                                <div role="contentinfo" class="ui-grid-pager-panel ng-scope" ng-if="gridOptions.data.length !== 0">
+                                    <div role="navigation" class="ui-grid-pager-container">
+                                        <div role="menubar" class="ui-grid-pager-control">
+                                            <!-- Start Page -->
+                                            <button type="button" role="menuitem" class="ui-grid-pager-first" ui-grid-one-bind-title="aria.pageToFirst" ui-grid-one-bind-aria-label="aria.pageToFirst" ng-click="pagination.firstPage()" ng-disabled="cantPageBackward()" title="Page to first" aria-label="Page to first" disabled="disabled">
+                                                <div class="first-triangle">
+                                                    <div class="first-bar"></div>
+                                                </div>
+                                            </button>
+                                            <!-- Prev Page -->
+                                            <button type="button" role="menuitem" class="ui-grid-pager-previous" ui-grid-one-bind-title="aria.pageBack" ui-grid-one-bind-aria-label="aria.pageBack" ng-click="pagination.previousPage()" ng-disabled="cantPageBackward()" title="Page back" aria-label="Page back" disabled="disabled">
+                                                <div class="first-triangle prev-triangle"></div>
+                                            </button>
+                                            <input type="text" ui-grid-one-bind-title="aria.pageSelected" ui-grid-one-bind-aria-label="aria.pageSelected" class="ui-grid-pager-control-input ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-required" ng-model="pagination.pageNumber" min="1" max="{{pagination.getTotalPages()}}" required="" title="Selected page" aria-label="Selected page" ng-change="pagination.currentPage()" numbers-only>
+                                            <span class="ui-grid-pager-max-pages-number ng-binding" ng-show="pagination.getTotalPages() > 0">                                        
+                                        /
+                                        {{pagination.getTotalPages()}}
+                                    </span>
+                                            <!-- Next Page -->
+                                            <button type="button" role="menuitem" class="ui-grid-pager-next" ui-grid-one-bind-title="aria.pageForward" ui-grid-one-bind-aria-label="aria.pageForward" ng-click="pagination.nextPage()" ng-disabled="cantPageForward()" title="Page forward" aria-label="Page forward">
+                                                <div class="last-triangle next-triangle"></div>
+                                            </button>
+                                            <!-- Last Page -->
+                                            <button type="button" role="menuitem" class="ui-grid-pager-last" ui-grid-one-bind-title="aria.pageToLast" ui-grid-one-bind-aria-label="aria.pageToLast" ng-click="pagination.lastPage()" ng-disabled="cantPageToLast()" title="Page to last" aria-label="Page to last">
+                                                <div class="last-triangle">
+                                                    <div class="last-bar"></div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div class="ui-grid-pager-row-count-picker ng-scope">
+                                            <select ng-model="pagination.ddlpageSize" ng-options="o as o for o in pagination.paginationPageSizes" ng-change="pagination.pageSizeChange()" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                            </select>
+                                            <span class="ui-grid-pager-row-count-label ng-binding">&nbsp;items per page</span>
+                                        </div>
+                                    </div>
+                                    <div class="ui-grid-pager-count-container">
+                                        <div class="ui-grid-pager-count">
+                                            <span ng-show="pagination.totalItems > 0" class="ng-binding" style="">
+                                        {{pagination.pageNumber}}
+                                        -
+                                            <!--<abbr ui-grid-one-bind-title="paginationThrough" title="through"> - </abbr>-->
+                                        {{pagination.ddlpageSize}} of {{pagination.totalItems}} items
+                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="gridOptions.data.length == 0">No Deposits.</div>
+                        </div>
+                        <!-- /.widget-body -->
+                    </div>
+                    <div class="widget" style="margin-top:2rem;" ng-if="vm.currencySelected.type == 1">
+                        <header class="widget-header has-header-icon">
+                            <h4 class="widget-title">My Deposit Transaction History</h4><span class="widget-header-icon" data-toggle="tooltip" title="Refresh Transaction Histroy"><i class="fa fa-refresh" aria-hidden="true" ng-click="vm.refreshCryptoTxnHistory()"></i>
+                                </span>
+                        </header>
+                        <!-- /.widget-header -->
+                        <hr class="widget-separator">
+                        <div class="widget-body" ng-if="vm.currencySelected.currency_code == 'BTC'">
+                            <div id="GridCustomId" ui-grid="vm.btcGridOptions" ui-grid-auto-resize ui-grid-resize-columns class="grid" ng-if="vm.btcGridOptions.data.length !== 0">
+                            </div>
+                            <div ng-if="vm.btcGridOptions.data.length == 0">No Deposits.</div>
+                        </div>
+                        <div class="widget-body" ng-if="vm.currencySelected.currency_code == 'ETH'">
+                            <div id="GridCustomId" ui-grid="vm.ethGridOptions" ui-grid-auto-resize ui-grid-resize-columns class="grid" ng-if="vm.ethGridOptions.data.length !== 0"></div>
+                            <div ng-if="vm.ethGridOptions.data.length == 0">No Deposits.</div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.widget -->
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+<!-- <script type="text/javascript">
+document.querySelector(".menu-item-deposit").classList.add("active");
+</script> -->

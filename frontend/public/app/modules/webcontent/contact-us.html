@@ -1,0 +1,111 @@
+
+<!-- Body Content -->
+<div id="body-content">
+
+      <!-- Site Banner -->
+      <div class="site-banner text-banner inner_banner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="site-banner-heading"> <strong>Contact Us </strong></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Site Banner -->
+
+    <!-- Section -->
+    <div class="section text-section">
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-4 col-lg-4 col-sm-12">
+						<div class="widget-contact" style="margin-top:100px;">
+							<ul class="list-icon">
+							  <!--   <li><i class="fa fa-map-marker"></i>1355 Market Street, home area
+									<br>San Francisco, CA 345345345</li>
+								<li><i class="fa fa-phone"></i>(123) 456-7890 </li>
+								<li><i class="fa fa-envelope"></i><a href="#">abc@dfd.com</a>
+								</li>    -->   
+								<li>&nbsp;</li>       
+								<li>&nbsp;</li>       
+								<li>&nbsp;</li>       
+								<li>&nbsp;</li>       
+								<li>&nbsp;</li>       
+								<li>&nbsp;</li>				
+							</ul>
+						</div>
+					</div>
+                <div class="col-md-8 col-lg-8 col-sm-12">
+                    <div class="card-body has-parts justify-content-center">
+                <!--Support Form -->
+                <div class="card-body-part col-offset-6">
+                    <h4 class="card-body-heading marB20">Got Questions? Talk to Us.</h4>
+
+                    <form class="form marB30" name="vm.supportForm" novalidate autocomplete="off" enctype="multipart/form-data">
+                       
+                        <div class="form-group">
+                            <label class="form-group-label">Your email address <sup class="asterik">*</sup></label>
+                            <input type="email" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" name="email" ng-model="vm.support.email" required autocomplete="off" />
+                            <p class="error-msg" ng-if="vm.supportForm.email.$error.required && vm.supportForm.$submitted">Please enter email.</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-group-label">Subject <sup class="asterik">*</sup></label>
+                            <input type="text" class="form-control" name="subject" ng-model="vm.support.subject" required autocomplete="off" />
+                            <p class="error-msg" ng-if="vm.supportForm.subject.$error.required && vm.supportForm.$submitted">Please enter subject.</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-group-label" ng-model="desc">Description <sup class="asterik">*</sup></label>
+                            <textarea class="form-control" style=" resize: none;" name="desc" ng-model="vm.support.desc" required autocomplete="off" /></textarea>
+                            <p class="error-msg" ng-if="vm.supportForm.desc.$error.required && vm.supportForm.$submitted">Please enter description.</p>
+                        </div>
+<!--                         <div class="form-group">
+                            <label class="form-group-label">Upload Attachment</label>
+                            <div class="custom-input-file marT15">
+                                <input type="file" class="form-control inputfile" ng-model="vm.file1" ngf-select name="file" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-pattern="'.doc,.docx,.pdf,.jpeg,.jpg,.png'" ngf-max-size="1MB" style="padding:0px;" />
+                                <a href="javascript:;" class="form-control">Browse</a>
+                                <div class="selected-value marT15"><span class="text"></span><span class="input-close">×</span></div>
+                            </div>
+                        </div> -->
+
+<div>
+                <!-- <label class="form-group-label">Upload Attachment</label> -->
+                    <!-- <div class="custom-input-file marT15"> -->
+                                <!-- <input type="file" class="form-control inputfile" multiple ng-model="vm.file1" ngf-select name="file" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-pattern="'.doc,.docx,.pdf,.jpeg,.jpg,.png'" ngf-max-size="10MB" style="padding:0px;" />
+
+                                <a href="javascript:;" class="form-control">Browse</a> -->
+                                <!-- <div class="selected-value marT15"><span class="text"></span><span class="input-close">×</span></div> -->
+
+
+ <!-- </div> -->
+</div>
+  <!-- <br><br>
+  Files:
+  <ul>
+    <li ng-repeat="f in vm.file1" style="font:smaller">
+{{f.name}} {{f.$errorParam}}
+      <span class="progress" ng-show="f.progress >= 0">
+        <div style="width:{{f.progress}}%"  
+            ng-bind="f.progress + '%'"></div>
+      </span>
+    </li>
+    <li ng-repeat="f in errFiles" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}
+    </li> 
+  </ul>
+  {{errorMsg}} -->
+<!-- {{vm.file1 | json}} -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" ng-click="vm.contact(vm.support, vm.file1)">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <!--Support Form -->
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Section -->
+
+</div>
+<!-- Body Content -->
+

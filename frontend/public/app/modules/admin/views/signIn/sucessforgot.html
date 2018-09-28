@@ -1,0 +1,49 @@
+<div class="app flex-row align-items-center">
+    <div class="container">
+        <div class="row justify-content-centers">
+            <div class="col-md-8">
+                <div class="card-group">
+                    <div class="card p-4">
+                        <div class="card-body  has-info-icon">
+                            <h5><i class="danger-icon icon-check"></i>Your password reset sucessfully</h5>
+                           <p>Please <a ng-click="vm.resetPassLoginAdmin()" class="link" style="cursor: pointer; color:#266CD6;">click here</a> to go back to Admin Login Page.</p>
+                            <!--<form autocomplete="off" name="vm.passwordForm" ng-submit="vm.resetAdminPassword();" novalidate>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="icon-user"></i></span>
+                                    </div>
+                                    <input id="sign-up-password" type="{{vm.inputType}}" class="form-control" name="password" placeholder="New Password" required ng-model="vm.forgotPswd.password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}" autocomplete="off" > 
+                                     <i class="fa fa-eye show-password-icon" aria-hidden="true" ng-model="vm.passwordCheckbox" ng-click="vm.hideShowPassword()" ng-if="!vm.showPassword"></i>
+                                <i class="fa fa-eye-slash show-password-icon" aria-hidden="true" ng-model="vm.passwordCheckbox" ng-click="vm.hideShowPassword()" ng-if="vm.showPassword"></i>
+
+               <p class="error-msg" ng-if="vm.loginForm1.forgotEmail.$error.pattern && vm.loginForm1.forgotEmail.$touched">Please enter your registered email address.</p>
+                 
+                                </div>
+                               <p class="error-msg" ng-if="vm.passwordForm.password.$error.required && vm.passwordForm.$submitted">Please enter New Password.</p>
+                         <p class="error-msg" ng-if="vm.passwordForm.password.$error.pattern && vm.passwordForm.$submitted">Password should contain minimum 6 characters, at least one uppercase letter, one lowercase letter, one number and one special character(@$!%*?&).</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input ng-model="vm.forgotPswd.device_ipAddress" style="display: none">
+                    <input type="hidden" ng-model="vm.forgotPswd.device_os" ng-init="vm.forgotPswd.device_os =  vm.device_os">
+                    <input type="hidden" ng-model="vm.forgotPswd.device_name" ng-init="vm.forgotPswd.device_name =  vm.device_name">
+                    <input type="hidden" ng-model="vm.forgotPswd.device_browser" ng-init="vm.forgotPswd.device_browser =  vm.device_browser">
+                                        <button type="submit" class="btn btn-primary px-4">RESET YOUR PASSWORD</button>
+                                    </div>
+                                    
+                                </div>
+                            </form>-->
+                        </div>
+                    </div>
+                    <div class="card text-white py-5 d-md-down-none" style="width:44%">
+                        <div class="card-body text-center">
+                            <div>
+                                <a href="#"><img src="assets/content/images/logo_color.png" alt="Fuleex" width="250"></a>
+                                <!--<button type="button" class="btn btn-primary active mt-3">Register Now!</button>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

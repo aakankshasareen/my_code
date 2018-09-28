@@ -1,0 +1,190 @@
+<h1 class="dashboard-main-heading d-none d-md-block">Support</h1>
+<div class="card">
+<div class="card-body has-parts">
+
+  <!-- Tickets -->
+  <div class="card-body-part">
+    <h6 class="card-body-heading marB5">My Tickets</h6>
+
+                            <!-- Tab Navigation -->
+                            <div class="tab-navigation marT20">
+                                <ul class="tab-head">
+                                    <li data-tab=".open-tickets" class="tab-head-item active">Open Tickets</li>
+                                    <li data-tab=".closed-tickets" class="tab-head-item">Closed Tickets</li>
+                                </ul>
+                                <div class="tab-content marT20 tickets-tab-content">
+
+                                    <!-- Open Tickets -->
+                                    <div class="tab-pane open-tickets hidding-vertical-scroll active">
+                                        <div class="site-accordion">
+
+                                            <!-- Accordion Block -->
+                                            <div class="accordion-block" ng-repeat="support in data" ng-if="support.status==1">
+                                                <h6 class="accordion-block-heading">{{support.subject}}</h6>
+                                                <div class="accordion-block-content">
+                                                    <ul class="card-text-list">
+                                                        <li class="row marT20">
+                                                            <p class="col-xl-3 col-sm-4 marB0">Issue Type</p>
+                                                            <h5 class="card-text-list-heading col-xl-9 col-sm-8 marB0">{{support.issue | supportIssueFilter}}</h5>
+                                                        </li>
+
+                                                    <li class="row marT20" ng-if="support.document_path">
+                                                            <p class="col-xl-3 col-sm-4 marB0">Uploads</p>
+                                                            <h5 class="card-text-list-heading col-xl-9 col-sm-8 marB0">
+                                                              <a  ng-click="vm.downloadDoc(support.document_path)">
+                                                                <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download File</a>
+
+                                                           </h5>                                      
+                                                        </li> 
+                                                    <!--  <li class="row marT20">
+                                                            <p class="col-xl-3 col-sm-4 marB0">Query Type</p>
+                                                            <h5 class="card-text-list-heading col-xl-9 col-sm-8 marB0">{{support.query_type}}</h5>
+                                                        </li> -->
+
+                                                        <!-- <li class="row marT20">
+                                                            <p class="col-xl-3 col-sm-4 marB0">Uploads</p>
+                                                            <h5 class="card-text-list-heading col-xl-9 col-sm-8 marB0">sss</h5>
+                                                        </li> -->
+                                                        <li class="row marT20">
+                                                            <p class="col-xl-3 col-sm-4 marB0">Description </p>
+                                                            <h5 class="card-text-list-heading col-xl-9 col-sm-8 marB0">{{support.description}}</h5>
+                                                        </li>
+                                                        <li class="row marT20">
+                                                            <p class="col-xl-3 col-sm-4 marB0">Actions </p>
+                                                            <div class="card-text-list-heading col-xl-9 col-sm-8 marB0">
+                                                              <ul class="list-inline">
+                                                              <li><a class="btn btn-primary btn-xs" data-toggle="tooltip" title="Reply" ui-sref="dashboard.repplySupport({id:support.id})">Reply</a></li>
+                                                              <li>
+                                                             <button data-toggle="tooltip" title="Close Ticket" class="btn btn-primary btn-xs" ng-click="vm.updateSupportStatusCu(support.id, support.status)">Close</button>
+                                                           </li>
+                                                              </ul> 
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                          
+
+                                            <!-- Accordion Block -->
+                                            
+
+                                        </div>
+                                    </div>
+                                    <!-- Open Tickets -->
+
+                                    <!-- Closed Tickets -->
+                                    <div class="tab-pane hidding-vertical-scroll closed-tickets">
+                                      
+                                        <div class="site-accordion">
+                                       <div class="accordion-block" ng-repeat="support in data" ng-if="support.status==0">
+                                                <h6 class="accordion-block-heading">{{support.subject}}</h6>
+                                                <div class="accordion-block-content">
+                                                    <ul class="card-text-list">
+                                                        <li class="row marT20">
+                                                            <p class="col-xl-3 col-sm-4 marB0">Issue Type</p>
+                                                            <h5 class="card-text-list-heading col-xl-9 col-sm-8 marB0">{{support.issue | supportIssueFilter}}</h5>
+                                                        </li>
+
+                                                      
+                                                          <li class="row marT20" ng-if="support.document_path">
+                                                           <p class="col-xl-3 col-sm-4 marB0">Uploads</p>
+                                                            <h5 class="card-text-list-heading col-xl-9 col-sm-8 marB0">
+                                                              <a  ng-click="vm.downloadDoc(support.document_path)">
+                                                                <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download File</a>
+
+                                                            </h5>
+                                                           
+                                                        </li> 
+                                                        <li class="row marT20">
+                                                            <p class="col-xl-3 col-sm-4 marB0">Description </p>
+                                                            <h5 class="card-text-list-heading col-xl-9 col-sm-8 marB0">{{support.description}}</h5>
+                                                        </li>
+                                                        <li class="row marT20">
+                                                            <p class="col-xl-3 col-sm-4 marB0">Actions </p>
+                                                            <div class="card-text-list-heading col-xl-9 col-sm-8 marB0">
+                                                              <ul class="list-inline">
+                                                             
+                                                              <li>
+
+                                                                <button data-toggle="tooltip" title="Open Ticket" class="btn btn-primary btn-xs" ng-click="vm.updateSupportStatusCu(support.id, support.status)">Open</button>
+                                                              </li>
+                                                              </ul>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            </div> 
+                                             
+                                    </div>
+                                  
+                                    <!-- Closed Tickets -->
+                                </div>
+                            </div>
+                            <!-- Tab Navigation -->
+  </div>
+  <!-- Tickets -->
+
+    <!--Support Form -->
+    <div class="card-body-part">
+        <h6 class="card-body-heading marB20">Support Center</h6>
+        <form class="form marB30" name="vm.formSupport"  novalidate autocomplete="off" enctype="multipart/form-data">
+                                                 <div class="form-group">
+                                                     <label class="form-group-label">Please select issue below which suits best to your query <sup class="asterik">*</sup></label>
+                                                     <select class="custom-select form-control" name="issue" ng-model="vm.issue" required autocomplete="off" ng-options="type.name for type in vm.supportTypes track by type.id">
+                                                    <option style="display:none" value="">Select issue</option>
+                                                   
+                                                     </select>
+                                                     <p class="error-msg" ng-if="vm.formSupport.issue.$error.required && vm.formSupport.$submitted">Please  Select Issue</p>
+                                             </div>
+                                                 <div class="form-group">
+                                                     <label class="form-group-label" >Your email address  <sup class="asterik">*</sup></label>
+                                                     <input type="email" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty" name="email" ng-model="vm.email"  required  autocomplete="off" disabled=""/>
+                                                     
+                                                 </div>
+                                                 <div class="form-group">
+                                                     <label class="form-group-label" >Subject <sup class="asterik">*</sup></label>
+                                                     <input type="text" class="form-control" name="subject" ng-model="vm.subject"   required autocomplete="off"/>
+                                                     <p class="error-msg" ng-if="vm.formSupport.subject.$error.required && vm.formSupport.$submitted">Please  fill subject..</p>
+                                             </div>
+                                                 <div class="form-group">
+                                                     <label class="form-group-label" ng-model="desc">Description <sup class="asterik">*</sup></label>
+                                                     <textarea class="form-control" style=" resize: none;"  name="desc" ng-model="vm.desc"  required autocomplete="off" /></textarea>
+                                                     <p class="error-msg" ng-if="vm.formSupport.desc.$error.required && vm.formSupport.$submitted">Please Write Description</p>
+                                                   </div>
+
+                                                 <div class="form-group">
+                                                     <label class="form-group-label">Upload Attachment</label>
+                                                     <div class="custom-input-file marT15">
+                                                      <input type="file" class="form-control inputfile" ng-model="vm.file" ngf-select required name="file" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-pattern="'.doc,.docx,.pdf,.jpeg,.jpg,.png'" ngf-max-size="1MB"  style="padding:0px;" /> 
+                                                      <a href="javascript:;" class="form-control">Browse</a>
+                                                      <div class="selected-value marT15"><span class="text"></span><span class="input-close">×</span></div>
+                                                    <!-- <p class="error-msg" ng-if="vm.formSupport.file.$error.required && vm.formSupport.$submitted">Please Upload Attachment</p> -->
+                                                    <!-- <p class=" error-msg" ng-if="vm.formSupport.file.$error.required && vm.formSupport.$submitted">Please Upload Attachment</p>
+                                                    <p class=" error-msg" ng-if="vm.formSupport.file.$error.pattern && vm.formSupport.file.$touched">Please upload a valid (.jpg, .png, .doc, .docx, .pdf) file only</p>
+                                                    <p class="error-msg" ng-if="vm.formSupport.file.$error.maxSize">Maximum file upload size : 1MB</p>      -->
+                                                </div>
+                                                      
+                       
+                                                      <!-- <span ng-if="vm.file">Image thumbnail: <img style="width:100px;" ngf-thumbnail="vm.file || '/thumb.jpg'" /></span> -->
+                                             </div>
+                                            
+                                        
+
+                                                 <div class="form-group">
+                                                     <button type="submit" class="btn btn-primary"  ng-click="vm.addSupportData(vm.formSupport, vm.file)">Submit</button>
+                                             </div>
+                                         </form>
+        </div>
+        <!--Support Form -->
+        <form method="post"  name="downloadForm" action="/api/downloadSupport">
+                                               <input type="hidden" value={{token}} name="token">
+                                              <input type="hidden" name="path" >
+                                              </form>
+
+</div>
+
+</div>
+

@@ -1,0 +1,31 @@
+<div class="text-page">
+
+        <div class="section">
+            <div class="container">
+                <!-- logo -->
+                <div class="row">
+                    <div class="col-12 text-center">
+                    <h6 class="section-heading">Two Factor Authentication</h6>
+                    <form class="form small-form" name="vm.login2FA" ng-submit="vm.verifyLoginToken();" novalidate>
+                            <div class="form-group">
+                                <label class="form-group-label" style="color: #000">Enter 2FA code </label>
+                                <input id="sign-in-email" class="form-control marginAuto" type="text" ng-model="vm.authLogin.verifyCode" autofocus autocomplete="off" name="twofa" required ng-change="vm.input2fachanged();" numbr-only style="color: #000">
+                                 <p class="error-msg" ng-if="vm.login2FA.twofa.$error.required && vm.login2FA.$submitted">Please enter 2FA code.</p>
+                            </div>
+                            <!-- <div class="form-group mb-5">
+                                <div class="checkbox checkbox-primary"><input type="checkbox" id="keep_me_logged_in"><label for="keep_me_logged_in">Keep me signed in</label></div>
+                            </div> -->
+                         <input ng-model="vm.getUser.device_ipAddress" style="display: none">
+                        <input type="hidden" ng-model="vm.getUser.device_os" ng-init="vm.getUser.device_os =  vm.device_os">
+                        <input type="hidden" ng-model="vm.getUser.device_name" ng-init="vm.getUser.device_name =  vm.device_name">
+                        <input type="hidden" ng-model="vm.getUser.device_browser" ng-init="vm.getUser.device_browser =  vm.device_browser">
+                            <input type="submit" class="btn btn-primary" value="SUBMIT" />
+                        </form>
+                   
+                </div>
+                <!-- #reset-password-form -->
+            </div>
+            <!-- /.simple-page-content -->
+        </div>
+        <!-- .simple-page-wrap -->
+</div>

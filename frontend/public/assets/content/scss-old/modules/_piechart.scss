@@ -1,0 +1,33 @@
+.piechart {
+    margin: 60px auto 0;
+    @include square(180px);
+}
+
+.piechart-legend {
+    table {
+        color: $theme-color2 !important;
+        font-weight: 300;
+        font-size: 0.6875rem;
+        margin-top: 40px;
+        display: block;
+        tbody {
+            display: flex !important;
+            flex-wrap: wrap;
+            tr {
+                width: 33.33%;
+            }
+        }
+        td {
+            padding: 10px 5px;
+        }
+    }
+    .legendColorBox {
+        > div {
+            border: none !important;
+        }
+        div {
+            border-width: 9px !important;
+            @include border-radius(50%);
+        }
+    }
+}

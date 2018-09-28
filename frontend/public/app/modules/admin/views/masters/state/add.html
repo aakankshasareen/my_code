@@ -1,0 +1,41 @@
+<div class="animated fadeIn">
+ 
+        <!-- <h1 class="page-title">{{vm.pageHeading}} State</h1> -->
+        
+        <div class="card">
+           <div class="card-header"> <h4>{{vm.pageHeading}} State</h4></div>
+           
+            <div class="card-body">
+           <form autocomplete="off" ng-submit="vm.id ? vm.update() : vm.add()" name="vm.form" enctype="multipart/form-data" novalidate>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Country</label>
+                            <sup class="text-danger">*</sup>
+                            <select name="country" required ng-options="option.name for option in vm.CountryList track by option.id" class="form-control" ng-selected="vm.country" ng-model="vm.country">
+                                <option value="" style="display: none">Please select country</option>
+                            </select>
+                            <p class="error-msg" ng-if="vm.form.country.$error.required && vm.form.$submitted">Please select country</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Name</label>
+                            <sup class="text-danger">*</sup>
+                            <input type="text" class="form-control" name="state_name" required ng-model="vm.state_name" aria-describedby="emailHelp" placeholder="Enter State Name" pattern="^[ a-zA-Z]*$">
+                            <p class="error-msg" ng-if="vm.form.state_name.$error.required && vm.form.$submitted">Please enter state</p>
+                            <p class="error-msg" ng-if="vm.form.state_name.$error.pattern && vm.form.$submitted">Please enter valid state</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Status</label>
+                            <sup class="text-danger">*</sup>
+                            <select name="status" required ng-options="option.name for option in vm.Status track by option.id" class="form-control" ng-selected="vm.status" ng-model="vm.status">
+                                <option value="" style="display: none">Please select status</option>
+                            </select>
+                            <p class="error-msg" ng-if="vm.form.status.$error.required && vm.form.$submitted">Please select status</p>
+                        </div>
+                        <input type="hidden" ng-model="vm.id" />
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" ng-click="vm.cancel()" class="btn btn-secondary">Cancel</button>
+            </form>
+            
+             </div>
+        </div>
+</div>
+       

@@ -1,0 +1,18 @@
+.social-icons {
+    .social-icon {
+        background-color: #fff;
+        color: $theme-color;
+        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        @include sphere(1.875rem);
+        @include transition(350ms);
+        &:hover {
+            background-color: $theme-color5;
+            color: #fff;
+            @include translate(0,-5px);
+        }
+    }
+}

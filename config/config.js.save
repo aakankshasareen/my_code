@@ -1,0 +1,58 @@
+
+module.exports = {
+  superSecret: 'Aighooktesiefa0T',
+
+  btcExchangeWallet: "Exchange",
+ethExchangeWallet: 'Fuleex',
+    fuleexExchangeWallet: "Fuleex_erc20",
+    abcExchangeWallet: 'Fuleex_abc',
+  globalDomain: 'https://ex-fuleex.sofodev.co',
+
+  //mysql
+  mysql_host: 'sofoaws-demo-mysql.mysql.database.azure.com',
+  mysql_user: 'exchange_fuleex_user@sofoaws-demo-mysql',
+  mysql_database: 'exchange_fuleex_db',
+  mysql_password: 'aish8Ohb1ooges8',
+
+ mongodb_host:'localhost',
+    mongodb_port:'27017',
+    mongodb_database:'fuleex',
+
+  //email
+  email: 'devtest@sakshay.in',
+  password: 'India@00321',
+
+//  email: 'vaibhavdrichierich@gmail.com',//'devtest@sakshay.in',
+//  password: 'vaibhav777',//'India@00321',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+
+  // bitcoin                
+
+  // App basics
+  serveport: 3211,
+
+
+  //ethereum-web3
+  //     geth_http:'http://geth-alpha.sofodev.co:38545',   
+	geth_http: 'http://crypto-testnets.sofodev.co:38545',
+        geth_http_erc20:'http://crypto-testnets.sofodev.co:38545',
+        erc20Server: 'ws://crypto-testnets.sofodev.co:38547',
+
+//contract addresses
+
+     fulxContractAddress:'0xfd701e4dcc9d3ec09e5e720d4ff5de157d734dca',
+     abcContractAddress:'0xfd701e4dcc9d3ec09e5e720d4ff5de157d734dca',
+abcLastBlock: 4082796,
+//  btc_pass: '',
+  //  btc_port: '',
+  //  btc_host: '',
+
+  bitcoin_version: 2,
+  bitcoin_pin: '',
+  litecoin_apiKey: '1baf-70c5-5cff-7917',
+  bitcoin_apiKey: '5003-119c-83fa-c6b9',
+//  dogecoin_apiKey: '6c65-95d3-b7a2-347d',
+otc_api_key : '52726fb7ae72be6b5190465e39be271e'
+}

@@ -1,0 +1,568 @@
+<div class="animated fadeIn">
+    
+        <!-- <h1 class="page-title">{{vm.pageHeading}} Currency</h1> -->
+         <div class="card orderbook-list">
+                <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-sm-6"><h4>Fee Report(Fiat)</h4></div>
+                            <div class="col-sm-6">
+                                  
+                            </div>
+                        </div>
+                    </div>
+         
+            <uib-tabset active="0"  class="inner_tab_active">
+            <uib-tab index="0" heading="USD Fee" ng-click="gridApi.core.handleWindowResize()"zz>
+            <div class="card-body">
+              <ul class="list-inline justify-content-end">                                                             
+                                            <li>
+                                                <div class="btn-group">
+                                                    <button type="button" data-toggle="dropdown" class="btn dropdown-toggle btn-success">Export As
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <div role="menu" class="dropdown-menu">
+                                                            <a class="dropdown-item" href="#" ng-click="export('pdf')"><i class="fa fa-file-pdf-o"></i>PDF</a>
+                                                            <a class="dropdown-item" href="#" ng-click="export('csv')"><i class="fa fa-file-excel-o"></i>CSV</a>
+                                                        </div>
+                                                </div>
+                                            </li>                                      
+                                        </ul>
+                <div ui-grid="gridOptions"
+                       ui-grid-move-columns
+                       ui-grid-exporter
+                       ui-grid-auto-resize
+                       class="grid" style="{{tableHeight}}">
+                       <div role="contentinfo" class="ui-grid-pager-panel ng-scope">
+                          <div role="navigation" class="ui-grid-pager-container">
+                              <div role="menubar" class="ui-grid-pager-control">
+                                  <!-- Start Page -->
+                                  <button type="button" role="menuitem" class="ui-grid-pager-first" ui-grid-one-bind-title="aria.pageToFirst"
+      
+                                          ui-grid-one-bind-aria-label="aria.pageToFirst"
+      
+                                          ng-click="paginationusd.firstPage()"
+      
+                                          ng-disabled="cantPageBackward()" title="Page to first" aria-label="Page to first"
+      
+                                          disabled="disabled">
+                                      <div class="first-triangle">
+                                          <div class="first-bar"></div>
+      
+                                      </div>
+                                  </button>
+      
+                                  <!-- Prev Page -->
+                                  <button type="button" role="menuitem" class="ui-grid-pager-previous"
+      
+                                          ui-grid-one-bind-title="aria.pageBack" ui-grid-one-bind-aria-label="aria.pageBack"
+      
+                                          ng-click="paginationusd.previousPage()"
+      
+                                          ng-disabled="cantPageBackward()" title="Page back" aria-label="Page back" disabled="disabled">
+                                      <div class="first-triangle prev-triangle"></div>
+                                  </button>
+      
+                                  <input type="text" ui-grid-one-bind-title="aria.pageSelected" ui-grid-one-bind-aria-label="aria.pageSelected"
+      
+                                         class="ui-grid-pager-control-input ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-required"
+      
+                                         ng-model="paginationusd.pageNumber"
+      
+                                         min="1" max="{{paginationusd.getTotalPages()}}" required="" title="Selected page"
+      
+                                         aria-label="Selected page" ng-change="paginationusd.currentPage()" numbers-only >
+      
+                                  <span class="ui-grid-pager-max-pages-number ng-binding"
+                                        ng-show="paginationusd.getTotalPages() > 0">                                        
+                                      /
+                                      {{paginationusd.getTotalPages()}}
+                                  </span>
+      
+                                  <!-- Next Page -->
+                                  <button type="button" role="menuitem" class="ui-grid-pager-next" ui-grid-one-bind-title="aria.pageForward"
+      
+                                          ui-grid-one-bind-aria-label="aria.pageForward"
+      
+                                          ng-click="paginationusd.nextPage()"
+      
+                                          ng-disabled="cantPageForward()"
+      
+                                          title="Page forward" aria-label="Page forward">
+                                      <div class="last-triangle next-triangle"></div>
+                                  </button>
+      
+                                  <!-- Last Page -->
+                                  <button type="button" role="menuitem" class="ui-grid-pager-last"
+                                          ui-grid-one-bind-title="aria.pageToLast" ui-grid-one-bind-aria-label="aria.pageToLast"
+                                          ng-click="paginationusd.lastPage()" ng-disabled="cantPageToLast()" title="Page to last" aria-label="Page to last">
+                                      <div class="last-triangle"><div class="last-bar"></div></div>
+                                  </button>
+                              </div>
+                              <div class="ui-grid-pager-row-count-picker ng-scope">
+                                  <select ng-model="paginationusd.ddlpageSize"
+                                          ng-options="o as o for o in paginationusd.paginationPageSizes" ng-change="paginationusd.pageSizeChange()"
+                                          class="ng-pristine ng-untouched ng-valid ng-not-empty">                                
+                                  </select>
+                                  <span class="ui-grid-pager-row-count-label ng-binding">&nbsp;items per page</span>
+                              </div>
+                          </div>
+                          <div class="ui-grid-pager-count-container">
+                              <div class="ui-grid-pager-count">
+                                  <span ng-show="paginationusd.totalItems > 0" class="ng-binding" style="">
+                                      {{paginationusd.pageNumber}}
+                                      -
+                                          <!--<abbr ui-grid-one-bind-title="paginationThrough" title="through"> - </abbr>-->
+                                      {{paginationusd.ddlpageSize}} of {{paginationusd.totalItems}} items
+                                  </span>
+                              </div>
+                          </div>
+                  </div>
+          
+          </div> 
+                  </div>
+                </uib-tab>
+    
+                <uib-tab index="1" heading="SGD Fee" ng-click="gridApi.core.handleWindowResize()">
+            <div class="card-body">
+              <ul class="list-inline justify-content-end">                                                             
+                                            <li>
+                                                <div class="btn-group">
+                                                    <button type="button" data-toggle="dropdown" class="btn dropdown-toggle btn-success">Export As
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <div role="menu" class="dropdown-menu">
+                                                            <a class="dropdown-item" href="#" ng-click="exportSGD('pdf')"><i class="fa fa-file-pdf-o"></i>PDF</a>
+                                                            <a class="dropdown-item" href="#" ng-click="exportSGD('csv')"><i class="fa fa-file-excel-o"></i>CSV</a>
+                                                        </div>
+                                                </div>
+                                            </li>                                      
+                                        </ul>
+                <div ui-grid="gridSGDOptions"
+                       ui-grid-move-columns
+                       ui-grid-exporter
+                       ui-grid-auto-resize
+                       class="grid" style="{{tableHeight}}">
+                       <div role="contentinfo" class="ui-grid-pager-panel ng-scope">
+                          <div role="navigation" class="ui-grid-pager-container">
+                              <div role="menubar" class="ui-grid-pager-control">
+                                  <!-- Start Page -->
+                                  <button type="button" role="menuitem" class="ui-grid-pager-first" ui-grid-one-bind-title="aria.pageToFirst"
+      
+                                          ui-grid-one-bind-aria-label="aria.pageToFirst"
+      
+                                          ng-click="paginationsgd.firstPage()"
+      
+                                          ng-disabled="cantPageBackward()" title="Page to first" aria-label="Page to first"
+      
+                                          disabled="disabled">
+                                      <div class="first-triangle">
+                                          <div class="first-bar"></div>
+      
+                                      </div>
+                                  </button>
+      
+                                  <!-- Prev Page -->
+                                  <button type="button" role="menuitem" class="ui-grid-pager-previous"
+      
+                                          ui-grid-one-bind-title="aria.pageBack" ui-grid-one-bind-aria-label="aria.pageBack"
+      
+                                          ng-click="paginationsgd.previousPage()"
+      
+                                          ng-disabled="cantPageBackward()" title="Page back" aria-label="Page back" disabled="disabled">
+                                      <div class="first-triangle prev-triangle"></div>
+                                  </button>
+      
+                                  <input type="text" ui-grid-one-bind-title="aria.pageSelected" ui-grid-one-bind-aria-label="aria.pageSelected"
+      
+                                         class="ui-grid-pager-control-input ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-required"
+      
+                                         ng-model="paginationsgd.pageNumber"
+      
+                                         min="1" max="{{paginationsgd.getTotalPages()}}" required="" title="Selected page"
+      
+                                         aria-label="Selected page" ng-change="paginationsgd.currentPage()" numbers-only >
+      
+                                  <span class="ui-grid-pager-max-pages-number ng-binding"
+                                        ng-show="paginationsgd.getTotalPages() > 0">                                        
+                                      /
+                                      {{paginationsgd.getTotalPages()}}
+                                  </span>
+      
+                                  <!-- Next Page -->
+                                  <button type="button" role="menuitem" class="ui-grid-pager-next" ui-grid-one-bind-title="aria.pageForward"
+      
+                                          ui-grid-one-bind-aria-label="aria.pageForward"
+      
+                                          ng-click="paginationsgd.nextPage()"
+      
+                                          ng-disabled="cantPageForward()"
+      
+                                          title="Page forward" aria-label="Page forward">
+                                      <div class="last-triangle next-triangle"></div>
+                                  </button>
+      
+                                  <!-- Last Page -->
+                                  <button type="button" role="menuitem" class="ui-grid-pager-last"
+                                          ui-grid-one-bind-title="aria.pageToLast" ui-grid-one-bind-aria-label="aria.pageToLast"
+                                          ng-click="paginationsgd.lastPage()" ng-disabled="cantPageToLast()" title="Page to last" aria-label="Page to last">
+                                      <div class="last-triangle"><div class="last-bar"></div></div>
+                                  </button>
+                              </div>
+                              <div class="ui-grid-pager-row-count-picker ng-scope">
+                                  <select ng-model="paginationsgd.ddlpageSize"
+                                          ng-options="o as o for o in paginationsgd.paginationPageSizes" ng-change="paginationsgd.pageSizeChange()"
+                                          class="ng-pristine ng-untouched ng-valid ng-not-empty">                                
+                                  </select>
+                                  <span class="ui-grid-pager-row-count-label ng-binding">&nbsp;items per page</span>
+                              </div>
+                          </div>
+                          <div class="ui-grid-pager-count-container">
+                              <div class="ui-grid-pager-count">
+                                  <span ng-show="paginationsgd.totalItems > 0" class="ng-binding" style="">
+                                      {{paginationsgd.pageNumber}}
+                                      -
+                                          <!--<abbr ui-grid-one-bind-title="paginationThrough" title="through"> - </abbr>-->
+                                      {{paginationsgd.ddlpageSize}} of {{paginationsgd.totalItems}} items
+                                  </span>
+                              </div>
+                          </div>
+                  </div>
+          
+          </div> 
+                  </div>
+                </uib-tab>
+    
+                <uib-tab index="2" heading="RMB Fee" ng-click="gridApi.core.handleWindowResize()">
+                    <div class="card-body">
+                      <ul class="list-inline justify-content-end">                                                             
+                                                    <li>
+                                                        <div class="btn-group">
+                                                            <button type="button" data-toggle="dropdown" class="btn dropdown-toggle btn-success">Export As
+                                                                <span class="caret"></span>
+                                                            </button>
+                                                            <div role="menu" class="dropdown-menu">
+                                                                    <a class="dropdown-item" href="#" ng-click="exportRMB('pdf')"><i class="fa fa-file-pdf-o"></i>PDF</a>
+                                                                    <a class="dropdown-item" href="#" ng-click="exportRMB('csv')"><i class="fa fa-file-excel-o"></i>CSV</a>
+                                                                </div>
+                                                        </div>
+                                                    </li>                                      
+                                                </ul>
+                        <div ui-grid="gridRMBOptions"
+                               ui-grid-move-columns
+                               ui-grid-exporter
+                               ui-grid-auto-resize
+                               class="grid" style="{{tableHeight}}">
+                               <div role="contentinfo" class="ui-grid-pager-panel ng-scope">
+                                  <div role="navigation" class="ui-grid-pager-container">
+                                      <div role="menubar" class="ui-grid-pager-control">
+                                          <!-- Start Page -->
+                                          <button type="button" role="menuitem" class="ui-grid-pager-first" ui-grid-one-bind-title="aria.pageToFirst"
+              
+                                                  ui-grid-one-bind-aria-label="aria.pageToFirst"
+              
+                                                  ng-click="paginationrmb.firstPage()"
+              
+                                                  ng-disabled="cantPageBackward()" title="Page to first" aria-label="Page to first"
+              
+                                                  disabled="disabled">
+                                              <div class="first-triangle">
+                                                  <div class="first-bar"></div>
+              
+                                              </div>
+                                          </button>
+              
+                                          <!-- Prev Page -->
+                                          <button type="button" role="menuitem" class="ui-grid-pager-previous"
+              
+                                                  ui-grid-one-bind-title="aria.pageBack" ui-grid-one-bind-aria-label="aria.pageBack"
+              
+                                                  ng-click="paginationrmb.previousPage()"
+              
+                                                  ng-disabled="cantPageBackward()" title="Page back" aria-label="Page back" disabled="disabled">
+                                              <div class="first-triangle prev-triangle"></div>
+                                          </button>
+              
+                                          <input type="text" ui-grid-one-bind-title="aria.pageSelected" ui-grid-one-bind-aria-label="aria.pageSelected"
+              
+                                                 class="ui-grid-pager-control-input ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-required"
+              
+                                                 ng-model="paginationrmb.pageNumber"
+              
+                                                 min="1" max="{{paginationrmb.getTotalPages()}}" required="" title="Selected page"
+              
+                                                 aria-label="Selected page" ng-change="paginationrmb.currentPage()" numbers-only >
+              
+                                          <span class="ui-grid-pager-max-pages-number ng-binding"
+                                                ng-show="paginationrmb.getTotalPages() > 0">                                        
+                                              /
+                                              {{paginationrmb.getTotalPages()}}
+                                          </span>
+              
+                                          <!-- Next Page -->
+                                          <button type="button" role="menuitem" class="ui-grid-pager-next" ui-grid-one-bind-title="aria.pageForward"
+              
+                                                  ui-grid-one-bind-aria-label="aria.pageForward"
+              
+                                                  ng-click="paginationrmb.nextPage()"
+              
+                                                  ng-disabled="cantPageForward()"
+              
+                                                  title="Page forward" aria-label="Page forward">
+                                              <div class="last-triangle next-triangle"></div>
+                                          </button>
+              
+                                          <!-- Last Page -->
+                                          <button type="button" role="menuitem" class="ui-grid-pager-last"
+                                                  ui-grid-one-bind-title="aria.pageToLast" ui-grid-one-bind-aria-label="aria.pageToLast"
+                                                  ng-click="paginationrmb.lastPage()" ng-disabled="cantPageToLast()" title="Page to last" aria-label="Page to last">
+                                              <div class="last-triangle"><div class="last-bar"></div></div>
+                                          </button>
+                                      </div>
+                                      <div class="ui-grid-pager-row-count-picker ng-scope">
+                                          <select ng-model="paginationrmb.ddlpageSize"
+                                                  ng-options="o as o for o in paginationrmb.paginationPageSizes" ng-change="paginationrmb.pageSizeChange()"
+                                                  class="ng-pristine ng-untouched ng-valid ng-not-empty">                                
+                                          </select>
+                                          <span class="ui-grid-pager-row-count-label ng-binding">&nbsp;items per page</span>
+                                      </div>
+                                  </div>
+                                  <div class="ui-grid-pager-count-container">
+                                      <div class="ui-grid-pager-count">
+                                          <span ng-show="paginationrmb.totalItems > 0" class="ng-binding" style="">
+                                              {{paginationrmb.pageNumber}}
+                                              -
+                                                  <!--<abbr ui-grid-one-bind-title="paginationThrough" title="through"> - </abbr>-->
+                                              {{paginationrmb.ddlpageSize}} of {{paginationrmb.totalItems}} items
+                                          </span>
+                                      </div>
+                                  </div>
+                          </div>
+                  
+                  </div> 
+                          </div>
+                        </uib-tab>
+                        <uib-tab index="3" heading="HKD Fee" ng-click="gridApi.core.handleWindowResize()">
+                            <div class="card-body">
+                              <ul class="list-inline justify-content-end">                                                             
+                                                            <li>
+                                                                <div class="btn-group">
+                                                                    <button type="button" data-toggle="dropdown" class="btn dropdown-toggle btn-success">Export As
+                                                                        <span class="caret"></span>
+                                                                    </button>
+                                                                    <div role="menu" class="dropdown-menu">
+                                                                            <a class="dropdown-item" href="#" ng-click="exportHKD('pdf')"><i class="fa fa-file-pdf-o"></i>PDF</a>
+                                                                            <a class="dropdown-item" href="#" ng-click="exportHKD('csv')"><i class="fa fa-file-excel-o"></i>CSV</a>
+                                                                        </div>
+                                                                </div>
+                                                            </li>                                      
+                                                        </ul>
+                                <div ui-grid="gridHKDOptions"
+                                       ui-grid-move-columns
+                                       ui-grid-exporter
+                                       ui-grid-auto-resize
+                                       class="grid" style="{{tableHeight}}">
+                                       <div role="contentinfo" class="ui-grid-pager-panel ng-scope">
+                                          <div role="navigation" class="ui-grid-pager-container">
+                                              <div role="menubar" class="ui-grid-pager-control">
+                                                  <!-- Start Page -->
+                                                  <button type="button" role="menuitem" class="ui-grid-pager-first" ui-grid-one-bind-title="aria.pageToFirst"
+                      
+                                                          ui-grid-one-bind-aria-label="aria.pageToFirst"
+                      
+                                                          ng-click="paginationhkd.firstPage()"
+                      
+                                                          ng-disabled="cantPageBackward()" title="Page to first" aria-label="Page to first"
+                      
+                                                          disabled="disabled">
+                                                      <div class="first-triangle">
+                                                          <div class="first-bar"></div>
+                      
+                                                      </div>
+                                                  </button>
+                      
+                                                  <!-- Prev Page -->
+                                                  <button type="button" role="menuitem" class="ui-grid-pager-previous"
+                      
+                                                          ui-grid-one-bind-title="aria.pageBack" ui-grid-one-bind-aria-label="aria.pageBack"
+                      
+                                                          ng-click="paginationhkd.previousPage()"
+                      
+                                                          ng-disabled="cantPageBackward()" title="Page back" aria-label="Page back" disabled="disabled">
+                                                      <div class="first-triangle prev-triangle"></div>
+                                                  </button>
+                      
+                                                  <input type="text" ui-grid-one-bind-title="aria.pageSelected" ui-grid-one-bind-aria-label="aria.pageSelected"
+                      
+                                                         class="ui-grid-pager-control-input ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-required"
+                      
+                                                         ng-model="paginationhkd.pageNumber"
+                      
+                                                         min="1" max="{{paginationhkd.getTotalPages()}}" required="" title="Selected page"
+                      
+                                                         aria-label="Selected page" ng-change="paginationhkd.currentPage()" numbers-only >
+                      
+                                                  <span class="ui-grid-pager-max-pages-number ng-binding"
+                                                        ng-show="paginationhkd.getTotalPages() > 0">                                        
+                                                      /
+                                                      {{paginationhkd.getTotalPages()}}
+                                                  </span>
+                      
+                                                  <!-- Next Page -->
+                                                  <button type="button" role="menuitem" class="ui-grid-pager-next" ui-grid-one-bind-title="aria.pageForward"
+                      
+                                                          ui-grid-one-bind-aria-label="aria.pageForward"
+                      
+                                                          ng-click="paginationhkd.nextPage()"
+                      
+                                                          ng-disabled="cantPageForward()"
+                      
+                                                          title="Page forward" aria-label="Page forward">
+                                                      <div class="last-triangle next-triangle"></div>
+                                                  </button>
+                      
+                                                  <!-- Last Page -->
+                                                  <button type="button" role="menuitem" class="ui-grid-pager-last"
+                                                          ui-grid-one-bind-title="aria.pageToLast" ui-grid-one-bind-aria-label="aria.pageToLast"
+                                                          ng-click="paginationhkd.lastPage()" ng-disabled="cantPageToLast()" title="Page to last" aria-label="Page to last">
+                                                      <div class="last-triangle"><div class="last-bar"></div></div>
+                                                  </button>
+                                              </div>
+                                              <div class="ui-grid-pager-row-count-picker ng-scope">
+                                                  <select ng-model="paginationhkd.ddlpageSize"
+                                                          ng-options="o as o for o in paginationhkd.paginationPageSizes" ng-change="paginationhkd.pageSizeChange()"
+                                                          class="ng-pristine ng-untouched ng-valid ng-not-empty">                                
+                                                  </select>
+                                                  <span class="ui-grid-pager-row-count-label ng-binding">&nbsp;items per page</span>
+                                              </div>
+                                          </div>
+                                          <div class="ui-grid-pager-count-container">
+                                              <div class="ui-grid-pager-count">
+                                                  <span ng-show="paginationhkd.totalItems > 0" class="ng-binding" style="">
+                                                      {{paginationhkd.pageNumber}}
+                                                      -
+                                                          <!--<abbr ui-grid-one-bind-title="paginationThrough" title="through"> - </abbr>-->
+                                                      {{paginationhkd.ddlpageSize}} of {{paginationhkd.totalItems}} items
+                                                  </span>
+                                              </div>
+                                          </div>
+                                  </div>
+                          
+                          </div> 
+                                  </div>
+                                </uib-tab>
+                
+                                <uib-tab index="4" heading="TWD Fee" ng-click="gridApi.core.handleWindowResize()">
+                                    <div class="card-body">
+                                      <ul class="list-inline justify-content-end">                                                             
+                                                                    <li>
+                                                                        <div class="btn-group">
+                                                                            <button type="button" data-toggle="dropdown" class="btn dropdown-toggle btn-success">Export As
+                                                                                <span class="caret"></span>
+                                                                            </button>
+                                                                            <div role="menu" class="dropdown-menu">
+                                                                                    <a class="dropdown-item" href="#" ng-click="exportTWD('pdf')"><i class="fa fa-file-pdf-o"></i>PDF</a>
+                                                                                    <a class="dropdown-item" href="#" ng-click="exportTWD('csv')"><i class="fa fa-file-excel-o"></i>CSV</a>
+                                                                                </div>
+                                                                        </div>
+                                                                    </li>                                      
+                                                                </ul>
+                                        <div ui-grid="gridTWDOptions"
+                                               ui-grid-move-columns
+                                               ui-grid-exporter
+                                               ui-grid-auto-resize
+                                               class="grid" style="{{tableHeight}}">
+                                               <div role="contentinfo" class="ui-grid-pager-panel ng-scope">
+                                                  <div role="navigation" class="ui-grid-pager-container">
+                                                      <div role="menubar" class="ui-grid-pager-control">
+                                                          <!-- Start Page -->
+                                                          <button type="button" role="menuitem" class="ui-grid-pager-first" ui-grid-one-bind-title="aria.pageToFirst"
+                              
+                                                                  ui-grid-one-bind-aria-label="aria.pageToFirst"
+                              
+                                                                  ng-click="paginationtwd.firstPage()"
+                              
+                                                                  ng-disabled="cantPageBackward()" title="Page to first" aria-label="Page to first"
+                              
+                                                                  disabled="disabled">
+                                                              <div class="first-triangle">
+                                                                  <div class="first-bar"></div>
+                              
+                                                              </div>
+                                                          </button>
+                              
+                                                          <!-- Prev Page -->
+                                                          <button type="button" role="menuitem" class="ui-grid-pager-previous"
+                              
+                                                                  ui-grid-one-bind-title="aria.pageBack" ui-grid-one-bind-aria-label="aria.pageBack"
+                              
+                                                                  ng-click="paginationtwd.previousPage()"
+                              
+                                                                  ng-disabled="cantPageBackward()" title="Page back" aria-label="Page back" disabled="disabled">
+                                                              <div class="first-triangle prev-triangle"></div>
+                                                          </button>
+                              
+                                                          <input type="text" ui-grid-one-bind-title="aria.pageSelected" ui-grid-one-bind-aria-label="aria.pageSelected"
+                              
+                                                                 class="ui-grid-pager-control-input ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-required"
+                              
+                                                                 ng-model="paginationtwd.pageNumber"
+                              
+                                                                 min="1" max="{{paginationtwd.getTotalPages()}}" required="" title="Selected page"
+                              
+                                                                 aria-label="Selected page" ng-change="paginationtwd.currentPage()" numbers-only >
+                              
+                                                          <span class="ui-grid-pager-max-pages-number ng-binding"
+                                                                ng-show="paginationtwd.getTotalPages() > 0">                                        
+                                                              /
+                                                              {{paginationtwd.getTotalPages()}}
+                                                          </span>
+                              
+                                                          <!-- Next Page -->
+                                                          <button type="button" role="menuitem" class="ui-grid-pager-next" ui-grid-one-bind-title="aria.pageForward"
+                              
+                                                                  ui-grid-one-bind-aria-label="aria.pageForward"
+                              
+                                                                  ng-click="paginationtwd.nextPage()"
+                              
+                                                                  ng-disabled="cantPageForward()"
+                              
+                                                                  title="Page forward" aria-label="Page forward">
+                                                              <div class="last-triangle next-triangle"></div>
+                                                          </button>
+                              
+                                                          <!-- Last Page -->
+                                                          <button type="button" role="menuitem" class="ui-grid-pager-last"
+                                                                  ui-grid-one-bind-title="aria.pageToLast" ui-grid-one-bind-aria-label="aria.pageToLast"
+                                                                  ng-click="paginationtwd.lastPage()" ng-disabled="cantPageToLast()" title="Page to last" aria-label="Page to last">
+                                                              <div class="last-triangle"><div class="last-bar"></div></div>
+                                                          </button>
+                                                      </div>
+                                                      <div class="ui-grid-pager-row-count-picker ng-scope">
+                                                          <select ng-model="paginationtwd.ddlpageSize"
+                                                                  ng-options="o as o for o in paginationtwd.paginationPageSizes" ng-change="paginationtwd.pageSizeChange()"
+                                                                  class="ng-pristine ng-untouched ng-valid ng-not-empty">                                
+                                                          </select>
+                                                          <span class="ui-grid-pager-row-count-label ng-binding">&nbsp;items per page</span>
+                                                      </div>
+                                                  </div>
+                                                  <div class="ui-grid-pager-count-container">
+                                                      <div class="ui-grid-pager-count">
+                                                          <span ng-show="paginationtwd.totalItems > 0" class="ng-binding" style="">
+                                                              {{paginationtwd.pageNumber}}
+                                                              -
+                                                                  <!--<abbr ui-grid-one-bind-title="paginationThrough" title="through"> - </abbr>-->
+                                                              {{paginationtwd.ddlpageSize}} of {{paginationtwd.totalItems}} items
+                                                          </span>
+                                                      </div>
+                                                  </div>
+                                          </div>
+                                  
+                                  </div> 
+                                          </div>
+                                        </uib-tab>
+    
+              </uib-tabset>
+    
+           </div>
+        </div>
+    

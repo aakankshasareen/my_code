@@ -1,0 +1,91 @@
+#footer {
+    font-size: 0.75rem;
+    font-weight: 300;
+    position: relative;
+    background-color: #e4e6ee;
+    .footer-item {
+        margin-top: 2.813rem;
+    }
+    .footer-item-heading {
+        font-size: 0.75rem;
+        color: $theme-color4;
+        margin-bottom: 1.563rem;
+    }
+    .footer-links {
+        li {
+            margin-bottom: 1.125rem;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+        a[href] {
+            @include transition(350ms);
+            &:hover,
+            &:focus {
+                color: $theme-color;
+                text-decoration: underline;
+            }
+        }
+        a {
+            color: $theme-color2;
+            position: relative;
+            display: block;
+
+            &.has-icon {
+                padding-left: 40px;
+                &:before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 16px;
+                    height: 20px;
+                    background-repeat: no-repeat;
+                    background-position: right top;
+                }
+            }
+            &.email-link {
+                &:before {
+                    background-image: url(../images/svgs/envelope-nav-icon.svg);
+                }
+            }
+            &.address-link {
+                &:before {
+                    background-image: url(../images/svgs/location-nav-icon.svg);
+                }
+            }
+            &.phone-link {
+                &:before {
+                    background-image: url(../images/svgs/phone-nav-icon.svg);
+                    top: -3px;
+                }
+            }
+        }
+    }
+
+    .copyright-text {
+        margin-top: 1.875rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .footer-items-wrap {
+        margin-left: -15px;
+        width: calc(100% + 30px);
+        justify-content: space-between;
+        @include media-breakpoint-down(md) {
+            justify-content: flex-start;
+        }
+        @include media-breakpoint-down(sm) {
+            justify-content: space-between;
+        }
+        .footer-item {
+            padding: 0 15px;
+            @include media-breakpoint-down(md) {
+                width: 33.33%;
+            }
+            @include media-breakpoint-down(sm) {
+                width: 50%;
+            }
+        }
+    }
+}

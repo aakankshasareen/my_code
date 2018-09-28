@@ -1,0 +1,11 @@
+{
+    "development": {
+        "username": "exchange_fuleexuat_user@sofoaws-demo-mysql",
+        "password": "aepeiNg1lat5Cae",
+        "database": "exchange_fuleexuat_db",
+        "host": "sofoaws-demo-mysql.mysql.database.azure.com",
+        "dialect": "mysql",       
+        "freezeTableName": true,
+        "operatorsAliases": false
+    }
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>E20C1084-7FB1-441C-8ED6-E034CF5A68AC</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Portfolio_Op.1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-112.000000, -354.000000)">
+        <g id="eth-copy" transform="translate(112.000000, 354.000000)" fill-rule="nonzero">
+            <circle id="Oval" fill="#627EEA" cx="10" cy="10" r="10"></circle>
+            <g id="Group" transform="translate(5.625000, 2.500000)" fill="#FFFFFF">
+                <polygon id="Shape" fill-opacity="0.602" points="4.68625 0 4.68625 5.54375 9.371875 7.6375"></polygon>
+                <polygon id="Shape" points="4.68625 0 0 7.6375 4.68625 5.54375"></polygon>
+                <polygon id="Shape" fill-opacity="0.602" points="4.68625 11.23 4.68625 14.996875 9.375 8.51"></polygon>
+                <polygon id="Shape" points="4.68625 14.996875 4.68625 11.229375 0 8.51"></polygon>
+                <polygon id="Shape" fill-opacity="0.2" points="4.68625 10.358125 9.371875 7.6375 4.68625 5.545"></polygon>
+                <polygon id="Shape" fill-opacity="0.602" points="0 7.6375 4.68625 10.358125 4.68625 5.545"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

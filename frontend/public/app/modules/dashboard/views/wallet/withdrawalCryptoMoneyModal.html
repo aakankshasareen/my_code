@@ -1,0 +1,67 @@
+
+<!-- Modal Header -->
+<div class="modal-header">
+    <h4 class="modal-title">Withdraw Crypto to Wallet </h4>
+    <button type="button" class="close" ng-click="cancel();">&times;</button>
+</div>
+<!-- Modal body -->
+ <form class="form marT30" name="withdrawForm" ng-submit="generateWithdrawRequestCrypto();" novalidate >
+<div class="modal-body">
+         <div class="tab-pane">
+<div class="form-group">
+                       <div class="form-heading-box">
+                            <div class="row align-items-center">
+                                <div class="col-6 ">
+                                      {{crypto_balance}}
+                                   
+                                </div>
+                                <div class="col-6 text-left">
+                                    <h4 class="card-body-heading marB0 text-right"> {{crypto_currency}}  </h4>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                       
+                            <div class="form-group">
+                                <label class="form-group-label">Enter address {{crypto_currency}} </label>
+                                <input class="form-control" type="text" ng-model="receiverAddress" required autocomplete="off" name="receiverAddress" />
+                                <p ng-if="withdrawForm.receiverAddress.$error.required && withdrawForm.$submitted" style="color:red">Please enter receiver address</p>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-group-label">Enter amount <span class="light-font display-block-xs">(Min {{minWithdrawAmt}} {{crypto_currency}} , Max {{maxWithdrawAmt}} {{crypto_currency}} )</span></label>
+                                <input class="form-control" type="text" ng-model="withdrawAmt" ng-change="changeAmount();" maxlength="100" ng-model-options="{ debounce: 300 }" required name="wdAmount" id="wdAmt" autocomplete="off" ng-pattern="/^(\d+)?(\.\d{1,8})?$/">
+                                <p class="marB5 error-msg" ng-if="withdrawForm.wdAmount.$error.required && withdrawForm.$submitted">Please enter amount</p>
+                                <p class="marB5 error-msg" ng-if="withdrawForm.wdAmount.$error.pattern">Please enter valid amount. Decimals permitted upto 8 digits</p>
+                                <p class="marB5 error-msg" ng-if="showMinWithdrawErr">Minimum amount to withdraw is {{crypto_currency + " " + minWithdrawAmt}}</p>
+                                <p class="marB5 error-msg" ng-if="showMaxWithdrawErr">Maximum amount to withdraw is {{crypto_currency + " " + maxWithdrawAmt}}</p>
+                                <p class="marB5 error-msg" ng-if="showZeroAmtErr">Please enter valid amount</p>
+                                <p class="marB5 error-msg" ng-if="showWalletAmtErr">You donot have sufficient funds in wallet </p>
+                                <!--<span class="form-note" >{{vm.minCommissionAmount}}{{vm.balance_currency_code}}</span>-->
+                                <!--
+                                <input type="hidden" ng-model="vm.currencyWithdrawTradeCode" value=""> -->
+                                <p class="fs-13 text-muted marT10">Note: It might take a few minutes for the network to confirm the transaction.</p>
+                            </div>
+                            <div class="form-group">
+                              <div class="has-form-group-icon">
+                                <label class="form-group-label d-flex align-items-center justify-content-between">OTP<small ng-hide="showSendButton">Resend in <span ng-bind="timer"></span> sec</small></label>
+                                <input class="form-control" ng-disabled="!OTPSent" numbr-only ng-model="otp" required name="otp" autocomplete="off" ng-maxLength="6" ng-minLength="6">
+                                <a href="" class="form-group-icon otp-link" ng-show="showSendButton" ng-click="sendCustomerOTP()">{{OTPSent?'Resend':'Send'}} OTP</a>
+                                </div>
+                                <p class="error-msg" ng-if="!withdrawForm.otp.$valid && (withdrawForm.otp.$touched||withdrawForm.$submitted)">Please enter valid OTP</p>
+                            </div>
+                            <div class="form-group text-center">
+                                 <input type="hidden" ng-model="crypto_currency" name="crypto_currency" value="{{crypto_currency}}" />
+                                <button type="submit" class="btn btn-primary" >Withdraw</button>
+                            </div>
+                        
+                    </div>
+</div>
+</form>
+<!-- Modal footer -->
+<!-- <div class="modal-footer justify-content-end">
+    <button type="button" class="btn btn-outline-primary" ng-click="cancel();">Cancel</button>
+    <button type="submit" class="btn btn-primary" ng-click="depositMoney()">Deposit</button>
+</div> -->
+
+<!-- Modal footer -->

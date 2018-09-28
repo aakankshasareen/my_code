@@ -1,0 +1,60 @@
+
+<!-- Modal Header -->
+<div class="modal-header">
+    <h4 class="modal-title">Withdraw USD to Wallet </h4>
+    <button type="button" class="close" ng-click="cancel();">&times;</button>
+</div>
+<!-- Modal body -->
+<form class="form marT30" name="withdrawFormINR" ng-submit="generateWithdrawRequestINR();" autocomplete="off" novalidate>
+<div class="modal-body">
+         <div class="withdrawInrTradeTab tab-pane">
+<div class="form-group">
+                         <div class="form-heading-box">
+                            <div class="row align-items-center">
+                                <div class="col-6 ">
+                                      {{inr_balance | number : 2}}
+                                   
+                                </div>
+                                <div class="col-6 text-left">
+                                    <h4 class="card-body-heading marB0 text-right">{{balanceCurrencyCodeINR}} </h4>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    
+                     </div>
+                           
+                            <div class="form-group">
+                                <label class="form-group-label">Enter amount <span class="light-font display-block-xs">(Min {{minWithdrawAmtINR}} {{balanceCurrencyCodeINR}} , Max {{maxWithdrawAmtINR}} {{balanceCurrencyCodeINR}} )</span></label>
+                                <input class="form-control" type="text" ng-model="withdrawAmtINR" ng-change="changeAmountINR();" maxlength="100" ng-model-options="{ debounce: 300 }" required name="wdAmountINR" id="wdAmt" autocomplete="off" ng-pattern="/^(\d+)?(\.\d{1,8})?$/">
+                                <p class="marB5 error-msg" ng-if="withdrawFormINR.wdAmountINR.$error.required && withdrawFormINR.$submitted">Please enter amount</p>
+                                <p class="marB5 error-msg" ng-if="withdrawFormINR.wdAmountINR.$error.pattern">Please enter valid amount. Decimals permitted upto 8 digits</p>
+                                <p class="marB5 error-msg" ng-if="showMinWithdrawErr">Minimum amount to withdraw is {{balanceCurrencyCodeINR + " " + minWithdrawAmtINR}}</p>
+                                <p class="marB5 error-msg" ng-if="showMaxWithdrawErr">Maximum amount to withdraw is {{balanceCurrencyCodeINR + " " + maxWithdrawAmtINR}}</p>
+                                <p class="marB5 error-msg" ng-if="showZeroAmtErr">Please enter valid amount</p>
+                                <p class="marB5 error-msg" ng-if="showWalletAmtErr">You donot have sufficient funds in wallet </p>
+                                <!--<span class="form-note" >{{vm.minCommissionAmount}}{{vm.balance_currency_code}}</span>-->
+                                <!--
+                                <input type="hidden" ng-model="vm.currencyWithdrawTradeCode" value=""> -->
+                              <!--   <p class="fs-13 text-muted marT10">Note: It might take a few minutes for the network to confirm the transaction.</p> -->
+                            </div>
+                            <div class="form-group">
+                              <div class="has-form-group-icon">
+                                <label class="form-group-label d-flex align-items-center justify-content-between">OTP<small ng-hide="showSendButton">Resend in <span ng-bind="vm.timer"></span> sec</small></label>
+                                <input class="form-control" ng-disabled="!OTPSent" numbr-only ng-model="otp" required name="otp" autocomplete="off" ng-maxLength="6" ng-minLength="6">
+                                <a href="" class="form-group-icon otp-link" ng-show="showSendButton" ng-click="sendCustomerOTP()">{{OTPSent?'Resend':'Send'}} OTP</a>
+                                </div>
+                                <p class="error-msg" ng-if="!withdrawFormINR.otp.$valid && (withdrawFormINR.otp.$touched||withdrawFormINR.$submitted)">Please enter valid OTP</p>
+                            </div>
+                             <input type="hidden" ng-model="getcurrencyHidInr" name="getcurrencyHidInr" value="{{balanceCurrencyCodeINR}}" />
+                            <div class="form-group text-center">
+
+                                <button type="submit" class="btn btn-primary">Withdraw</button>
+                            </div>
+
+                        
+
+                    </div>
+</div>
+    
+                        </form>

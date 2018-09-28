@@ -1,0 +1,71 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="pe-7s-note2"></i>
+        </div>
+        <div class="header-title">
+            <h1>{{vm.pageHeading}} Contact</h1>
+            <small>Platform Support</small>
+            <ol class="breadcrumb">
+                <li><a ui-sref="admin.dashboard"><i class="pe-7s-home"></i> Dashboard</a></li>
+               <li><a ui-sref="admin.contact">Contact</a></li>
+                <li class="active">{{vm.pageHeading}}</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- Form controls -->
+            <div class="col-sm-12">
+                <div class="panel panel-bd lobidrag">
+                    <!--                    <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h4>Add Country</h4>
+                                            </div>
+                                        </div>-->
+
+                    <div class="panel-body">                                    
+                        <form autocomplete="off" ng-submit="vm.id ? vm.update() : vm.add()" name="vm.form" enctype="multipart/form-data">      
+                        
+                       <!-- <div class="form-group">
+                                <label for="exampleInputPassword1">Category</label>
+                                 <sup class="asterik">*</sup>
+                               
+                                 <select name="category_name" required ng-options="option.category_name for option in vm.FaqCategoryList track by option.id" class="form-control" ng-selected="vm.category_name" ng-model="vm.category_name">                                                                                             
+                                    <option value="" style="display: none">Please Select Category</option>        
+                                </select>                                             
+                            </div> 
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Question</label>
+                                <sup class="asterik">*</sup>
+                                <input type="text" class="form-control" name="question" required  ng-model="vm.question" aria-describedby="emailHelp" placeholder="Enter Question">                                            
+                            </div>-->
+                            <div class="form-group">
+                                <label for="exampleInputPassword1"><b>Query</b>:</label>
+                                
+                                {{vm.description}}
+                            </div>
+                                                         
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Status</label>
+                                 <sup class="asterik">*</sup>
+                                 <select name="status" required ng-options="option.name for option in vm.Status track by option.id" class="form-control" ng-selected="vm.status" ng-model="vm.status">                                                                                          
+                                    <option value="" style="display: none">Please Select Status</option>        
+                                </select>                                             
+                            </div>                               
+                            <input type="hidden" ng-model="vm.id" />
+                            <button type="submit" class="btn btn-primary" ng-disabled="vm.form.$invalid">Submit</button>
+                            <button type="button" ng-click="vm.cancel()" class="btn btn-primary">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Inline form -->                        
+            <!-- Textual inputs -->                        
+        </div>
+        <!-- Checkboxes & Radios -->
+    </section> <!-- /.content -->
+</div>

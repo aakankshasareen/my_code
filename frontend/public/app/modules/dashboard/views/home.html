@@ -1,0 +1,332 @@
+<h1 class="dashboard-main-heading">Profile</h1>
+
+<!-- Profile Details Card -->
+<div class="card">
+    <div class="card-header">Profile Details</div>
+    <div class="card-body has-parts">
+        <div class="card-body-part">
+            <div class="user-profile">
+                <div class="user-img" data-toggle="modal" data-target="#updatePhotoModal">
+                    <div class="user-img-inner" ng-if="vm.profileImage" style="background-image:url({{vm.profileImage||'assets/content/images/user-img-placeholder.png'}})"></div>
+                    <!-- <img width="98" src="assets/content/images/user-img-placeholder.png" ng-src="{{vm.profileImage}}" alt="User Image" /> -->
+                    <div ng-if="!vm.profileImage"> Upload Photo</div>
+                </div>
+
+                <div class="user-content marT10">
+                    <h6 class="user-profile-heading">{{vm.profile.fullname | capitalize}}</h6>
+                    <div class="marB5">{{ vm.profile.email}}
+                        <span style="margin-left: 5px;color: #10c610;" ng-show="vm.isEmailVerified">
+                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                        </span>
+                        <span style="margin-left: 5px;color: #fb0000;" ng-show="!vm.isEmailVerified">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                        </span>
+                        <span ng-show="!vm.isEmailVerified && !vm.showResendLink">
+                            <a class="link" style="color: #2196F3;text-decoration: underline;cursor:pointer" ng-click="vm.sendEmailLink()">Send
+                                Email Verification Link.</a>
+                        </span>
+                        <span ng-if="vm.showResendLink">
+                            <a class="link" style="color: #2196F3;text-decoration: underline;cursor:pointer" ng-click="vm.sendEmailLink()">Resend
+                                Email Verification Link.</a>
+                        </span>
+                    </div>
+                    <div>{{vm.profile.mobileNumber}}</div>
+                    <button class="btn btn-primary marT15" ng-click="vm.changePasswordModal();">Change password</button>
+                </div>
+            </div>
+            <div class="marT30">To change your account details please contact
+                <a ui-sref="dashboard.support" class="normal-font">Customer Support</a>
+            </div>
+        </div>
+        <div class="card-body-part text-center text-left-md">
+            <img width="70" class="marT20-lg-up marB10" src="assets/content/images/verification-icon.png" alt="Verification" />
+            <h6 class="card-body-heading marB5">Your Account KYC is
+                <span class="text-danger" ng-if="$root.kycStatus == 0">Incomplete</span>
+                <span class="text-primary" ng-if="$root.kycStatus == 1">Approval Pending</span>
+                <span class="text-success" ng-if="$root.kycStatus == 2">Approved</span>
+                <span class="text-danger" ng-if="$root.kycStatus == 3">Not Approved</span>
+            </h6>
+            <!--                <p ng-if="$root.kycStatus == 3">Due To : <span class="text-danger">{{$root.kycComment}}</span></p>-->
+            <p>You can transact only after successful verification of the documents</p>
+            <!-- <a ui-sref="dashboard.kyc" class="btn btn btn-primary marT5">{{$root.kycStatus==0?'Verify':'View'}} Account</a> -->
+            <li class="row marT20">
+                <h5 class="card-text-list-heading col-xl-12 col-sm-12 marB0">
+                    <!-- <a class="btn btn-outline-primary marB20" ng-click="$root.call_download(9);">
+                        <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download KYC Form</a> -->
+                    <!-- <a class ="btn btn-outline-primary marB20 ng-scope" ng-click="vm.downloadDoc(vm.kyc_form)" ng-if ="!vm.value">
+                                <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download Uploaded KYC Form</a>
+                        <a class ="btn btn-outline-primary marB20 ng-scope" ui-sref="dashboard.trade">
+                                Trade View</a> -->
+                    <a class="btn btn-outline-primary marB20 ng-scope" ui-sref="dashboard.userProfileKYC">
+                        <!-- <span class="list-item-text">Fill KYC Form</span> -->
+                        <span class="list-item-text" ng-if="$root.kycStatus == 0">Fill KYC Form</span>
+                        <span class="list-item-text" ng-if="$root.kycStatus == 1">View Filled KYC Form</span>
+                        <span class="list-item-text" ng-if="$root.kycStatus == 2">View Approved KYC Form</span>
+                        <span class="list-item-text" ng-if="$root.kycStatus == 3">View Disapproved KYC Form</span>
+                    </a>
+                    <a class="btn btn-outline-primary marB20 ng-scope" ui-sref="dashboard.trade">
+                        Trade View</a>
+                </h5>
+            </li>
+            <!-- <li class="row marT20" >
+                    <h5 class="card-text-list-heading col-xl-9 col-sm-8 marB0">
+                     
+                   </h5>                                      
+            </li>  -->
+            <form method="post" name="downloadKYCForm" action="/api/downloadKyc">
+                <input type="hidden" value={{token}} name="token">
+                <input type="hidden" name="path">
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Profile Details Card -->
+
+<!-- Security Card -->
+<div class="card">
+    <div class="card-header">Security</div>
+    <div class="card-body has-parts">
+        <div class="card-body-part">
+            <h6 class="card-body-heading">Enable Two-factor Authentication (2FA)</h6>
+            <p>Secure your Fuleex Account by enabling Two-Factor Authentication. We use "Google Authenticator" App to secure
+                our users account, you can download the app on your smartphone and scan our QR code. This will add an extra
+                layer of security by always asking for an OTP which only you will have on your smartphone.</p>
+            <!-- <a ui-sref="dashboard.Enable2FA" class="btn btn-outline-primary marT20" data-toggle="modal" data-target="#twoFAModal">Enable 2FA</a> -->
+            <button ng-click="vm.enable2FA()" ng-if="!vm.enable2FaButton" class="btn btn-outline-primary marT20">Enable 2FA</button>
+            <button ng-click="vm.disable2FA()" ng-if="vm.enable2FaButton" class="btn btn-outline-primary marT20">Disable
+                2FA
+            </button>
+        </div>
+        <div class="card-body-part text-center text-left-md">
+            <h6 class="card-body-heading">Step-by-step process to enable 2F Authentication</h6>
+            <ul class="row">
+                <li class="col-xl-3 col-lg-6 col-sm-3 col-6 text-center marT10">
+                    <img height="28" style="width:50px;" src="assets/content/images/svgs/download-app-icon.svg" alt="Icon">
+                    <p class="marT10">Download App</p>
+                </li>
+                <li class="col-xl-3 col-lg-6 col-sm-3 col-6 text-center marT10">
+                    <img height="28" style="width:50px;" src="assets/content/images/svgs/scan-qr-code-icon.svg" alt="Icon">
+                    <p class="marT10">Scan QR Code</p>
+                </li>
+                <li class="col-xl-3 col-lg-6 col-sm-3 col-6 text-center marT10">
+                    <img height="28" style="width:50px;" src="assets/content/images/svgs/backup-key-icon.svg" alt="Icon">
+                    <p class="marT10">Backup Key</p>
+                </li>
+                <li class="col-xl-3 col-lg-6 col-sm-3 col-6 text-center marT10">
+                    <img height="28" style="width:50px;" src="assets/content/images/svgs/google-authentication-icon.svg" alt="Icon">
+                    <p class="marT10">Enable Google Authentication</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Security Card -->
+
+
+<div class="row">
+    <!-- KYC Documents Card -->
+    <!--     <div class="col-xl-6 marB20 padR10-xl">
+        <div class="card full-height">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">KYC Document </div>
+                    <div class="col-6 text-right">
+                        <span class="text-danger" ng-if="$root.kycStatus == 0">Incomplete</span>
+                        <span class="text-primary" ng-if="$root.kycStatus == 1">Approval Pending</span>
+                        <span class="text-success" ng-if="$root.kycStatus == 2">Approved</span>
+                        <span class="text-danger" ng-if="$root.kycStatus == 3" data-toggle="tooltip" title="{{$root.kycComment}}">Not Approved</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body text-center kyc_doc_card_body" ng-if="$root.kycStatus == 0" ><p>No Documents Uploaded </p> <a ui-sref="dashboard.kyc" class="btn btn btn-primary marT5">Verify Account</a></div>
+            <div ng-if="vm.sumsubimages.length>0">
+                <div class="card-body kyc_doc_card_body" ng-repeat="image in vm.sumsubimages" style="margin: 0px;padding: 10px;">
+                    <h6 class="card-body-heading">{{image.id_doc_type}}</h6>
+                    <div class="document-section">
+                        <img src="sumsub_docs/{{image.image_name}}" style="max-height: 80px !important" />
+                    </div>
+                    <div class="document-name">
+                        <ul>
+                            
+                            <li class="close-icone" ng-if="image.image_status == 0">
+                                <i class="fa fa-close"></i>
+                                <span ng-if="image.image_status == 0">REJECTED</span>
+                                <p>{{image.image_type}}</p>
+                            </li>
+                            <li class="right-icone" ng-if="image.image_status == 1">
+                                <i class="fa fa-check-circle"></i>
+                                <span ng-if="image.image_status == 1">APPROVED</span>                                
+                                <p>{{image.image_type}}</p>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="card-body kyc_doc_card_body" style="flex:0 1 0;" ng-if="vm.sumsubimages.length == 0 || vm.sumsubimages == undefined">No Documents Uploaded OR Documents Are Still in Under Review</div>
+           </div>
+    </div> -->
+    <!-- KYC Documents Card -->
+    <div class="col-xl-12 marB20">
+        <div class="card full-height">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">Bank Account</div>
+                    <div class="col-6 text-right">
+                        <span class="text-danger" ng-if="$root.bankStatus == 0">Incomplete</span>
+                        <span class="text-warning" ng-if="$root.bankStatus == 1">Approval Pending</span>
+                        <span class="text-success" ng-if="$root.bankStatus == 2">Approved</span>
+                        <span class="text-danger" ng-if="$root.bankStatus == 3" data-toggle="tooltip" title="{{$root.bankComment}}">Not
+                            Approved
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body text-center" ng-if="!vm.bank">No Bank Account Added</div>
+            <div class="card-body">
+                <div ng-if="vm.bank">
+                    <ul class="row card-text-list">
+                        <li class="col-md-3 marT10">
+                            <p>Bank Holder Name</p>
+                            <h5 class="card-text-list-heading">{{vm.bank.holderName | capitalize}}</h5>
+
+                        </li>
+                        <li class="col-md-2 marT10 text-center">
+                            <p>Bank Name</p>
+                            <h5 class="card-text-list-heading">{{vm.bank.bankName | capitalize}}</h5>
+
+                        </li>
+                        <li class="col-md-2 marT10 text-center">
+                            <p>Account Number</p>
+                            <h5 class="card-text-list-heading">{{vm.bank.accountNumber}}</h5>
+
+                        </li>
+                        <li class="col-md-2 marT10 text-center">
+                            <p>SWIFT / IFSC Code</p>
+                            <h5 class="card-text-list-heading">{{vm.bank.ifscCode}}</h5>
+                        </li>
+                        <li class="col-md-3 marT10 text-right">
+                            <p>Remark</p>
+                            <h5 class="card-text-list-heading">{{vm.bank.remark}}</h5>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="text-center">
+                    <a ui-sref="dashboard.bankDetails" class="btn btn-outline-primary marT20 remove-menu-active">
+                        <span>{{vm.bank?'View':'Add'}} Bank Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update Photo Modal -->
+<div id="updatePhotoModal" class="modal fade">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Update Photo</h4>
+                <button type="button" class="close" ng-click="vm.uploadCancel()" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body d-flex flex-wrap align-items-center justify-content-center">
+                <div ng-hide="vm.inputImage" class="custom-input-file">
+                    <input type="file" id="fileInput" class="inputfile ng-touched ng-dirty ng-valid-min-size ng-valid-max-total-size ng-valid-validate-fn ng-valid-max-height ng-valid-min-height ng-valid-max-width ng-valid-min-width ng-valid-ratio ng-valid-max-ratio ng-valid-min-ratio ng-valid-max-duration ng-valid-min-duration ng-valid-validate-async-fn ng-not-empty ng-valid-parse ng-valid ng-valid-required"
+                        ngf-select="" ng-model="vm.inputImage" name="file" accept="image/*" ngf-pattern="'.jpeg,.jpg,.png'" ngf-max-size="1MB"
+                        style="padding: 0px;">
+                    <a href="javascript:;" class="btn btn-outline-primary">Add Photo</a>
+                </div>
+                <div ng-show="vm.inputImage">
+                    <img ngf-thumbnail="vm.inputImage" style="max-height:200px">
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer justify-content-between">
+                <div class="text-muted">.jpeg, .jpg and .png files supported. Max file size 1MB.</div>
+                <div class="">
+                    <button type="button" ng-click="vm.uploadCancel()" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                    <span id="cancel" style="display:none" data-dismiss="modal"></span>
+                    <button type="button" class="btn btn-primary" ng-click="vm.uploadProfileImage()">Update Photo</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Update Photo Modal -->
+
+
+<style>
+    .user-img-inner {
+        height: 100%;
+        width: 100%;
+        background-repeat: no-repeat;
+        border-radius: 50%;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    .document-section {
+        display: inline-block;
+        width: 43%;
+    }
+
+    .document-name {
+        display: inline-block;
+        float: right;
+    }
+
+    .document-name ul {
+        float: left;
+        padding-left: 68px;
+    }
+
+    .document-name ul li {
+        display: table-cell;
+        font-size: 19px;
+        padding: 15px;
+    }
+
+    .document-name ul li p {
+        font-size: 8px;
+    }
+
+    .name-section {
+        font-weight: 700;
+        color: #231a64;
+    }
+
+    .right-icone>i {
+        color: green;
+        font-size: 34px;
+        float: left;
+        margin-right: 8px;
+    }
+
+    .close-icone>i {
+        color: #f35a73;
+        font-size: 34px;
+        float: left;
+        margin-right: 8px;
+    }
+
+    .right-icone>span {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .close-icone>span {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .kyc_doc_card_body {
+        border-bottom: 1px solid #ccc;
+    }
+</style>

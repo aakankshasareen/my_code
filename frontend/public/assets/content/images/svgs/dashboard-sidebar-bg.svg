@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="72px" height="1037px" viewBox="0 0 72 1037" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>5EF6682E-ACBD-47AE-B0E5-F8E0371E7DE0</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="153.908989%" y1="100%" x2="-36.154276%" y2="-23.3685345%" id="linearGradient-1">
+            <stop stop-color="#C86DD7" offset="0%"></stop>
+            <stop stop-color="#BC62D0" offset="4.36513686%"></stop>
+            <stop stop-color="#BC61D0" offset="4.41316971%"></stop>
+            <stop stop-color="#AC51C7" offset="10.2997449%"></stop>
+            <stop stop-color="#6836B5" offset="33.9669771%"></stop>
+            <stop stop-color="#6836B5" offset="57.9528713%"></stop>
+            <stop stop-color="#6836B5" offset="60.8826136%"></stop>
+            <stop stop-color="#3321A8" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Profile-VD" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-4" fill="url(#linearGradient-1)" x="0" y="0" width="72" height="1037"></rect>
+    </g>
+</svg>

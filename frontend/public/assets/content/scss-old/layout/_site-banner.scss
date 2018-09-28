@@ -1,0 +1,67 @@
+.site-banner {
+    padding: 8.4375rem 0 3.125rem;
+    min-height: 63rem;
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+    background: url(../images/site-banner-bg.svg) no-repeat;
+    background-size: cover;
+    @include media-breakpoint-down(md) {
+        padding: 3.125rem 0;
+    }
+    @include extra-large {
+        min-height: 68rem;
+        background-size: 100%;
+    }
+    &.text-banner {
+        min-height: 10rem;
+        .site-banner-heading {
+            margin: 2rem 0;
+            @include media-breakpoint-down(sm) {
+                margin: 6rem 0;
+            }
+        }
+    }
+    .site-banner-heading {
+        font-size: 1.438rem;
+        margin: 3.75rem 0;
+        font-weight: 200;
+        line-height: 1.45;
+        strong {
+            font-weight: 600;
+        }
+        .highlight-text {
+            color: #f8c73a;
+        }
+    }
+    .site-banner-list {
+        justify-content: space-around;
+        max-width: 85%;
+        @include media-breakpoint-down(xs) {
+            max-width: 100%;
+            font-size: 14px;
+            margin-left: 0;
+            margin-right: 0;
+            flex-wrap: nowrap;
+            .list-icon {
+                height: 45px;
+            }
+        }
+        li {
+            text-align: center;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 40px;
+
+        }
+        .list-icon {
+            display: block;
+            margin: 0 auto 30px;
+            height: 65px;
+            @include media-breakpoint-down(xs) {
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+}

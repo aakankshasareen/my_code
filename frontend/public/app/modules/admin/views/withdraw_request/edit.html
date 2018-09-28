@@ -1,0 +1,138 @@
+<style>
+    p.form-control-static {
+    margin-top: 5px;
+}
+</style>
+
+<div class="animated fadeIn">
+    <!-- <h1 class="page-title">{{pageHeading}} Currency</h1> -->
+    <div class="card">
+        <div class="card-header">
+            <h4>Edit Withdraw Request</h4>
+        </div>
+        <div class="card-body">
+            <form autocomplete="off" name="vm.withdrawForm" ng-submit="vm.approve? vm.approveWithdrawRequest() : vm.disapprove?vm.disapproveWithdrawRequest():vm.updateWithdrawRequest()"
+                name="vm.currencyForm" enctype="multipart/form-data" novalidate>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Customer Name</label>
+                    <div class="col-md-3">
+                        <p class="form-control-static">{{vm.customer_name | capitalize}}</p>
+                    </div>
+                    <label class="col-md-3 col-form-label">Customer Email</label>
+                    <div class="col-md-3">
+                        <p class="form-control-static">{{vm.email}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Currency Type</label>
+                    <div class="col-md-3">
+                        <p class="form-control-static">{{vm.currency_type | mapCurrencyType}}</p>
+                    </div>
+                    <label class="col-md-3 col-form-label">KYC Status</label>
+                    <div class="col-md-3">
+                        <p class="form-control-static">{{vm.kyc_status | kycStatusAdmin }}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Currency Code</label>
+                    <div class="col-md-3">
+                        <p class="form-control-static">{{vm.currency_code}}</p>
+                    </div>
+                    <label class="col-md-3 col-form-label">Amount</label>
+                    <div class="col-md-3">
+                        <p class="form-control-static">{{vm.amount}}</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label">Date</label>
+                  <div class="col-md-3">
+                      <p class="form-control-static">{{vm.created_at | date : 'dd-MM-yyyy'}}</p>
+                  </div>
+                  <label class="col-md-3 col-form-label">Status</label>
+                  <div class="col-md-3">
+                      <p class="form-control-static">{{vm.status | mapWithdrawStatusAdmin}}</p>
+                  </div>
+                </div> 
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label">Fee</label>
+                  <div class="col-md-3">
+                      <p class="form-control-static">{{vm.platform_value }}</p>
+                  </div>
+                  
+                </div>
+                <hr>
+                <h3 class="h5"><u>Account Details</u></h3>
+                <div class="form-group row" ng-if="vm.currency_type">
+                  <label class="col-md-3 col-form-label">Crypto Address</label>
+                  <div class="col-md-9">
+                      <p class="form-control-static">{{vm.crypto_address}}</p>
+                  </div>
+                  <label class="col-md-3 col-form-label">QR Code</label>
+                  <div class="col-md-9"><img src="{{vm.qrcode}}"></div>
+                </div>
+                <div class="form-group row" ng-if="!vm.currency_type">
+                  <label class="col-md-3 col-form-label">Account Holder's Name</label>
+                  <div class="col-md-9">
+                      <p class="form-control-static">{{vm.bankDetails.holderName}}</p>
+                  </div>
+                  <label class="col-md-3 col-form-label">Account Number</label>
+                  <div class="col-md-9"><p class="form-control-static">{{vm.bankDetails.accNumber}}</p></div>
+                  <label class="col-md-3 col-form-label">Bank</label>
+                  <div class="col-md-9"><p class="form-control-static">{{vm.bankDetails.bankName}}</p></div>
+                  <label class="col-md-3 col-form-label">SWIFT / IFSC code</label>
+                  <div class="col-md-9"><p class="form-control-static">{{vm.bankDetails.ifscCode}}</p></div>
+                  <label class="col-md-3 col-form-label">Verification Status</label>
+                  <div class="col-md-9"><p class="form-control-static">{{vm.bankDetails.status | kycStatusAdmin}}</p></div>
+                </div>
+                <hr>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Reference Number</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" required ng-model="vm.reference_number" name="reference_number" placeholder="Enter Reference Number" ng-value="vm.reference_number"
+                            maxlength="100">
+                            <p class="error-msg" ng-if="vm.withdrawForm.reference_number.$error.required && vm.withdrawForm.$submitted">Please enter reference number</p>
+                            <!-- <p class="form-control-static" ng-if="vm.status>0">{{vm.reference_number}}</p> -->
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label">Remark</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="comment" required ng-model="vm.comment" placeholder="Enter Remark" ng-value="vm.comment" maxlength="100">
+                        <p class="error-msg" ng-if="vm.withdrawForm.comment.$error.required && vm.withdrawForm.$submitted">Please enter remark</p>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label"></label>
+                    <div class="col-md-2" ng-if="vm.status==0">
+                        <button type="submit" ng-model="vm.approve" ng-click="vm.approve=true" class="btn btn-primary">Approve</button>
+                    </div>
+                    <div class="col-md-2" ng-if="vm.status==0">
+                        <button type="submit" ng-click="vm.disapprove=true" ng-model="vm.disapprove" class="btn btn-danger">Disapprove</button>
+                    </div>
+                    <div class="col-md-2" ng-if="vm.status>0">
+                        <button type="submit" ng-click="vm.update=true" ng-model="vm.update" class="btn btn-primary">Update</button>
+                    </div>
+                    <!-- <div class="col-md-2">
+                                                        <button type="button" ng-click="vm.cancel()" class="btn btn-secondary">Cancel</button>
+                                                    </div> -->
+
+                </div>
+
+
+                <!-- <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" ng-click="vm.cancel()" class="btn btn-secondary">Cancel</button> -->
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Inline form -->
+<!-- Textual inputs -->
+</div>
+<!-- Checkboxes & Radios -->
+
+
+</section>
+<!-- /.content -->
+</div>

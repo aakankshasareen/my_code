@@ -1,0 +1,372 @@
+<div class="dashboard-wrapper">
+    <!--[if lt IE 10]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif-->
+    <header class="dashboard-header">
+        <div class="dashboard-header-logo">
+            <a ui-sref="dashboard.home" class="logo">
+                <img src="assets/content/images/logo.png" alt="Logo" />
+            </a>
+        </div>
+        <nav id="main-navigation" class="dashboard-navigation sidebar-navigation">
+            <ul ng-class="vm.highlightMenuSelection()">
+                <li class="active dashboard-navigation-item sidebar-list-item">
+                    <a ui-sref="dashboard.trade">
+                        <span class="list-item-icon nav-icon-trade"></span>
+                        <span class="list-item-text">trade</span>
+                    </a>
+                </li>
+                <li class="dashboard-navigation-item sidebar-list-item">
+                    <a ui-sref="dashboard.wallet">
+                        <span class="list-item-icon nav-icon-wallet"></span>
+                        <span class="list-item-text">Wallet</span>
+                    </a>
+                </li>
+                <li class="dashboard-navigation-item sidebar-list-item">
+                    <a ui-sref="dashboard.portfolio">
+                        <span class="list-item-icon nav-icon-portfolio"></span>
+                        <span class="list-item-text">Portfolio</span>
+                    </a>
+                </li>
+                <li class="dashboard-navigation-item sidebar-list-item">
+                    <a ui-sref="dashboard.history">
+                        <span class="list-item-icon nav-icon-history"></span>
+                        <span class="list-item-text">History</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <ul class="list-inline align-items-center justify-content-end dashboard-header-panel">
+            <li class="username-wrap">
+                <div class="d-flex">
+                    Hi,
+                    <strong title="{{$root.userName}}" class="username">&nbsp;{{$root.userName}}</strong>
+                </div>
+            </li>
+            <li class="has-nav-dropdown click-dropdown header-balance-dropdown with-arrow d-none d-lg-block" ng-click="vm.balanceClick();$root.updateBalanceHW2()">
+                <!--ng-click="vm.balanceClick()">-->
+
+                <span class="trigger cursor-pointer balance_menu">My Balances</span>
+                <div class="nav-dropdown">
+                    <div class="nav-dropdown-heading-wrap">
+                        <h4 class="nav-dropdown-heading theme-color">Active Balances</h4>
+                    </div>
+                    <ul class="nav-dropdown-list">
+                        <li ng-repeat="item in vm.getWallet track by $index">
+                            <a class="clearfix">
+                                <span class="left-side float-left">{{item.currency_code}}</span>
+                                <span class="right-side float-right">{{item.total_amount}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="has-nav-dropdown hover-dropdown">
+                <a class="trigger" href="javascript:void(0)" ng-click="vm.resetCustomerNotification()">
+                    <img class="trigger-icon" style="max-width:30px;" src="assets/content/images/svgs/notification-icon.svg" alt="Icon" />
+                    <span class="notification-count trigger-icon" ng-if="vm.notify_counter > 0">{{vm.notify_counter}}</span>
+                </a>
+                <!--Nav Dropdown -->
+                <div class="nav-dropdown notification-dropdown big-dropdown">
+                    <a href="/support_ticket" ui-sref="dashboard.NotificationList" ng-if="vm.allNotifications.length > 0" class='btn btn-primary view-all-btn'>View All</a>
+                    <a href="/support_ticket" ui-sref="dashboard.NotificationList" ng-if="vm.allNotifications.length == 0" class='btn btn-primary view-all-btn'>No Notification</a>
+                    <ul class="nav-dropdown-list" style="max-height: 400px;overflow: auto;">
+                        <li ng-repeat="notification in vm.allNotifications">
+                            <a href="{{ notification.link}}" id="ad_notification{{notification.id}}" class="dropdown-item {{notification.is_read == 0 ? 'noti_unread' : 'noti_read'}}"
+                                ng-click="vm.markNotificationRead(notification.id, $index)">{{ notification.title}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Nav Dropdown -->
+            </li>
+            <li class="has-nav-dropdown hover-dropdown d-none d-xl-block pr-0">
+                <a href="#" class="trigger">
+                    <img class="trigger-icon" width="32" src="assets/content/images/user-img-placeholder.png" ng-src="{{vm.profileImage}}"alt="User" />
+                </a>
+                <div class="nav-dropdown">
+                    <ul class="nav-dropdown-list">
+                        <li class="remove-menu-active">
+                            <a ui-sref="dashboard.userProfile">My Profile</a>
+                        </li>
+                        <li class="remove-menu-active">
+                            <a ui-sref="dashboard.support">Support</a>
+                        </li>
+                        <li class="remove-menu-active">
+                            <a ng-click="vm.logout()">Logout</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+            <li id="mobileMenuTrigger" class="menu-trigger d-xl-none" data-target="#mobile-navigation">
+
+                <span class="first line"></span>
+                <span class="second line"></span>
+                <span class="third line"></span>
+            </li>
+        </ul>
+        <!-- Mobile Navigation -->
+        <nav id="mobile-navigation" class="site-navigation">
+            <ul>
+                <li>
+                    <a class="menu-trigger fixed-active close-mobile-menu">
+                        <span class="first line"></span>
+                        <span class="second line"></span>
+                        <span class="third line"></span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav-menu">
+                <li>
+                    <a ui-sref="dashboard.trade({'pair_id':vm.default.id, 'currency_from':vm.default.from_currency_code, 'currency_to': vm.default.to_currency_code, 'currency_from_symbol':vm.default.from_icon_path, 'currency_to_symbol': vm.default.to_icon_path})">Trade</a>
+                </li>
+                <li>
+                    <a ui-sref="dashboard.wallet">Wallet</a>
+                </li>
+                <li>
+                    <a ui-sref="dashboard.history">History</a>
+                </li>
+                <li>
+                    <a ui-sref="dashboard.portfolio">Portfolio</a>
+                </li>
+                <li>
+                    <a ui-sref="dashboard.userProfile">Profile</a>
+                </li>
+                <li>
+                    <a ui-sref="dashboard.support">Support</a>
+                </li>
+                <li>
+                    <a ng-click="vm.logout()">Logout</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Mobile Navigation -->
+    </header>
+    <!-- .site-navbar -->
+    <div class="dashboard-content">
+        <main class="dashboard-main">
+            <ul class="dashboard-main-exchange-list header-exchange-list" ng-class="vm.highlightSelectedPair();" ng-if="$state.current.name=='dashboard.trade' || $state.current.name=='dashboard.home'">
+                <li ng-repeat="item in vm.pairList" ng-click="vm.clickMe()" ui-sref="dashboard.trade({'pair_id':item.id, 'currency_from':item.from_currency_code, 'currency_to': item.to_currency_code, 'currency_from_symbol':item.from_icon_path, 'currency_to_symbol': item.to_icon_path})"
+                    style="cursor:pointer;">
+                    <span class="text bold-font find-active">{{item.from_currency_code+"/"+item.to_currency_code}}</span>
+                    <span ng-if="(item.from=='FULX' && item.to=='USD')" class="increment-value" ng-class="{'text-success': item.changes>=0, 'text-danger': item.changes<0}">{{2 | number:2}}
+                        <!-- <i class="fa" ng-class="{'fa-caret-up': item.changes>=0, 'fa-caret-down': item.changes<0}"></i> -->
+                    </span>
+                    <span ng-if="(item.from!='FULX' || item.to!='USD')" class="increment-value" ng-class="{'text-success': item.changes>=0, 'text-danger': item.changes<0}">{{item.last_trade_price | number:2}}
+                        <!-- <i class="fa" ng-class="{'fa-caret-up': item.changes>=0, 'fa-caret-down': item.changes<0}"></i> -->
+                    </span>
+                    <small class="increment-percent" ng-class="{'text-success': item.changeInPrice>=0, 'text-danger': item.changeInPrice<0}">{{item.changeInPrice | makePositive | number:2}}
+                        <i class="fa status-pointer" ng-class="{'fa-caret-up': item.changeInPrice>=0, 'fa-caret-down': item.changeInPrice<0}"></i>
+                    </small>
+                </li>
+            </ul>
+            <div ui-view="section" class="dashboard-inner-content">
+            </div>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="main_footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3 col-md-3">
+                        <div class="widget-contact">
+                            <ul class="list-icon">
+                                <!-- <li><i class="fa fa-map-marker"></i>1355 Market Street, home area
+                                        <br>San Francisco, CA 345345345</li>
+                                    <li><i class="fa fa-phone"></i>(123) 456-7890 </li> -->
+                                <li>&nbsp;</li>
+                                <li>&nbsp;</li>
+                                <li>&nbsp;</li>
+                                <!-- <li><i class="fa fa-envelope"></i><a href="#">abc@dfd.com</a></li>  -->
+                                <li>&nbsp;</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-md-9">
+                        <div class="row">
+                            <div class="col-xs-8 col-sm-8 col-md-8">
+                                <div class="footer-box" ng-controller="faqController">
+                                    <h2 class="footer_main-heading">Useful links</h2>
+                                    <ul class="footer-list list-half">
+                                        <li>
+                                            <a href="http://fuleex.io/" target="_blank">About Us</a>
+                                        </li>
+                                        <li>
+                                            <a href="https://2316974281.wixsite.com/fuleex/blog">Blog </a>
+                                        </li>
+                                        <li>
+                                            <a href="http://fuleex.io/news/news.html">News </a>
+                                        </li>
+                                        <!-- <li><a href="#" ng-click="$root.call_download(7);">Referral Program</a></li> -->
+                                        <li>
+                                            <a href="https://bitcointalk.org/index.php?topic=4803890.0" target="_blank">Referral Program</a>
+                                        </li>
+                                        <!-- <li><a href="#" ng-click="$root.call_download(4);">Strategic Partnerships</a></li> -->
+
+                                        <li>
+                                            <a ui-sref="Strategic">Strategic Partnerships</a>
+                                        </li>
+                                        <li>
+                                            <a href="https://2316974281.wixsite.com/fuleex" target="_blank">ICO listing</a>
+                                        </li>
+
+                                    </ul>
+                                    <ul class="footer-list list-half">
+                                        <li>
+                                            <a ui-sref="disclaimer" href="disclaimer" target="_blank">Disclaimers</a>
+                                        </li>
+                                        <!-- <li><a ui-sref="disclaimer" ng-click="$root.call_download(6);">Fees</a></li> -->
+                                        <li>
+                                            <a ui-sref="fees">Fees</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" ng-click="$root.call_download(8);">Fund Deposit & Withdrawal</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" ng-click="$root.call_download(2);">Online Trading Agreement</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" ng-click="$root.call_download(3);">Privacy Document</a>
+                                        </li>
+
+                                        <!-- <li>
+                                            <a href="#" ng-click="$root.call_download(5);">Token Purchase / Sales Terms</a>
+                                        </li> -->
+                                        <li>
+                                            <a ui-sref="trading" target="_blank">Trade</a>
+                                        </li>
+                                        <li>
+                                            <!-- <a data-toggle="modal" data-target="#OTCDashboard"
+                                            target="_blank" rel="noopener">OTC Trade</a> -->
+                                            <a ui-sref="otctrade" href="otctrade" target="_blank">OTC Trade</a>
+                                        </li>
+                                    </ul>
+                                    <form method="get" name="test_call_download" action="/api/call_download">
+                                        <input type="hidden" value={{token}} name="token">
+                                        <input type="hidden" name="doc">
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4">
+                                <h2 class="footer_main-heading">Connect with Us</h2>
+                                <div class="footer-box">
+                                    <ul class="footer-list">
+                                        <li>
+                                            <a ui-sref="contact_us" target="_blank">Contact Us</a>
+                                        </li>
+                                        <li>
+                                            <a href="mailto: info@fuleex.io">Email : info@fuleex.io </a>
+                                        </li>
+                                    </ul>
+                                    <!--social-->
+                                    <!-- <h3 class="footer-title">Connect with Us</h3> -->
+                                    <div class="social-content">
+                                        <div class="social-row">
+                                            <div class="social_icon">
+                                                <a href="https://www.facebook.com/fuleex">
+                                                    <i class="fa fa-facebook"></i>
+                                                </a>
+                                                <a href="https://t.me/FuleexFULX">
+                                                    <i class="fa fa-telegram"></i>
+                                                </a>
+                                                <a href="https://medium.com/@Fuleex.io">
+                                                    <i class="fa fa-medium"></i>
+                                                </a>
+                                                <a href="https://twitter.com/Fuleex_">
+                                                    <i class="fa fa-twitter"></i>
+                                                </a>
+                                                <a href="https://www.linkedin.com/company/fuleex">
+                                                    <i class="fa fa-linkedin"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+									<ul class="support_data">
+									<li  style="width:50px;"><img src="assets/content/images/support.png"/></li>
+									<li><img src="assets/content/images/qrcode.png"/></li>
+								</ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--div class="col-sm-3 col-md-3">
+                            <div class="newsletter-box">
+                                <h3 class="footer-title">Email Newslatter</h3>
+                                <p>Subscribe to our newsletter!</p>
+                                <form method="post" action="#" class="newsletter-form"><input type="hidden" value="form 4" name="form-name">
+                                    <input type="text" placeholder="Email Address">
+                                    <button type="submit"><i aria-hidden="true" class="fa fa-paper-plane"></i></button>
+                                    <div class="envelope">
+                                        <i aria-hidden="true" class="fa fa-envelope"></i>
+                                    </div>
+                                </form>
+                            </div>
+                        </div-->
+                </div>
+            </div>
+        </div>
+        <!-- /.End of main footer -->
+        <div class="sub_footer">
+            <div class="container">
+                <div class="logos-wrapper">
+                    <!--<div class="logos-row">
+                            <div class="social-content">
+                                <div class="social-row">
+                                    <div class="social_icon">
+                                        <a href="https://www.facebook.com/fuleex"><i class="fa fa-facebook"></i></a>
+                                        <a href="https://t.me/joinchat/D7TS0RLNKRh-23wMcf7TqQ"><i class="fa fa-telegram"></i></a>
+                                        <a href="https://twitter.com/Fuleex_"><i class="fa fa-twitter"></i></a>
+                                       
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                        </div>-->
+                    <div class="copyright">
+                        <span>&copy; 2018 All Rights Reserved Fuleex.io.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.End of sub footer -->
+    </footer>
+
+    <a class="btn-lg scrollup" style="display: block;">
+        <i class="fa fa-arrow-up"></i>
+    </a>
+
+    <!-- Footer -->
+
+</div>
+<div id="OTCDashboard" class="modal fade modal_terms" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <!-- <div class="modal-header text-center">
+				<h4 class="modal-title">Agreement</h4>
+				
+			</div> -->
+            <!-- Modal body -->
+            <form class="form" novalidate>
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" style="top:20px">&times;</button>
+                    <div class="form-group">
+                        <div class="has-form-group-icon">
+                            <img width="200" src="assets/content/images/logo_color.png" alt="Logo" class="">
+                            <label class="form-group-label text-center">
+                                </label>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <!-- <div class="modal-footer justify-content-end">
+					<button type="button" class="btn btn-outline-primary" data-dismiss="modal" >Close</button>
+				</div> -->
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+.goToTop {
+        display: none;
+        width: 40px;
+        height: 40px;
+        @include position(fixed, $right:30px, $bottom:20px );
+        @include border-radius(4px);
+        cursor: pointer;
+        font-size: 27px;
+        font-weight: bold;
+        padding-top: 5px;
+        text-align: center;
+        z-index: 100;
+        background-color: $theme-color-light;
+        color: #fff;
+        &:hover {
+            opacity: 0.7;
+        }
+    }

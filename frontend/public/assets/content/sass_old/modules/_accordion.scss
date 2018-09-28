@@ -1,0 +1,53 @@
+.site-accordion {
+    list-style-type: none;
+    .accordion-block {
+    list-style: none;
+    position: relative;
+}
+
+.accordion-block-heading {
+    margin: 0;
+    font-size: 1.2rem;
+    color: $theme-color2;
+    padding-right: 1rem;
+    margin-bottom: 1.9rem;
+    cursor: pointer;
+    position: relative;
+    @include media-breakpoint-down(sm) {
+        font-size: 1rem;
+    }
+   /* &.active-on-load {
+        + .accordion-block-content {
+            display: block;
+        }
+    }*/
+    &.active {
+    &:after {
+    transform: rotate(180deg);
+    }
+    }
+
+    &:after {
+    content:"\f107";
+    font-family: FontAwesome;
+    position: absolute;
+    right: 0;
+    top: 0;
+    @include transition(500ms);
+}
+
+    }
+
+
+    .accordion-block-content {
+    color: #666666;
+    font-size: 0.9rem;
+    padding:  0;
+    display: none;
+    position: relative;
+    margin-top: -1.2rem;
+    margin-bottom: 1.9rem;
+}
+
+
+}

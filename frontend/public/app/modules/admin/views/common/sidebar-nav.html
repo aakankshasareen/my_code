@@ -1,0 +1,128 @@
+<div class="sidebar">
+  <nav class="sidebar-nav">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.dashboard"><i class="icon-speedometer"></i> Dashboard</a>
+      </li>
+      <li class="nav-item" ng-if="$root.allowedPermission['Manage Customer'] || $root.isSuperAdmin == 1">
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.customerList"><i class="icon-people"></i> Manage Customers </a>
+      </li>
+      <li class="nav-item" ng-if="$root.allowedPermission['Manage Currency'] || $root.isSuperAdmin == 1">
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.currencyList"><i class="icon-wallet"></i> Manage Currency</a>
+      </li>
+      <li class="nav-item" ng-if="$root.allowedPermission['Manage Currency Pairs'] || $root.isSuperAdmin == 1" >
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.currencyPairs"><i class="icon-control-pause"></i> Manage Currency Pairs</a>
+      </li>
+      <li class="nav-item" ng-if="$root.allowedPermission['Manage Platform Commission'] || $root.isSuperAdmin == 1">
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.platformCommission"><i class="icon-present"></i>Manage Platform Commission</a>
+      </li>
+      <li class="nav-item" ng-if="$root.allowedPermission['Manage Trading Limit'] || $root.isSuperAdmin == 1">
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.tradeLimit"><i class="icon-directions"></i> Manage Trading Limit</a>
+      </li>
+<!--       <li class="nav-item" ng-if="$root.allowedPermission['Manage Faq'] || $root.isSuperAdmin == 1">
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.faqList"><i class="icon-question"></i> Manage FAQ</a>
+      </li> -->
+      <li class="nav-item" ng-if="$root.allowedPermission['Manage Email Template'] || $root.isSuperAdmin == 1">
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.EmailTemplateList"><i class="icon-envelope-open"></i> Manage Email Template</a>
+      </li>
+      <!-- <li class="nav-item" ng-if="$root.isSuperAdmin == 1">
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.SmsTemplateList"><i class="icon-bubbles"></i> Manage SMS Template</a>
+      </li> -->
+      <li class="nav-item" ng-if="$root.allowedPermission['Manage Support'] || $root.isSuperAdmin == 1">
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.supportList"><i class="icon-support"></i> Manage Support</a>
+      </li>
+      <li class="nav-item" ng-if="$root.allowedPermission['Manage Deposit Request'] || $root.isSuperAdmin == 1">
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.depositRequest"><i class="icon-cloud-upload"></i>Manage Deposit Requests</a>
+      </li>
+      <li class="nav-item" ng-if="$root.allowedPermission['Manage Withdraw Request'] || $root.isSuperAdmin == 1">
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.withdrawRequest"><i class="icon-cloud-download"></i>Manage Withdraw Requests</a>
+      </li>
+      <li class="nav-item nav-dropdown"  ng-if="$root.allowedPermission.Country || $root.allowedPermission.State || $root.allowedPermission.City || $root.allowedPermission.KYC || $root.isSuperAdmin == 1">
+        <a class="nav-link nav-dropdown-toggle"  href="#"><i class="icon-user-following"></i> Masters</a>
+        <ul class="nav-dropdown-items">
+          <li class="nav-item"  ng-if="$root.allowedPermission.Country || $root.isSuperAdmin == 1">
+            <a class="nav-link" ui-sref-active="active" ui-sref="admin.countryList"><i class="icon-location-pin"></i>Manage Country</a>
+          </li>
+          <li class="nav-item"  ng-if="$root.allowedPermission.State || $root.isSuperAdmin == 1">
+            <a class="nav-link" ui-sref-active="active" ui-sref="admin.stateList"><i class="icon-location-pin"></i>Manage State</a>
+          </li>
+          <li class="nav-item"  ng-if="$root.allowedPermission.City || $root.isSuperAdmin == 1">
+            <a class="nav-link" ui-sref-active="active" ui-sref="admin.cityList"><i class="icon-location-pin"></i>Manage City</a>
+          </li>
+          <li class="nav-item"  ng-if="$root.allowedPermission.KYC || $root.isSuperAdmin == 1">
+            <a class="nav-link" ui-sref-active="active" ui-sref="admin.kycList"><i class="icon-shield"></i> Manage KYC</a>
+          </li>
+        </ul>
+     </li>
+      <li class="nav-item nav-dropdown" ng-if="$root.isSuperAdmin == 1">
+        <a class="nav-link nav-dropdown-toggle"  ui-sref-active="active" href="#"><i class="icon-layers"></i>Access Management</a>
+
+        <ul class="nav-dropdown-items">
+          <li class="nav-item">
+            <a class="nav-link" ui-sref-active="active" ui-sref="admin.roleList"><i class="icon-star"></i> Manage Roles</a>
+          </li>
+          <li class="nav-item" >
+            <a class="nav-link" ui-sref-active="active" ui-sref="admin.rolePermissionList"><i class="icon-star"></i> Manage Permissions</a>
+          </li>
+          <li class="nav-item" >
+            <a class="nav-link" ui-sref-active="active" ui-sref="admin.adminUserList"><i class="icon-user-follow"></i> Manage Admin User</a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item nav-dropdown" ng-if="$root.allowedPermission.customerReportAdmin || $root.allowedPermission.transactionReportAdmin || $root.allowedPermission.transactionReportCustomerAdmin || $root.allowedPermission.getTotalDepositAmount || $root.allowedPermission.getTotalWithdrawAmount || $root.isSuperAdmin == 1">
+          <a class="nav-link nav-dropdown-toggle"  ui-sref-active="active" href="#"><i class="icon-book-open"></i>Reports</a>
+
+          <ul class="nav-dropdown-items">
+            <li class="nav-item"  ng-if="$root.allowedPermission.getTotalDepositAmount || $root.isSuperAdmin == 1">
+              <a class="nav-link" ui-sref-active="active" ui-sref="admin.totalDeposits"><i class="icon-star"></i>Total Deposits</a>
+            </li>
+            <li class="nav-item"  ng-if="$root.allowedPermission.getTotalWithdrawAmount || $root.isSuperAdmin == 1">
+              <a class="nav-link" ui-sref-active="active" ui-sref="admin.totalWithdrawals"><i class="icon-star"></i> Total Withdrawals</a>
+            </li>
+            <!-- <li class="nav-item"  ng-if="$root.allowedPermission.getCustomerCountries || $root.isSuperAdmin == 1">
+              <a class="nav-link" ui-sref-active="active" ui-sref="admin.adminUserList"><i class="icon-user-follow"></i> Customer Report</a>
+            </li> -->
+            <li class="nav-item"  ng-if="$root.allowedPermission.customerReportAdmin || $root.isSuperAdmin == 1">
+                <a class="nav-link" ui-sref-active="active" ui-sref="admin.customerreport"><i class="icon-user-follow"></i> Customer Report </a>
+              </li>
+            <li class="nav-item"  ng-if="$root.allowedPermission.transactionReportAdmin || $root.isSuperAdmin == 1">
+                <a class="nav-link" ui-sref-active="active" ui-sref="admin.transactionreport"><i class="icon-user-follow"></i> Transaction Report </a>
+              </li>
+              <li class="nav-item" ng-if="$root.isSuperAdmin == 1">
+                <a class="nav-link" ui-sref-active="active" ui-sref="admin.feereport">
+                  <i class="icon-star"></i>Fee Report (Crypto)</a>
+              </li>
+              <li class="nav-item" ng-if="$root.isSuperAdmin == 1">
+                <a class="nav-link" ui-sref-active="active" ui-sref="admin.feereportFiat">
+                  <i class="icon-star"></i>Fee Report (Fiat)</a>
+              </li>
+               <!-- <li class="nav-item"  ng-if="$root.isSuperAdmin == 1">
+                <a class="nav-link" ui-sref-active="active" ui-sref="admin.depositsReport"><i class="icon-user-follow"></i> Deposit Report </a>
+              </li>
+              <li class="nav-item"  ng-if="$root.isSuperAdmin == 1">
+                <a class="nav-link" ui-sref-active="active" ui-sref="admin.withdrawalReport"><i class="icon-user-follow"></i> Withdraw Report </a>
+              </li> -->
+
+
+          </ul>
+        </li>
+        <li class="nav-item" ng-if="$root.allowedPermission.transactionReportAdmin || $root.isSuperAdmin == 1">
+          <a class="nav-link" ui-sref-active="active" ui-sref="admin.orderBook"><i class="icon-notebook"></i> Order Book</a>
+        </li>
+<!--       <li class="nav-item" ng-if="$root.allowedPermission.transactionReportAdmin || $root.isSuperAdmin == 1">
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.addAmountFiat"><i class="icon-paper-plane"></i> Add Amount</a>
+      </li> -->
+
+      <!-- <li class="nav-item" ng-if="$root.allowedPermission['Manage Contact'] || $root.isSuperAdmin == 1">
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.contact"><i class="icon-support"></i> Manage Contact</a>
+      </li> -->
+
+       <li class="nav-item" ng-if=" $root.isSuperAdmin == 1">
+       <!-- $root.allowedPermission.['Activity Log'] || -->
+        <a class="nav-link" ui-sref-active="active" ui-sref="admin.activityLog"><i class="icon-support"></i> Activity Log</a>
+      </li>
+
+    </ul>
+  </nav>
+</div>

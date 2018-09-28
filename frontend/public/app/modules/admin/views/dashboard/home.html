@@ -1,0 +1,274 @@
+<div class="animated fadeIn">
+
+    <h1 class="page-title">Dashboard</h1>
+
+    <!-- Card Group -->
+    <div class="row home-quick-link">
+       <div class="col-md-6 col-xl-3">
+        <div class="card text-white bg-primary cursor-pointer" ui-sref="admin.customerList">
+            <div class="card-body">
+                <div class="h1 text-right mb-4">
+                    <i class="icon-people"></i>
+                </div>
+                <div class="h4 mb-0">{{vm.totalUsers}}</div>
+                <small class="text-uppercase font-weight-bold">Total Users</small>
+                <!-- <div class="progress progress-xs mt-3 mb-0">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div> -->
+            </div>
+        </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+        <div class="card text-white bg-danger cursor-pointer" ui-sref="admin.customerList({kyc_status:1})">
+            <div class="card-body">
+                <div class="h1 text-right mb-4">
+                    <i class="icon-info"></i>
+                </div>
+                <div class="h4 mb-0">{{vm.totalPendingKyc}}</div>
+                <small class="text-uppercase font-weight-bold">KYC Approval Pending</small>
+                <!-- <div class="progress progress-xs mt-3 mb-0">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div> -->
+            </div>
+        </div>
+
+        </div>
+        <div class="col-md-6 col-xl-3">
+        <div class="card text-white bg-info cursor-pointer"  ui-sref="admin.currencyList({status:1})" >
+            <div class="card-body">
+                <div class="h1 text-right mb-4">
+                    <i class="icon-layers"></i>
+                </div>
+                <div class="h4 mb-0">{{vm.totalCurrencies}}</div>
+                <small class="text-uppercase font-weight-bold">Active Currencies</small>
+                <!-- <div class="progress progress-xs mt-3 mb-0">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div> -->
+            </div>
+        </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+        <div class="card text-white bg-success cursor-pointer">
+            <div class="card-body" ng-click="vm.liveUsersUpdate()">
+                <i class="icon-reload card-btn-top"></i>
+                <div class="h1 text-right mb-4">
+                    <i class="icon-user-following"></i>
+                </div>
+                <div class="h4 mb-0">{{vm.liveUsers}}</div>
+                <small class="text-uppercase font-weight-bold">Members online</small>
+                <!-- <div class="progress progress-xs mt-3 mb-0">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card text-white bg-success cursor-pointer bg-btc">
+            <div class="card-body" ng-click="vm.liveUsersUpdate()">
+                <i class="icon-reload card-btn-top"></i>
+                <div class="h1 text-right mb-4">
+                        <!-- <img src="/images/currencyimage/file-1528441366056.svg" alt=""> -->
+                </div>
+                <div class="h4 mb-0">{{vm.totalFeeBTC ?vm.totalFeeBTC:0}}</div>
+                <small class="text-uppercase font-weight-bold">Total BTC Fees (BTC)</small>
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card text-white bg-success cursor-pointer bg-eth">
+            <div class="card-body" ng-click="vm.liveUsersUpdate()">
+                <i class="icon-reload card-btn-top"></i>
+                <div class="h1 text-right mb-4">
+                     <!-- <i class="icon-user-following"></i> -->
+                </div>
+                <div class="h4 mb-0">{{vm.totalFeeETH ?vm.totalFeeETH :0}}</div>
+                <small class="text-uppercase font-weight-bold">Total ETH Fees (ETH)</small>
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card text-white bg-success cursor-pointer bg-ltc">
+            <div class="card-body" ng-click="vm.liveUsersUpdate()">
+                <i class="icon-reload card-btn-top"></i>
+                <div class="h1 text-right mb-4">
+                          <!-- <i class="icon-user-following"></i> -->
+                </div>
+                <div class="h4 mb-0">{{vm.totalFeeLTC ? vm.totalFeeLTC :0}}</div>
+                <small class="text-uppercase font-weight-bold">Total LTC Fees (LTC)</small>
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card text-white bg-success cursor-pointer bg-fulx">
+            <div class="card-body" ng-click="vm.liveUsersUpdate()">
+                <i class="icon-reload card-btn-top"></i>
+                <div class="h1 text-right mb-4">
+                        <!-- <img src="/images/currencyimage/file-1531305262270.jpeg" alt=""> -->
+                </div>
+                <div class="h4 mb-0">{{vm.totalFeeFULX ? vm.totalFeeFULX : 0}}</div>
+                <small class="text-uppercase font-weight-bold">Total FULX Fees (FULX)</small>
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card text-white bg-success cursor-pointer bg-abc">
+            <div class="card-body" ng-click="vm.liveUsersUpdate()">
+                <i class="icon-reload card-btn-top"></i>
+                <div class="h1 text-right mb-4">
+                    <!-- <i class="icon-user-following"></i> -->
+                </div>
+                <div class="h4 mb-0">{{vm.totalFeeABC ? vm.totalFeeABC : 0}}</div>
+                <small class="text-uppercase font-weight-bold">Total ABC Fees (ABC)</small>
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card text-white bg-success cursor-pointer bg-usd">
+            <div class="card-body" ng-click="vm.liveUsersUpdate()">
+                <i class="icon-reload card-btn-top"></i>
+                <div class="h1 text-right mb-4">
+                    <!-- <i class="icon-user-following"></i> -->
+                </div>
+                <div class="h4 mb-0">{{vm.totalFeeUSD ? vm.totalFeeUSD : 0}}</div>
+                <small class="text-uppercase font-weight-bold">Total USD Fees (USD)</small>
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card text-white bg-success cursor-pointer bg-hkd">
+            <div class="card-body" ng-click="vm.liveUsersUpdate()">
+                <i class="icon-reload card-btn-top"></i>
+                <div class="h1 text-right mb-4">
+                    <!-- <i class="icon-user-following"></i> -->
+                </div>
+                <div class="h4 mb-0">{{vm.totalFeeHKD ? vm.totalFeeHKD : 0}}</div>
+                <small class="text-uppercase font-weight-bold">Total HKD Fees (HKD)</small>
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card text-white bg-success cursor-pointer bg-rmb">
+            <div class="card-body" ng-click="vm.liveUsersUpdate()">
+                <i class="icon-reload card-btn-top"></i>
+                <div class="h1 text-right mb-4">
+                    <!-- <i class="icon-user-following"></i> -->
+                </div>
+                <div class="h4 mb-0">{{vm.totalFeeRMB ? vm.totalFeeRMB : 0}}</div>
+                <small class="text-uppercase font-weight-bold">Total RMB Fees (RMB)</small>
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card text-white bg-success cursor-pointer bg-sgd">
+            <div class="card-body" ng-click="vm.liveUsersUpdate()">
+                <i class="icon-reload card-btn-top"></i>
+                <div class="h1 text-right mb-4">
+                    <!-- <i class="icon-user-following"></i> -->
+                </div>
+                <div class="h4 mb-0">{{vm.totalFeeSGD ? vm.totalFeeSGD : 0}}</div>
+                <small class="text-uppercase font-weight-bold">Total SGD Fees (SGD)</small>
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+        <div class="card text-white bg-success cursor-pointer bg-twd">
+            <div class="card-body" ng-click="vm.liveUsersUpdate()">
+                <i class="icon-reload card-btn-top"></i>
+                <div class="h1 text-right mb-4">
+                    <!-- <i class="icon-user-following"></i> -->
+                </div>
+                <div class="h4 mb-0">{{vm.totalFeeTWD ? vm.totalFeeTWD : 0}}</div>
+                <small class="text-uppercase font-weight-bold">Total TWD Fees (TWD)</small>
+               
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <!-- Card Group -->
+
+    <!-- Card -->
+    <div class="card">
+        <div class="card-header" style=" font-weight:bold;">Last Trade Price</div>
+        <div class="card-body pb-0">
+
+           <div class="row">
+            <div class="col-xl-2 col-sm-6 pl-2" ng-repeat="pair in vm.tradeCurrencyPairs">
+              <div class="card">
+                    <div class="card-body p-3">
+                 
+                        <div class="h5 text-success mb-0">{{pair.from_currency_code}}/{{pair.to_currency_code}}</div>
+                        <div class="text-muted text-uppercase font-weight-bold font-xs">1 {{pair.from_currency_code}} = {{pair.last_trade_price}} {{pair.to_currency_code}}</div>
+                    </div>
+                </div>
+            </div>
+           </div>
+
+        </div>
+    </div>
+
+    <!-- Card -->
+    <div class="card">
+        <div class="card-header" style=" font-weight:bold;" >Active Currencies</div>
+        <div class="card-body">
+        <ul class="list-inline">
+          <li ng-repeat="currency in vm.currencyIcons"><img width="33" src="{{currency.currency_icon_path}}" alt="{{currency.currency_name}}"></li>
+        </ul>
+        </div>
+    </div>
+
+    <!-- Card -->
+
+    <div class="card">
+    <div class="card-header" style=" font-weight:bold;">New Customers (Latest 10)</div>
+    <div class="card-body">
+    <table class="table table-responsive-sm table-hover table-outline mb-0">
+        <thead class="thead-light">
+            <tr>
+                <th>User</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <!-- <th class="text-center">Country</th> -->
+                <th>Activity</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr ng-if="!vm.customersData.length">
+            <td colspan="4">
+              <div style="opacity: 0.25; font-size: 1.5em; width: 100%; text-align: center;">No registered users</div>
+            </td>
+          </tr>
+            <tr ng-repeat="customer in vm.customersData">
+                <td>
+                    <div>{{customer.fullname}}</div>
+                    <div class="small text-muted">
+                        Registered: {{customer.registered | adminDateFilter}}
+                    </div>
+                </td>
+                <td>
+                  <div> {{customer.email}} </div>
+                </td>
+                <td><div>{{customer.mobileNumber}}</div></td>
+                <!-- <td class="text-center">
+                    <div>{{customer.country}}</div>
+                </td> -->
+                <td>
+                    <div class="small text-muted">Last login</div>
+                    <strong>{{customer.lastLogin | adminDateFilter}}</strong>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    </div>
+
+</div>

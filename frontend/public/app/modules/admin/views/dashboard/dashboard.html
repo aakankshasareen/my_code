@@ -1,0 +1,35 @@
+<!-- Navbar -->
+<div ng-include="'app/modules/admin/views/common/navbar.html'" include-replace></div>
+<div class="app-body">
+  <!-- Navigation -->
+  <div ng-include ="'app/modules/admin/views/common/sidebar-nav.html'" include-replace></div>
+  <!-- Main content -->
+  <main class="main">
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb" breadcrumb>
+      <ncy-breadcrumb></ncy-breadcrumb>
+
+      <!-- Breadcrumb Menu-->
+      <!--<li class="breadcrumb-menu">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+          <a class="btn" href="#"><i class="icon-speech"></i></a>
+          <a class="btn" ui-sref="app.main"><i class="icon-graph"></i> &nbsp;Dashboard</a>
+          <a class="btn" ui-sref="app.main"><i class="icon-settings"></i> &nbsp;Settings</a>
+        </div>
+      </li>-->
+
+    </ol>
+
+    <div class="container-fluid">
+      <div ui-view="section"></div>
+    </div>
+    <!-- /.conainer-fluid -->
+  </main>
+
+  <!-- Aside Menu -->
+  <!--<div ng-include src="'app/modules/admin/views/common/aside.html'"></div>-->
+
+</div>
+
+<!-- Footer -->
+<div ng-include="'app/modules/admin/views/common/footer.html'" include-replace></div>

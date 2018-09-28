@@ -1,0 +1,94 @@
+<div class="animated fadeIn">
+
+        <!-- <h1 class="page-title">{{pageHeading}} Currency</h1> -->
+         <div class="card">
+  
+            
+           <div class="card-header"><h4>{{pageHeading}} Currency</h4></div>
+           <div class="card-body">
+                    <form autocomplete="off" ng-submit="vm.getCurrency.id ? vm.updateCurrency() : vm.addCurrency()" name="vm.currencyForm" enctype="multipart/form-data" novalidate>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Currency Name</label>
+                                    <sup class="text-danger">*</sup>
+                                    <input type="text" class="form-control" name="currency_name" required  ng-model="vm.getCurrency.currency_name" aria-describedby="emailHelp" placeholder="Enter Currency Name" maxlength="100" pattern="^[ a-zA-Z]*$">
+                                    <p class="error-msg" ng-if="vm.currencyForm.currency_name.$error.required && vm.currencyForm.$submitted">Please enter currency name</p>
+                                    <p class="error-msg" ng-if="vm.currencyForm.currency_name.$error.pattern && vm.currencyForm.$submitted">Please enter valid currency name</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Currency Code</label>
+                                    <sup class="text-danger">*</sup>
+                                    <input type="text" class="form-control" name="currency_code"  ng-disabled="vm.getCurrency.id" required ng-model="vm.getCurrency.currency_code" placeholder="Enter Currency Code" maxlength="100" pattern="^[A-Za-z0-9]*$">
+                                    <p class="error-msg" ng-if="vm.currencyForm.currency_code.$error.required && vm.currencyForm.$submitted">Please enter currency code</p>
+                                    <p class="error-msg" ng-if="vm.currencyForm.currency_code.$error.pattern && vm.currencyForm.$submitted">Please enter valid currency code</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Currency Type</label>
+                                    <sup class="text-danger">*</sup>
+                                    <select name="currency_type" required ng-options="option.name for option in vm.currencyType track by option.id" ng-disabled="vm.getCurrency.id" class="form-control" ng-model="vm.getCurrency.currency_type">
+                                    <option value="" style="display: none">Please Select Currency Type</option>
+                                    </select>
+                                    <p class="error-msg" ng-if="vm.currencyForm.currency_type.$error.required && vm.currencyForm.$submitted">Please select currency type</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Status</label>
+                                    <sup class="text-danger">*</sup>
+                                    <select name="currency_status" required ng-options="option.name for option in vm.status track by option.id" class="form-control" ng-model="vm.getCurrency.currency_status">
+                                    <option value="" style="display: none">Please Select Status</option>
+                                    </select>
+                                    <p class="error-msg" ng-if="vm.currencyForm.currency_status.$error.required && vm.currencyForm.$submitted">Please select status</p>
+                                </div>
+                                <div class="row">
+
+                                <div class="form-group col-sm-6">
+                                    <label for="exampleInputPassword1">Currency Icon ( File size limit 10KB )</label>
+                                     <sup class="text-danger" ng-if="!vm.getCurrency.id" >*</sup>
+                                    <input
+                                        type="file"
+                                        ngf-select
+                                        ng-model="vm.getCurrency.file"
+                                        ng-required="!vm.getCurrency.id"
+                                        name="file"
+                                        ngf-pattern="'image/*'"
+                                        accept="image/*"
+                                        ngf-max-size="10KB"
+                                        />
+                                    <input type="hidden" ng-model="vm.getCurrency.hidden_currency_icon"  />
+
+                                    <span ng-if="vm.getCurrency.file">
+                                    Image thumbnail: <img style="width:100px;" ngf-thumbnail="vm.getCurrency.file || '/thumb.jpg'"/>
+                                     </span>
+                                     <p class="error-msg" ng-if="vm.currencyForm.file.$error.required && vm.currencyForm.$submitted">Please upload currency icon</p>
+                                     <p class="error-msg" ng-if="vm.currencyForm.file.$error.pattern && vm.currencyForm.file.$touched">Please upload only image file</p>
+                                     <p class="error-msg" ng-if="vm.currencyForm.file.$error.maxSize">Maximum file upload size : 10KB.</p>
+                                    
+                                    <p>{{vm.getCurrency.progress}}</p>
+                                </div>
+                                    <div class="form-group col-sm-6">
+                                        <label for="exampleInputPassword1" ng-if="vm.getCurrency.uploaded_icon">Uploaded Currency Icon</label>
+                                        <br>
+                                        <input type="hidden" ng-model="vm.getCurrency.uploaded_icon" />
+                                         <span ng-if="vm.getCurrency.uploadedfile">
+                                     <img ng-if="vm.getCurrency.uploadedfile" style="width:100px;" ngf-thumbnail="vm.getCurrency.uploadedfile || '/thumb.jpg'"/>
+
+                                    </span>
+                                    </div>
+                                </div>
+
+                                        <input type="hidden" ng-model="vm.getCurrency.id" />
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="button" ng-click="vm.cancel()" class="btn btn-secondary">Cancel</button>
+                    </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Inline form -->
+                <!-- Textual inputs -->
+            </div>
+            <!-- Checkboxes & Radios -->
+
+
+        </section> <!-- /.content -->
+    </div>

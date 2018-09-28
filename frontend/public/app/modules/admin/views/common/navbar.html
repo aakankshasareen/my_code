@@ -1,0 +1,57 @@
+<header class="app-header navbar">
+  <button class="navbar-toggler mobile-sidebar-toggler d-lg-none" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" ui-sref="admin.dashboard"></a>
+  <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <ul class="nav navbar-nav ml-auto d-md-down-none">
+    
+    <!-- <li class="nav-item">
+      <a class="nav-link" href="#"><i class="icon-bell big-icon"></i><span class="badge badge-pill badge-danger">5</span></a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      <i class="icon-wallet big-icon"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+       <div class="dropdown-header text-center">
+          <strong>My Wallet</strong>
+        </div>
+        <a class="dropdown-item" href="#"><i class="fa fa-shield"></i>$0</a>
+        <a class="dropdown-item" href="#"><i class="fa fa-lock"></i>$0</a>
+      </div>
+    </li> -->
+     <li class="nav-item dropdown">
+         <a class="nav-link cursor-pointer" data-toggle="dropdown"  ng-click="vm.resetAdminNotification()">
+             <div class="notification-icon-wrap"> 
+                <i class="icon-bell notification-icon"></i>
+                <span class="notification-count trigger-icon" ng-if="vm.notify_counter > 0">{{vm.notify_counter}}</span>
+             </div>
+             
+        </a>
+        <!--Nav Dropdown -->
+        <div class="dropdown-menu notification-dropdown dropdown-menu-right" >
+            <a href="admin/notification-list" ui-sref="admin.notificationList" class='btn btn-primary view-all-btn' ng-if="vm.allNotifications.length > 0">View All</a>
+            <a href="admin/notification-list" ui-sref="admin.notificationList" ng-if="vm.allNotifications.length == 0" class='btn btn-primary view-all-btn' >No Notification</a>
+            <div class="dropdown-inner">
+            <a  ng-repeat="notification in vm.allNotifications" style='font-size: 12px' href="{{ notification.link}}" id="ad_notification{{notification.id}}" class="dropdown-item {{notification.is_read == 0 ? 'noti_unread' : 'noti_read'}}" ng-click="vm.markNotificationRead(notification.id, $index)">{{ notification.title}}</a>            
+            </div>
+        </div>
+        <!--Nav Dropdown -->
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      <i class="icon-settings big-icon" title="Settings"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" ui-sref="admin.settings" ui-sref-active="active"><i class="icon-settings big-icon"></i> Settings</a>
+        <a class="dropdown-item" ui-sref="admin.editMyProfile" title="Edit My Profile"><i class="mr-3 fa fa-user"></i>My Profile</a>
+                                              
+        <a class="dropdown-item" ui-sref="admin.adminchangePassword"><i class="fa fa-shield"></i>Change Password</a>
+        <a class="dropdown-item" ng-click="vm.adminLogout();"><i class="mr-3 fa fa-power-off"></i> Logout</a>
+      </div>
+    </li>   
+  </ul>
+</header>

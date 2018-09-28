@@ -1,0 +1,44 @@
+
+#toast-container .toast {
+	border: 1px solid;
+	@include shadow(none !important);
+	.toast-message {
+	font-size: 0.8rem;
+	}
+	.toast-close-button {
+	top: -4px;
+	font-size: 0;
+	&:before {
+	font-family: FontAwesome;
+	content: "\f00d";
+	font-size: 1rem;
+	}
+}
+}
+
+#toast-container .toast.toast-error {
+	color: #721c24;
+background: #f8d7da !important;
+border-color: #f5c6cb;
+.toast-close-button {
+	&:before {
+	color: #721c24;
+	}
+}
+}
+
+#toast-container .toast.toast-success {
+	color: #155724;
+background: #d4edda !important;
+border-color: #c3e6cb;
+.toast-close-button {
+	top: -4px;
+	font-size: 0;
+	&:before {
+	font-family: FontAwesome;
+	content: "\f00d";
+	color: #155724;
+	font-size: 1rem;
+	}
+}
+}

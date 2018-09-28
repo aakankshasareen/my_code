@@ -1,0 +1,12 @@
+.pagination {
+    .page-link {
+        font-weight: 300;
+        border: none;
+        background: none !important;
+        color: $theme-color2;
+        @include border-radius(0 !important);
+        &.active {
+            font-weight: 700;
+        }
+    }
+}

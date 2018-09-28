@@ -1,0 +1,128 @@
+.modal {
+    font-size: 0.8125rem;
+    &.fade {
+    opacity: 1;
+    }
+    .modal-title {
+        font-size: 1rem;
+        color: $theme-color3;
+    }
+    .modal-body {
+        min-height: 100px;
+        font-size: 0.8125rem;
+        color: $theme-color4;
+        padding: 1.4rem 2.188rem 2.4rem 2.188rem;
+        letter-spacing: 0.4px;
+        &.is-small {
+            min-height: 120px;
+        }
+        .form-group-label {
+            color: $theme-color3;
+        }
+        .form-control-wrap {
+            max-width: 13.125rem;
+            position: relative;
+        }
+        @include media-breakpoint-down(sm) {
+            padding: 1rem;
+        }
+        
+        .form-control {
+            border-color: $theme-color !important;
+        }
+        .custom-input-file .selected-value, .form-group-icon, .form-control, .custom-input-file .input-close {
+            color: $theme-color3 !important;
+        }
+    }
+
+    .btn-outline-primary {
+        border-color: $theme-color;
+        color: $theme-color;
+    }
+
+    .custom-select {
+        background-image: url(../images/svgs/caret-down.svg);
+    }
+
+    .modal-header {
+        position: relative;
+    }
+    .close {
+        font-size: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 1;
+        background: url(../images/close-btn.png) no-repeat;
+        right: 15px;
+        @include vertically-centered();
+        @include square(15px);
+    }
+    
+    .card-text-list-heading {
+        font-size: 1rem;
+        color: $theme-color;
+        font-weight: normal;
+    }
+    .card-text-list {
+        font-size: 0.75rem;
+    }
+    .custom-select {
+        max-width: 274px;
+    }
+    .modal-lg {
+    max-width: 40rem;
+    .modal-body {
+    min-height: 320px;
+    }
+    }
+}
+.modal-backdrop {
+    background: rgba(0,0,0,0.5);
+}
+
+#twoFAModal .modal-body .tab-pane {
+    max-width: 450px;
+}
+
+* [data-toggle="modal"] {
+    cursor: pointer;
+}
+.modal_terms{
+	text-align:center;
+	.modal-lg{
+		max-width:50rem;
+	}
+	.modal-body{
+		padding-bottom:20px;
+	}
+	img{
+		margin-bottom:20px;
+	}
+	.form-group-label {
+		margin-bottom:10px;
+	}
+	.Disclaimer {
+		font-size: 10px;
+		text-align: justify;
+		p{
+			margin-bottom:5px;
+		}
+	}
+	.btn-full{
+		display:flex;
+		width:100%;
+		 justify-content: space-between;
+		 margin:20px 0;
+		li{
+			width:24%;
+			a{
+				background:$theme-color5;
+				    width: 100%;
+				display: inline-block;
+				PADDING: 12px 5px;
+				FONT-SIZE: 0.70rem;
+				color: #fff;
+			}
+		}
+	}
+}

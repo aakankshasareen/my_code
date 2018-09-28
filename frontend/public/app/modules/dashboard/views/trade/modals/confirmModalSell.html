@@ -1,0 +1,42 @@
+<!-- Limit BUY -->
+<div class="modal-header">
+    <h3 class="modal-title">Confirm Order</h3>
+    <button type="button" class="close" ng-click="cancel()">×</button>
+</div>
+<div class="modal-body full-min-height">
+
+    <ul class="transaction-list card-text-list ">
+    <li class="row">
+    <h5 class="col-6 mar10 marB30-sm card-text-list-heading">Quantity To Sell</h5>
+    <div class="col-6 text-right">
+        <!-- <img class="icon-image-size-trade" ng-src="{{sellIcon}}" alt="{{currToBuy}}"/> -->
+    {{qtyToSell | number : 8}}&nbsp;{{currToSell}}</div>
+    </li>
+
+    <li class="row">
+    <h5 class="col-6 mar10 marB30-sm card-text-list-heading">Price </h5>
+    <div class="col-6 text-right">
+        <!-- <img width="18" class="icon-image-size-trade" ng-src="{{buyIcon}}" alt="{{currBuyAt}}"/> -->
+        {{sellPrice | number : 2}}&nbsp;{{currSellAt}}</div>
+    </li>
+
+   <!--  <li class="row">
+    <h5 class="col-sm-6 mar10 card-text-list-heading">Transaction Fee</h5>
+    <div class="col-sm-6 text-right">
+        <img width="18" class="icon-image-size-trade" ng-src="{{buyIcon}}" alt="{{currBuyAt}}"/>{{getFee.value}} {{getFee.percent != 0 ? "("+getFee.percent+"%)" : ''}}</div>
+    </li> -->
+
+    <li class="row">
+    <h5 class="col-6 mar10 marB30-sm card-text-list-heading black-color">Grand Total</h5>
+    <div class="col-6 text-right black-color">
+        <!-- <img width="18" class="icon-image-size-trade" ng-src="{{buyIcon}}" alt="{{currBuyAt}}"/> -->{{getTotalAmnt | number : 2}} &nbsp;{{currSellAt}}</div>
+    </li>
+    </ul>
+
+</div>
+<div class="modal-footer justify-content-flex-start has-two-btns">
+    <button class="btn btn-outline-primary" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="ok()">Place Order</button>
+</div>
+
+

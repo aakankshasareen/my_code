@@ -1,0 +1,31 @@
+.login-page {
+    background: url(../images/login-bg.jpg) no-repeat center center;
+    background-size: cover;
+    min-height: 100vh;
+    padding: 30px 15px;
+    @include media-breakpoint-up(xl) {
+    background-attachment: fixed;
+    }
+    @include media-breakpoint-down(sm) {
+    padding: 0 15px;
+    }
+    .content-wrap {
+        width: 440px;
+        margin: 30px auto;
+        @include media-breakpoint-down(xs) {
+            width: 100%;
+        }
+    }
+    .login-card {
+        max-width: 440px;
+        width: 100%;
+        .form {
+            margin-top: 28px;
+        }
+    }
+    .tab-navigation {
+        .card-header {
+            padding: 0;
+        }
+    }
+}

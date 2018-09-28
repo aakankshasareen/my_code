@@ -1,0 +1,33 @@
+<div class="animated fadeIn">
+ 
+    <h1 class="page-title">Admin Settings</h1>
+     <div class="card">
+       <div class="card-body">
+        
+        <form autocomplete="off" ng-submit="vm.updateSettings(settingsForm.$valid)" name="vm.settingsForm"  novalidate>                                    
+            <div class="form-group">
+                <label for="exampleInputEmail1">Date Format</label>
+                <sup class="text-danger">*</sup>
+                <select name="date_format" ng-options="option.name for option in vm.date_format track by option.name" class="form-control" required  aria-describedby="emailHelp" ng-model="vm.settings.date_format" ng-selected="vm.date_format" ng-model="vm.date_format">
+                    <option value="" style="display: none">Please select date format</option>
+                </select>
+                <!-- <input type="text" class="form-control" name="date_format" required  ng-model="vm.settings.date_format" aria-describedby="emailHelp" placeholder="Enter Date Format">                                             -->
+                <p class="error-msg" ng-if="vm.settingsForm.date_format.$error.required && vm.settingsForm.$submitted">Please enter date format </p> 
+            </div>                            
+            <div class="form-group">
+                <label for="exampleInputEmail1">Display Date Format</label>
+                <sup class="text-danger">*</sup>
+                <select name="display_date_format" ng-options="option.name for option in vm.display_date_format track by option.name" class="form-control"  required   aria-describedby="emailHelp" ng-model="vm.settings.display_date_format" ng-selected="vm.display_date_format" ng-model="vm.disdate_format">
+                    <option value="" style="display: none">Please display date format</option>
+                </select>
+                <!-- <input type="text" class="form-control" name="display_date_format" required  ng-model="vm.settings.display_date_format" aria-describedby="emailHelp" placeholder="Enter Display Date Format">                                             -->
+                <p class="error-msg" ng-if="vm.settingsForm.display_date_format.$error.required && vm.settingsForm.$submitted">Please display date format </p>                                        
+                
+            </div>                            
+            <button type="submit" class="btn btn-primary" >Submit</button>
+            <button type="button" ng-click="vm.cancel()" class="btn btn-secondary">Cancel</button>
+        </form>
+
+     </div>
+    </div>
+   </div>

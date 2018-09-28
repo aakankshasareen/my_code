@@ -1,0 +1,62 @@
+.menu-trigger {
+    cursor: pointer;
+    z-index: 101;
+    padding-left: 12px;
+    padding-top: 18px;
+    @include square(54px);
+    @include transition(350ms);
+    @include vertically-centered();
+    right: 15px;
+    &.theme2 {
+        .line {
+            background-color: $theme-color;
+        }
+    }
+    .line {
+        height: 3px;
+        width: 30px;
+        background-color:#F04F23;
+        margin-bottom: 6px;
+        display: block;
+        position: relative;
+        @include transition(all 0.15s cubic-bezier(0.63, 0.62, 0.48, 1.64) 0.1s);
+        @include transform(rotateZ(0deg) translateX(0px) translateY(0px));
+        &:last-child {
+            margin-bottom: 0;
+        }
+        &.second {
+            @include transform(none);
+        }
+    }
+    &.active, &.fixed-active {
+        .line {
+            background-color: $theme-color;
+            &.second {
+                opacity: 0;
+            }
+            &.first {
+                @include transform(rotateZ(48deg) translateX(6px) translateY(6px) !important);
+            }
+            &.third {
+                @include transform(rotateZ(-49deg) translateX(7px) translateY(-6px) !important);
+            }
+        }
+    }
+}
+
+#mobileMenuTrigger {
+    z-index: 110;
+    padding: 0;
+	width: 31px;
+	height: 24px;
+}
+
+.card-filters-menu {
+    right: 0;
+    display: none !important;
+}
+.scrolled{
+	.line{
+		    background-color:#fff;
+	}
+}

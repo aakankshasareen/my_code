@@ -1,0 +1,57 @@
+<div class="animated fadeIn"> 
+    <!-- <h1 class="page-title">{{vm.pageHeading}} City</h1> -->
+     <div class="card">
+       <div class="card-header"><h4 >Edit Customer Profile</h4></div>
+       <div class="card-body">
+        <form name="vm.profileForm" ng-submit="vm.saveProfile();" id="prof-frm" novalidate>
+            <div class="widget-body">
+                <!-- Form -->
+                <input type="hidden" ng-model="vm.profile.id" />
+                <div class="form row">
+                    <div class="form-group col-sm-6">
+                        <label for="fullName" class="form-group-label">Full Name<sup class="text-danger">*</sup></label>
+                        <input class="form-control" name="fullName" id="fullName" placeholder="Enter Full Name" type="text" ng-model="vm.profile.fullname" required maxlength="50" autocomplete="off" pattern="^[ a-zA-Z]*$">
+                        <p class="error-msg" ng-if="vm.profileForm.fullName.$error.required && vm.profileForm.$submitted">Please enter full name</p>
+						<p class="error-msg" ng-if="vm.profileForm.fullName.$error.pattern && vm.profileForm.$submitted">Please enter valid full name</p>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="form-group-label">Country<sup class="text-danger">*</sup></label>
+                        <select class="custom-select form-control" ng-model="vm.profile.country" ng-options="item.name for item in vm.getCountry track by item.id" ng-change="vm.getCitiesByCountryId(vm.profile.country)" required autocomplete="off" name="country1"  >
+                            <option style="display:none" value="">Select Country</option>
+                        </select> 
+                        <p class="error-msg" ng-if="vm.profileForm.country1.$error.required && vm.profileForm.$submitted">Please select country</p>
+                        <!--<p class="error-msg" ng-if="vm.profileForm.fullName.$error.pattern && vm.profileForm.$submitted">Please enter valid country</p>-->
+                        <!-- ng-options="item.id as item.name for item in vm.getCountry track by item.id" -->
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="form-group-label">City<sup class="text-danger">*</sup></label>
+                        <select class="custom-select form-control" ng-model="vm.profile.city" ng-options="item.name for item in vm.getCitiesByCountry track by item.id" required autocomplete="off"  name="city">
+                            <option style="display:none" value="">Select City</option>
+                            <!-- <option ng-if="vm.getCitiesByCountry.length === 0" value="Others">Others</option> -->                    
+                        </select>
+                        <p class="error-msg" ng-if="vm.profileForm.city.$error.required && vm.profileForm.$submitted">Please select city</p>
+                        <p ng-if="vm.getCitiesByCountry.length == 0">No cities available for the selected country</p>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="form-group-label">Pincode<sup class="text-danger">*</sup></label>
+                        <input class="form-control" name="pin" placeholder="Enter Pin Code" type="text" required ng-model="vm.profile.postal_code" maxlength="10" autocomplete="off" pattern="^[0-9]*$">
+                        <p class="error-msg" ng-if="vm.profileForm.pin.$error.required && vm.profileForm.$submitted">Please enter pincode</p>
+                       <p class="error-msg" ng-if="vm.profileForm.pin.$error.pattern && vm.profileForm.$submitted">Please enter valid pincode</p>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="form-group-label">Address</label>
+                        <textarea class="form-control" name="address" placeholder="Enter Address" ng-model="vm.profile.address" maxlength="400" autocomplete="off" rows="4" cols="50" style=" resize: none;"></textarea>
+
+                    <!-- <p class="error-msg" ng-if="vm.profileForm.address.$error.required && vm.profileForm.$submitted">Please Enter Address.</p>-->
+                    </div>
+                    <input ng-model="vm.profile.device_ipAddress" style="display: none">
+                    <div class="form-group col-sm-12 text-center">
+                        <input type="submit" class="btn btn-primary" value="Save Profile" />
+                    </div>
+                </div>
+                <!-- Form -->
+            </div>
+        </form>
+        </div>
+    </div>
+</div>

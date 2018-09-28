@@ -1,0 +1,43 @@
+<div class="animated fadeIn">
+ 
+    <!-- <h1 class="page-title">{{vm.pageHeading}} Currency</h1> -->
+     <div class="card">
+       <div class="card-header"> <h4>Add Currency Pairs</h4></div>
+       <div class="card-body">
+        <form ng-submit="saveCurrencyPairs(currencyPairsForm.$valid)" name="vm.currencyPairsForm" novalidate>
+       
+            <div class="form-group">
+                <label for="exampleInputPassword1">From (Fiat & Crypto)</label>
+                <sup class="text-danger">*</sup>
+                <select name="currency_from" required ng-options="option.currency_code for option in activeCurrencyListFrom track by option.currency_code" class="form-control"  ng-model="request.currency_from">                                                                                             
+                <option value="" style="display:none">Please Select Currency</option>
+                </select> 
+                <p class="error-msg" ng-if="vm.currencyPairsForm.currency_from.$error.required && vm.currencyPairsForm.$submitted">Please select currency</p>
+            </div>
+     
+       
+   
+            <div class="form-group">                               
+                <label for="exampleInputEmail1">To (Crypto)</label>
+                <sup class="text-danger">*</sup>
+                <select name="currency_to" required ng-options="option.currency_code for option in activeCurrencyListTo track by option.currency_code" class="form-control"  ng-model="request.currency_to">                                                                                             
+                <option value="" style="display:none">Please Select Currency</option>
+                </select>
+               <p class="error-msg" ng-if="vm.currencyPairsForm.currency_to.$error.required && vm.currencyPairsForm.$submitted">Please select currency</p>
+            </div> 
+ 
+            <div class="form-group">
+             
+               <button type="submit" class="btn btn-primary">Save</button>
+             
+               <button type="button" ng-click="vm.cancel1()" class="btn btn-secondary">Cancel</button>
+           </div> 
+
+        
+        </form>
+       </div>
+    </div>
+</div>
+
+
+   

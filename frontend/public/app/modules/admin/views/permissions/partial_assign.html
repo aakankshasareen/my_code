@@ -1,0 +1,19 @@
+<li ng-repeat="pm in subItems"  class="{{pm.is_display?'show_div':'hide_div'}}" >
+    <label>
+        <input id='check_permission{{pm.id}}' ng-class="{{pm.children.length > 0 ? 'parent_node':'child_node'}}" ng-change="{{pm.children.length > 0 ? 'vm.checkAllChildNodes(this)':'vm.checkParentNode(this)'}}"
+            checklist-model="vm.assign_permissions" checklist-value="pm.id" ng-checked="vm.permissions_has.indexOf(pm.id) != -1"
+            type="checkbox" ng-model-options="{ updateOn: 'change' }" />
+            <strong ng-if="pm.parent_permission_id==0">{{pm.display_name}}</strong>
+            <span ng-if="pm.parent_permission_id > 0">{{pm.display_name}}</span>
+    </label>
+    <div ng-switch on="pm.children.length > 0" >
+        <div ng-switch-when="true">
+            <ul>
+                <div ng-include="'app/modules/admin/views/permissions/partial_assign.html'" onload="subItems = pm.children">
+                </div>
+            </ul>
+        </div>
+    </div>
+</li>
+<script>
+</script>

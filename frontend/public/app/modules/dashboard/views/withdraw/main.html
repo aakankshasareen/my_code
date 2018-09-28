@@ -1,0 +1,276 @@
+<div class="site-content" ng-cloak>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget site-content-widget">
+                <header class="widget-header">
+                    <h2 class="page-title">Select Amount &amp; Currency</h2>
+                </header>
+                <div class="widget-body">
+                    <!-- Row -->
+                    <div class="row">
+                        <!-- Left Side -->
+                        <div class="left-side col-lg-8 col-el-9">
+                            <!-- Form -->
+                            <form class="currency-frm" name="vm.withdrawForm" novalidate>
+                                <div class="form select-currency-form marB40">
+                                    <p class="marB5 error-msg" ng-if="vm.withdrawForm.wdAmount.$error.required && vm.withdrawForm.$submitted">Please enter amount</p>
+                                        <p class="marB5 error-msg" ng-if="vm.withdrawForm.wdAmount.$error.pattern">Please enter valid amount. Decimals permitted upto 8 digits.</p>
+                                        <p class="marB5 error-msg" ng-if="vm.showMinWithdrawErr">Minimum amount to withdraw is {{vm.currencySelected.currency_code + " " + vm.minWithdrawAmt}}</p>
+                                        <p class="marB5 error-msg" ng-if="vm.showMaxWithdrawErr">Maximum amount to withdraw is {{vm.currencySelected.currency_code + " " + vm.maxWithdrawAmt}}</p>
+                                        <p class="marB5 error-msg" ng-if="vm.showZeroAmtErr">Please enter valid amount.</p>
+                                        <p class="marB5 error-msg" ng-if="vm.showWalletAmtErr">You donot have sufficient funds in wallet. </p>
+                                    <div class="form-group marB0">
+                                        <input type="text" class="form-control" placeholder="0.000" ng-model="vm.withdrawAmt" ng-change="vm.changeAmount();" maxlength="100" ng-model-options="{ debounce: 300 }" required name="wdAmount" id="wdAmt" autocomplete="off" ng-pattern="/^(\d+)?(\.\d{1,8})?$/">
+                                        <div class="form-dropdown" style="padding:0">
+                                            <select ng-options="item as item.currency_code group by vm.getCurrencyName(item.type) for item in vm.selectCurrency" ng-model="vm.currencySelected" ng-change="vm.selectListCur(vm.currencySelected)">{{item}}
+                                            </select>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-control-box">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <ul class="clean-list form-control-box-list">
+                                                    <li ng-model="vm.withdrawalAmtToUser" class="currency-wrap"><strong>Withdrawal Amount : </strong> <img class="icon-image-size currency-icon" onerror="this.onerror = '';this.style.marginRight='10px';" alt="{{vm.currencySelected.currency_code}}" ng-src="{{vm.currencySelected.currency_icon_path}}" />{{" "}}{{vm.withdrawalAmtToUser ? vm.withdrawalAmtToUser : 0}}</li>
+                                                    <li ng-model="vm.commissionFee" class="currency-wrap"><strong>Commission : </strong> <img class="icon-image-size currency-icon" alt="{{vm.currencySelected.currency_code}}" ng-src="{{vm.currencySelected.currency_icon_path}}" onerror="this.onerror = '';this.style.marginRight='10px';"/>{{" "}}{{vm.commissionFee ? vm.commissionFee : 0}} <span ng-if="!vm.showCommissionAmt">{{" "+"("+vm.minCommissionPercentage+"%)" }}</span></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm-6 clearfix">
+                                                <div class="pull-right float-none-xs marT20-xs">
+                                                    <h6 class="marB0">Total Amount</h6>
+                                                    <p class="bold-font indigo-500 currency-wrap" ng-model="vm.ttlWithdrawAmt"><img class="icon-image-size currency-icon" onerror="this.onerror = '';this.style.marginRight='26px';" alt="{{vm.currencySelected.currency_code}}" ng-src="{{vm.currencySelected.currency_icon_path}}" />{{" "}}{{vm.ttlWithdrawAmt ? vm.ttlWithdrawAmt : 0}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Form -->
+                                <!-- Tab Content -->
+                                <div class="currency-form-tab-content tab-content" ng-if="vm.currencySelected.type == 0">
+                                    <h3 class="widget-title">Choose Withdrawal Payment Method</h3>
+                                    <!-- Accordion -->
+                                    <div class="site-accordion marB25">
+                                        <div class="accordion-block">
+                                            <div class="accordion-block-heading">
+                                                <span class="heading-icon payment-cards-icon"></span>
+                                                <span class="heading-text">Payment Cards</span>
+                                                <span class="heading-arrow fa fa-angle-right"></span>
+                                            </div>
+                                            <div class="accordion-block-content text-center">
+                                                <!-- <h4 class="content-heading">You have not added cards yet</h4> -->
+                                                <h4 class="content-heading">Choose payment card</h4>
+                                                <table class="responsive-table table payment-cards-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Status</th>
+                                                            <th>Name on card</th>
+                                                            <th>Expires on</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="radio radio-primary">
+                                                                    <input id="card1" name="userCard" type="radio">
+                                                                    <label for="card1" class="card-type">
+                                                                        <span class="fa fa-cc-visa card-type-icon"></span> ending with <strong>3232</strong>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td><span class="card-status not-verified">Not Verified</span></td>
+                                                            <td>Ankita Soni</td>
+                                                            <td>06/24</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="radio radio-primary">
+                                                                    <input id="card2" name="userCard" type="radio">
+                                                                    <label for="card2" class="card-type">
+                                                                        <span class="fa fa-cc-mastercard card-type-icon"></span> ending with <strong>3232</strong>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td><span class="card-status verified">Verified</span></td>
+                                                            <td>Ankita Soni</td>
+                                                            <td>06/24</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <ul class="list-inline marT20">
+                                                    <li><a class="btn-primary btn btn-lg">Add a new card</a></li>
+                                                    <li><a class="btn-primary btn btn-lg">Card manager</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-block">
+                                            <div class="accordion-block-heading">
+                                                <span class="heading-icon bank-transfer-icon"></span>
+                                                <span class="heading-text">Bank Transfer</span>
+                                                <span class="heading-arrow fa fa-angle-right"></span>
+                                            </div>
+                                            <div class="accordion-block-content text-center">
+                                                <h4 class="content-heading">Verify your identity to choose this payment method</h4>
+                                                <p>Your account limit will also be increased on successful verification</p>
+                                                <a class="btn-primary btn marT20 marB20 btn-lg">Start Verification</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button type="submit" class="btn btn-primary" ng-click="vm.generateWithdrawRequest();">Withdraw</button>
+                                    </div>
+                                </div>
+                                <div class="currency-form-tab-content tab-content" ng-if="vm.currencySelected.type == 1">
+                                    <!-- ETH Tab Pane -->
+                                    <div id="currencyEth" class="tab-pane active">
+                                        <h3 class="widget-title">{{vm.currencySelected.currency_code}} Withdrawl</h3>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <p class="fs-16 light-font">Enter the recipient's address below</p>
+                                                <div class="form">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="" ng-model="vm.withdraw.receiverAddress" required autocomplete="off" name="receiverAddress" />
+                                                        <p ng-if="vm.withdrawForm.receiverAddress.$error.required && vm.withdrawForm.$submitted" style="color:red">Please enter receiver address</p>
+                                                        <p class="fs-13 text-muted italic-font marT10">It might take a few minutes for the network to confirm the transaction.</p>
+                                                    </div>
+                                                    <div class="form-group text-center">
+                                                        <button type="submit" class="btn btn-primary" ng-click="vm.generateWithdrawRequest();">Withdraw</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ETH Tab Pane -->
+                                </div>
+                                <!-- Tab Content -->
+                            </form>
+                            <div class="widget" style="margin-top:2rem;">
+                                <header class="widget-header has-header-icon">
+                                    <h4 class="widget-title">My Withdrawal Transaction History</h4><span class="widget-header-icon" data-toggle="tooltip" title="Refresh Transaction Histroy"><i class="fa fa-refresh" aria-hidden="true" ng-click="vm.refreshTxnHistory()"></i></span>
+                                </header>
+                                <!-- /.widget-header -->
+                                <hr class="widget-separator">
+                                <div class="widget-body">
+                                    <!-- <table class="table table-striped table-hover">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Currency</th>
+                                    <th>Amount</th>
+                                    <th>Fee</th>
+                                    <th>Status</th>
+                                </tr>
+                               
+                                <tr ng-repeat="item in vm.getWithdrawHistory|orderBy:'item.created_at':true">
+                                    <td>{{item.created_at| date:'MMM d, y h:mm:ss a'}}</td>
+                                    <td>{{item.currency_code}}</td>
+                                    <td>{{item.amount}}</td>
+                                    <td>{{item.platform_value}}</td>
+                                    <td>{{item.status}}</td>
+                                </tr>
+                                <tr> 
+                                    <td ng-if="vm.getWithdrawHistory.length == 0" colspan="8">No Withdrawals . </td>
+                                </tr>
+                              
+                            </table> -->
+                                    <!-- Grid / Pagination  -->
+                                    <div id="GridCustomId" ui-grid="gridOptions" ui-grid-auto-resize ui-grid-resize-columns class="grid white-header" ng-if="gridOptions.data.length !== 0">
+                                        <div role="contentinfo" class="ui-grid-pager-panel ng-scope" ng-if="gridOptions.data.length !== 0">
+                                            <div role="navigation" class="ui-grid-pager-container">
+                                                <div role="menubar" class="ui-grid-pager-control">
+                                                    <!-- Start Page -->
+                                                    <button type="button" role="menuitem" class="ui-grid-pager-first" ui-grid-one-bind-title="aria.pageToFirst" ui-grid-one-bind-aria-label="aria.pageToFirst" ng-click="pagination.firstPage()" ng-disabled="cantPageBackward()" title="Page to first" aria-label="Page to first" disabled="disabled">
+                                                        <div class="first-triangle">
+                                                            <div class="first-bar"></div>
+                                                        </div>
+                                                    </button>
+                                                    <!-- Prev Page -->
+                                                    <button type="button" role="menuitem" class="ui-grid-pager-previous" ui-grid-one-bind-title="aria.pageBack" ui-grid-one-bind-aria-label="aria.pageBack" ng-click="pagination.previousPage()" ng-disabled="cantPageBackward()" title="Page back" aria-label="Page back" disabled="disabled">
+                                                        <div class="first-triangle prev-triangle"></div>
+                                                    </button>
+                                                    <input type="text" ui-grid-one-bind-title="aria.pageSelected" ui-grid-one-bind-aria-label="aria.pageSelected" class="ui-grid-pager-control-input ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-required" ng-model="pagination.pageNumber" min="1" max="{{pagination.getTotalPages()}}" required="" title="Selected page" aria-label="Selected page" ng-change="pagination.currentPage()" numbers-only>
+                                                    <span class="ui-grid-pager-max-pages-number ng-binding" ng-show="pagination.getTotalPages() > 0">                                        
+                                        /
+                                        {{pagination.getTotalPages()}}
+                                    </span>
+                                                    <!-- Next Page -->
+                                                    <button type="button" role="menuitem" class="ui-grid-pager-next" ui-grid-one-bind-title="aria.pageForward" ui-grid-one-bind-aria-label="aria.pageForward" ng-click="pagination.nextPage()" ng-disabled="cantPageForward()" title="Page forward" aria-label="Page forward">
+                                                        <div class="last-triangle next-triangle"></div>
+                                                    </button>
+                                                    <!-- Last Page -->
+                                                    <button type="button" role="menuitem" class="ui-grid-pager-last" ui-grid-one-bind-title="aria.pageToLast" ui-grid-one-bind-aria-label="aria.pageToLast" ng-click="pagination.lastPage()" ng-disabled="cantPageToLast()" title="Page to last" aria-label="Page to last">
+                                                        <div class="last-triangle">
+                                                            <div class="last-bar"></div>
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                                <div class="ui-grid-pager-row-count-picker ng-scope">
+                                                    <select ng-model="pagination.ddlpageSize" ng-options="o as o for o in pagination.paginationPageSizes" ng-change="pagination.pageSizeChange()" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                                    </select>
+                                                    <span class="ui-grid-pager-row-count-label ng-binding">&nbsp;items per page</span>
+                                                </div>
+                                            </div>
+                                            <div class="ui-grid-pager-count-container">
+                                                <div class="ui-grid-pager-count">
+                                                    <span ng-show="pagination.totalItems > 0" class="ng-binding" style="">
+                                        {{pagination.pageNumber}}
+                                        -
+                                            <!--<abbr ui-grid-one-bind-title="paginationThrough" title="through"> - </abbr>-->
+                                        {{pagination.ddlpageSize}} of {{pagination.totalItems}} items
+                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-if="gridOptions.data.length == 0">No Withdrawals</div>
+                                </div>
+                                <!-- Grid / Pagination  -->
+                            </div>
+                        </div>
+                        <!-- Left Side -->
+                        <!-- Right Side -->
+                        <div class="right-side col-lg-4 col-el-3 clearfix">
+                            <!-- Dashboard Card -->
+                            <div class="dashboard-card pull-right side-card text-center">
+                                <div class="dashboard-card-header icon-header">
+                                    <img class="relative-element" src="assets/images/dashboard-card-wallet-icon.svg" alt="Wallet Icon" />
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <ul class="dashboard-card-list clean-list">
+                                        <li class="list-item">
+                                            <h5 class="list-item-heading">Wallet Balance</h5>
+                                            <p class="highlight-text">{{vm.withdrawWalletBalance}} {{vm.currencySelected.currency_code}}</p>
+                                          
+                                        </li>
+                                        <li class="list-item">
+                                            <h5 class="list-item-heading small-heading italic-font">Maximum Limit</h5>
+                                            <p>{{vm.maxWithdrawAmt}} {{vm.currencySelected.currency_code}}</p>
+                                        </li>
+                                        <li class="list-item">
+                                            <h5 class="list-item-heading small-heading  italic-font">Minimum Limit</h5>
+                                            <p>{{vm.minWithdrawAmt}} {{vm.currencySelected.currency_code}}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Dashboard Card -->
+                            <!-- Dashboard Card -->
+                            <div class="dashboard-card pull-right side-card text-center hidden-md-down">
+                                <div class="dashboard-card-header icon-header">
+                                    <img class="relative-element" src="assets/images/dashboard-card-info-icon.svg" alt="Info Icon" />
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <p><span class="italic-font">Need help?</span> &nbsp;&nbsp;<a href="" class="indigo-500 semibold-font">Click Here</a></p>
+                                </div>
+                            </div>
+                            <!-- Dashboard Card -->
+                        </div>
+                        <!-- Right Side -->
+                    </div>
+                    <!-- Row -->
+                </div>
+            </div>
+            <!-- /.widget -->
+        </div>
+    </div>
+    <!-- /.row -->
+</div>

@@ -1,0 +1,94 @@
+<!-- Modal Header -->
+<div class="modal-header">
+    <h4 class="modal-title">2F Authentication</h4>
+    <button type="button" class="close" ng-click="cancelConfig();">&times;</button>
+</div>
+<div class="tab-navigation tab-wizard">
+    <ul class="tab-head border-bottom">
+        <li data-tab=".downloadAppStep" class="tab-head-item active"><span class="step">Step1</span><span class="d-none d-md-block">Download App</span></li>
+        <li data-tab=".scanCodeStep" class="tab-head-item marL5-xs"><span class="step">Step2</span><span class="d-none d-md-block">Scan QR Code</span></li>
+        <li data-tab=".backupKeyStep" class="tab-head-item marL5-xs"><span class="step">Step3</span><span class="d-none d-md-block">Backup Key</span></li>
+        <li data-tab=".EnableAuthStep" class="tab-head-item marL5-xs"><span class="step">Step4</span><span class="d-none d-md-block">Enable Google Authentication</span></li>
+    </ul>
+    <div class="tab-content">
+        <!-- Download App -->
+        <div class="tab-pane downloadAppStep active">
+            <div class="modal-body text-center d-flex align-items-center justify-content-center">
+                <div class="tab-pane-content">
+                    <p>Download and Install Google Aunthentication App</p>
+                    <ul class="list-inline justify-content-center">
+                        <li><a href="#"><img width="102" src="assets/content/images/app-store-btn.png" alt="App Store" /></a></li>
+                        <li><a href="#"><img width="102" src="assets/content/images/google-play-btn.png" alt="Play Store" /></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-end">
+                <button type="button" class="btn btn-primary marL10 tab-wizard-btn">Next Step</button>
+            </div>
+        </div>
+        <!-- Download App -->
+        <!-- Scan Code -->
+        <div class="tab-pane scanCodeStep">
+            <div class="modal-body text-center d-flex align-items-center justify-content-center">
+                <div class="tab-pane-content">
+                    <p>Open the Google Authenticator App and scan the QR code</p>
+                    <div ng-bind-html="qrcode"></div>
+                    <!-- <img class="marB20" src="content/images/qr-code-placeholder.jpg" alt="QR Code" /> -->
+                    <p>If the scanner doesn’t work, please enter the private key below manually</p>
+                    <div class="code-block text-center">{{val.text}}</div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button class="btn btn-outline-primary tab-wizard-btn">Previous</button>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-primary marL10 tab-wizard-btn">Next Step</button>
+                </div>
+            </div>
+        </div>
+        <!-- Scan Code -->
+        <!-- Backup Key -->
+        <div class="tab-pane backupKeyStep">
+            <div class="modal-body text-center d-flex align-items-center justify-content-center">
+                <div class="tab-pane-content">
+                    <p>Save this private key somewhere safe. It will help you recover your account if you lose your device containing Google Authenticator App</p>
+                    <div class="code-block has-link text-left">
+                        <div class="code-block-text">{{val.text}}</div>
+                        <div class="link cursor-pointer" ngclipboard data-clipboard-text={{val.text}}>Copy Key</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button class="btn btn-outline-primary tab-wizard-btn">Previous</button>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-primary marL10 tab-wizard-btn">Next Step</button>
+                </div>
+            </div>
+        </div>
+        <!-- Backup Key -->
+        <!-- Enable Auth -->
+        <div class="tab-pane EnableAuthStep">
+            <form class="form" name="authForm" novalidate>
+                <div class="modal-body d-flex align-items-center justify-content-center">
+                    <div class="tab-pane-content">
+               <!--          <p class="theme-color2 marB40">Please enter your details</p> -->
+                        <!-- <div class="form-group">
+                                        <label class="form-group-label">Enter your Private Key</label>
+                                        <input class="form-control" type="password" />
+                                        <a href="#" class="form-group-icon eye-icon"></a>
+                                    </div> -->
+                        <div class="form-group">
+                            <label class="form-group-label">Enter your Authenticator 2FA Code</label>
+                            <input type="text" ng-model="auth.verifyCode" autofocus autocomplete="off" name="verifycode" required numbr-only class="form-control">
+                            <p class="error-msg" ng-if="authForm.verifycode.$error.required && authForm.$submitted">Please enter 2FA code.</p>
+                            <!--   <a href="#" class="form-group-icon">Resend OTP</a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-end">
+                    <button type="submit" class="btn btn-primary marL10 tab-wizard-btn" ng-click="verifyToken();">Enable 2F Authentication</button>
+                </div>
+            </form>
+        </div>
+        <!-- Enable Auth-->
+    </div>
+</div>

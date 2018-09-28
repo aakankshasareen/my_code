@@ -1,0 +1,48 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="pe-7s-note2"></i>
+        </div>
+        <div class="header-title">
+            <h1>Manage Country</h1>
+            <small>Country List</small>
+            <ol class="breadcrumb">
+                <li><a ui-sref="admin.dashboard"><i class="pe-7s-home"></i> Dashboard</a></li>
+                <li><a ui-sref="admin.countryList">Country</a></li>
+                <li class="active">List</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- Form controls -->
+            <div class="col-sm-12">
+                <div class="panel panel-bd lobidrag">
+                    <!--                    <div class="panel-heading">
+                                            <div class="panel-title row">
+                                                <div class="col-sm-6">
+                                                    <h4>Country List</h4>
+                                                </div>
+                                                <div class="col-sm-2" style="float: right;margin-right: 0px;">
+                                                    <a ui-sref="admin.addCountry"><button type="button" class="btn btn-primary w-md m-b-5"> +Add New </button></a>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                    <div class="panel-body">  
+                        <div class="row">                          
+                            <div class="col-sm-2" style="float: right;">
+                                <a ui-sref="admin.addCountry"><button type="button" class="btn btn-primary w-md m-b-5"> +Add New </button></a>
+                            </div>                              
+                            <div class="col-sm-3" style="float: right;">
+                                <input style="float: right" class="form-control" ng-model='vm.filterValue' placeholder="Search..." ng-change="vm.filter()"/>                        
+                            </div>
+                        </div>                                        
+                        <div class="grid" id="grid1" ui-grid="vm.gridOptions" ui-grid-pagination  style="height: 675px"></div>
+                    </div>
+                </div>
+            </div>                                               
+        </div>
+    </section> 
+</div>

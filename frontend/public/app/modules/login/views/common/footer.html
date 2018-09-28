@@ -1,0 +1,210 @@
+<footer class="footer">
+    <div class="main_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-md-3">
+                    <div class="widget-contact">
+                        <ul class="list-icon">
+                            <!-- <li><i class="fa fa-map-marker"></i>1355 Market Street, home area
+                                        <br>San Francisco, CA 345345345</li>
+                                    <li><i class="fa fa-phone"></i>(123) 456-7890 </li> -->
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                            <li>&nbsp;</li>
+                            <!-- <li><i class="fa fa-envelope"></i><a href="#">abc@dfd.com</a></li>  -->
+                            <li>&nbsp;</li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-9 col-md-9">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-md-8">
+                            <div class="footer-box" ng-controller="faqController">
+                                <h2 class="footer_main-heading">Useful links</h2>
+                                <ul class="footer-list list-half">
+                                    <li>
+                                        <a href="http://fuleex.io/" target="_blank">About Us</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://2316974281.wixsite.com/fuleex/blog">Blog </a>
+                                    </li>
+                                    <li>
+                                        <a href="http://fuleex.io/news/news.html">News </a>
+                                    </li>
+                                    <!-- <li><a href="#" ng-click="$root.call_download(7);">Referral Program</a></li> -->
+                                    <li>
+                                        <a href="https://bitcointalk.org/index.php?topic=4803890.0" target="_blank">Referral Program</a>
+                                    </li>
+                                    <!-- <li><a href="#" ng-click="$root.call_download(4);">Strategic Partnerships</a></li> -->
+
+                                    <li>
+                                        <a ui-sref="Strategic">Strategic Partnerships</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://2316974281.wixsite.com/fuleex" target="_blank">ICO listing</a>
+                                    </li>
+
+                                </ul>
+                                <ul class="footer-list list-half">
+                                    <li>
+                                        <a ui-sref="disclaimer" href="disclaimer" target="_blank">Disclaimers</a>
+                                    </li>
+                                    <!-- <li><a ui-sref="disclaimer" ng-click="$root.call_download(6);">Fees</a></li> -->
+                                    <li>
+                                        <a ui-sref="fees">Fees</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" ng-click="$root.call_download(8);">Fund Deposit & Withdrawal</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" ng-click="$root.call_download(2);">Online Trading Agreement</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" ng-click="$root.call_download(3);">Privacy Document</a>
+                                    </li>
+
+                                    <!-- <li>
+                                        <a href="#" ng-click="$root.call_download(5);">Token Purchase / Sales Terms</a>
+                                    </li> -->
+                                    <li>
+                                        <a ui-sref="trading" target="_blank">Trade</a>
+                                    </li>
+                                    <li>
+                                        <!-- <a data-toggle="modal" data-target="#OTC"
+                                        target="_blank" rel="noopener">OTC Trade</a> -->
+                                        <a  ui-sref="otctrade" href="otctrade" target="_blank">OTC Trade</a>
+                                    </li>
+                                </ul>
+                                <form method="get" name="test_call_download" action="/api/call_download">
+                                    <input type="hidden" value={{token}} name="token">
+                                    <input type="hidden" name="doc">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <h2 class="footer_main-heading">Connect with Us</h2>
+                            <div class="footer-box">
+                                <ul class="footer-list">
+                                    <li>
+                                        <a ui-sref="contact_us" target="_blank">Contact Us</a>
+                                    </li>
+                                    <li>
+                                        <a href="mailto: info@fuleex.io">Email : info@fuleex.io </a>
+                                    </li>
+                                </ul>
+                                <!--social-->
+                                <!-- <h3 class="footer-title">Connect with Us</h3> -->
+                                <div class="social-content">
+                                    <div class="social-row">
+                                        <div class="social_icon">
+                                            <a href="https://www.facebook.com/fuleex">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                            <a href="https://t.me/FuleexFULX">
+                                                <i class="fa fa-telegram"></i>
+                                            </a>
+                                            <a href="https://medium.com/@Fuleex.io">
+                                                <i class="fa fa-medium"></i>
+                                            </a>
+                                            <a href="https://twitter.com/Fuleex_">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                            <a href="https://www.linkedin.com/company/fuleex">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+								<ul class="support_data">
+									<li  style="width:50px;"><img src="assets/content/images/support.png"/></li>
+									<li><img src="assets/content/images/qrcode.png"/></li>
+								</ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--div class="col-sm-3 col-md-3">
+                            <div class="newsletter-box">
+                                <h3 class="footer-title">Email Newslatter</h3>
+                                <p>Subscribe to our newsletter!</p>
+                                <form method="post" action="#" class="newsletter-form"><input type="hidden" value="form 4" name="form-name">
+                                    <input type="text" placeholder="Email Address">
+                                    <button type="submit"><i aria-hidden="true" class="fa fa-paper-plane"></i></button>
+                                    <div class="envelope">
+                                        <i aria-hidden="true" class="fa fa-envelope"></i>
+                                    </div>
+                                </form>
+                            </div>
+                        </div-->
+            </div>
+        </div>
+    </div>
+    <!-- /.End of main footer -->
+    <div class="sub_footer">
+        <div class="container">
+            <div class="logos-wrapper">
+                <!--<div class="logos-row">
+                            <div class="social-content">
+                                <div class="social-row">
+                                    <div class="social_icon">
+                                        <a href="https://www.facebook.com/fuleex"><i class="fa fa-facebook"></i></a>
+                                        <a href="https://t.me/joinchat/D7TS0RLNKRh-23wMcf7TqQ"><i class="fa fa-telegram"></i></a>
+                                        <a href="https://twitter.com/Fuleex_"><i class="fa fa-twitter"></i></a>
+                                       
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                        </div>-->
+                <div class="copyright">
+                    <span>&copy; 2018 All Rights Reserved Fuleex.io.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.End of sub footer -->
+</footer>
+
+<a class="btn-lg scrollup" style="display: block;">
+    <i class="fa fa-arrow-up"></i>
+</a>
+
+<!-- Footer -->
+<div id="otc_eng" class="modal fade modal_terms" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">          
+            <form class="form" novalidate>
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" style="top:20px">&times;</button>
+                    <div class="form-group">
+                        <div class="has-form-group-icon">
+                            <img width="200" src="assets/content/images/logo_color.png" alt="Logo" class="">                           
+						<!-- <img src="assets/content/images/Fuleex-remittance-procedure_eng_white.jpg"/> -->
+						<img src="assets/content/images/Fuleex-remittance-procedure_eng_white_v2.jpg"/>
+                        </div>
+                    </div>
+                </div>               
+            </form>
+        </div>
+    </div>
+</div>
+<div id="otc_cn" class="modal fade modal_terms" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">          
+            <form class="form" novalidate>
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" style="top:20px">&times;</button>
+                    <div class="form-group">
+                        <div class="has-form-group-icon">
+                            <img width="200" src="assets/content/images/logo_color.png" alt="Logo" class="">                           
+                        <!-- <img src="assets/content/images/Fuleex-remittance-procedure_chiness_white.jpg"/> -->
+						<img src="assets/content/images/Fuleex-remittance-procedure_chiness_white_v2.jpg"/>                        
+                        </div>
+                    </div>
+                </div>               
+            </form>
+        </div>
+    </div>
+</div>

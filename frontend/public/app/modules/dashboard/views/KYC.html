@@ -1,0 +1,414 @@
+<h1 class="dashboard-main-heading">KYC</h1>
+<!-- Profile Details Card -->
+<div class="card">
+    <div class="card-header">KYC Details</div>
+    <div class="card-body has-parts">
+        <div class="col-sm-12 text-center text-left-md">
+            <img width="70" class="marT20-lg-up marB10" src="assets/content/images/verification-icon.png" alt="Verification" />
+            <h6 class="card-body-heading marB5">Your Account KYC is
+                <span class="text-danger" ng-if="$root.kycStatus == 0">Incomplete</span>
+                <span class="text-primary" ng-if="$root.kycStatus == 1">Approval Pending</span>
+                <span class="text-success" ng-if="$root.kycStatus == 2">Approved</span>
+                <span class="text-danger" ng-if="$root.kycStatus == 3">Not Approved</span>
+            </h6>
+            <h6 class="card-body-heading marB5" ng-show="$root.kycComment">Admin Remarks: {{$root.kycComment}}</h6>
+            <!--                <p ng-if="$root.kycStatus == 3">Due To : <span class="text-danger">{{$root.kycComment}}</span></p>-->
+            <p ng-show="($root.kycStatus != 2)">You can transact only after successful verification of the documents</p>
+            <!-- <a ui-sref="dashboard.kyc" class="btn btn btn-primary marT5">{{$root.kycStatus==0?'Verify':'View'}} Account</a> -->
+            <li class="row marT20">
+                <h5 class="card-text-list-heading col-xl-12 col-sm-12 marB0">
+                    <a class="btn btn-outline-primary marB20" ng-click="$root.call_download(9);">
+                        <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download KYC Form</a>
+                    <!-- <a class="btn btn-outline-primary marB20 ng-scope" ng-click="vm.downloadDoc(vm.kyc_form)" >
+                        <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download Uploaded KYC Form</a> -->
+                    <a class="btn btn-outline-primary marB20 ng-scope" ui-sref="dashboard.trade">
+                        Trade View</a>
+                </h5>
+            </li>
+            <form name="kycForm" novalidate>
+                <label>Upload Your KYC Form <small style="font-size: 80% !important">&nbsp;&nbsp;(Allowed Formats 1. For
+                        KYC: DOC, DOCX | 2. For Others: DOC, DOCX, JPEG, JPG, PNG )</small></label>
+                <!-- <input type="file" ng-model="vm.kycDetails"  name="upload"  accept=".doc,.docx,.pdf,.jpeg,.jpg,.png"> -->
+                <div class="parent-kyc-main">
+                    <div class="parent-kyc">
+                        <h6>KYC Form<span style="color:#f00">*</span></h6>
+                        <div class="custom-input-file">
+
+                            <div ng-show="!($root.kycStatus == 3)">
+                                <div ng-show="vm.kyc_form_exists">
+                                    <label class="form-label">Upload Image
+                                        <small class="desc">"File should be max 1MB and support DOC or DOCX formats."</small></label>
+                                    <div class="btn-parent-input">
+                                        <input type="file" class="inputfile" ngf-select ng-model="vm.kyc_form" name="kyc_form" accept=".doc,.docx" ngf-pattern="'.doc,.docx'"
+                                            ngf-max-size="1MB" ng-required="!vm.idProofUploaded" style="padding:0px;left:calc(50% - 98px);    height: 40px;
+                        cursor: pointer; " />
+                                        <a href="javascript:;" class="btn btn-outline-primary"> <i class="fa fa-upload" aria-hidden="true"></i>&nbsp;KYC
+                                            Doc
+                                        </a>
+                                    </div>
+                                    <div class="selected-value marT15" style="width: 100%;
+                        margin: 10px auto;"><span class="text"></span><span class="input-close">×</span></div>
+                                </div>
+                                <div ng-show="!vm.kyc_form_exists">
+                                    <!-- <img src="{{vm.kyc_form}}"> -->
+                                    <i class="fa fa-file-word-o color-icon-kyc"></i>
+                                    <a class="btn btn-outline-primary marB20 ng-scope" ng-click="vm.downloadDoc(vm.kyc_form)">
+                                        <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download Uploaded KYC Form</a>
+                                    <span class="text-primary overlay_bar" ng-if="$root.kycStatus == 1">Approval Pending</span>
+                                    <span class="text-danger overlay_bar" ng-if="$root.kycStatus == 3">Not Approved</span>
+                                </div>
+                            </div>
+                            <div ng-show="$root.kycStatus == 3">
+                                <label class="form-label">Upload Image
+                                    <small class="desc">"File should be max 1MB and support DOC or DOCX formats."</small></label>
+                                <div class="btn-parent-input">
+                                    <input type="file" class="inputfile" ngf-select ng-model="vm.kyc_form" name="kyc_form" accept=".doc,.docx" ngf-pattern="'.doc,.docx'"
+                                        ngf-max-size="1MB" ng-required="!vm.idProofUploaded" style="padding:0px;left:calc(50% - 98px);    height: 40px;
+                        cursor: pointer; " />
+                                    <a href="javascript:;" class="btn btn-outline-primary"> <i class="fa fa-upload" aria-hidden="true"></i>&nbsp;KYC
+                                        Doc
+                                    </a>
+                                </div>
+                                <div class="selected-value marT15" style="width: 100%;
+                        margin: 10px auto;"><span class="text"></span><span class="input-close">×</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="parent-kyc">
+                        <h6>Selfie Photo<span style="color:#f00">*</span></h6>
+                        <div class="custom-input-file">
+
+                            <div ng-show="!($root.kycStatus == 3)">
+                                <div ng-show="!vm.selfie_photo_exists">
+                                    <label class="form-label">Upload Image
+                                        <small class="desc">"File should be max 1MB and support DOC, DOCX, JPG, JPEG or PNG
+                                            formats."</small></label>
+                                    <div class="btn-parent-input">
+                                        <input type="file" class="inputfile" ngf-select ng-model="vm.selfie_photo" name="kyc_form" accept=".doc,.docx,.jpg,.jpeg,.png"
+                                            ngf-pattern="'.doc,.docx,.jpg,.jpeg,.png'" ngf-max-size="1MB" ng-required="!vm.idProofUploaded"
+                                            style="padding:0px;left:calc(50% - 98px);    height: 40px;
+                                cursor: pointer; " />
+                                        <a href="javascript:;" class="btn btn-outline-primary"> <i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Selfie
+                                            Photo
+                                        </a>
+                                    </div>
+                                    <div class="selected-value marT15" style="width: 100%;
+                                margin: 10px auto;"><span class="text"></span><span
+                                            class="input-close">×</span></div>
+                                </div>
+                                
+                                <div ng-show="vm.selfie_photo_exists">
+                                    <i class="fa fa-file-word-o color-icon-kyc" ng-show="vm.is_selfie_doc"></i>
+                                    <img src="{{vm.selfie_photo.substr(16)}}" ng-show="!vm.is_selfie_doc">
+                                    <a class="btn btn-outline-primary marB20 ng-scope" ng-click="vm.downloadDoc(vm.selfie_photo)">
+                                        <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download Selfie Photo</a>
+                                    <span class="text-primary overlay_bar" ng-if="$root.kycStatus == 1">Approval Pending</span>
+                                    <!-- <span class="text-danger overlay_bar" ng-if="$root.kycStatus == 3">Not Approved</span> -->
+                                </div>
+                            </div>
+                            <div ng-show="$root.kycStatus == 3">
+                                <label class="form-label">Upload Image
+                                    <small class="desc">"File should be max 1MB and support DOC, DOCX, JPG, JPEG or PNG formats."</small></label>
+                                <div class="btn-parent-input">
+                                    <input type="file" class="inputfile" ngf-select ng-model="vm.selfie_photo" name="kyc_form" accept=".doc,.docx,.jpg,.jpeg,.png"
+                                        ngf-pattern="'.doc,.docx,.jpg,.jpeg,.png'" ngf-max-size="1MB" ng-required="!vm.idProofUploaded"
+                                        style="padding:0px;left:calc(50% - 98px);    height: 40px;
+                                cursor: pointer; " />
+                                    <a href="javascript:;" class="btn btn-outline-primary"> <i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Selfie
+                                        Photo
+                                    </a>
+                                </div>
+                                <div class="selected-value marT15" style="width: 100%;
+                                margin: 10px auto;"><span class="text"></span><span class="input-close">×</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="parent-kyc">
+                        <h6>Identity Document<span style="color:#f00">*</span></h6>
+                        <div class="custom-input-file">
+
+                            <div ng-show="!($root.kycStatus == 3)">
+                                <div ng-show="!vm.identity_doc_exists">
+                                    <label class="form-label">Upload Image
+                                        <small class="desc">"File should be max 1MB and support DOC, DOCX, JPG, JPEG or PNG
+                                            formats."</small></label>
+                                    <div class="btn-parent-input">
+                                        <input type="file" class="inputfile" ngf-select ng-model="vm.identity_doc" name="kyc_form" accept=".doc,.docx,.jpg,.jpeg,.png"
+                                            ngf-pattern="'.doc,.docx,.jpg,.jpeg,.png'" ngf-max-size="1MB" ng-required="!vm.idProofUploaded"
+                                            style="padding:0px;left:calc(50% - 98px);    height: 40px;
+                        cursor: pointer; " />
+                                        <a href="javascript:;" class="btn btn-outline-primary"> <i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Identity
+                                            Document
+                                        </a>
+                                    </div>
+                                    <div class="selected-value marT15" style="width: 100%;
+                        margin: 10px auto;"><span class="text"></span><span class="input-close">×</span></div>
+                                </div>
+                                <div ng-show="vm.identity_doc_exists">
+                                        <i class="fa fa-file-word-o color-icon-kyc" ng-show="vm.is_id_doc"></i>
+                                    <img src="{{vm.identity_doc.substr(16)}}" ng-show="!vm.is_id_doc">
+                                    <a class="btn btn-outline-primary marB20 ng-scope" ng-click="vm.downloadDoc(vm.identity_doc)">
+                                        <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download Identity Document</a>
+                                    <span class="text-primary overlay_bar" ng-if="$root.kycStatus == 1">Approval Pending</span>
+                                    <!-- <span class="text-danger overlay_bar" ng-if="$root.kycStatus == 3">Not Approved</span> -->
+                                </div>
+                            </div>
+                            <div ng-show="$root.kycStatus == 3">
+                                <label class="form-label">Upload Image
+                                    <small class="desc">"File should be max 1MB and support DOC, DOCX, JPG, JPEG or PNG formats."</small></label>
+                                <div class="btn-parent-input">
+                                    <input type="file" class="inputfile" ngf-select ng-model="vm.identity_doc" name="kyc_form" accept=".doc,.docx,.jpg,.jpeg,.png"
+                                        ngf-pattern="'.doc,.docx,.jpg,.jpeg,.png'" ngf-max-size="1MB" ng-required="!vm.idProofUploaded"
+                                        style="padding:0px;left:calc(50% - 98px);    height: 40px;
+                        cursor: pointer; " />
+                                    <a href="javascript:;" class="btn btn-outline-primary"> <i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Identity
+                                        Document
+                                    </a>
+                                </div>
+                                <div class="selected-value marT15" style="width: 100%;
+                        margin: 10px auto;"><span class="text"></span><span class="input-close">×</span></div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="parent-kyc">
+                        <h6>Address Document<span style="color:#f00">*</span></h6>
+                        <div class="custom-input-file">
+
+                            <div ng-show="!($root.kycStatus == 3)">
+                                <div ng-show="!vm.address_doc_exists">
+                                    <label class="form-label">Upload Image
+                                        <small class="desc">"File should be max 1MB and support DOC, DOCX, JPG, JPEG or PNG
+                                            formats."</small></label>
+                                    <div class="btn-parent-input">
+                                        <input type="file" class="inputfile" ngf-select ng-model="vm.address_doc" name="kyc_form" accept=".doc,.docx,.jpg,.jpeg,.png"
+                                            ngf-pattern="'.doc,.docx,.jpg,.jpeg,.png'" ngf-max-size="1MB" ng-required="!vm.idProofUploaded"
+                                            style="padding:0px;left:calc(50% - 98px);    height: 40px;
+                        cursor: pointer; " />
+                                        <a href="javascript:;" class="btn btn-outline-primary"> <i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Address
+                                            Document
+                                        </a>
+                                    </div>
+                                    <div class="selected-value marT15" style="width: 100%;
+                        margin: 10px auto;"><span class="text"></span><span class="input-close">×</span></div>
+                                </div>
+                                <div ng-show="vm.address_doc_exists">
+                                    <i class="fa fa-file-word-o color-icon-kyc" ng-show="vm.is_addr_doc"></i>
+                                    <img src="{{vm.address_doc.substr(16)}}" ng-show="!vm.is_addr_doc">
+                                    <a class="btn btn-outline-primary marB20 ng-scope" ng-click="vm.downloadDoc(vm.address_doc)">
+                                        <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download Address Document</a>
+                                    <span class="text-primary overlay_bar" ng-if="$root.kycStatus == 1">Approval Pending</span>
+                                    <span class="text-danger overlay_bar" ng-if="$root.kycStatus == 3">Not Approved</span>
+                                </div>
+                            </div>
+                            <div ng-show="$root.kycStatus == 3">
+                                <label class="form-label">Upload Image
+                                    <small class="desc">"File should be max 1MB and support DOC, DOCX, JPG, JPEG or PNG formats."</small></label>
+                                <div class="btn-parent-input">
+                                    <input type="file" class="inputfile" ngf-select ng-model="vm.address_doc" name="kyc_form" accept=".doc,.docx,.jpg,.jpeg,.png"
+                                        ngf-pattern="'.doc,.docx,.jpg,.jpeg,.png'" ngf-max-size="1MB" ng-required="!vm.idProofUploaded"
+                                        style="padding:0px;left:calc(50% - 98px);    height: 40px;
+                        cursor: pointer; " />
+                                    <a href="javascript:;" class="btn btn-outline-primary"> <i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Address
+                                        Document
+                                    </a>
+                                </div>
+                                <div class="selected-value marT15" style="width: 100%;
+                        margin: 10px auto;"><span class="text"></span><span class="input-close">×</span></div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="parent-kyc">
+                        <h6>Source Of Funds Document</h6>
+                        <div class="custom-input-file">
+
+                            <div ng-show="!($root.kycStatus == 3)">
+                                <div ng-show="!vm.fund_source_exists">
+                                    <label class="form-label">Upload Image
+                                        <small class="desc">"File should be max 1MB and support DOC, DOCX, JPG, JPEG or PNG
+                                            formats."</small></label>
+
+                                    <div class="btn-parent-input">
+                                        <input type="file" class="inputfile" ngf-select ng-model="vm.fund_source" name="kyc_form" accept=".doc,.docx,.jpg,.jpeg,.png"
+                                            ngf-pattern="'.doc,.docx,.jpg,.jpeg,.png'" ngf-max-size="1MB" ng-required="!vm.idProofUploaded"
+                                            style="padding:0px;left:calc(50% - 98px);    height: 40px;
+                        cursor: pointer; " />
+                                        <a href="javascript:;" class="btn btn-outline-primary mb-3"> <i class="fa fa-upload"
+                                                aria-hidden="true"></i>&nbsp;Source Of Funds Document</a>
+                                    </div>
+                                    <br />
+                                    <p style="color: #f00;">* If required, we may need to request it at a later time.</p>
+                                    <div class="selected-value marT15" style="width: 100%;
+                        margin: 10px auto;"><span class="text"></span><span class="input-close">×</span></div>
+                                </div>
+                                <div ng-show="vm.fund_source_exists">
+                                    <i class="fa fa-file-word-o color-icon-kyc" ng-show="vm.is_fs_doc"></i>
+                                    <img src="{{vm.fund_source.substr(16)}}" ng-show="!vm.is_fs_doc">
+                                    <a class="btn btn-outline-primary marB20 ng-scope" ng-click="vm.downloadDoc(vm.fund_source)">
+                                        <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download Fund Source Document</a>
+                                    <span class="text-primary overlay_bar" ng-if="$root.kycStatus == 1">Approval Pending</span>
+                                    <span class="text-danger overlay_bar" ng-if="$root.kycStatus == 3">Not Approved</span>
+                                </div>
+                            </div>
+                            <div ng-show="$root.kycStatus == 3">
+                                <label class="form-label">Upload Image
+                                    <small class="desc">"File should be max 1MB and support DOC, DOCX, JPG, JPEG or PNG formats."</small></label>
+                                <div class="btn-parent-input">
+                                    <input type="file" class="inputfile" ngf-select ng-model="vm.fund_source" name="kyc_form" accept=".doc,.docx,.jpg,.jpeg,.png"
+                                        ngf-pattern="'.doc,.docx,.jpg,.jpeg,.png'" ngf-max-size="1MB" ng-required="!vm.idProofUploaded"
+                                        style="padding:0px;left:calc(50% - 98px);    height: 40px;
+                        cursor: pointer; " />
+                                    <a href="javascript:;" class="btn btn-outline-primary mb-3"> <i class="fa fa-upload"
+                                            aria-hidden="true"></i>&nbsp;Source Of Funds Document</a>
+                                </div>
+                                <p style="color: #f00;">* If required, we may need to request it at a later time.</p>
+                                <div class="selected-value marT15" style="width: 100%;
+                        margin: 10px auto;"><span class="text"></span><span class="input-close">×</span></div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="parent-kyc">
+                        <h6>Intended Purpose Of Fund Transfer</h6>
+                        <div class="custom-input-file">
+
+                            <div ng-show="!($root.kycStatus == 3)">
+                                <div ng-show="!vm.transfer_purpose_exists">
+                                    <label class="form-label">Upload Image
+                                        <small class="desc">"File should be max 1MB and support DOC, DOCX, JPG, JPEG or PNG
+                                            formats."</small></label>
+                                    <div class="btn-parent-input">
+                                        <input type="file" class="inputfile" ngf-select ng-model="vm.transfer_purpose" name="kyc_form" accept=".doc,.docx,.jpg,.jpeg,.png"
+                                            ngf-pattern="'.doc,.docx,.jpg,.jpeg,.png'" ngf-max-size="1MB" ng-required="!vm.idProofUploaded"
+                                            style="padding:0px;left:calc(50% - 98px);    height: 40px;
+                        cursor: pointer; " />
+                                        <a href="javascript:;" class="btn btn-outline-primary mb-3"> <i class="fa fa-upload"
+                                                aria-hidden="true"></i>&nbsp;Intended Purpose Of Fund Transfer</a>
+                                    </div>
+                                    <p style="color: #f00;">* If required, we may need to request it at a later time.</p>
+                                    <div class="selected-value marT15" style="width: 100%;
+                        margin: 10px auto;"><span class="text"></span><span class="input-close">×</span></div>
+                                </div>
+                                <div ng-show="vm.transfer_purpose_exists">
+                                    <i class="fa fa-file-word-o color-icon-kyc" ng-show="vm.is_tp_doc"></i>
+                                    <img src="{{vm.transfer_purpose.substr(16)}}" ng-show="!vm.is_tp_doc">
+                                    <a class="btn btn-outline-primary marB20 ng-scope" ng-click="vm.downloadDoc(vm.transfer_purpose)">
+                                        <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download Intended Purpose
+                                        Of Fund Transfer Document</a>
+                                    <span class="text-primary overlay_bar" ng-if="$root.kycStatus == 1">Approval Pending</span>
+                                    <span class="text-danger overlay_bar" ng-if="$root.kycStatus == 3">Not Approved</span>
+                                </div>
+                            </div>
+                            <div ng-show="$root.kycStatus == 3">
+                                <label class="form-label">Upload Image
+                                    <small class="desc">"File should be max 1MB and support DOC, DOCX, JPG, JPEG or PNG formats."</small></label>
+                                <div class="btn-parent-input">
+                                    <input type="file" class="inputfile" ngf-select ng-model="vm.transfer_purpose" name="kyc_form" accept=".doc,.docx,.jpg,.jpeg,.png"
+                                        ngf-pattern="'.doc,.docx,.jpg,.jpeg,.png'" ngf-max-size="1MB" ng-required="!vm.idProofUploaded"
+                                        style="padding:0px;left:calc(50% - 98px);    height: 40px;
+                        cursor: pointer; " />
+                                    <a href="javascript:;" class="btn btn-outline-primary mb-3"> <i class="fa fa-upload"
+                                            aria-hidden="true"></i>&nbsp;Intended Purpose Of Fund Transfer</a>
+                                </div>
+                                <p style="color: #f00;">* If required, we may need to request it at a later time.</p>
+                                <div class="selected-value marT15" style="width: 100%;
+                        margin: 10px auto;"><span class="text"></span><span class="input-close">×</span></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary medium-btn" ng-click="vm.savekycStatus(vm.kyc_form_exists, $root.kycStatus)"
+                    ng-show="vm.saveStatus">Save</button>
+                <!--                 <div class="custom-input-file">
+                        <input type="file" class="inputfile" ngf-select ng-model="vm.kyc_form" name="kyc_form" accept=".doc,.docx" ngf-pattern="'.doc,.docx'" ngf-max-size="1MB" ng-required="!vm.idProofUploaded" style="padding:0px;left:calc(50% - 98px);    height: 40px;
+                        cursor: pointer; " />
+                        <a href="javascript:;" class="btn btn-outline-primary"> <i class="fa fa-upload" aria-hidden="true"></i>&nbsp;Upload KYC</a>
+                        <button type="submit" class="btn btn-primary medium-btn" ng-click="vm.savekycStatus()">Save</button>
+                        <div class="selected-value marT15" style="width: 100%;
+                        margin: 10px auto;"><span class="text"></span><span class="input-close">×</span></div>
+                    </div> -->
+                <!-- <input type="file" class="inputfile" ngf-select ng-model="vm.kyc_form" name="kyc_form" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-pattern="'.doc,.docx,.pdf,.jpeg,.jpg,.png'" ngf-max-size="1MB" style="padding:0px;" /> -->
+            </form>
+            <!-- <li class="row marT20" >
+                    <h5 class="card-text-list-heading col-xl-9 col-sm-8 marB0">
+                     
+                   </h5>                                      
+            </li>  -->
+            <form method="post" name="downloadKYCForm" action="/api/downloadKyc">
+                <input type="hidden" value={{token}} name="token">
+                <input type="hidden" name="path">
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Profile Details Card -->
+<style>
+    .user-img-inner {
+        height: 100%;
+        width: 100%;
+        background-repeat: no-repeat;
+        border-radius: 50%;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    .document-section {
+        display: inline-block;
+        width: 43%;
+    }
+
+    .document-name {
+        display: inline-block;
+        float: right;
+    }
+
+    .document-name ul {
+        float: left;
+        padding-left: 68px;
+    }
+
+    .document-name ul li {
+        display: table-cell;
+        font-size: 19px;
+        padding: 15px;
+    }
+
+    .document-name ul li p {
+        font-size: 8px;
+    }
+
+    .name-section {
+        font-weight: 700;
+        color: #231a64;
+    }
+
+    .right-icone>i {
+        color: green;
+        font-size: 34px;
+        float: left;
+        margin-right: 8px;
+    }
+
+    .close-icone>i {
+        color: #f35a73;
+        font-size: 34px;
+        float: left;
+        margin-right: 8px;
+    }
+
+    .right-icone>span {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .close-icone>span {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .kyc_doc_card_body {
+        border-bottom: 1px solid #ccc;
+    }
+</style>

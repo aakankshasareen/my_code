@@ -1,0 +1,109 @@
+.work-timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    font-size: 14px;
+    color: #868686;
+    .timeline-item {
+        display: flex;
+        align-items: center;
+        margin: 75px 0;
+        background-repeat: no-repeat;
+        background-size: 350px;
+        background-position: bottom left;
+        &:nth-child(odd) {
+            .timeline-item-content {
+                order: 1;
+                margin-left: 110px;
+                margin-right: 0;
+                text-align: left;
+                &:before {
+                    left: -85px;
+                    right: inherit;
+                }
+            }
+            .timeline-item-figure {
+                &:before {
+                    left: inherit;
+                    right: -49px;
+                }
+            }
+        }
+        &:first-child {
+            margin-top: 0;
+        }
+        &:last-child {
+            margin-bottom: 0;
+            .timeline-item-figure:before {
+                display: none;
+            } 
+        }
+    }
+    .timeline-item-content {
+        text-align: left;
+        flex: 1;
+        margin-right: 110px;
+        position: relative;
+        &:before {
+            content: "";
+            position: absolute;
+            right: -72px;
+            top: calc(50% - 22px);
+            z-index: 1;
+            background: url(../images/timeline-spot-icon.png) no-repeat;
+            background-size: 100%;
+            width: 48px;
+            height: 48px;
+            @include transform(translate(0,-50%));
+        }
+
+    }
+    .timeline-item-figure {
+        flex: 1;
+        position: relative;
+        @include clearfix();
+        &:before {
+            content: "";
+            height: calc(100% + 26px);
+            position: absolute;
+            left: -64px;
+            top: calc(50% + 17px);
+            width: 1px;
+            background-color: #efefef;
+        }
+    }
+    .timeline-item-heading {
+        font-weight: 600;
+        font-size: 16px;
+        margin-top: 16px;
+        color: #000000;
+    }
+    
+    @include extra-small {
+        .timeline-item {
+            display: block;
+            text-align: center;
+            margin: 60px 0;
+            background: none !important;
+            &:first-child {
+                margin-top: 0;
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+        .timeline-item-content {
+            text-align: center !important;
+            margin: 0 !important;
+            &:before {
+                display: none;
+            }
+        }
+        .timeline-item-figure {
+            margin-top: 20px;
+            &:before {
+                display: none;
+            }
+        }
+        }
+}

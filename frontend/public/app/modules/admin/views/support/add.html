@@ -1,0 +1,57 @@
+<div class="animated fadeIn">
+  <!-- <h1 class="page-title">Reply Support</h1> -->
+  <div class="card">
+    <div class="card-header"><h1>Reply Support</h4></div>
+    <div class="card-body">
+
+      <div class="text-block-list">
+
+        <!-- Text Block for the Query -->
+        <div class="text-block with-bg">
+          <div class="text-block-header">
+            <div class="row">
+              <div class="col-sm-7">
+                <h5 class="text-block-heading">Query: <span class="supportqueryhead">{{vm.description}}</span> </h5>
+              </div>
+             
+            </div>
+          </div>
+          <div ></div>
+        </div>
+
+        <!-- Text Block for all the comments by customer or support -->
+<!--
+
+*************        Change the order by according the date  of the comment      *******************
+
+         -->
+          <div ng-if="maindata[0].comment" ng-repeat="commentdata in maindata | orderBy:'-'" class="text-block with-bg" ng-class="(commentdata.sender_id == vm.receiverId ) ? '' : 'reply-block'">
+            <div class="text-block-header">
+              <div class="row">
+                <div class="col-sm-7">
+                  <h5 class="text-block-heading">{{(commentdata.sender_id == vm.receiverId) ? 'From: Customer' : 'From: Fuleex Support'}}</h5>
+                </div>
+                <small class="col-sm-5 text-right"> {{commentdata.created_at | date : 'dd-MM-yyyy HH:mm a'}}</small>
+              </div>
+            </div>
+            <div class="text-block-content">{{ commentdata.comment }}</div>
+          </div>
+      </div>
+      <br>
+      <form autocomplete="off" ng-submit="vm.id ? vm.add() :''" name="vm.form" enctype="multipart/form-data" ng-if="vm.status.id!=0" novalidate>
+      <div class="form-group" >
+          <label>Message {{ vm.status.id }}</label>
+           <sup class="text-danger">*</sup>
+          <textarea class="form-control" name="answer" required ng-model="vm.answer" placeholder="Enter answer"></textarea>
+          <p class="error-msg" ng-if="vm.form.answer.$error.required && vm.form.$submitted">Please enter message </p>
+        </div>
+      <input type="hidden" ng-model="vm.id" />
+      <input type="hidden" ng-model="vm.assignId" />
+      <input type="hidden" ng-model="vm.receiverId" />
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" ng-click="vm.cancel()" class="btn btn-primary">Cancel</button>
+    </form>
+    <button ng-if="vm.status.id==0"type="button" ng-click="vm.reOpenTicket()" class="btn btn-primary">Re-Open</button>
+    </div>
+  </div>
+</div>

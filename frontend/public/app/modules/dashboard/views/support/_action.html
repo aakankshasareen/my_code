@@ -1,0 +1,2 @@
+<a class="btn btn-primary list-item" data-toggle="tooltip" title="Reply" ui-sref="dashboard.repplySupport({id:row.entity.id})"><i class="fa fa-reply"></i></a>
+<button data-toggle="tooltip" title="{{row.entity.status==1 ?'Close':'Open'}}" class="btn btn-primary list-item" ng-click="grid.appScope.vm.updateSupportStatusCu(row)"><i ng-class="row.entity.status==1 ?'fa fa-close':'fa fa-folder-open'"></i></button>

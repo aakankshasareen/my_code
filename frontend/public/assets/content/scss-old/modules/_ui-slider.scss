@@ -1,0 +1,29 @@
+.ui-slider {
+    height: 8px;
+    background: #1489fd url(../images/ui-slider-bg.svg) no-repeat;
+    border: none !important;
+    @include border-radius(10px);
+    .ui-widget-header {
+        background: none !important;
+    }
+    .ui-slider-handle {
+        background: #ffb944;
+        width: 2px;
+        height: 12px;
+        border: none;
+        top: -2px;
+        cursor: default;
+        outline: none !important;
+    }
+}
+
+.ui-slider-heading {
+    font-size: 0.6875rem;
+    color: $theme-color2;
+    margin-bottom: 12px;
+}
+
+.ui-slider-val {
+    font-size: 0.5625rem;
+    margin-top: 10px;
+}

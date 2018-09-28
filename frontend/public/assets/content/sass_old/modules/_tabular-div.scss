@@ -1,0 +1,20 @@
+.tabular-div {
+display: table;
+    .table-cell {
+    display: table-cell;
+        &.top {
+        vertical-align: top;
+        }
+        &.middle {
+        vertical-align: middle;
+        }
+        &.bottom {
+        vertical-align: bottom;
+        }
+    }
+    &.tabular-3-col {
+            .table-cell {
+            width: 33.33%;
+            }
+        }
+}

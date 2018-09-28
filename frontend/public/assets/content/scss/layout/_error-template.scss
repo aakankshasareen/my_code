@@ -1,0 +1,12 @@
+.error-template {
+    min-height: auto !important;
+    .error-heading { 
+        font-size: 4.0625rem; 
+        font-weight: 900; 
+        padding-top: 0; 
+        margin-top: -2.5rem; 
+    }
+    .error-details { 
+        margin: 2rem 0; 
+    }
+}

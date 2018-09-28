@@ -1,0 +1,44 @@
+<div class="animated fadeIn">
+
+    <!-- <h1 class="page-title">{{vm.pageHeading}} Email Template</h1> -->
+
+    <div class="card">
+        <div class="card-header"> <h4>{{vm.pageHeading}} SMS Template</h4></div>
+        <div class="card-body">
+          <form autocomplete="off" ng-submit="vm.template.id ? vm.update() : vm.add()" name="vm.form" enctype="multipart/form-data" novalidate>
+            <div class="form-group">
+              <label>Template Name <sup class="text-danger">*</sup></label>
+              <input type="text" class="form-control" name="template_name" required  ng-model="vm.template.template_name" aria-describedby="smsHelp" pattern="^[ a-zA-Z]*$" placeholder="Enter Template Name">
+              <p class="error-msg" ng-if="vm.form.template_name.$error.required && vm.form.$submitted">Please enter template name</p>
+              <p class="error-msg" ng-if="vm.form.template_name.$error.pattern && vm.form.$submitted">Please enter valid template name</p>
+            </div>
+            <div class="form-group">
+              <label>Template Code <sup class="text-danger">*</sup></label>
+              <input type="text" class="form-control" name="template_code" required  ng-model="vm.template.template_code" aria-describedby="smsHelp"  pattern="^[ A-Z a-z0-9-_]*$" placeholder="Enter Template Code" ng-disabled="vm.template.id">
+              <p class="error-msg" ng-if="vm.form.template_code.$error.required && vm.form.$submitted">Please enter template code</p>
+              <p class="error-msg" ng-if="vm.form.template_code.$error.pattern && vm.form.$submitted">Please enter valid template code</p>
+            </div>
+            <div class="form-group">
+              <label>Message <sup class="text-danger">*</sup></label>
+              <textarea class="form-control" name="template_message" required ng-model="vm.template.template_message"  id="template_message"></textarea>
+              <p class="error-msg" ng-if="vm.form.template_message.$error.required && vm.form.$submitted">Please enter template message</p>
+            </div>
+            <div class="form-group">
+              <label>Status <sup class="text-danger">*</sup></label>
+              <select name="status" required ng-options="option.name for option in vm.Status track by option.id" class="form-control" ng-selected="vm.status" ng-model="vm.status">
+                 <option value="" style="display: none">Please Select Status</option>
+             </select>
+             <p class="error-msg" ng-if="vm.form.status.$error.required && vm.form.$submitted">Please enter status</p>
+            </div>
+            <input type="hidden" ng-model="vm.id" />
+             <div class="form-group">
+               <button type="submit" class="btn btn-primary" ng-click="">Submit</button>
+               <button type="button" ng-click="vm.cancel()" class="btn btn-secondary">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+</div>
+<script>
+       // CKEDITOR.replace( 'template_message',{extraPlugins: 'tokens'});
+</script>

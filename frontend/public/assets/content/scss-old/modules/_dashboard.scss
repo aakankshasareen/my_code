@@ -1,0 +1,329 @@
+.dashboard-header {
+    background-color: $theme-color3;
+    color: #fff;
+    padding: 1.188rem 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    .dashboard-header-panel {
+        width: 100%;
+        padding-right: 2rem;
+        @include media-breakpoint-down(lg) {
+            padding-right: 5rem;
+        }
+        > li {
+            padding: 0 1.25rem;
+            font-size: 0.875rem;
+            @include media-breakpoint-down(sm) {
+                padding: 0;
+            }
+            &.with-arrow {
+
+                padding-right: 0.9375rem;
+            }
+        }
+        a {
+            position: relative;
+            display: block;
+        }
+    }
+    .dashboard-header-logo {
+        width: 4.5rem;
+        padding: 0 0.625rem;
+        text-align: center;
+        position: relative;
+        @include extra-large {
+            width: 6.5rem;
+        }
+        &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: -24px;
+            background-color: #4e2caf;
+            width: 68px;
+            height: 76px;
+            @include media-breakpoint-down(lg) {
+                display: none;
+            }
+            @include extra-large {
+                width: 95px;
+                height: 79px;
+            }
+        }
+        a {
+            position: relative;
+            display: block;
+            width: 2.625rem;
+            margin: 0 auto;
+        }
+//        @include media-breakpoint-down(lg) {
+//            a {
+//                float: left;
+//                width: 130px;
+//            }
+//        }
+    }
+
+    .header-balance-dropdown {
+        margin-right: 15px;
+        position: relative;
+    }
+
+    .username {
+        display: inline-block;
+        max-width: 5rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        @include media-breakpoint-down(lg) {
+            max-width: 15rem;
+        }
+    }
+    .username-wrap {
+        @include media-breakpoint-down(sm) {
+            position: absolute;
+            right: 20px;
+            bottom: -25px;
+            color: $theme-color;
+            display: none;
+        }
+    }
+}
+
+.dashboard-main-exchange-list {
+    display: flex;
+    position: absolute;
+    top: -3.9rem;
+    z-index: 1;
+    left: 11%;
+    width: 68%;
+    color: #fff;
+    li {
+        cursor: pointer;
+        width: 14.28%;
+        text-align: center;
+        color: #fff;
+        padding: 0.3125rem;
+        margin-left: 0.3125rem;
+        text-align: left;
+        position: relative;
+        flex-wrap: wrap;
+        font-size: 0.75rem;
+        @include border-radius(0.4rem);
+        span,
+        small {
+            word-break: break-all;
+            word-wrap: break-word;
+            display: block;
+            font-weight: 700;
+        }
+        .text {
+            width: 100%;
+            margin-bottom: 0.2rem;
+        }
+        .increment-value {
+            margin-bottom: 0.2rem;
+        }
+        .increment-percent {}
+        /*.status-pointer {
+            position: absolute;
+            top: 0.3125rem;
+            font-size: 0.75rem;
+            right: 0.5rem;
+        } */
+        @include media-breakpoint-down(md) {
+            width: calc(25% - 10px);
+            padding: 10px 5px;
+            margin: 0 5px 10px;
+        }
+        @include media-breakpoint-down(sm) {
+            width: calc(33.33% - 10px);
+        }
+        @include media-breakpoint-down(xs) {
+            span {
+                margin-bottom: 5px !important;
+            }
+            .status-pointer {
+                position: static;
+            }
+            span,
+            small {
+                width: 100% !important;
+                text-align: center !important;
+            }
+        }
+    }
+    @include media-breakpoint-down(lg) {
+        position: static;
+        margin-left: -5px;
+        justify-content: flex-start;
+        width: calc(100% + 10px);
+        margin-bottom: 10px;
+        li {
+            font-size: 0.9rem;
+            padding: 10px;
+            background-color: #fff;
+            .status-pointer {
+                top: 10px;
+                right: 10px;
+            }
+            .text {
+                margin-bottom: 10px;
+            }
+        }
+    }
+    @include media-breakpoint-down(md) {
+        flex-wrap: wrap;
+    }
+}
+
+.dashboard-content {
+    display: flex;
+    background-color: #eeeff4;
+
+    .dashboard-sidebar {
+        width: 72px;
+        background: #c66bd6 url(../images/dashboard-sidebar-bg.png) no-repeat;
+        background-size: cover;
+        @include extra-large {
+            width: 100px;
+        }
+        .sidebar-list {
+            padding-top: 20px;
+            .sidebar-list-item {
+                position: relative;
+                &.active,
+                &:hover {
+                    background-color: #431888;
+                }
+            }
+            a {
+                color: #fff;
+                padding: 1rem 0.625rem;
+                font-weight: 300;
+                font-size: 0.625rem;
+                display: block;
+                text-align: center;
+                cursor: pointer;
+                text-transform: capitalize;
+            }
+            .has-submenu {
+                &:hover {
+                    .submenu {
+                        display: block;
+                    }
+                }
+            }
+            .submenu {
+                display: none;
+                position: absolute;
+                background: $theme-color;
+                border-left: 1px solid lighten($theme-color, 10%);
+                z-index: 1;
+                top: 0;
+                left: 4.28rem;
+                min-width: 5.875rem;
+                li {
+                    border-bottom: 1px solid lighten($theme-color, 10%);
+                    &:last-child {
+                        border-bottom: none;
+                    }
+                }
+            }
+        }
+        .list-item-icon {
+            width: 27px;
+            height: 27px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            display: block;
+            margin: 0 auto 10px;
+            background-size: 100%;
+            &.nav-icon-portfolio {
+                background-image: url(../images/svgs/portfolio-navicon.svg);
+            }
+            &.nav-icon-wallet {
+                background-image: url(../images/svgs/wallet-navicon.svg);
+            }
+            &.nav-icon-history {
+                background-image: url(../images/svgs/history-navicon.svg);
+            }
+            &.nav-icon-trade {
+                background-image: url(../images/svgs/trade-navicon.svg);
+            }
+        }
+    }
+    
+    .dashboard-main {
+        width: 100%;
+        padding: 1.25rem 1.25rem 3.125rem 1.25rem;
+        position: relative;
+        @include media-breakpoint-down(xs) {
+            padding: 20px 15px;
+        }
+    }
+}
+
+.dashboard-main-heading {
+    font-weight: 300;
+    font-size: 1.125rem;
+    position: absolute;
+    top: -3rem;
+    color: #fff;
+    z-index: 12;
+    @include media-breakpoint-down(lg) {
+        position: static;
+        color: $theme-color;
+        margin-bottom: 30px;
+        font-weight: 500;
+        display: none !important;
+    }
+}
+
+.dashboard-wrapper #footer {
+    @include media-breakpoint-down(sm) {
+        display: none !important;
+    }
+}
+
+.exchange-view-activated .dashboard-wrapper {
+    @include media-breakpoint-down(sm) {
+        .dashboard-header,
+        #footer,
+        .dashboard-inner-content {
+            display: none;
+        }
+        .dashboard-main-exchange-list li {
+            width: 100%;
+            padding: 25px;
+            margin: 20px 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: #fff !important;
+            color: $text-color;
+            .increment-percent {
+                font-weight: bold !important;
+            }
+            &.bg-success {
+                .increment-percent {
+                    color: $success-color;
+                }
+            }
+            &.bg-danger {
+                .increment-percent {
+                    color: $error-color;
+                }
+            }
+        }
+    }
+}
+
+.uib-daypicker .btn,
+.uib-button-bar .btn {
+    background: #fff;
+}
+
+.anychart-credits-logo {
+    display: none;
+}

@@ -1,0 +1,60 @@
+.login-page {
+    background: url('../images/section-icon.png') no-repeat center center;
+    background-size: cover;
+    min-height: 100vh;
+    padding: 1.8px 1rem;
+    position: relative;
+    &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: rgba(0,0,0,0.6);
+        @include square(100%);
+    }
+    .content-wrap {
+        width: 27.5rem;
+        z-index: 1;
+        position: relative;
+        margin: 1rem auto;
+        @include media-breakpoint-down(xs) {
+            width: 100%;
+        }
+    }
+    .login-card {
+        max-width: 440px;
+        width: 100%;
+        background: rgba(255,255,255,0.7);
+        .card-header {
+            background: none;
+        }
+        .card-body {
+            background-color: #fff;
+        }
+        .form-control {
+            &:hover {
+            border-color: $theme-color;
+        }
+        }
+        .form {
+            margin-top: 1.75rem;
+            .form-group-label, .form-control {
+                color: $theme-color3;
+            }
+        }
+    }
+    a {
+        color: $theme-color3;
+    }
+    .tab-navigation {
+        .card-header {
+            padding: 0;
+            .tab-head-item {
+                background: rgba(255,255,255,0.6);
+                &.active {
+                    background: $theme-color5;
+                }
+            }
+        }
+    }
+}

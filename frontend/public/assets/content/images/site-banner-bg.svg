@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1280px" height="808px" viewBox="0 0 1280 808" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>EECEBF77-357F-455B-968E-75A623FDC598</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="125.088768%" y1="85.4073399%" x2="-2.9786443%" y2="6.59929051%" id="linearGradient-1">
+            <stop stop-color="#C86DD7" offset="0%"></stop>
+            <stop stop-color="#BC62D0" offset="4.36513686%"></stop>
+            <stop stop-color="#BC61D0" offset="4.41316971%"></stop>
+            <stop stop-color="#AC51C7" offset="10.2997449%"></stop>
+            <stop stop-color="#3023AE" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Web-Copy-12" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M-1,750.29434 C86.4745472,820.626917 175.654955,826.667646 266.541225,768.416526 C402.870629,681.039845 489.207107,623.349974 629.738126,750.29434 C665.286769,782.406112 738.32847,855.309375 944.904492,744.446326 C1082.62184,670.537627 1195.98701,678.527693 1285,768.416526 L1280,0 L-5,0 L-1,750.29434 Z" id="Path-3" fill="url(#linearGradient-1)"></path>
+    </g>
+</svg>

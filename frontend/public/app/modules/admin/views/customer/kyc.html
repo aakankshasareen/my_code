@@ -1,0 +1,509 @@
+<style>
+  .calendar-button {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+    position: relative;
+    left: 2px;
+  }
+
+  .thumbnail {
+    width: 35px;
+  }
+</style>
+<div class="animated fadeIn">
+  <!-- Modal -->
+  <div id="disapproveModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #E5343D">
+          <h4 class="modal-title" style="color: white">Write Comment for Disapprove</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <textarea class="form-control" ng-model="vm.kyc_status_comment" style="min-width: 100%;resize:none" placeholder="Write here..."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" ng-click="vm.approveKYC('disapprove')" ng-disabled="!vm.kyc_status_comment">Confirm</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8">
+      <h1 class="page-title d-flex align-items-center">Verify / Edit Customer KYC
+        <smal class="status"><span ng-if="vm.pers.kyc_status == 0" style="color: #FF9800;">(Incomplete)</span>
+          <span ng-if="vm.pers.kyc_status == 1" style="color: #2196F3;">(Pending)</span>
+          <span class="text-success" ng-if="vm.pers.kyc_status == 2">(Verified)</span>
+          <span class="text-danger" ng-if="vm.pers.kyc_status == 3">(Not Verified)</span></small>
+      </h1>
+    </div>
+
+    <!-- Approval buttons and verfication status -->
+
+    <div class="col-lg-4 text-right">
+
+      <button type="button" ng-click="vm.approveKYC('approve')" ng-if="vm.pers.kyc_status !== 2 " ng-disabled="vm.pers.kyc_status == 0" class="btn btn-labeled btn-success m-b-5">
+              <i class="fa fa-check"></i>&nbsp;
+              Approve
+            </button>
+      <button type="button" data-toggle="modal" data-target="#disapproveModal" ng-if="vm.pers.kyc_status !== 3" ng-disabled="vm.pers.kyc_status == 0" class="btn btn-labeled btn-danger m-b-5">
+              <i class="fa fa-times"></i>&nbsp;
+              Disapprove
+          </button>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <tabset class="tab-container kyc-form">
+    <ul class="nav nav-tabs">
+
+      <!-- Uncomment this for nav links according to exchange design and delete the below li tags
+        <li class="nav-item" ng-class="$index == 0 ? 'active' : ''"  ng-repeat="item in vm.getKycTabs">
+            <a class="nav-link" ng-class="$index == 0 ? 'active' : ''" href="#{{item.id}}" data-toggle="tab" aria-expanded="true"> <i class="{{item.icon_name}}" style="font-size: 1.25rem"></i> &nbsp;{{item.name}}</a>
+        </li> -->
+
+      <li class="nav-item active">
+        <a class="nav-link active" data-toggle="tab" data-target="#1">
+          <!--personalTab--><i class="icon-user"></i> Personal </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" data-target="#2">
+          <!--identificationTab--><i class="icon-info"></i> Identification</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" data-target="#3">
+          <!--addressTab--><i class="icon-map"></i> Address</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+
+      <tab id="1" class="active tab-pane">
+
+        <form name="vm.persInfoForm" class="row form" novalidate enctype='multipart/form-data' >
+          <div class="form-group col-sm-6">
+            <label>Full Name <sup class="text-danger">*</sup></label>
+            <input type="text" placeholder="Enter Full Name" class="form-control" ng-model="vm.pers.fullname" required maxlength="50" required name="flname" pattern="^[ a-zA-Z]*$" autocomplete="off" />
+            <p class="error-msg" ng-if="vm.persInfoForm.flname.$error.required && vm.persInfoForm.$submitted">Please enter full name </p>
+            <p class="error-msg" ng-if="vm.persInfoForm.flname.$error.pattern">Please enter valid full name </p>
+            <!-- <p class="error-msg" ng-if="vm.persInfoForm.flname.$error.minlength">Your name should contain atleast 3 characters</p> -->
+          </div>
+          <div class="form-group col-sm-6">
+            <label>Mobile Number <sup class="text-danger">*</sup></label>
+            <input type="text" placeholder="Enter Mobile Number" class="form-control" ng-model="vm.pers.mobileNumber" required name="tel" id="mobNum" ng-intl-tel-input data-initial-country="in" required maxlength="15" autocomplete="off" numbr-only />
+            <p class="error-msg" ng-if="vm.persInfoForm.tel.$error.required && vm.persInfoForm.$submitted">Please enter mobile number </p>
+            <!-- <p class="error-msg" ng-if="vm.persInfoForm.tel.$error.minlength && vm.persInfoForm.$submitted">Mobile number should contain atleast 10 digits</p> -->
+          </div>
+          <div class="form-group col-sm-6">
+            <label>Date of Birth <sup class="text-danger">*</sup></label>
+            <div class="input-group">
+              <span class="input-group-btn">
+                              <button type="button" class="btn btn-default calendar-button" ng-click="vm.dob.opened = true;"><i class="fa fa-calendar"></i></button>
+                            </span>
+              <input type="text" class="form-control" uib-datepicker-popup="{{$root.format}}" ng-model="vm.pers.date_of_birth" is-open="vm.dob.opened" datepicker-options="vm.dateOptions" close-text="Close" autocomplete="off" onkeypress="return false;" placeholder="Select Date of Birth"
+                required name="dob" />
+            </div>
+            <p class="error-msg" ng-if="vm.persInfoForm.dob.$error.required && vm.persInfoForm.$submitted">Please select date of birth</p>
+          </div>
+          <div class="form-group col-sm-6">
+            <label>Place of Birth <sup class="text-danger">*</sup></label>
+            <input type="text" class="form-control" ng-model="vm.pers.birth_place" required pattern="^[ a-zA-Z0-9,-_]*$" autocomplete="off" name="place" placeholder="Enter Place of Birth" />
+            <p class="error-msg" ng-if="vm.persInfoForm.place.$error.required && vm.persInfoForm.$submitted">Please enter place of birth </p>
+            <p class="error-msg" ng-if="vm.persInfoForm.place.$error.pattern && vm.persInfoForm.$submitted">Please enter valid place of birth </p>
+          </div>
+
+          <div class="form-group col-sm-6">
+            <label>Gender <sup class="text-danger">*</sup></label>
+            <select class=" form-control form-control" ng-model="vm.pers.gender" required name="gender">
+                          <option style="display:none" value="">Select Gender</option>
+                          <option value="female">Female</option>
+                          <option value="male">Male</option>
+                          <option value="male">Others</option>
+                      </select>
+            <p class="error-msg" ng-if="vm.persInfoForm.gender.$error.required && vm.persInfoForm.$submitted">Please select gender </p>
+          </div>
+
+          <div class="form-group col-sm-6">
+            <label>Upload your Photo <i class="fa fa-info-circle marL10 fs-18" data-toggle="tooltip" data-placement="top" data-original-title="Maximum file upload size : 1MB. Allowed Formats : JPG,PNG"></i></label>
+            <div class="custom-input-file form-control">
+              <input type="file" class="inputfile" ngf-select ng-model="vm.persFile" name="file" accept="image/*" ngf-pattern="'.jpeg,.jpg,.png'" ngf-max-size="1MB" ng-required="!vm.profilePhoto" style="padding:0px;" />
+              <label class="inputlabel"><span class="selected-value">Upload your image</span><span class="fa fa-image input-icon"></span></label>
+            </div>
+            <p class="error-msg" ng-if="vm.persInfoForm.file.$error.required && vm.persInfoForm.file.$submitted">Please upload photo</p>
+            <p class="error-msg" ng-if="vm.persInfoForm.file.$error.pattern && vm.persInfoForm.file.$touched"> Please upload valid (.jpg, .png) file only</p>
+            <p class="error-msg" ng-if="vm.persInfoForm.file.$error.maxSize">Maximum file upload size : 1MB </p>
+            <div class="col-md-4 text-right text-center-xs marB20-xs marT20-xs">
+
+                <span ng-if="vm.persFile"><img style="width:100px;" ngf-thumbnail="vm.persFile || '/thumb.jpg'" /></span>
+            </div>
+            <div class="uploaded-photo marT10">
+              <h5 class="heading">Uploaded Photo</h5>
+
+              <span ng-if="vm.profilePhoto" class="pull-right">
+                <a href="" ng-click="vm.downloadDoc(vm.photo_uploaded_href)" >
+                    <img ngf-thumbnail="vm.profilePhoto || '/thumb.jpg'"/>
+                </a>
+            </span>
+            <span ng-if="!vm.profilePhoto"><i>No Photo Uploaded</i></span>
+              <!-- <img width="35" class="thumbnail" src="assets/images/profile-example.svg" ng-if="!vm.persFile" alt="Image" />
+              <span ng-if="vm.persFile"><img class="thumbnail" ngf-thumbnail="vm.persFile || '/thumb.jpg'" /></span> -->
+            </div>
+          </div>
+          <div class="form-group col-sm-12 text-center">
+            <button type="submit" class="btn btn-primary btn-lg" ng-click="vm.savePersonalInfo(vm.persInfoForm, vm.pers, vm.persFile, '3');">Save</button>
+          </div>
+        </form>
+
+      </tab>
+      <tab id="2" class="tab-pane">
+
+        <form class="row form" name="vm.idForm" novalidate>
+            <input type="hidden" ng-model="vm.idType.doc_type" ng-init="vm.idType.doc_type = 1">
+
+          <div class="form-group col-sm-6">
+            <label>Issuing Country <sup class="text-danger">*</sup></label>
+            <select class=" form-control" ng-model="vm.idType.issuing_country" ng-options="item.name for item in vm.getCountry track by item.id" required autocomplete="off" name="authority" ng-change="vm.changeCountry(vm.idType.issuing_country)">
+                            <option style="display:none" value="">Select Issuing Country</option>
+                        </select>
+            <p class="error-msg" ng-if="vm.idForm.authority.$error.required && vm.idForm.$submitted">Please select issuing country</p>
+          </div>
+          <div class="form-group col-sm-6">
+            <label>ID Type <sup class="text-danger">*</sup></label>
+            <select class=" form-control" ng-model="vm.idType.doc_name" name="idtype" ng-options="item.name for item in vm.getIDType track by item.id" required autocomplete="off" id="docName" ng-change="vm.changeIdType(vm.idType.doc_name)">
+                            <option style="display:none" value="">Select ID Type</option>
+                        </select>
+
+            <p class="error-msg" ng-if="vm.idForm.idtype.$error.required && vm.idForm.$submitted">Please select id type</p>
+          </div>
+          <div class="form-group col-sm-6">
+            <label class="form-group-label">{{vm.idType.doc_name ? vm.idType.doc_name.name : 'Identity Card'}} Number<sup class="text-danger">*</sup></label>
+            <input class="form-control" type="text" ng-model="vm.idType.doc_reference" required pattern="^[a-zA-Z0-9]*$" maxlength="20" minlength="3" autocomplete="off" name="idnum" placeholder="Enter {{vm.idType.doc_name ? vm.idType.doc_name.name : 'Identity Card'}} Number">
+            <p class="error-msg" ng-if="vm.idForm.idnum.$error.required && vm.idForm.$submitted">Please enter identity number </p>
+            <p class="error-msg" ng-if="vm.idForm.idnum.$error.pattern && vm.idForm.idnum.$touched">Please enter valid identity number</p>
+          </div>
+          <div class="form-group col-sm-6">
+            <label>{{vm.idType.doc_name ? vm.idType.doc_name.name : 'Identity Card'}} Issue Date <sup class="text-danger">*</sup></label>
+            <div class="input-group">
+              <span class="input-group-btn">
+                            <button type="button" class="btn btn-default calendar-button" ng-click="vm.issueDate.opened = true;"><i class="fa fa-calendar"></i></button>
+                          </span>
+              <input type="text" class="form-control" uib-datepicker-popup="{{$root.format}}" ng-model="vm.idType.issue_date" is-open="vm.issueDate.opened" datepicker-options="vm.dateOptions" close-text="Close" autocomplete="off" placeholder="Select Issue Date" required="true"
+                name="issueDate" onkeypress="return false;" />
+            </div>
+            <p class="error-msg" ng-if="vm.idForm.issueDate.$error.required && vm.idForm.$submitted">Please select issue date </p>
+          </div>
+          <div class="form-group col-sm-6">
+            <label>Identity Card Expiration Date</label>
+            <div class="input-group">
+              <span class="input-group-btn">
+                            <button type="button" class="btn btn-default calendar-button" ng-click="vm.expDate.opened = true;"><i class="fa fa-calendar"></i></button>
+                          </span>
+              <input type="text" class="form-control" uib-datepicker-popup="{{$root.format}}" ng-model="vm.idType.expiration_date" is-open="vm.expDate.opened" datepicker-options="vm.dateExpiryOptions" close-text="Close" autocomplete="off" placeholder="Select Expiration Date"
+                required name="expDate" onkeypress="return false;" />
+            </div>
+            <p class="error-msg" ng-if="vm.idForm.expDate.$error.required && vm.idForm.$submitted">Please select expiration date </p>
+          </div>
+          <div class="form-group col-sm-6">
+            <label>Upload ID Proof - Passport or Singapore NRIC Front <i class="fa fa-info-circle marL10 fs-18" data-toggle="tooltip" data-placement="top" data-original-title="Maximum file upload size : 1MB. Allowed Formats : JPG,PNG,PDF,DOC,DOCX"></i><sup class="text-danger">*</sup></label>
+            <div class="custom-input-file form-control">
+              <input type="file" class="inputfile" ngf-select ng-model="vm.file" name="file1" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-pattern="'.doc,.docx,.pdf,.jpeg,.jpg,.png'" ngf-max-size="1MB" ng-required="!vm.idProofUploaded" style="padding:0px;" />
+              <label class="inputlabel"><span class="selected-value">Upload your image</span><span class="fa fa-image input-icon"></span></label>
+            </div>
+            <p class="error-msg" ng-if="vm.idForm.file1.$error.required && vm.idForm.$submitted">Please upload ID proof</p>
+            <p class="error-msg" ng-if="vm.idForm.file1.$error.pattern && vm.idForm.$submitted">Please upload a Valid (.jpg, .png, .doc, .docx, .pdf) file only</p>
+            <p class="mt-2 error-msg" ng-if="vm.idForm.file1.$error.maxSize">Maximum file upload size : 1MB.</p>
+
+            <span ng-if="vm.file"><img style="width:100px;" ngf-thumbnail="vm.file || '/thumb.jpg' " /></span>
+
+            <div class="uploaded-photo marT10">
+              <h5 class="heading">Uploaded Id Proof Photo - Front</h5>
+
+              <span ng-if="vm.idProofUploaded"><a href="" ng-click="vm.downloadDoc(vm.idProofFront_uploaded_href)" class="pull-right"><img ngf-thumbnail="vm.idProofUploaded || '/thumb.jpg'"/></a></span>
+              <span ng-if="!vm.idProofUploaded"><i>No ID Proof - Front Uploaded</i></span>
+
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <label>Upload ID Proof -  Singapore NRIC back or utility/telco bill or bank statement not more than 90 days ago. <i class="fa fa-info-circle marL10 fs-18" data-toggle="tooltip" data-placement="top" data-original-title="Maximum file upload size : 1MB. Allowed Formats : JPG,PNG,PDF,DOC,DOCX"></i></label>
+            <div class="custom-input-file form-control">
+              <input type="file" class="inputfile" required ngf-select ng-model="vm.file_back" name="file_back" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-pattern="'.doc,.docx,.pdf,.jpeg,.jpg,.png'" ngf-max-size="1MB" style="padding:0px;" />
+              <label class="inputlabel"><span class="selected-value">Upload your image</span><span class="fa fa-image input-icon"></span></label>
+            </div>
+            <!-- <p class="error-msg" ng-if="vm.idForm.file_back.$error.required && vm.idForm.$submitted">Please upload id proof</p> -->
+            <p class="error-msg" ng-if="vm.idForm.file_back.$error.pattern && vm.idForm.$submitted">Please upload a valid (.jpg, .png, .doc, .docx, .pdf)file only</p>
+            <p class="error-msg" ng-if="vm.idForm.file_back.$error.maxSize">Maximum file upload size : 1MB.</p>
+
+            <span ng-if="vm.file_back"><img style="width:100px;" ngf-thumbnail="vm.file_back || '/thumb.jpg' " /></span>
+
+            <div class="uploaded-photo marT10">
+              <h5 class="heading">Uploaded Id Proof Photo - Back</h5>
+            
+              <span ng-if="vm.idProofBackUploaded" class="pull-right"><a href="" ng-click="vm.downloadDoc(vm.idProofBack_uploaded_href)"><img ngf-thumbnail="vm.idProofBackUploaded || '/thumb.jpg'"/></a></span>
+              <span ng-if="!vm.idProofBackUploaded"><i>No ID Proof - Back Uploaded</i></span>
+
+
+            </div>
+          </div>
+          <div class="form-group col-sm-6">
+            <label>Upload Selfie with ID Proof <i class="fa fa-info-circle marL10 fs-18" data-toggle="tooltip" data-placement="top" data-original-title="Maximum file upload size : 1MB. Allowed Formats : JPG,PNG,PDF,DOC,DOCX"></i><sup class="text-danger">*</sup></label>
+            <div class="custom-input-file form-control">
+              <input type="file" class="inputfile" ngf-select ng-model="vm.selfie" name="selfie" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-pattern="'.doc,.docx,.pdf,.jpeg,.jpg,.png'" ngf-max-size="1MB" ng-required="!vm.selfieUploaded" style="padding:0px;" />
+              <label class="inputlabel"><span class="selected-value">Upload your image</span><span class="fa fa-image input-icon"></span></label>
+            </div>
+            <p class="error-msg" ng-if="vm.idForm.selfie.$error.required && vm.idForm.$submitted">Please upload selfie </p>
+            <p class="error-msg" ng-if="vm.idForm.selfie.$error.pattern && vm.idForm.$submitted">Please upload a valid (.jpg, .png, .doc, .docx, .pdf) file only </p>
+            <p class="error-msg" ng-if="vm.idForm.selfie.$error.maxSize">Maximum file upload size : 1MB.</p>
+            <span ng-if="vm.selfie"><img style="width:100px;" ngf-thumbnail="vm.selfie || '/thumb.jpg' " /></span>
+
+            <div class="uploaded-photo marT10">
+              <h5 class="heading">Uploaded Selfie with ID Proof</h5>
+              <span ng-if="vm.selfieUploaded" class="pull-right">
+                <a href="" ng-click="vm.downloadDoc(vm.selfie_uploaded_href)">
+                    <img ngf-thumbnail="vm.selfieUploaded || '/thumb.jpg'"/>
+                </a>
+            </span>
+            <span ng-if="!vm.selfieUploaded"><i>No Selfie with ID Proof Uploaded</i></span>
+
+            </div>
+          </div>
+          <div class="form-group col-sm-12 text-center">
+            <button type="submit" ng-click="vm.saveData(vm.idForm, vm.idType, vm.file, '1', vm.selfie, vm.file_back)" class="btn btn-primary btn-lg">Save</button>
+          </div>
+        </form>
+
+      </tab>
+      <tab id="3" class="tab-pane">
+
+        <div class="row">
+          <form class="form col-sm-12" name="vm.poaForm" novalidate>
+            <div class="row">
+              <div class="col-sm-6">
+                <h5 class="tab-pane-heading">Residential Address</h5>
+                <div class="row">
+                    <input type="hidden" ng-model="vm.poaRes.doc_type" ng-init="vm.poaRes.doc_type = 5">
+                </div>
+                <div class="form-group">
+                  <label>Address <sup class="text-danger">*</sup></label>
+                  <textarea class="form-control" ng-model="vm.poaRes.res_address" required autocomplete="off" name="street" maxlength="400" placeholder="Enter Address" style=" resize: none;" /></textarea>
+                  <p class="error-msg" ng-if="vm.poaForm.street.$error.required && vm.poaForm.$submitted">Please enter address </p>
+                </div>
+                <div class="form-group">
+                  <label>ZIP Code <sup class="text-danger">*</sup></label>
+                  <input type="text" class="form-control" ng-model="vm.poaRes.res_pin_code" required pattern="^[0-9]*$" maxlength="10" autocomplete="off" name="zip" placeholder="Enter ZIP Code" />
+                  <p class="error-msg" ng-if="vm.poaForm.zip.$error.required && vm.poaForm.$submitted">Please enter ZIP code </p>
+                  <p class="error-msg" ng-if="vm.poaForm.zip.$error.pattern && vm.poaForm.zip.$touched">Please enter valid ZIP code </p>
+                </div>
+                <div class="form-group">
+                  <label>Country <sup class="text-danger">*</sup></label>
+                  <select class="form-control" ng-model="vm.poaRes.res_country" ng-options="item.name for item in vm.getCountry track by item.id" ng-change="vm.getStatesByCountryId_Res(vm.poaRes.res_country)" required autocomplete="off" name="rescountry">
+                                    <option style="display:none" value="">Select Country</option>
+                                </select>
+                  <p class="error-msg" ng-if="vm.poaForm.rescountry.$error.required && vm.poaForm.$submitted">Please select country </p>
+                </div>
+                <div class="form-group">
+                  <label>State/Province <sup class="text-danger">*</sup></label>
+                  <select class=" form-control" ng-model="vm.poaRes.res_state" ng-options="item.name for item in vm.getStatesRes track by item.id" required ng-disabled="!vm.poaRes.res_country" ng-change="vm.getCitiesByStateId_Res();" name="state">
+                                    <option style="display:none" value="">Select State/Province</option>
+                                </select>
+                  <p class="error-msg" ng-if="vm.poaForm.state.$error.required && vm.poaForm.$submitted && vm.poaRes.res_country">Please select state/province </p>
+                  <p ng-if="vm.getStatesRes.length == 0 && vm.poaRes.res_country">No states available for the selected country</p>
+                </div>
+                <div class="form-group">
+                  <label>City <sup class="text-danger">*</sup></label>
+                  <select class=" form-control" ng-model="vm.poaRes.res_city" ng-options="item.name for item in vm.getCitiesRes track by item.id" required autocomplete="off" ng-disabled="!vm.poaRes.res_state" name="city">
+                                    <option style="display:none" value="">Select City</option>
+                                </select>
+                  <p class="error-msg" ng-if="vm.poaForm.city.$error.required && vm.poaForm.$submitted && vm.poaRes.res_state">Please select city </p>
+                  <p ng-if="vm.getCitiesRes.length == 0 && vm.poaRes.res_state">No cities available for the selected state.</p>
+                </div>
+                <div class="form-group">
+                  <label>Address Proof Type <sup class="text-danger">*</sup></label>
+                  <select class=" form-control" ng-model="vm.poaRes.doc_name" required name="proof" ng-options="item.name for item in vm.getAddrProofTypes track by item.id">
+                                    <option style="display:none" value="">Select Address Proof Type</option>
+                                </select>
+                  <p class="error-msg" ng-if="vm.poaForm.proof.$error.required && vm.poaForm.$submitted">Please select address proof type </p>
+                </div>
+                <div class="form-group">
+                  <label>Upload Residential Address Proof - Front <i class="fa fa-info-circle marL10 fs-18" data-toggle="tooltip" data-placement="top" data-original-title="Maximum file upload size : 1MB. Allowed Formats : JPG,PNG,PDF,DOC,DOCX"></i><sup class="text-danger">*</sup></label>
+                  <div class="custom-input-file form-control">
+                    <input type="file" class="inputfile" ngf-select ng-model="vm.addressFile" name="file" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-pattern=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-max-size="1MB" ng-required="!vm.residentialUploaded" style="padding:0px;"
+                    />
+                    <label class="inputlabel"><span class="selected-value">Upload your image</span><span class="fa fa-image input-icon"></span></label>
+                  </div>
+                  <p class="error-msg" ng-if="vm.poaForm.file.$error.required && vm.poaForm.$submitted">Please upload residential address proof </p>
+                  <p class=" error-msg" ng-if="vm.poaForm.file.$error.pattern && vm.poaForm.$submitted">Please upload a valid (.jpg, .png, .doc, .docx, .pdf) file only</p>
+                  <p class="error-msg" ng-if="vm.poaForm.file.$error.maxSize">Maximum file upload size : 1MB.</p>
+
+                  <span ng-if="vm.addressFile"><img style="width:100px;" ngf-thumbnail="vm.addressFile || '/thumb.jpg' " /></span>
+                  <div class="uploaded-photo marT10">
+                    <h5 class="heading">Uploaded Residential Address Proof - Front</h5>
+                    <span ng-if="vm.residentialUploaded" class="">
+                        <a href="" ng-click="vm.downloadDoc(vm.residential_uploaded_href)"><img ngf-thumbnail="vm.residentialUploaded || '/thumb.jpg'"/></a>
+                    </span>
+                    <span ng-if="!vm.residentialUploaded"><i>No Residential Address Proof Uploaded</i></span>
+
+                    <!-- <img class="thumbnail" src="assets/images/address-proof-example.svg" alt="Address Proof" ng-if="!vm.addressFile" />
+                    <span ng-if="vm.addressFile"><img class="thumbnail" ngf-thumbnail="vm.addressFile || '/thumb.jpg'" /></span> -->
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Upload Residential Address Proof - Back <i class="fa fa-info-circle marL10 fs-18" data-toggle="tooltip" data-placement="top" data-original-title="Maximum file upload size : 1MB. Allowed Formats : JPG,PNG,PDF,DOC,DOCX"></i></label>
+                  <div class="custom-input-file form-control">
+                    <input type="file" class="inputfile" ngf-select ng-model="vm.addressFileBack" name="file_back" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-pattern="'.doc,.docx,.pdf,.jpeg,.jpg,.png'" ngf-max-size="1MB" style="padding:0px;" />
+                    <label class="inputlabel"><span class="selected-value">Upload your image</span><span class="fa fa-image input-icon"></span></label>
+                  </div>
+                  <p class="mt-2 error-msg" ng-if="vm.poaForm.file_back.$error.pattern && vm.poaForm.file_back.$touched">Please upload a valid (.jpg, .png, .doc, .docx, .pdf) file only </p>
+                  <p class="mt-2 error-msg" ng-if="vm.poaForm.file_back.$error.maxSize">Maximum file upload size : 1MB.</p>
+                  <span ng-if="vm.addressFileBack"><img style="width:100px;" ngf-thumbnail="vm.addressFileBack || '/thumb.jpg' " /></span>
+
+                  <div class="uploaded-photo marT10">
+                    <h5 class="heading">Upload Residential Address Proof - Back</h5>
+                    <span ng-if="vm.residentialBackUploaded" class="pull-right">
+                        <a href="" ng-click="vm.downloadDoc(vm.residentialBack_uploaded_href)"><img style="width:100px" ngf-thumbnail="vm.residentialBackUploaded || '/thumb.jpg'"/></a>
+                    </span>
+                    <span ng-if="!vm.residentialBackUploaded"><i>No Residential Address Proof Uploaded - Back</i></span>
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <h5 class="tab-pane-heading">Permanent Address</h5>
+                  </div>
+                  <div class="col-sm-6 text-right">
+                    <label>
+                      <input id="addressInput" checked="checked" type="checkbox" ng-change="vm.sameAsRes();" ng-model="vm.check">
+                      Same as residential
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                    <input type="hidden" ng-model="vm.poaP.doc_type" ng-init="vm.poaP.doc_type = 2">
+                </div>
+                <div class="form-group">
+                  <label>Address
+                    <!-- <sup class="text-danger">*</sup> -->
+                  </label>
+                  <textarea class="form-control" ng-model="vm.poaP.address" ng-disabled="vm.check" autocomplete="off" maxlength="400" placeholder="Enter Address"></textarea>
+                </div>
+                <div class="form-group">
+                  <label>ZIP Code
+                    <!-- <sup class="text-danger">*</sup> -->
+                  </label>
+                  <input type="text" class="form-control" ng-model="vm.poaP.pin_code" ng-disabled="vm.check" pattern="^[0-9]*$" maxlength="10" autocomplete="off" placeholder="Enter ZIP Code" />
+                </div>
+                <div class="form-group">
+                  <label>Country
+                    <!-- <sup class="text-danger">*</sup> -->
+                  </label>
+                  <select class=" form-control" ng-model="vm.poaP.country" ng-disabled="vm.check" ng-options="item.name for item in vm.getCountry track by item.id" ng-change="vm.getStatesByCountryId_Per(vm.poaP.country)" autocomplete="off">
+                    <option style="display:none" value="">Select Country</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>State/Province
+                    <!-- <sup class="text-danger">*</sup> -->
+                  </label>
+                  <select class=" form-control" ng-model="vm.poaP.state" ng-disabled="vm.check || !vm.poaP.country" ng-options="item.name for item in vm.getStatesPer track by item.id" ng-change="vm.getCitiesByStateId_Per();">
+                    <option style="display:none" value="">Select State/Province</option>
+                  </select>
+                  <p ng-if="vm.getStatesPer.length == 0 && vm.poaP.country">No states available for the selected country.</p>
+                </div>
+                <div class="form-group">
+                  <label>City
+                    <!-- <sup class="text-danger">*</sup> -->
+                  </label>
+                  <select class=" form-control" ng-model="vm.poaP.city" ng-options="item.name for item in vm.getCitiesPer track by item.id" ng-disabled="vm.check || !vm.poaP.state">
+                    <option style="display:none" value="">Select City</option>
+                  </select>
+                  <p ng-if="vm.getCitiesPer.length == 0 && vm.poaP.state">No cities available for the selected state.</p>
+                </div>
+                <div class="form-group">
+                  <label>Address Proof Type
+                    <!-- <sup class="important" ng-required="vm.paddressFile1 || vm.paddressFileBack">*</sup> -->
+                  </label>
+                  <select class=" form-control" ng-model="vm.poaP.doc_name" ng-options="item.name for item in vm.getAddrProofTypes track by item.id" ng-required="vm.paddressFile1 || vm.paddressFileBack" name="proof1">
+                    <option style="display:none" value="">Select Address Proof Type</option>
+                  </select>
+                  <p class="error-msg" ng-if="vm.poaForm.proof1.$error.required && vm.poaForm.$submitted">Please select Address Proof Type.</p>
+                </div>
+                <div class="form-group">
+                  <label>Upload Permanent Address Proof - Front <i class="fa fa-info-circle marL10 fs-18" data-toggle="tooltip" data-placement="top" data-original-title="Maximum file upload size : 1MB. Allowed Formats : JPG,PNG,PDF,DOC,DOCX"></i></label>
+                  <div class="custom-input-file form-control">
+                    <input type="file" class="inputfile" ngf-select ng-model="vm.paddressFile1" name="file1" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-pattern="'.doc,.docx,.pdf,.jpeg,.jpg,.png'" ngf-max-size="1MB" style="padding:0px;" />
+                    <label class="inputlabel"><span class="selected-value">Upload your image</span><span class="fa fa-image input-icon"></span></label>
+                  </div>
+                  <p class="mt-2 error-msg" ng-if="vm.poaForm.file1.$error.maxSize">Maximum file upload size : 1MB.</p>
+                  <p class="mt-2 error-msg" ng-if="vm.poaForm.file1.$error.pattern && vm.poaForm.file1.$touched">Please upload a valid (.jpg, .png, .doc, .docx, .pdf) file only.</p>
+
+                  <span ng-if="vm.paddressFile1"><img style="width:100px;" ngf-thumbnail="vm.paddressFile1 || '/thumb.jpg' " /></span>
+
+                  <div class="uploaded-photo marT10">
+                    <h5 class="heading">Uploaded Permanent Address Proof - Front</h5>
+                    <span ng-if="vm.permanentUploaded" class="pull-right">
+                        <a href="" ng-click="vm.downloadDoc(vm.permanent_uploaded_href)"><img style="width:100px;height: 57px" ngf-thumbnail="vm.permanentUploaded || '/thumb.jpg'"/></a>
+                    </span>
+                    <span ng-if="!vm.permanentUploaded"><i>No Permanent Address Proof Uploaded - Front</i></span>
+
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Upload Residential Address Proof - Back <i class="fa fa-info-circle marL10 fs-18" data-toggle="tooltip" data-placement="top" data-original-title="Maximum file upload size : 1MB. Allowed Formats : JPG,PNG,PDF,DOC,DOCX"></i></label>
+                  <div class="custom-input-file form-control">
+                    <input type="file" class="inputfile" ngf-select ng-model="vm.paddressFileBack" name="file1_back" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-pattern="'.doc,.docx,.pdf,.jpeg,.jpg,.png'" ngf-max-size="1MB" style="padding:0px;" />
+                    <label class="inputlabel"><span class="selected-value">Upload your image</span><span class="fa fa-image input-icon"></span></label>
+                  </div>
+                  <p class="mt-2 error-msg" ng-if="vm.poaForm.file1_back.$error.maxSize">Maximum file upload size : 1MB.</p>
+                  <p class="mt-2 error-msg" ng-if="vm.poaForm.file1_back.$error.pattern && vm.poaForm.file1_back.$touched">Please upload a valid (.jpg, .png, .doc, .docx, .pdf) file only.</p>
+
+                  <span ng-if="vm.paddressFileBack"><img style="width:100px;" ngf-thumbnail="vm.paddressFileBack || '/thumb.jpg' " /></span>
+
+                  <div class="uploaded-photo marT10">
+                    <h5 class="heading">Uploaded Permanent Address Proof - Back</h5>
+                    <span ng-if="vm.permanentBackUploaded" class="pull-right">
+                        <a href="" ng-click="vm.downloadDoc(vm.permanentBack_uploaded_href)"><img style="width:100px;height: 57px" ngf-thumbnail="vm.permanentBackUploaded || '/thumb.jpg'"/></a>
+                    </span>
+                    <span ng-if="!vm.permanentBackUploaded"><i>No Permanent Address Proof Uploaded - Back</i></span>
+                    <!-- <img class="thumbnail" src="assets/images/address-proof-example.svg" alt="Address Proof" ng-if="!vm.paddressFileBack" />
+                    <span ng-if="vm.paddressFileBack"><img class="thumbnail"  ngf-thumbnail="vm.paddressFileBack || '/thumb.jpg'" /></span> -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 text-center">
+                <button type="submit" class="btn btn-primary btn-lg" ng-click="vm.saveAddressInfo(vm.poaForm, vm.poaP, vm.paddressFile1, vm.paddressFileBack, '2', vm.poaRes, vm.addressFile, vm.addressFileBack, '5');">Save</button>
+              </div>
+            </div>
+          </form>
+
+            <!-- Form to download document and images -->
+            <form method="post"  name="downloadForm" action="/api/downloadAdmin">
+              <input type="hidden" value={{token}} name="token">
+              <input type="hidden" name="path">
+            </form>
+
+      </tab>
+      </div>
+  </tabset>
+  <!-- Tabs -->
+
+  <script>
+    $(function() {
+      $("body").on("change", ".custom-input-file .inputfile", function() {
+        var $this = $(this);
+        var $target = $this.closest(".custom-input-file").find(".selected-value");
+        var filename = $this.val();
+        if (filename.substring(3, 11) == 'fakepath') {
+          filename = filename.substring(12);
+        }
+        $target.text(filename);
+      });
+    });
+  </script>
+
+  </div>

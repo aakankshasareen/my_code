@@ -1,0 +1,21 @@
+#header {
+    padding: 16px 0;
+    position: relative;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: url(../images/site-banner-bg.svg) no-repeat;
+    background-size: cover;
+    z-index: 100;
+    @include transition(350ms);
+    @include shadow(0 2px 4px 0 rgba(0, 0, 0, 0.14));
+    &.scrolled {
+        padding: 10px 0;
+    }
+    .logo {
+        color: #fff;
+        font-size: 19px;
+        font-weight: 700;
+    }
+}

@@ -1,0 +1,30 @@
+<div class="card">
+<div class="card-header">Frequently asked questions(FAQ)</div>
+<div class="card-body tab-navigation">
+                <ul class="tab-head">
+                    <li ng-repeat="faqCat in dataCat" data-tab=".tab{{faqCat.id}}"  id="{{faqCat.id}}" ng-click="vm.getFaqById($event)" class="tab-head-item" ng-class="{'active':$index === 0}"
+                    >{{faqCat.category_name}}</li>
+                   
+                </ul>
+                <div class="tab-content marT20">
+                    <div ng-repeat="faqCat in dataCat"  class="tab-pane tab{{faqCat.id}}" ng-class="{'active':$index === 0}">
+
+                       <!-- Site Accordion -->
+                            <ol class="site-accordion">
+
+                                <!-- Accordion Block -->
+                                <li class="accordion-block" ng-repeat="faqvalue in data">
+                                    <h6 class="accordion-block-heading " ng-class="{'active-on-load':$index === 0}">{{faqvalue.question}}</h6>
+                                    <div class="accordion-block-content" ng-bind-html="faqvalue.answer">
+                                    
+                                    </div>
+                                </li>
+                                <!-- Accordion Block -->
+                               </ol>
+                                <!-- Site Accordion -->
+
+                    </div>
+                    
+                </div>
+            </div>
+</div>

@@ -1,0 +1,80 @@
+
+<!-- Modal Header -->
+<div class="modal-header">
+    <h4 class="modal-title">Deposit {{select_ccy}} to Wallet </h4>
+    <button type="button" class="close" ng-click="cancel();">&times;</button>
+</div>
+<!-- Modal body -->
+<form class="form marB30" name="depositForm" novalidate>
+	<div class="modal-body">
+			<div class="form-group">
+				<div class="has-form-group-icon">
+				<label class="form-group-label">Date</label>
+			<div class="form-control-wrap">
+				<input class="form-control" type="text" name="depositdate" ng-model="deposit.date" uib-datepicker-popup="{{$root.format}}" is-open="depositdate.opened" datepicker-options="dateOptions" close-text="Close" autocomplete="off" required />
+				<span class="form-group-icon fa fa-calendar calendar-icon" ng-click="depositdate.opened = true;"></span>
+			</div>
+			</div>
+			<p class="error-msg" ng-if="depositForm.depositdate.$error.required && depositForm.$submitted">Please select Deposit Date</p>
+			</div>
+			<div class="form-group">
+				<div class="has-form-group-icon">
+				<label class="form-group-label">Amount {{CurrencyType}} </label>
+				<div class="form-control-wrap">
+					<input class="form-control" type="text" ng-model="deposit.amount" required ng-pattern="/^(\d+)?(\.\d{1,8})?$/" autocomplete="off" maxlength="30" name="amt" />
+					<span class="form-group-icon">{{CurrencyType}}</span>
+					</div>
+					<p ng-if="depositForm.amt.$error.required && depositForm.$submitted" class="error-msg">Please enter amount</p>
+					<p class="marB5 error-msg" ng-if="depositForm.amt.$error.pattern">Please enter valid amount. Decimals permitted upto 8 digits</p>
+							   
+				</div>
+			</div>
+				<div class="form-group">
+				<label class="form-group-label">Mode</label>
+				<div class="form-control-wrap">
+					<select class="custom-select form-control" ng-model="deposit.mode"  required autocomplete="off" name="mode">
+						<option style="display:none" value=""></option>
+						<option value="1">Bank Wire</option>
+						<!-- <option value="2">Paypal </option> -->
+						<!-- <option value="3">Credit Cards</option> -->
+						<!-- <option value="4">Alipay</option> -->
+						<!-- <option value="5">Weixin</option> -->
+						<!-- <option value="4">UPI </option> -->
+					</select>
+					<!-- p ng-if="depositForm.amt.$error.pattern && depositForm.amt.$submitted" class="error-msg">Please enter valid amount.</p> -->
+				</div>
+				<p ng-if="depositForm.mode.$error.required && depositForm.$submitted" class="error-msg">Please select mode</p>
+			</div>
+			<div class="form-group">
+				<label class="form-group-label">Upload Slip<small style="font-size: 80% !important">&nbsp;&nbsp;(Maximum file upload size : 1MB. Allowed Formats : JPG, PNG, PDF, DOC, DOCX )</small></label>
+				<div class="custom-input-file marT20 d-flex flex-wrap d-block-xs align-items-center">
+					<input type="file" class="inputfile" ngf-select ng-model="depositFile" name="depositfile" accept=".doc,.docx,.pdf,.jpeg,.jpg,.png" ngf-pattern="'.doc,.docx,.pdf,.jpeg,.jpg,.png'" ngf-max-size="1MB" required />
+					<a href="javascript:;" class="btn btn-outline-primary">Upload Image</a>
+				 <div class="selected-value full-width marL10 marT15-xs"><span class="text"></span><span class="input-close">×</span></div>
+					<!-- <div class="selected-value marT15"><span class="text"></span><span class="input-close">×</span></div> -->
+				</div>
+				<!-- <div class="row">
+						<div class="col-12"><small style="font-size: 80% !important">&nbsp;&nbsp;(Maximum file upload size : 1MB. Allowed Formats : JPG,PNG,PDF,DOC,DOCX )</small></div>
+					</div> -->
+					<p class="mt-2 error-msg" ng-if="depositForm.depositfile.$error.required && depositForm.$submitted">Please upload deposit slip</p>
+					<p class="mt-2 error-msg" ng-if="depositForm.depositfile.$error.pattern && depositForm.depositfile.$touched">Please upload a valid (.jpg, .png, .doc, .docx, .pdf) file only</p>
+					<p class="mt-2 error-msg" ng-if="depositForm.depositfile.$error.maxSize">Maximum file upload size : 1MB</p>
+			</div>
+			<div class="form-group">
+				<label class="form-group-label">Reference Number</label>
+				<div class="form-control-wrap">
+					<input class="form-control" type="text" ng-model="deposit.reference_no" required autocomplete="off" maxlength="50" name="reference" />
+					<!-- p ng-if="depositForm.amt.$error.pattern && depositForm.amt.$submitted" class="error-msg">Please enter valid amount.</p> -->
+				</div>
+				<p ng-if="depositForm.reference.$error.required && depositForm.$submitted" class="error-msg">Please enter reference number</p>
+			</div>
+		<div>Note: The amount will be reflected in your wallet once the deposit amount has been verified. Thank you for your kind patience. 
+</div>
+	</div>
+	<!-- Modal footer -->
+	<div class="modal-footer justify-content-end">
+		<button type="button" class="btn btn-outline-primary" ng-click="cancel();">Cancel</button>
+		<button type="submit" class="btn btn-primary" ng-click="depositMoney()">Deposit</button>
+	</div>
+</form>
+<!-- Modal footer -->

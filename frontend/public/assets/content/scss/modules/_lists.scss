@@ -1,0 +1,38 @@
+.two-columns-list {
+    display: flex;
+    flex-wrap: wrap;
+    > li {
+        width: 50%;
+        padding-right: 1rem;
+        @include extra-small {
+            width: 100%;
+            padding-right: 0;
+        }
+    }
+}
+
+/* .default-list,
+.default-list-decimal {
+    > li {
+        list-style-type: disc;
+    }
+    li {
+        list-style-position: outside;
+        margin-top: 1.5rem;
+      
+    }
+
+    ul,
+    ol {
+        padding-left: 1rem;
+    }
+} */
+
+.default-list-decimal {
+    > li {
+        list-style-type: decimal;
+    }
+}
+.list-group-item{
+	background:$theme-color3
+}

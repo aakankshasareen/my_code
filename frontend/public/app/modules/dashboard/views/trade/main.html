@@ -1,0 +1,45 @@
+<!-- <div class="site-content" ng-cloak>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget site-content-widget">
+                <div class="widget-body trade-page">
+                    <div class="row " ng-class="vm.highlightSelectedTab()">
+                        <div class="col-md-12">
+                                 <ul class="nav nav-tabs theme-tabs trade-tabs" role="tablist">
+                                <li class="nav-item" ng-repeat="item in vm.getCurrency track by $index">
+                                    <a class="nav-link" ui-sref="dashboard.trade.page({'pair_id':item.id, 'currency_from':item.from_currency_code, 'currency_to': item.to_currency_code, 'currency_from_symbol':item.from_icon_path, 'currency_to_symbol': item.to_icon_path})" role="tab">{{item.from_currency_code+"/"+item.to_currency_code}}<br/></a>
+                                </li>
+                              
+                            </ul>
+                            <div ui-view></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+<!--  <main class="site-main"> -->
+<div class="site-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget site-content-widget">
+                <div class="widget-body trade-page">
+                    <div class="row" ng-class="vm.highlightSelectedTab()">
+                        <div class="col-md-12">
+                          
+                            <ul class="nav nav-tabs trade-tabs theme2" role="tablist">
+                                <li class="nav-item" ng-repeat="item in vm.getCurrency track by $index">
+                                    <a class="nav-link" ui-sref="dashboard.trade.page({'pair_id':item.id, 'currency_from':item.from_currency_code, 'currency_to': item.to_currency_code, 'currency_from_symbol':item.from_icon_path, 'currency_to_symbol': item.to_icon_path})" role="tab">{{item.from_currency_code+"/"+item.to_currency_code}}<br/></a>
+                                </li>
+                            </ul>
+                            
+                            <div ui-view></div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

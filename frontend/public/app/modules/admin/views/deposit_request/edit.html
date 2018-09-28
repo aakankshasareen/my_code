@@ -1,0 +1,123 @@
+<style>
+    p.form-control-static {
+        margin-top: 5px;
+    }
+</style>
+<div class="animated fadeIn">
+    <!-- <h1 class="page-title">{{pageHeading}} Currency</h1> -->
+    <div class="card">
+        <div class="card-header">
+            <h4>Edit Deposit Request</h4>
+        </div>
+        <div class="card-body">
+            <form autocomplete="off" name="vm.depositForm" ng-submit="vm.approve? vm.approveDepositRequest() : vm.disapprove?vm.disapproveDepositRequest():vm.updateDepositRequest()"
+                enctype="multipart/form-data" novalidate>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Customer Name</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">{{vm.customer_name}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Customer Email</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">{{vm.email}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Currency Type</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">{{vm.currency_type | mapCurrencyType}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Currency Code</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">{{vm.currency_code}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Date</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">{{vm.created_at | date : 'dd-MM-yyyy'}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Status</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">{{vm.status | mapDepositStatusAdmin}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Amount</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">{{vm.amount}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Refernce Number</label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">{{vm.reference_number}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Remark</label>
+                            <div class="col-md-9">
+                                <input type="text" name="comment" class="form-control" required ng-model="vm.comment" placeholder="Enter Remark" ng-value="vm.comment"
+                                    maxlength="100">
+                                <p class="error-msg" ng-if="vm.depositForm.comment.$error.required && vm.depositForm.$submitted">Please enter remark</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label"></label>
+                            <div class="col-md-2" ng-if="vm.status==0">
+                                <button type="submit" ng-model="vm.approve" ng-click="vm.approve=true" class="btn btn-primary">Approve</button>
+                            </div>
+                            <div class="col-md-2" ng-if="vm.status==0">
+                                <button type="submit" ng-click="vm.disapprove=true" ng-model="vm.disapprove" class="btn btn-danger">Disapprove</button>
+                            </div>
+                            <div class="col-md-2" ng-if="vm.status>0">
+                                <button type="submit" ng-click="vm.update=true" ng-model="vm.update" class="btn btn-primary">Update</button>
+                            </div>
+                            <!-- <div class="col-md-2">
+                                                        <button type="button" ng-click="vm.cancel()" class="btn btn-secondary">Cancel</button>
+                                                    </div> -->
+
+                        </div>
+
+
+                        <!-- <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" ng-click="vm.cancel()" class="btn btn-secondary">Cancel</button> -->
+                    </div>
+                    <div class="col-md-3">
+                        <ul class="list-group" ng-if="vm.docName">
+                            <li class="list-group-item ng-scope">
+                                <a href="" ng-click="vm.downloadDoc(vm.docURL)" class="ng-binding">
+                                    <i class="fa fa-paperclip fs-1rem marR10"></i>{{vm.docName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+            <form method="post" name="downloadForm" action="/api/downloadAdmin">
+                <input type="hidden" value={{token}} name="token">
+                <input type="hidden" name="path">
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Inline form -->
+<!-- Textual inputs -->
+</div>
+<!-- Checkboxes & Radios -->
+
+
+</section>
+<!-- /.content -->
+</div>

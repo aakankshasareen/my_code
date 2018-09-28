@@ -1,0 +1,42 @@
+<div class="login-page flex-wrap">
+    <div class="content-wrap">
+        <div class="text-center marB20">
+    <a class="full-width text-center marB20" ui-sref="app"><img width="210" src="assets/content/images/logo.png" alt="Fuleex" /></a>
+</div>
+    
+     <!--Login Card -->
+     <div class="login-card card">
+         <div class="card-header theme2"> Forgot Password</div>
+         <div class="card-body">
+                <form class="form" name="vm.chckPswdForm" ng-submit="vm.checkPswdEmail(vm.checkPswd);" novalidate>
+
+                     <!-- Form Group -->
+                     <div class="form-group">
+                         <label class="form-group-label">Email</label>
+                         <input id="reset-password-email" type="text" class="form-control" required ng-model="vm.checkPswd.email" autofocus autocomplete="off" name="forgotEmail" pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'>
+                         <p class="error-msg" ng-if="vm.chckPswdForm.forgotEmail.$error.required && vm.chckPswdForm.$submitted">Please enter your registered email address</p>
+                         <p class="error-msg" ng-if="vm.chckPswdForm.forgotEmail.$error.pattern && vm.chckPswdForm.$submitted">Please enter valid email address</p>
+                      </div>
+                      <div class="form-group">
+                      <div class="d-flex justify-content-center" on-create="vm.setWidgetId(widgetId)" ng-model="vm.checkPswd.g_recaptcha_response" vc-recaptcha
+                      key="'6LdSvkYUAAAAAOeAtCz_vBfiZY6NqSmrTzxyr6Y8'" style="margin-bottom: 10px;"
+                      ></div>
+                     <!-- Form Group -->
+
+                
+                            </div>
+                     <!-- Form Group -->
+
+                     <div class="form-group">
+                         <input type="submit" class="btn btn-primary big-btn full-width" value="SUBMIT" />
+                     </div>
+
+                 </form>
+          
+         </div>
+     </div>
+     </div>
+     </div>
+     <!--Login Card -->
+     </div>
+

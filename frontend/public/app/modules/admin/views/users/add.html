@@ -1,0 +1,128 @@
+<div class="animated fadeIn">
+
+    <!-- <h1 class="page-title">{{vm.pageHeading}} User</h1> -->
+
+     <div class="card">
+       <div class="card-header">   <h4>{{vm.pageHeading}} User</h4></div>
+
+       <div class="card-body">
+
+        <form name="vm.registrationForm" ng-submit="vm.id ? vm.update() : vm.register()" novalidate>
+            <div class="form-group">
+                <label >Full Name</label>
+                <sup class="text-danger">*</sup>
+                <input id="sign-up-name" type="text" class="form-control" placeholder="Full Name" required ng-model="vm.setUser.name" autocomplete="off" pattern="^[ a-zA-Z]*$" name="fullname" maxlength="50"/>
+                <p class="error-msg" ng-if="vm.registrationForm.fullname.$error.pattern && vm.registrationForm.fullname.$touched">Please enter valid name.</p>
+                <p class="error-msg" ng-if="vm.registrationForm.fullname.$error.required && vm.registrationForm.$submitted">Please enter full name.</p>
+            </div>
+            <div class="form-group">
+                <label >Email</label>
+                 <sup class="text-danger">*</sup>
+                <input id="sign-up-email" type="text" class="form-control" placeholder="Email Address" required ng-model="vm.setUser.email" autocomplete="off" name="rgemail" pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'/>
+                 <p class="error-msg" ng-if="vm.registrationForm.rgemail.$error.required && vm.registrationForm.$submitted">Please enter Email Address.</p>
+
+                 <p class="error-msg" ng-if="vm.registrationForm.rgemail.$error.pattern && vm.registrationForm.rgemail.$touched">Please enter valid Email Address.</p>
+            </div>
+            <div class="form-group has-info-icon">
+                <label >Password</label>
+                <sup class="text-danger">*</sup>
+                <input id="sign-up-password" type={{vm.inputType}} class="form-control" name="password" placeholder="Password" ng-required='vm.id ? false : true' ng-model="vm.setUser.password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}" autocomplete="off">
+
+                <i class="fa fa-eye show-password-icon" aria-hidden="true" ng-model="vm.passwordCheckbox" ng-click="vm.hideShowPassword()" ng-if="!vm.showPassword"></i>
+                <i class="fa fa-eye-slash show-password-icon" aria-hidden="true" ng-model="vm.passwordCheckbox" ng-click="vm.hideShowPassword()" ng-if="vm.showPassword"></i>
+
+                <div class="i-icon form-group-icon-info">
+                    <i class="fa fa-info-circle infoIcon" data-toggle="tooltip" data-placement="top" title="Password should contain minimum 6 characters, at least one uppercase letter, one lowercase letter, one number and one special character(@$!%*?&#^)"></i>
+                </div>
+
+                 <p class="error-msg" ng-if="vm.registrationForm.password.$error.required && vm.registrationForm.$submitted">Please enter Password.</p>
+                 <p class="error-msg" ng-if="vm.registrationForm.password.$error.pattern && vm.registrationForm.password.$touched">Password should contain minimum 6 characters, at least one uppercase letter, one lowercase letter, one number and one special character(@$!%*?&#^).</p>
+            </div>
+
+
+
+            <div class="form-group">
+                <label >Role</label>
+                 <sup class="text-danger">*</sup>
+                             <select name="role_name" required ng-options="option.name for option in vm.roleList track by option.id" class="form-control" ng-selected="vm.setUser.role_id" ng-model="vm.setUser.role_id" autocomplete="off">                                                                                             
+                    <option value="" style="display: none">Please Select Role</option>
+                </select>
+                <p class="error-msg" ng-if="vm.registrationForm.role_name.$error.required && vm.registrationForm.$submitted">Please Select Role </p>
+            </div>
+
+
+
+            <div class="form-group">
+                <label >Phone Number</label>
+                <sup class="text-danger">*</sup>
+                <input class="form-control" type="text" ng-model="vm.setUser.mobileNumber" ng-intl-tel-input data-initial-country="in" required name="tel" id="phone" autocomplete="off" placeholder="Mobile Number" numbr-only>
+                <p class="error-msg" ng-if="vm.registrationForm.tel.$error.required && vm.registrationForm.$submitted">Please enter a mobile number.</p>
+                <p class="error-msg" ng-if="vm.registrationForm.tel.$error.ngIntlTelInput && vm.registrationForm.tel.$touched">Please enter valid mobile number.</p>
+            </div>
+
+
+            <div class="form-group">
+                <label >Status</label>
+                <sup class="text-danger">*</sup>
+             
+                <select  required ng-options="option.name for option in vm.Status track by option.id" name="status" class="form-control" ng-selected="vm.setUser.status" ng-model="vm.setUser.status" >
+                    <option value="" style="display: none">Please Select Status</option>
+                </select>
+                <p class="error-msg" ng-if="vm.registrationForm.status.$error.required && vm.registrationForm.$submitted">Please select status </p>
+            </div>
+
+            <input ng-model="vm.setUser.device_ipAddress" style="display: none">
+            <input type="hidden" ng-model="vm.setUser.device_os" ng-init="vm.setUser.device_os =  vm.device_os">
+            <input type="hidden" ng-model="vm.setUser.device_name" ng-init="vm.setUser.device_name =  vm.device_name">
+            <input type="hidden" ng-model="vm.setUser.device_browser" ng-init="vm.setUser.device_browser =  vm.device_browser">
+            <input type="submit" class="btn btn-primary" value="Submit">
+            <button type="button" ng-click="vm.cancel()" class="btn btn-secondary">Cancel</button>
+        </form>
+
+
+         </div>
+    </div>
+</div>
+<style>
+
+    .form-group.has-info-icon  {
+        position: relative;
+        .form-control {
+        padding-right: 55px;
+        }
+    }
+
+    .form-group.has-info-icon .show-password-icon {
+        position: absolute;
+        right: 35px;
+        cursor: pointer;
+        top: 12px;
+    }
+
+    .form-group-icon-info {
+        display: inline-block;
+        margin-left: 15px;
+        cursor: pointer;
+    }
+
+
+    i.fa.fa-info-circle.infoIcon {
+        position: absolute;
+        margin-top: -5px;
+        margin-left: -25px;
+    }
+    .error-msg {
+        color: red;
+    }
+    .i-icon {
+        position: absolute;
+        right: 1px;
+        top: 40px;
+    }
+    .form-group.has-info-icon .show-password-icon {
+        position: absolute;
+        right: 35px;
+        cursor: pointer;
+        top: 34px;
+    }
+    </style>

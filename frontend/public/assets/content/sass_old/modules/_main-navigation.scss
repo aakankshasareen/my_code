@@ -1,0 +1,165 @@
+#main-navigation,
+.site-navigation {
+    display: block;
+    li {
+        margin-left: 30px;
+
+        &:first-child {
+            margin-left: 0;
+        }
+        a {
+            font-size: 0.875rem;
+            display: inline-block;
+            position: relative;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            @include media-breakpoint-up(lg) {
+                &:hover,
+                &.active {
+                    color: $theme-color5;
+                    &:after {
+                        width: 100%;
+                    }
+                }
+                &:after {
+                    content: "";
+                    width: 0;
+                    height: 2px;
+                    position: absolute;
+                    left: 0;
+                    bottom: -5px;
+                    background-color: $theme-color5;
+                    @include border-radius(10px);
+                    @include transition(350ms);
+                }
+            }
+        }
+
+        &.active {
+            a {
+                color: #fff;
+            }
+            .nav-icon-wallet {
+                background-image: url(../images/main-navicon-wallet-alt.png);
+            }
+            .nav-icon-trade {
+                background-image: url(../images/main-navicon-trade-alt.png);
+            }
+            .nav-icon-history {
+                background-image: url(../images/main-navicon-history-alt.png);
+            }
+            .nav-icon-portfolio {
+                background-image: url(../images/main-navicon-portfolio-alt.png);
+            }
+        }
+    }
+    .list-item-icon {
+        margin-right: 0.6rem;
+        font-size: 1.1rem;
+        // background-repeat: no-repeat;
+        // background-position: center center;
+        // display: block;
+        // background-size: 100%;
+        // margin-right: 0.6rem;
+        // @include square(25px);
+        // &.nav-icon-wallet {
+        //     background-image: url(../images/main-navicon-wallet.png);
+        // }
+        // &.nav-icon-trade {
+        //     background-image: url(../images/main-navicon-trade.png);
+        // }
+        // &.nav-icon-history {
+        //     background-image: url(../images/main-navicon-history.png);
+        // }
+        // &.nav-icon-portfolio {
+        //     background-image: url(../images/main-navicon-portfolio.png);
+        // }
+    }
+    @include media-breakpoint-down(lg) {
+        display: none;
+        z-index: 100;
+        position: fixed;
+        background-color: #fff;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        padding: 30px 0;
+        .nav-menu {
+            text-align: center !important;
+            overflow-y: auto;
+            height: 100%;
+            display: block;
+            flex-direction: column;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            li {
+                display: block;
+                padding: 20px 0;
+                margin-left: 0;
+                a {
+                    font-size: 30px;
+                    display: block;
+                    color: $text-color !important;
+                }
+            }
+        }
+        .has-nav-dropdown {
+            position: relative;
+            .nav-dropdown {
+                left: 0;
+                right: inherit;
+                width: 100%;
+            }
+            .nav-dropdown {
+                li {
+                    padding: 10px 0;
+                }
+                a {
+                    font-size: 17px;
+                    padding: 0;
+                    text-align: center;
+                    border: none;
+                }
+            }
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        padding: 20px 0;
+        .nav-menu {
+            li {
+                padding: 16px 0;
+                a {
+                    font-size: 25px;
+                }
+            }
+        }
+    }
+}
+
+
+// Dashboard Mobile Nav
+#mobile-navigation {
+    display: none;
+    position: fixed;
+    width: 100%;
+    z-index: 110;
+    @include shadow(0 0 10px 10px rgba(0, 0, 0, 0.1));
+    .close-mobile-menu {
+        position: absolute;
+        right: 5px;
+        top: 35px;
+        display: block;
+        &:after,
+        &:before {
+            display: none !important;
+        }
+        .line {
+            background-color: $text-color;
+        }
+    }
+}

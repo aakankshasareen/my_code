@@ -1,0 +1,192 @@
+<link rel="stylesheet" href="assets_admin/css/dashboard.css" />
+<div class="content-wrapper  dashboard-area">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="header-icon">
+            <i class="pe-7s-world"></i>
+        </div>
+        <div class="header-title">
+            <h1>Dashboard</h1>
+            <ol class="breadcrumb">
+                <li><a href="index.html"><i class="pe-7s-home"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <div class="panel panel-bd statistic-box-panel">
+                    <div class="panel-body">
+                        <div class="statistic-box has-icon">
+                            <i class="statistic-box-icon pe-7s-user"></i>
+                            <div class="wrap">
+                                <h4 class="statistic-box-heading mb-5">Total Users</h4>
+                                <strong class="statistic-box-value">{{vm.totalUsers}}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <div class="panel panel-bd statistic-box-panel">
+                    <div class="panel-body">
+                        <div class="statistic-box has-icon">
+                            <i class="statistic-box-icon pe-7s-attention"></i>
+                            <div class="wrap">
+                                <h4 class="statistic-box-heading mb-5">KYC Approval Pending</h4>
+                                <strong class="statistic-box-value">{{vm.totalPendingKyc}}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <div class="panel panel-bd statistic-box-panel">
+                    <div class="panel-body">
+                        <div class="statistic-box has-icon">
+                            <i class="statistic-box-icon pe-7s-cash"></i>
+                            <div class="wrap">
+                                <h4 class="statistic-box-heading mb-5">Active Currencies</h4>
+                                <strong class="statistic-box-value">{{vm.totalCurrencies}}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-bd active-currencies">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4 class="panel-title-heading">Active Currencies:</h4>                                    
+                            <ul class="list-inline panel-list" ng-repeat="currency in vm.currencyIcons">                                        
+                                <li><img width="20" src="{{currency.currency_icon_path}}" alt="{{currency.currency_name}}" /></li>
+                                <!--                                    <li><img width="20" src="assets_admin/images/eth-icon-theme.svg" alt="Ethereum" /></li>
+                                                                    <li><img width="20" src="assets_admin/images/euro-icon-theme.svg" alt="Euro" /></li>
+                                                                    <li><img width="10" src="assets_admin/images/dollar-icon-theme.svg" alt="Dollar" /></li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="panel panel-bd no-bg-color">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4>Last Trade Price</h4>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="currency-list row">
+                            <li class="col-lg-4 col-md-6" ng-repeat="pair in vm.tradeCurrencyPairs">
+                                <div class="currency-list-item">
+                                    <div class="list-item-content">
+                                        <h4 class="list-item-heading">{{pair.from_currency_code}}/{{pair.to_currency_code}}</h4>
+                                        <p><strong>1 {{pair.from_currency_code}}</strong> =  1.89 {{pair.to_currency_code}}</p>
+                                    </div>
+                                    <span class="list-item-icon"><img width="100" src="assets_admin/images/bitcoin-icon-theme.svg" alt="Icon" /></span>
+                                    <span class="change">5.2%</span>
+                                </div>
+                            </li>
+
+                            <!--                                    <li class="col-lg-4 col-md-6">
+                                                                <div class="currency-list-item">
+                                                                <div class="list-item-content">
+                                                                <h4 class="list-item-heading">ETH/USD</h4>
+                                                                <p><strong>0.00018441</strong> $1.99</p>
+                                                                </div>
+                                                                <span class="list-item-icon"><img width="100" src="assets_admin/images/eth-icon-theme.svg" alt="Icon" /></span>
+                                                                <span class="change">5.2%</span>
+                                                                </div>
+                                                                </li>
+                                                                <li class="col-lg-4 col-md-6">
+                                                                <div class="currency-list-item">
+                                                                <div class="list-item-content">
+                                                                <h4 class="list-item-heading">Euro/USD</h4>
+                                                                <p><strong>0.00018441</strong> $1.99</p>
+                                                                </div>
+                                                                <span class="list-item-icon"><img width="100" src="assets_admin/images/euro-icon-theme.svg" alt="Icon" /></span>
+                                                                <span class="change">5.2%</span>
+                                                                </div>
+                                                                </li>
+                                                                <li class="col-lg-4 col-md-6">
+                                                                <div class="currency-list-item">
+                                                                <div class="list-item-content">
+                                                                <h4 class="list-item-heading">USD/BTC</h4>
+                                                                <p><strong>1 BTC </strong> =  1.99 USD</p>
+                                                                </div>
+                                                                <span class="list-item-icon dollar-icon">
+                                                                    <img width="55" src="assets_admin/images/dollar-icon-theme.svg" alt="Icon" />
+                                                                </span>
+                                                                <span class="change">5.2%</span>
+                                                                </div>
+                                                                </li>
+                                                                <li class="col-lg-4 col-md-6">
+                                                                <div class="currency-list-item">
+                                                                <div class="list-item-content">
+                                                                <h4 class="list-item-heading">ETH/USD</h4>
+                                                                <p><strong>0.00018441</strong> $1.99</p>
+                                                                </div>
+                                                                <span class="list-item-icon"><img width="100" src="assets_admin/images/eth-icon-theme.svg" alt="Icon" /></span>
+                                                                <span class="change">5.2%</span>
+                                                                </div>
+                                                                </li>
+                                                                <li class="col-lg-4 col-md-6">
+                                                                <div class="currency-list-item">
+                                                                <div class="list-item-content">
+                                                                <h4 class="list-item-heading">Euro/USD</h4>
+                                                                <p><strong>0.00018441</strong> $1.99</p>
+                                                                </div>
+                                                                <span class="list-item-icon"><img width="100" src="assets_admin/images/euro-icon-theme.svg" alt="Icon" /></span>
+                                                                <span class="change">5.2%</span>
+                                                                </div>
+                                                                </li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="panel panel-bd">
+
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4>New Customers (Latest)</h4>
+                        </div>
+                    </div>                           
+                    <div class="panel-body">                                
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Street Address</th>
+                                        <th>City</th>
+                                        <!--<th>Action</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="customer in vm.customersData">
+                                        <td>{{customer.fullname}}</td>
+                                        <td>{{customer.email}}</td>
+                                        <td>{{customer.mobileNumber}}</td>
+                                        <td>{{customer.address}}</td>
+                                        <td>{{customer.city_name}}</td>                                                
+                                        <!--<td><a href="#" class="btn btn-success btn-xs">View</a></td>-->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>                            
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>

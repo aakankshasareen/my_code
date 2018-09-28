@@ -1,0 +1,67 @@
+.modal {
+    font-size: 0.8125rem;
+    &.fade {
+    opacity: 1;
+    }
+    .modal-title {
+        font-size: 16px;
+        color: $theme-color2;
+    }
+    .modal-body {
+        min-height: 100px;
+        font-size: 0.8125rem;
+        color: $theme-color4;
+        padding: 1.4rem 2.188rem 2.4rem 2.188rem;
+        letter-spacing: 0.4px;
+
+        .form-control-wrap {
+            max-width: 13.125rem;
+            position: relative;
+        }
+        @include media-breakpoint-down(sm){
+            padding: 1rem;
+        }
+    }
+    .modal-header {
+        position: relative;
+    }
+    .close {
+        font-size: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 1;
+        background: url(../images/close-btn.png) no-repeat;
+        right: 15px;
+        @include vertically-centered();
+        @include square(15px);
+    }
+    
+    .card-text-list-heading {
+        font-size: 1rem;
+        color: $theme-color2;
+        font-weight: normal;
+    }
+    .card-text-list {
+        font-size: 0.75rem;
+    }
+    .custom-select {
+        max-width: 274px;
+    }
+    .modal-lg {
+    max-width: 40rem;
+    .modal-body {
+    min-height: 320px;
+    }
+    }
+}
+.modal-backdrop {
+    background: rgba(0,0,0,0.5);
+}
+
+#twoFAModal .modal-body .tab-pane {
+    max-width: 450px;
+}
+
+* [data-toggle="modal"] {
+    cursor: pointer;
+}

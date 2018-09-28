@@ -1,0 +1,23 @@
+@mixin square($input) {
+    width: $input;
+    height: $input;
+}
+
+@mixin sphere($input) {
+    @include square($input);
+    @include border-radius(50%);
+}
+
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin centered {
+display: table !important;
+margin-right: auto;
+margin-left: auto;
+}

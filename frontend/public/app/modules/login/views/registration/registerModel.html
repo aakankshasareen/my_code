@@ -1,0 +1,45 @@
+
+<!-- Modal Header -->
+<div class="modal-header">
+    <h4 class="modal-title">OTP </h4>
+    <button type="button" class="close" ng-click="cancel();">&times;</button>
+</div>
+<!-- Modal body -->
+<form class="form marT30" name="otpForm" ng-submit="register();" novalidate >
+<div class="modal-body">
+      
+                            <!-- <div class="form-group">
+                                <label class="form-group-label">Enter OTP </label>
+                                <input class="form-control" type="text" ng-model="receiverAddress" required autocomplete="off" name="receiverAddress" />
+                                <p ng-if="otpForm.receiverAddress.$error.required && withdrawForm.$submitted" style="color:red">Please enter receiver address.</p>
+                            </div> -->
+                            
+                            <!-- <div class="form-group">
+                              <div class="has-form-group-icon">
+                                <label class="form-group-label d-flex align-items-center justify-content-between">Enter OTP<small ng-hide="showSendButton">Resend in <span ng-bind="timer"></span> sec</small></label>
+                                <input class="form-control" ng-disabled="!OTPSent" numbr-only ng-model="otp" required name="otp" autocomplete="off" ng-maxLength="6" ng-minLength="6">
+                                <a href="" class="form-group-icon otp-link" ng-show="showSendButton" ng-click="sendCustomerOTP()">{{OTPSent?'Resend':'Send'}} OTP</a>
+                                </div>
+                                <p class="error-msg" ng-if="!withdrawForm.otp.$valid && (withdrawForm.otp.$touched||withdrawForm.$submitted)">Please enter valid OTP</p>
+                            </div> -->
+                            <div class="form-group">
+                                <label class="form-group-label">Enter OTP </label>
+                                <input class="form-control" type="text" numbr-only ng-model="setUser.otp" required name="otp" id="otp" autocomplete="off" ng-minLength="6" ng-maxLength="10">
+                             
+                                <p class="error-msg" ng-if="!otpForm.otp.$valid && otpForm.otp.$touched">Please enter Valid OTP</p>
+                            </div>
+                            <div>
+                                <a ng-show="showSendButton" class="form-group-icon otp-link" ng-click="sendRegistrationOTP()" style="cursor:pointer">{{'RESEND OTP'}}</a>
+                            </div>
+                             <p ng-hide="showSendButton">Resend in <span ng-bind="timer"></span> sec</p>
+                             <div class="d-flex justify-content-center" on-create="setWidgetIdR(widgetId)" ng-model="setUser.g_recaptcha_response" vc-recaptcha key="'6LdSvkYUAAAAAOeAtCz_vBfiZY6NqSmrTzxyr6Y8'"></div>
+                            <div class="form-group text-center">
+                                 <input type="submit" class="btn btn-primary marL30" value="Submit" />
+                            </div>
+                        
+                    </div>
+
+</form>
+
+
+<!-- Modal footer -->

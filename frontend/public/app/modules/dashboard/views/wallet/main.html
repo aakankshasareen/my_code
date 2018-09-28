@@ -1,0 +1,616 @@
+<!--Portfolio Card -->
+<h1 class="dashboard-main-heading d-none d-md-block">Wallet</h1>
+<div class="card">
+    <div class="card-header">MY PORTFOLIO / FIAT WALLET SUMMARY
+    </div>
+    <div class="card-body has-parts">
+        <div class="card-body-part" ng-repeat="currenctyFiat in vm.getWallet " ng-if="currenctyFiat.type==0">
+
+            <h6 class="card-body-heading marB5 text-center">{{currenctyFiat.currency_code}} Balance</h6>
+            <ul class="row card-text-list">
+                <li class="col-12 col-xl-12 marT10">
+
+                    <h5 class="card-text-list-heading text-center">{{currenctyFiat.total_amount | number : 2}} {{currenctyFiat.currency_code}} </h5>
+                    <!-- <p>Balance </p> -->
+                </li>
+                <li class="col-md-12 marT10 text-center" ng-if="vm.inActive_bal">
+                    <h5 class="card-text-list-heading text-red">{{vm.inActive_bal | number : 2}} {{currenctyFiat.currency_code}} </h5>
+                    <p>In Order </p>
+                </li>
+            </ul>
+
+            <div class="row">
+                <div class="col-sm-12 col-xl-12">
+                    <button class="btn btn-outline-primary marT25 marT0-xs full-width" ng-click="vm.selectListCur(currenctyFiat.currency_code);vm.resetOTP();vm.getWithdrawFee(currenctyFiat.currency_code)">Withdraw {{currenctyFiat.currency_code}} </button>
+                </div>
+                <div class="col-sm-12 col-xl-12">
+                    <button class="btn btn-outline-primary marT25 full-width" ng-click="openDepositModal(currenctyFiat);">Deposit {{currenctyFiat.currency_code}}</button>
+                </div>
+            </div>
+            <!--<button class="btn btn-outline-primary marT25" data-toggle="modal" data-target="#withdrawMoneyModal">Withdraw Money</button>-->
+        </div>
+        <div class="card-body-part full-width">
+            <!-- <h6 class="card-body-heading marB5">SWIFT/NEFT/RTGS/IMPS</h6> -->
+            <h6>Use below address to deposit FIAT</h6>
+            <ul class="card-text-list">
+                <li class="row marT20 align-items-center">
+                    <p class="col-xl-5 col-sm-4 marB0">Account Name</p>
+                    <p class="text-color medium-font col-xl-7 col-sm-8 marB0">{{vm.adminAccountDetails.holder_name}}</p>
+                </li>
+                <li class="row marT20 align-items-center">
+                    <p class="col-xl-5 col-sm-4 marB0">Bank Name</p>
+                    <p class="text-color medium-font col-xl-7 col-sm-8 marB0">{{vm.adminAccountDetails.bank_name}}</p>
+                </li>
+                <li class="row marT20 align-items-center">
+                    <p class="col-xl-5 col-sm-4 marB0">Account Number</p>
+                    <p class="text-color medium-font col-xl-7 col-sm-8 marB0">{{vm.adminAccountDetails.account_number}}</p>
+                </li>
+<!--                 <li class="row marT20 align-items-center">
+                    <p class="col-xl-5 col-sm-4 marB0">SWIFT / IFSC Code</p>
+                    <p class="text-color medium-font col-xl-7 col-sm-8 marB0">{{vm.adminAccountDetails.ifsc_code}}</p>
+                </li> -->
+                <li class="row marT20 align-items-center">
+                    <p class="col-xl-5 col-sm-4 marB0">Bank Address</p>
+                    <p class="text-color medium-font col-xl-7 col-sm-8 marB0" ng-bind-html="vm.adminAccountDetails.bank_branch"></p>
+                </li>
+            </ul>
+        </div>
+        <!-- <div class="card-body-part smaller-part">
+            <h6 class="card-body-heading marB5">UPI</h6>
+            <ul class="card-text-list">
+                <li class="row marT20 align-items-center">
+                    <p class="col-xl-3 col-sm-4 marB0">VPA</p>
+                    <h5 class="card-text-list-heading col-xl-9 col-sm-8 marB0">{{vm.adminAccountDetails.upi}}</h5>
+                </li>
+            </ul>
+        </div> -->
+    </div>
+</div>
+<!-- Portfolio Card -->
+<!-- Crypto Wallet Card -->
+<div class="card d-none">
+    <div class="card-header"> Token Wallet</div>
+    <div class="card-body">
+    </div>
+</div>
+<!-- Crypto Wallet Card -->
+<!-- Crypto Wallet Card -->
+<div class="card">
+    <div class="card-header">My Token Wallet</div>
+    <div class="card-body p-0">
+        <!-- Table -->
+        <div class="table-responsive accordion-table">
+
+            <div id="contentRowHolder">
+                <!-- Deposit Btn Content Deposite -->
+                <div class="deposit-btn-content card">
+                    <div class="card-header big-heading">Deposit {{vm.currencySelected.currency_code}}</div>
+                    <div class="card-body" ng-if="vm.getCryptoAddress || vm.qrcode">
+                        <div class="text-center" ng-bind-html="vm.qrcode"></div>
+                        <form class="form centered-form">
+                            <div class="form-group">
+                                <label class="big-heading form-control-label">
+                                    <b>Address</b>
+                                </label>
+                                <div class="code-block has-link text-left">{{vm.getCryptoAddress}}
+                                    <div class="link" ngclipboard data-clipboard-text={{vm.getCryptoAddress}}>
+                                        <a href="#">Copy</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Deposit Btn Content -->
+                <!-- Withdraw Btn Content -->
+                <div id="withdrawContentCard" class="withdraw-btn-content card">
+                    <div class="card-header big-heading">
+                        <div class="row">
+                            <div class="col-6">Withdraw {{vm.currencySelected.currency_code}}</div>
+                            <div class="col-6 text-right">Available Balance: {{vm.withdrawWalletBalance}} {{vm.currencySelected.currency_code}} </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="centered">
+                            <form class="form marT20 marB20" autocomplete="off" name="vm.withdrawFormCrypto" ng-submit=" vm.generateWithdrawRequestCrypto();"
+                                novalidate>
+                                <div class="form-group">
+                                    <label class="form-group-label">Enter the address to send to</label>
+                                    <div class="form-control-wrap">
+                                        <input class="form-control" type="text" ng-model="vm.withdraw.receiverAddress" required autocomplete="off" name="receiverAddress">
+                                    </div>
+                                    <p ng-if="vm.withdrawFormCrypto.receiverAddress.$error.required && vm.withdrawFormCrypto.$submitted" style="color:red">Please enter receiver address</p>
+                                    <p class="fs-13 text-muted italic-font marT10">It might take a few minutes for the network to confirm the transaction.</p>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-group-label">How many coins would you like to send?
+                                        <span class="light-font">(Min {{vm.minWithdrawAmt}} {{vm.currencySelected.currency_code}}, Max {{vm.maxWithdrawAmt}}
+                                            {{vm.currencySelected.currency_code}})
+                                        </span>
+                                    </label>
+                                    <div class="form-control-wrap">
+                                        <input class="form-control" type="text" ng-model="vm.withdrawAmt" ng-change="vm.changeAmountCrypto();" maxlength="100" ng-model-options="{ debounce: 300 }"
+                                            required name="wdAmount" id="wdAmt" autocomplete="off" ng-pattern="/^(\d+)?(\.\d{1,8})?$/">
+                                        <p class="marB5 error-msg" ng-if="vm.withdrawFormCrypto.wdAmount.$error.required && vm.withdrawFormCrypto.$submitted">Please enter amount</p>
+                                        <p class="marB5 error-msg" ng-if="vm.withdrawFormCrypto.wdAmount.$error.pattern">Please enter valid amount. Decimals permitted upto 8 digits</p>
+                                        <p class="marB5 error-msg" ng-if="vm.showMinWithdrawErr">Minimum amount to withdraw is {{vm.currencySelected.currency_code + " " + vm.minWithdrawAmt}}</p>
+                                        <p class="marB5 error-msg" ng-if="vm.showMaxWithdrawErr">Maximum amount to withdraw is {{vm.currencySelected.currency_code + " " + vm.maxWithdrawAmt}}</p>
+                                        <p class="marB5 error-msg" ng-if="vm.showZeroAmtErr">Please enter valid amount</p>
+                                        <p class="marB5 error-msg" ng-if="vm.showWalletAmtErr">You donot have sufficient funds in wallet </p>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-if="vm.userFAStatus!=0">
+                                    <label class="form-group-label">Enter 2FA code </label>
+                                    <input class="form-control marginAuto" type="text" ng-model="vm.verifyCode" autofocus autocomplete="off" name="twofa" required
+                                        numbr-only>
+                                    <p class="error-msg" ng-if="vm.withdrawForm.twofa.$error.required && vm.withdrawForm.$submitted">Please enter 2FA code</p>
+                                </div>
+
+                                <!-- <div class="form-group" ng-if="vm.userFAStatus==0">
+                                                          <div class="has-form-group-icon">
+                                                            <label class="form-group-label d-flex align-items-center justify-content-between">OTP<small ng-hide="vm.showSendButton">Resend in <span ng-bind="vm.timer"></span> sec</small></label>
+                                                            <input ng-blur="vm.changeAmountCrypto()" class="form-control"  ng-disabled="!vm.OTPSent" numbr-only ng-model="vm.otp" required name="otp" autocomplete="off" ng-maxLength="6" ng-minLength="6">
+                                                            <a href="" class="form-group-icon" ng-show="vm.showSendButton" ng-click="vm.changeCustomerOTP()">{{vm.OTPSent?'Resend':'Send'}} OTP</a>
+                                                            </div>
+                                                            <p class="error-msg" ng-if="!vm.withdrawFormCrypto.otp.$valid && (vm.withdrawFormCrypto.otp.$touched||vm.withdrawFormCrypto.$submitted)">Please enter valid OTP</p>
+                                                        </div> -->
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit">Withdraw</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Withdraw Btn Content -->
+            </div>
+            <table class="table is-responsive accordion-table-inner">
+                <thead>
+                    <tr>
+                        <th>Token Name</th>
+                        <!-- <th>Last Trade Price</th> -->
+                        <th>Current Balance</th>
+                        <!-- <th>Amount</th> -->
+                        <th>Deposit</th>
+                        <th>Withdraw</th>
+                        <th>Trade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="CryptoCurrency in vm.getWalletCrypto" ng-if="CryptoCurrency.Cryptotype!=0">
+                        <td colspan="7" class="no-border padding-none">
+                            <table class="full-width">
+                                <tr>
+                                    <td class="pt-0">
+                                        <div class="currency-cell">
+                                            <img class="cell-icon" src="{{CryptoCurrency.icon_path}}" alt="Bitcoin" width="20px" height="20px" />
+                                            <a class="cell-link main_currency_name d-inline">{{CryptoCurrency.name}}</a>
+                                            <a ng-if="CryptoCurrency.name=='ABC Chain'" href="/assets/pdf/ICO ABC Chain Introduction-converted.pdf" target="_blank"><img src="/assets/images/information.svg" style="max-width:21px;
+    margin-left:10px;" /> </a>
+                                            <a ng-if="CryptoCurrency.name=='FULX'" href="" target="_blank"><img src="/assets/images/information.svg" style="max-width:21px;
+    margin-left:10px;" /> </a>
+                                            <!-- <h6 class="cell-heading marB0">{{CryptoCurrency.last_trade_price}} {{CryptoCurrency.currency_code}}</h6> -->
+                                        </div>
+                                    </td>
+                                    <!-- <td>
+                                        <h5 class="card-text-big">{{CryptoCurrency.last_trade_price | number : 2}} USD</h5>
+                                        
+                                    </td> -->
+                                    <td>
+                                        <h5 class="card-text-big">{{CryptoCurrency.balance | number : 8}} &nbsp;{{CryptoCurrency.currency_code}}</h5>
+
+                                    </td>
+                                    <!-- <td>
+                                        <h5 class="card-text-big">{{CryptoCurrency.UnitsInOrder ? CryptoCurrency.UnitsInOrder : '0.00' | number : 2 }} USD</h5> {{vm.clickCurrency}}                                      
+                                    </td> -->
+
+                                    <!--<td>
+                                        <h5 class="card-text-big text-red">20</h5>
+                                            <p class="marB0 card-text-small">Units In Order</p>
+                                        
+                                    </td>-->
+                                    <td class="deposit-btn-cell">
+                                        <button data-id="{{$index}}" class="btn btn-link has-icon deposit-btn table-content-link" data-content=".deposit-btn-content"
+                                            ng-click="vm.clickCurrency(CryptoCurrency, $event)">Deposit</button>
+                                        <!-- <input type="hidden" name="vm.depositeStatus" ng-module="vm.depositeStatusvalue" value="{{vm.depositeStatusvalue}}"> -->
+                                    </td>
+                                    <td class="deposit-btn-cell">
+                                        <button data-id="{{$index}}" class="btn btn-link has-icon withdraw-btn table-content-link" data-content=".withdraw-btn-content"
+                                            ng-click="vm.resetOTP();vm.selectListCur(CryptoCurrency.currency_code)" ng-disabled="statusKYCW">Withdraw</button>
+                                        <input type="hidden" name="vm.withdrawStatus" ng-module="vm.withdrawStatusvalue" value="{{vm.withdrawStatusvalue}}">
+                                    </td>
+                                    <td class="deposit-btn-cell">
+                                        <button class="btn btn-link has-icon trade-btn " data-toggle="modal" data-target="#wipModal_1" ng-click="getCryptoPairsOnSelect(CryptoCurrency.currency_code)">Trade</button>
+                                    </td>
+                                </tr>
+                                <!-- Content Row -->
+                                <tr class="content-row">
+                                    <td colspan="7">
+                                        <div class="content-row-container"></div>
+                                    </td>
+                                </tr>
+                                <!-- Content Row -->
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--  <div id="withdrawContentHolder" class="d-none">
+
+
+        </div> -->
+        <!-- Table -->
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="card-header has-filters">
+        <div class="row align-items-center">
+            <div class="col-xl-8 col-md-4 col-10">My Transaction History</div>
+            <div class="col-xl-4 col-md-8 col-2 text-right text-sm-left card-header-filters-wrap">
+
+                <div class="menu-trigger theme2 card-filters-menu d-md-none d-lg-none d-xl-none" data-target="#txnHistoryCardMenu">
+                    <span class="first line"></span>
+                    <span class="second line"></span>
+                    <span class="third line"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-content d-none" ng-controller="DashboardController as vm">
+        <main class="dashboard-main">
+            <ul class="dashboard-main-exchange-list header-exchange-list" ng-class="vm.highlightSelectedPair();" ng-if="$state.current.name=='dashboard.trade' || $state.current.name=='dashboard.home'">
+                <li ng-repeat="item in vm.pairList" ng-click="vm.clickMe()" ui-sref="dashboard.trade({'pair_id':item.id, 'currency_from':item.from_currency_code, 'currency_to': item.to_currency_code, 'currency_from_symbol':item.from_icon_path, 'currency_to_symbol': item.to_icon_path})"
+                    style="cursor:pointer;">
+                    <span class="text bold-font">{{item.from_currency_code+"/"+item.to_currency_code}}</span>
+                    <span class="increment-value" ng-class="{'text-success': item.changes>=0, 'text-danger': item.changes<0}">{{item.last_trade_price | number:2}}
+                        <!-- <i class="fa" ng-class="{'fa-caret-up': item.changes>=0, 'fa-caret-down': item.changes<0}"></i> -->
+                    </span>
+                    <small class="increment-percent" ng-class="{'text-success': item.changes>=0, 'text-danger': item.changes<0}">{{item.changes | makePositive | number:2}}
+                        <i class="fa status-pointer" ng-class="{'fa-caret-up': item.changes>=0, 'fa-caret-down': item.changes<0}"></i>
+                    </small>
+                </li>
+            </ul>
+            <div ui-view="section" class="dashboard-inner-content">
+            </div>
+        </main>
+    </div>
+    <div class="card-body tab-navigation pt-0">
+
+        <div class="tab-head-wrapper">
+            <!-- <div class="d-md-none tab-head-trigger marT20">Order Book</div> -->
+
+            <ul class="tab-head has-four-items d-sm-none d-md-flex">
+                <li data-tab=".depositWithdrawalTableINR" class="tab-head-item active" ng-click="gridApi.core.handleWindowResize()">Deposit/ Withdrawal (FIAT)</li>
+                <li data-tab=".depositWithdrawalTableCrypto" class="tab-head-item" ng-click="gridApi.core.handleWindowResize()">Deposit/ Withdrawal (Token)</li>
+            </ul>
+
+            <div class="d-md-none marT20 form">
+                <select class="tab-navigation-select custom-select">
+                    <option value=".depositWithdrawalTableINR">Deposit/ Withdrawal (FIAT)</option>
+                    <option value=".depositWithdrawalTableCrypto">Deposit/ Withdrawal (Token)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="tab-content marT20-sm">
+
+            <!-- Deposit/Withdrawal(INR) Table -->
+            <div class="tab-pane depositWithdrawalTableINR overflow-scroll-x-md active">
+                <div class="has-nav-dropdown click-dropdown export-btn">
+                    <span class="trigger btn btn-outline-primary">Export As</span>
+                    <div class="nav-dropdown">
+                        <ul class="nav-dropdown-list">
+                            <li>
+                                <a href="#" ng-click="exportInr('pdf');">PDF</a>
+                            </li>
+                            <li>
+                                <a href="#" ng-click="exportInr('csv');">EXCEL</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div ui-grid="inrHistoryOption" ui-grid-auto-resize ui-grid-resize-columns ui-grid-exporter class="grid">
+                    <div role="contentinfo" class="ui-grid-pager-panel ng-scope">
+                        <div role="navigation" class="ui-grid-pager-container">
+                            <div role="menubar" class="ui-grid-pager-control">
+                                <!-- Start Page -->
+                                <button type="button" role="menuitem" class="ui-grid-pager-first" ui-grid-one-bind-title="aria.pageToFirst" ui-grid-one-bind-aria-label="aria.pageToFirst"
+                                    ng-click="paginationinr.firstPage()" ng-disabled="cantPageBackward()" title="Page to first"
+                                    aria-label="Page to first" disabled="disabled">
+                                    <div class="first-triangle">
+                                        <div class="first-bar"></div>
+                                    </div>
+                                </button>
+                                <!-- Prev Page -->
+                                <button type="button" role="menuitem" class="ui-grid-pager-previous" ui-grid-one-bind-title="aria.pageBack" ui-grid-one-bind-aria-label="aria.pageBack"
+                                    ng-click="paginationinr.previousPage()" ng-disabled="cantPageBackward()" title="Page back"
+                                    aria-label="Page back" disabled="disabled">
+                                    <div class="first-triangle prev-triangle"></div>
+                                </button>
+                                <input type="text" ui-grid-one-bind-title="aria.pageSelected" ui-grid-one-bind-aria-label="aria.pageSelected" class="ui-grid-pager-control-input ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-required"
+                                    ng-model="paginationinr.pageNumber" min="1" max="{{paginationinr.getTotalPages()}}" required=""
+                                    title="Selected page" aria-label="Selected page" ng-change="paginationinr.currentPage()"
+                                    numbers-only>
+                                <span class="ui-grid-pager-max-pages-number ng-binding" ng-show="paginationinr.getTotalPages() > 0">
+                                    / {{paginationinr.getTotalPages()}}
+                                </span>
+                                <!-- Next Page -->
+                                <button type="button" role="menuitem" class="ui-grid-pager-next" ui-grid-one-bind-title="aria.pageForward" ui-grid-one-bind-aria-label="aria.pageForward"
+                                    ng-click="paginationinr.nextPage()" ng-disabled="cantPageForward()" title="Page forward"
+                                    aria-label="Page forward">
+                                    <div class="last-triangle next-triangle"></div>
+                                </button>
+                                <!-- Last Page -->
+                                <button type="button" role="menuitem" class="ui-grid-pager-last" ui-grid-one-bind-title="aria.pageToLast" ui-grid-one-bind-aria-label="aria.pageToLast"
+                                    ng-click="paginationinr.lastPage()" ng-disabled="cantPageToLast()" title="Page to last" aria-label="Page to last">
+                                    <div class="last-triangle">
+                                        <div class="last-bar"></div>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="ui-grid-pager-row-count-picker ng-scope">
+                                <select ng-model="paginationinr.ddlpageSize" ng-options="o as o for o in paginationinr.paginationPageSizes" ng-change="paginationinr.pageSizeChange()"
+                                    class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                </select>
+                                <span class="ui-grid-pager-row-count-label ng-binding">&nbsp;items per page</span>
+                            </div>
+                        </div>
+                        <div class="ui-grid-pager-count-container">
+                            <!-- <div class="ui-grid-pager-count"> -->
+                            <!-- <span ng-show="paginationinr.totalItems > 0" class="ng-binding" style=""> -->
+                            <!-- {{paginationinr.pageNumber}} -->
+                            <!-- - -->
+                            <!--<abbr ui-grid-one-bind-title="paginationThrough" title="through"> - </abbr>-->
+                            <!-- {{paginationinr.ddlpageSize}} of {{paginationinr.totalItems}} items -->
+                            <!-- </span> -->
+                            <!-- </div> -->
+                            <div class="ui-grid-pager-count" ng-if="paginationinr.totalItems > 0">
+
+                                <span ng-if="paginationinr.pageNumber">{{(paginationinr.pageNumber-1)*paginationinr.ddlpageSize+1}}</span>
+
+                                <span ng-if="paginationinr.pageNumber">
+                                    <span ng-if="(paginationinr.pageNumber-1)*paginationinr.ddlpageSize+paginationinr.ddlpageSize<=paginationinr.totalItems">
+                                        to {{(paginationinr.pageNumber-1)*paginationinr.ddlpageSize+paginationinr.ddlpageSize}}
+                                    </span>
+                                    <span ng-if="(paginationinr.pageNumber-1)*paginationinr.ddlpageSize+paginationinr.ddlpageSize>paginationinr.totalItems">
+                                        to {{paginationinr.totalItems}}
+                                    </span>
+                                </span>
+
+                                <span ng-if="paginationinr.totalItems">of {{paginationinr.totalItems}} items</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="tab-pane depositWithdrawalTableCrypto overflow-scroll-x-md">
+                <div class="has-nav-dropdown click-dropdown export-btn">
+                    <span class="trigger btn btn-outline-primary">Export As</span>
+                    <div class="nav-dropdown">
+                        <ul class="nav-dropdown-list">
+                            <li>
+                                <a href="#" ng-click="exportCrypto('pdf');">PDF</a>
+                            </li>
+                            <li>
+                                <a href="#" ng-click="exportCrypto('csv');">EXCEL</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div ui-grid="cryptoHistoryOption" ui-grid-auto-resize ui-grid-exporter ui-grid-resize-columns class="grid">
+
+                    <div role="contentinfo" class="ui-grid-pager-panel ng-scope">
+                        <div role="navigation" class="ui-grid-pager-container">
+                            <div role="menubar" class="ui-grid-pager-control">
+                                <!-- Start Page -->
+                                <button type="button" role="menuitem" class="ui-grid-pager-first" ui-grid-one-bind-title="aria.pageToFirst" ui-grid-one-bind-aria-label="aria.pageToFirst"
+                                    ng-click="paginationcrypto.firstPage()" ng-disabled="cantPageBackward()" title="Page to first"
+                                    aria-label="Page to first" disabled="disabled">
+                                    <div class="first-triangle">
+                                        <div class="first-bar"></div>
+                                    </div>
+                                </button>
+                                <!-- Prev Page -->
+                                <button type="button" role="menuitem" class="ui-grid-pager-previous" ui-grid-one-bind-title="aria.pageBack" ui-grid-one-bind-aria-label="aria.pageBack"
+                                    ng-click="paginationcrypto.previousPage()" ng-disabled="cantPageBackward()" title="Page back"
+                                    aria-label="Page back" disabled="disabled">
+                                    <div class="first-triangle prev-triangle"></div>
+                                </button>
+                                <input type="text" ui-grid-one-bind-title="aria.pageSelected" ui-grid-one-bind-aria-label="aria.pageSelected" class="ui-grid-pager-control-input ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-required"
+                                    ng-model="paginationcrypto.pageNumber" min="1" max="{{paginationcrypto.getTotalPages()}}"
+                                    required="" title="Selected page" aria-label="Selected page" ng-change="paginationcrypto.currentPage()"
+                                    numbers-only>
+                                <span class="ui-grid-pager-max-pages-number ng-binding" ng-show="paginationcrypto.getTotalPages() > 0">
+                                    / {{paginationcrypto.getTotalPages()}}
+                                </span>
+                                <!-- Next Page -->
+                                <button type="button" role="menuitem" class="ui-grid-pager-next" ui-grid-one-bind-title="aria.pageForward" ui-grid-one-bind-aria-label="aria.pageForward"
+                                    ng-click="paginationcrypto.nextPage()" ng-disabled="cantPageForward()" title="Page forward"
+                                    aria-label="Page forward">
+                                    <div class="last-triangle next-triangle"></div>
+                                </button>
+                                <!-- Last Page -->
+                                <button type="button" role="menuitem" class="ui-grid-pager-last" ui-grid-one-bind-title="aria.pageToLast" ui-grid-one-bind-aria-label="aria.pageToLast"
+                                    ng-click="paginationcrypto.lastPage()" ng-disabled="cantPageToLast()" title="Page to last"
+                                    aria-label="Page to last">
+                                    <div class="last-triangle">
+                                        <div class="last-bar"></div>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="ui-grid-pager-row-count-picker ng-scope">
+                                <select ng-model="paginationcrypto.ddlpageSize" ng-options="o as o for o in paginationcrypto.paginationPageSizes" ng-change="paginationcrypto.pageSizeChange()"
+                                    class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                </select>
+                                <span class="ui-grid-pager-row-count-label ng-binding">&nbsp;items per page</span>
+                            </div>
+                        </div>
+                        <div class="ui-grid-pager-count-container">
+                            <div class="ui-grid-pager-count">
+                                <!-- <span ng-show="paginationcrypto.totalItems > 0" class="ng-binding" style=""> -->
+                                <!-- {{paginationcrypto.pageNumber}} -->
+                                <!-- - -->
+                                <!--<abbr ui-grid-one-bind-title="paginationThrough" title="through"> - </abbr>-->
+                                <!-- {{paginationcrypto.ddlpageSize}} of {{paginationcrypto.totalItems}} items -->
+                                <!-- </span> -->
+                                <div class="ui-grid-pager-count" ng-if="paginationcrypto.totalItems > 0">
+
+                                    <span ng-if="paginationcrypto.pageNumber">{{(paginationcrypto.pageNumber-1)*paginationcrypto.ddlpageSize+1}}</span>
+
+                                    <span ng-if="paginationcrypto.pageNumber">
+                                        <span ng-if="(paginationcrypto.pageNumber-1)*paginationcrypto.ddlpageSize+paginationcrypto.ddlpageSize<=paginationcrypto.totalItems">
+                                            to {{(paginationcrypto.pageNumber-1)*paginationcrypto.ddlpageSize+paginationcrypto.ddlpageSize}}
+                                        </span>
+                                        <span ng-if="(paginationcrypto.pageNumber-1)*paginationcrypto.ddlpageSize+paginationcrypto.ddlpageSize>paginationcrypto.totalItems">
+                                            to {{paginationcrypto.totalItems}}
+                                        </span>
+                                    </span>
+
+                                    <span ng-if="paginationcrypto.totalItems">of {{paginationcrypto.totalItems}} items</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Transaction History Card -->
+<!-- Withdraw Wallet Modal -->
+<div id="withdrawMoneyModal" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Withdraw {{vm.currencySelected}} from Wallet</h4>
+                <button type="button" class="close" data-dismiss="modal" ng-click="vm.resetOTP()">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <form class="form" name="vm.withdrawForm" novalidate>
+                <div class="modal-body">
+                    <h6 class="fs-12 theme-color2">Wallet Balance</h6>
+                    <ul class="row card-text-list marB30">
+                        <li class="col-md-6 marT10">
+                            <h5 class="card-text-list-heading">{{vm.withdrawWalletBalance | number : 2}} {{vm.currencySelected}}</h5>
+                            <p>Balance</p>
+                        </li>
+                        <li class="col-md-6 marT10">
+                            <!-- <h5 class="card-text-list-heading text-red">10,000 INR</h5>
+                            <p>In Order</p> -->
+                        </li>
+                    </ul>
+                    <div class="form-group">
+                        <div class="has-form-group-icon">
+                            <label class="form-group-label">Enter amount you wish to withdraw
+                                <!-- <span class="light-font">(Min {{vm.minWithdrawAmt}} {{vm.currencySelected}} | Max {{vm.maxWithdrawAmt}} {{vm.currencySelected}})</span> -->
+                            </label>
+                            <div class="form-control-wrap">
+                                <input class="form-control" type="text" ng-model="vm.withdrawAmt" ng-change="vm.changeAmount();" maxlength="100" ng-model-options="{ debounce: 300 }"
+                                    required name="wdAmount" id="wdAmt" autocomplete="off" ng-pattern="/^(\d+)?(\.\d{1,8})?$/"
+                                />
+
+                                <span class="form-group-icon">{{vm.currencySelected}}</span>
+                            </div>
+                            <p class="marB5 error-msg" ng-if="vm.withdrawForm.wdAmount.$error.required && vm.withdrawForm.$submitted">Please enter amount</p>
+                            <p class="marB5 error-msg" ng-if="vm.withdrawForm.wdAmount.$error.pattern">Please enter valid amount. Decimals permitted upto 8 digits.</p>
+                            <!--  <p class="marB5 error-msg" ng-if="vm.showMinWithdrawErr">Minimum amount to withdraw is {{vm.minWithdrawAmt + " " + vm.currencySelected.currency_code}}</p>
+                            <p class="marB5 error-msg" ng-if="vm.showMaxWithdrawErr">Maximum amount to withdraw is {{vm.maxWithdrawAmt + " " + vm.currencySelected.currency_code}}</p> -->
+                            <p class="marB5 error-msg" ng-if="vm.showZeroAmtErr">Please enter valid amount.</p>
+                            <p class="marB5 error-msg" ng-if="vm.showWalletAmtErr">You donot have sufficient funds in wallet. </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="has-form-group-icon">
+                            <label class="form-group-label">Withdraw Fee({{vm.withdrawFee}}%)</label>
+                            <div class="form-control-wrap">
+                                <input class="form-control" type="text" ng-model="vm.withdrawFeeValue" maxlength="100" required name="wdFee" id="wdFee" autocomplete="off"
+                                    ng-pattern="/^(\d+)?(\.\d{1,8})?$/" ng-disabled="true" />
+                                <span class="form-group-icon">{{vm.currencySelected}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="vm.userFAStatus!=0">
+                        <label class="form-group-label">Enter 2FA code </label>
+                        <input class="form-control marginAuto" type="text" ng-model="vm.verifyCode" autofocus autocomplete="off" name="twofa" required
+                            numbr-only>
+                        <p class="error-msg" ng-if="vm.withdrawForm.twofa.$error.required && vm.withdrawForm.$submitted">Please enter 2FA code.</p>
+                    </div>
+
+                    <!-- <div class="form-group" ng-if="vm.userFAStatus==0">
+                                 <div class="has-form-group-icon">
+                                 <label class="form-group-label d-flex align-items-center justify-content-between">OTP<small ng-hide="vm.showSendButton">Resend in <span ng-bind="vm.timer"></span> sec</small></label>
+                              
+                                  <input  class="form-control"  ng-disabled="!vm.OTPSent" numbr-only ng-model="vm.otp" required name="otp" autocomplete="off" ng-maxLength="6" ng-minLength="6">
+                                 <a href="" class="form-group-icon" ng-show="vm.showSendButton" ng-click="vm.changeCustomerOTP()">{{vm.OTPSent?'Resend':'Send'}} OTP</a>
+                                  </div>
+                                <p class="error-msg" ng-if="!vm.withdrawFormCrypto.otp.$valid && (vm.withdrawFormCrypto.otp.$touched||vm.withdrawFormCrypto.$submitted)">Please enter valid OTP</p>
+                                </div> -->
+
+
+                    <input type="hidden" name="vm.currencySelected" ng-model="vm.currencySelected" value="{{vm.currencySelected}}">
+                    <div>Note: Depending on where you are located, it may take from 3-5 days to receive your requested amount
+                        to your linked account. Also note that your bank may charge a fee for this service. Kindly check
+                        with your bank before executing the withdrawal process.
+                        <!-- Please allow upto 24hrs for the amount to be transferred to your linked bank account -->
+                    </div>
+                </div>
+
+
+                <!-- Modal footer -->
+                <div class="modal-footer justify-content-end">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal" ng-click="vm.resetOTP()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" ng-click="vm.generateWithdrawRequest();">Withdraw</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Withdraw Wallet Modal -->
+
+<!-- WIP Modal -->
+<div id="wipModal_1" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h4 class="modal-title">Trade Pairs</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <form class="form" name="vm.withdrawForm" novalidate>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="has-form-group-icon">
+                            <ul class="dashboard-main-exchange-list inner-width-extra">
+                                <li ng-repeat="pairs in cryptoPairsModal" ui-sref="dashboard.trade({'pair_id':pairs.pairId, 'currency_from':pairs.from, 'currency_to': pairs.to, 'currency_from_symbol':null, 'currency_to_symbol': null})"
+                                    ng-click="vm.removeModel()">{{pairs.from}}/{{pairs.to}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer justify-content-end">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- WIP Modal -->
+
+<div class="cryptowithdrawal">
+
+</div>

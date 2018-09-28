@@ -1,0 +1,91 @@
+<div class="animated fadeIn">
+        <!-- <h1 class="page-title">{{pageHeading}} Currency</h1> -->
+         <div class="card">
+           <div class="card-header"><h4>Verify Customer Bank Details</h4></div>
+           <div class="card-body row">
+            <div class="col-md-9">
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">Customer Name</label>
+                            <div class="col-md-9">
+                            <p class="form-control-static" ng-bind="vm.bankDetails.fullName"></p>
+                            </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label">Account Holders Name</label>
+                                <div class="col-md-9">
+                                <p class="form-control-static" ng-bind="vm.bankDetails.holderName"></p>
+                                </div>
+                                </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label">Account Number</label>
+                                        <div class="col-md-9">
+                                        <p class="form-control-static" ng-bind="vm.bankDetails.accountNumber"></p>
+                                        </div>
+                                        </div>
+
+                                        <!-- <div class="form-group row">
+                                            <label class="col-md-3 col-form-label">SWIFT/IFSC Code</label>
+                                            <div class="col-md-9">
+                                            <p class="form-control-static" ng-bind="vm.bankDetails.ifscCode"></p>
+                                            </div>
+                                        </div> -->
+
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label">Bank Branch</label>
+                                            <div class="col-md-9">
+                                            <p class="form-control-static" ng-bind="vm.bankDetails.bankBranch"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label">Account Type</label>
+                                            <div class="col-md-9">
+                                            <p class="form-control-static" ng-bind="vm.bankDetails.accountType"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label">Status</label>
+                                            <div class="col-md-9">
+                                            <p class="form-control-static" ng-if="vm.bankDetails.status">{{vm.bankDetails.status | kycStatusAdmin}}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label">Remark</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control"  required ng-model="vm.remark" placeholder="Enter Remark" ng-value="vm.bankDetails.remark" maxlength="100" >
+                                                <p class="text-danger" ng-if="vm.remarkRequired">Please enter remark to disapprove</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label"></label>
+                                            <div class="col-md-2">
+                                                <button ng-click="vm.updateBankStatus(2)" ng-if="vm.bankDetails.status && vm.bankDetails.status!=2" class="btn btn-primary" >Approve</button>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button ng-click="vm.updateBankStatus(3)"  ng-if="vm.bankDetails.status && vm.bankDetails.status != 3" class="btn btn-danger">Disapprove</button>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button ng-click="vm.cancel()" class="btn btn-secondary">Cancel</button>
+                                            </div>
+                                        </div>
+                    </div>
+                    <div class="col-md-3">
+                      <ul class="list-group">
+                        <li class="list-group-item ng-scope" ng-repeat="document in vm.documents" style=""><a href="" ng-click="vm.downloadDoc(document.docURL)" class="ng-binding"><i class="fa fa-paperclip fs-1rem marR10"></i>{{document.docName}}</a></li>
+                      </ul>
+                    </div>
+
+                    </div>
+                  </div>
+                </div>
+                <form method="post"  name="downloadForm" action="/api/downloadAdmin">
+                    <input type="hidden" value={{token}} name="token">
+                    <input type="hidden" name="path">
+                </form>
+            </div>
+        </section> <!-- /.content -->
+    </div>

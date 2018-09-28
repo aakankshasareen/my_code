@@ -1,0 +1,192 @@
+<style>
+    .logout-btns-icon{
+        position: absolute;
+        right: 0px;
+    }
+    .main-header .navbar-custom-menu, .main-header .navbar-right {
+        margin-right: 0px;
+    }
+</style>
+<div class="hold-transition sidebar-mini" ng-cloak>
+    <div class="wrapper">
+        <header class="main-header">
+            <a class="logo" style="background-color: #41678e">
+                <!-- Logo -->
+<!--                <span class="logo-mini"> 
+                    <b>A</b>BD 
+                    <img src="assets_admin/dist/img/mini-logo.png" alt=""> 
+                </span> -->
+<span class="logo-lg" style="margin-top:-9px"> 
+                    <h1>COINONLINE</h1>
+                   
+                    <!--<b>Admin</b>BD--> 
+<!--                    <img src="assets_admin/dist/img/logo.png" alt=""> -->
+                </span> 
+            </a>
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top">
+                <a class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <!-- Sidebar toggle button-->
+                    <span class="sr-only">Toggle navigation</span> <span class="pe-7s-keypad"></span> </a>
+                <ul class="nav navbar-nav" ng-cloak ng-if="vm.getCurrency !== undefined">
+                    <li style="padding:0.5rem;margin-left:0.5rem;margin-top:0.2rem;"><a style="color:black;font-weight:bold;cursor:default;">BTC/USD : {{vm.getCurrency.BTC_USD}}</a></li>
+                    <li style="padding:0.5rem;margin-left:0.5rem;margin-top:0.2rem;"><a style="color:black;font-weight:bold;cursor:default;">BTC/EUR : {{vm.getCurrency.BTC_EUR}}</a></li>
+                    <li style="padding:0.5rem;margin-left:0.5rem;margin-top:0.2rem;"><a style="color:black;font-weight:bold;cursor:default;">ETH/USD : {{vm.getCurrency.ETH_USD}}</a></li>
+                    <li style="padding:0.5rem;margin-left:0.5rem;margin-top:0.2rem;"><a style="color:black;font-weight:bold;cursor:default;">ETH/EUR : {{ vm.getCurrency.ETH_EUR}}</a></li>
+                </ul>
+                <div class="navbar-custom-menu logout-btns-icon">
+                    <ul class="nav navbar-nav">
+                        <!-- Tasks -->
+                        <li class="dropdown tasks-menu"> <a class="dropdown-toggle" style="cursor:pointer" data-toggle="dropdown"> <i class="pe-7s-wallet" ng-click="vm.getWalletData();"></i> </a>
+                            <ul class="dropdown-menu wallet-wrapper" style="width:150px; box-shadow: 2px 10px 8px #888;">
+                                <li class="header">My Wallets</li>
+                                <li>
+                                    <ul class="menu">
+                                        <li>
+                                            <a>
+                                                € {{vm.getWallet.EUR !== undefined ? vm.getWallet.EUR : 0.00}}
+                                            </a>
+
+                                        </li>
+                                        <li>
+                                            <a>
+                                                $ {{vm.getWallet.USD !== undefined ? vm.getWallet.USD : 0.00}}
+                                            </a>
+
+                                        </li>
+                                        <li>
+                                            <a>
+                                                Ƀ {{vm.getWallet.BTC !== undefined ? vm.getWallet.BTC : 0.00}}
+                                            </a>
+                                        </li>
+                                        <li><a ><img src="images/eth.png"  height="10px;"/>{{vm.getWallet.ETH !== undefined ? vm.getWallet.ETH : 0.00}}</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- settings -->
+                        <li class="dropdown dropdown-user"> <a class="dropdown-toggle" style="cursor:pointer" data-toggle="dropdown"> <i class="pe-7s-settings"></i></a>
+                            <ul class="dropdown-menu">
+                                <!--                                <li><a ui-sref="dashboard.userProfile"><i class="pe-7s-users"></i> My Profile</a></li>
+                                                                <li><a ui-sref="dashboard.accountActivity"><i class="pe-7s-settings"></i> Account Activity</a></li>
+                                                                <li><a ui-sref="dashboard.changePassword"><i class="pe-7s-edit"></i>Change Password</a></li>
+                                                                -->
+                                <li><a ui-sref="admin.settings"><i class="pe-7s-settings"></i>Settings</a></li>
+                               
+
+                                <li><a ng-click="vm.adminLogout();" style="cursor: pointer"><i class="pe-7s-key"></i> Logout</a></li>
+                            
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- =============================================== -->
+        <!-- Left side column. contains the sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel text-center">
+                    <div class="image"> 
+                        <!--<img src="assets_admin/dist/img/user2-160x160.png" class="img-circle" alt="User Image">--> 
+                    </div>
+                    <div class="info">
+                        <p>Welcome, {{vm.userName}} </p>
+                        <a> </a> </div>
+                </div>                
+                <ul class="sidebar-menu">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="treeview"> 
+                        <a ui-sref="admin.dashboard"><i class="ti-home" aria-hidden="true"></i> 
+                            <span>Dashboard</span>                            
+                        </a> 
+                    </li>
+                    <li ng-if="$root.allowedPermission.getCustomerCountries || $root.isSuperAdmin == 1" class="treeview"> <a ui-sref="admin.customerList"> <i class="fa fa-money" aria-hidden="true"></i><span>Manage Customers</span> </a> </li>
+                    <li ng-if="$root.allowedPermission.getAllCurrencyList || $root.isSuperAdmin == 1" class="treeview"> <a ui-sref="admin.currencyList"> <i class="fa fa-money" aria-hidden="true"></i><span>Manage Currency</span> </a> </li>
+                    <li ng-if="$root.allowedPermission.getAllTradeCurrencyPairs || $root.isSuperAdmin == 1" class="treeview"> <a ui-sref="admin.currencyPairs"> <i class="fa fa-money" aria-hidden="true"></i><span>Manage Currency Pairs</span> </a> </li>
+                    <li ng-if="$root.allowedPermission.getCommissions || $root.isSuperAdmin == 1" class="treeview"> <a ui-sref="admin.platformCommission"> <i class="fa fa-money" aria-hidden="true"></i><span>Manage Platform Commission</span> </a> </li>
+
+                    <li ng-if="$root.allowedPermission.getTradeLimits || $root.isSuperAdmin == 1" class="treeview"> <a ui-sref="admin.tradeLimit"> <i class="fa fa-money" aria-hidden="true"></i><span>Manage Trade Limit</span> </a> </li>
+                    <li ng-if="$root.allowedPermission.getFaqList || $root.isSuperAdmin == 1" class="treeview"> <a ui-sref="admin.faqList"> <i class="fa fa-money" aria-hidden="true"></i><span> Manage FAQ</span> </a> </li>
+                    <li ng-if="$root.allowedPermission.getEmailTemplateList || $root.isSuperAdmin == 1" class="treeview"> <a ui-sref="admin.EmailTemplateList"> <i class="fa fa-money" aria-hidden="true"></i><span>Manage Email Template</span> </a> </li>
+                    <li ng-if="$root.allowedPermission.getSupportList || $root.isSuperAdmin == 1" class="treeview"> <a ui-sref="admin.supportList"> <i class="fa fa-money" aria-hidden="true"></i><span>Manage Support</span> </a> </li>
+                                
+                    <li ng-if="$root.allowedPermission.getAllWithdrawRequestList || $root.isSuperAdmin == 1" class="treeview"> <a ui-sref="admin.withdrawRequest"> 
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                            <span>Manage Withdraw Requests</span> 
+                        </a> 
+                    </li>
+
+                    <li class="treeview" ng-if="$root.allowedPermission.getAllCountryList || 
+                                $root.allowedPermission.getAllStateList ||
+                                $root.allowedPermission.getAllCountryList ||
+                                $root.allowedPermission.getAllKYCMasterList ||
+                                $root.isSuperAdmin == 1">
+                        <a ui-sref="#">
+                            <i class="ti-paint-bucket"></i><span>Masters</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>                        
+                        <ul class="treeview-menu" >                            
+                            <li ng-if="$root.allowedPermission.getAllCountryList || $root.isSuperAdmin == 1"><a ui-sref="admin.countryList">Manage Country</a></li>
+                            <li ng-if="$root.allowedPermission.getAllStateList || $root.isSuperAdmin == 1"><a ui-sref="admin.stateList">Manage State</a></li>
+                            <li ng-if="$root.allowedPermission.getAllCountryList || $root.isSuperAdmin == 1"><a ui-sref="admin.cityList">Manage City</a></li>
+                            <li ng-if="$root.allowedPermission.getAllKYCMasterList || $root.isSuperAdmin == 1" ><a ui-sref="admin.kycList">Manage KYC</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="treeview" ng-if="$root.isSuperAdmin == 1">
+                        <a ui-sref="#">
+                            <i class="ti-settings"></i><span>Access Management</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a ui-sref="admin.roleList">Manage Roles</a></li>
+                            <li><a ui-sref="admin.rolePermissionList">Manage Permissions</a></li>
+                            
+                            <li><a ui-sref="admin.adminUserList">Manage Admin Users</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview" ng-if="$root.allowedPermission.getTotalDepositAmount || $root.allowedPermission.getTotalWithdrawAmount || $root.isSuperAdmin == 1">
+                        <a ui-sref="#">
+                            <i class="ti-settings"></i><span>Reports</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li ng-if="$root.allowedPermission.getTotalDepositAmount || $root.isSuperAdmin == 1"><a ui-sref="admin.totalDeposits">Total Deposits</a></li>
+                            <li n-if="$root.allowedPermission.getTotalWithdrawAmount || $root.isSuperAdmin == 1"><a ui-sref="admin.totalWithdrawals">Total Withdrawals</a></li>
+                            
+                        </ul>
+                    </li>
+<!--                    <li class="treeview"> <a ui-sref="admin.dashboard"> <i class="fa fa-money" aria-hidden="true"></i><span>Customer Onboarding Criteria</span> </a> </li>                    
+                    <li class="treeview"> <a ui-sref="admin.dashboard"> <i class="fa fa-money" aria-hidden="true"></i><span>Support Ticketing</span> </a> </li>-->
+                </ul>
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- =============================================== -->
+        <!-- Content Wrapper. Contains page content -->
+        <div ui-view="section"></div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs"> <b>Version</b> 1.0</div>
+            <strong>Copyright &copy; 2018-2019 <a>Coinonline </a>.</strong> All rights reserved. </footer>
+    </div>
+</div>
+<!--<script src="assets_admin/js/angular/materialize.min.js"></script>-->
+<script>
+    $('body').removeClass('sidebar-collapse')
+
+    $('.sidebar-toggle').on('click', function () {
+
+        $('.sidebar-mini').toggleClass('sidebar-collapse')
+    })
+</script>

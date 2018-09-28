@@ -1,0 +1,42 @@
+.custom-input-file {
+    position: relative;
+    .inputfile {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        cursor: pointer;
+        width: 127px;
+        height: 35px;
+        z-index: 1;
+    }
+    .selected-value {
+        position: relative;
+        z-index: 1;
+        padding: 0.3125rem 0.8rem;
+        max-width: 250px;
+        border: 1px solid $form-border-color;
+        color: $theme-color2;
+        font-weight: normal;
+        display: none;
+        
+        
+        background-color: rgba(187, 200, 219, 0.1);
+        @include border-radius(1.063rem);
+    }
+    .text {
+      white-space: nowrap;
+        overflow: hidden;  
+        text-overflow: ellipsis;
+        display: block;
+        max-width: 200px;
+    }
+    .input-close {
+        right: 15px;
+        cursor: pointer;
+        font-size: 20px;
+        color: $theme-color4;
+        @include vertically-centered();
+    }
+
+}

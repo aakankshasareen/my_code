@@ -1,0 +1,522 @@
+.card {
+    color: $theme-color4;
+    font-size: 0.75rem;
+    margin-bottom: 20px;
+    letter-spacing: 0.4px;
+    @include border-radius(0.375rem);
+    &.has-flat-bottom {
+        @include border-radius(0.375rem 0.375rem 0 0);
+    }
+    &.has-flat-top {
+        @include border-radius(0 0 0.375rem 0.375rem);
+    }
+    &:last-child {
+        margin-bottom: 0;
+    }
+    &.has-shadow {
+        @include shadow(0 2px 4px 0 rgba(62, 45, 95, 0.23));
+    }
+    .card-body,
+    .card-header,
+    .card-footer {
+        padding: 1.375rem 1.688rem;
+        border-color: $form-border-color;
+        background-color: transparent;
+        @include media-breakpoint-down(lg) {
+            padding-left: 1.4rem;
+            padding-right: 1.4rem;
+        }
+        @include media-breakpoint-down(md) {
+            padding: 1rem;
+        }
+    }
+
+    &.compact-card {
+        .card-body, .card-body .card-body-part {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+    }
+    .card-text-dark {
+        color: $theme-color2;
+    }
+    .card-body {
+        position: relative; // .ui-grid {
+        //     margin-left: -1.688rem;
+        //     width: calc(100% + 1.688rem);
+        // }
+        &.has-parts {
+            padding: 1.375rem 0;
+            display: flex;
+            @include media-breakpoint-down(md) {
+                padding: 0;
+                display: block;
+            }
+        }
+        .card-body-part {
+            border-right: 1px solid $form-border-color;
+            padding: 0 1rem;
+            width: 50%;
+            &:last-child {
+                border: none;
+            }
+            &.big-part {
+                width: 85%;
+            }
+            &.small-part {
+                width: 35%;
+            }
+            &.smaller-part {
+                width: 28%;
+            }
+            @include media-breakpoint-down(md) {
+                width: 100%;
+                padding: 1rem;
+                border-bottom: 1px solid $form-border-color;
+                border-right: none;
+                &.big-part,
+                &.small-part {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .card-header {
+        color: $theme-color4;
+        letter-spacing: 0.9px;
+        font-weight: 600;
+        position: relative;
+        border-bottom-color: $form-border-color;
+        .custom-select {
+            height: 1.75rem;
+        }
+        &.theme2 {
+            font-size: 1.125rem;
+            color: #fff;
+            background-color: $theme-color;
+            text-align: center;
+        }
+    }
+    .card-body-heading {
+        font-size: 0.75rem;
+        color: $theme-color2;
+        margin-bottom: 1.1rem;
+        font-weight: 600;
+        &.marB5 {
+            margin-bottom: 5px;
+        }
+    }
+
+    .user-profile {
+        display: flex;
+        @include media-breakpoint-down(xs) {
+            display: block;
+        }
+        .user-img {
+            margin-right: 35px;
+            border: 1px solid $form-border-color;
+            padding: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            @include sphere(121px);
+        }
+        .user-content {
+            color: $theme-color2;
+        }
+        .user-profile-heading {
+            font-weight: 600;
+            font-size: 0.81rem;
+        }
+    }
+
+    .card-text-list-heading,
+    .card-text-big {
+        color: $theme-color2;
+        font-size: 1rem;
+        font-weight: normal;
+        small {
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 5px;
+            position: relative;
+            top: -1px;
+        }
+        .html-icon {
+            font-size: 1rem;
+            position: relative;
+            top: -2px;
+        }
+    }
+    .card-text-small {
+        color: $theme-color4;
+        font-size: 0.75rem;
+    }
+
+    .table-wrap {
+        margin-left: -1.688rem;
+        width: calc(100% + 3.376rem);
+    }
+
+    .buysellTrade {
+        .card-body-part {
+            padding: 0 1rem;
+            .card-text-small {
+                font-size: 0.6875rem;
+            }
+            &.big-part {
+                width: 60%;
+                @include media-breakpoint-down(md) {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .graph-list {
+        width: 310px;
+        margin: 0 auto 50px;
+    }
+
+    .price-status {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 6.25rem;
+        max-width: 6.25rem;
+    }
+
+    // .hidden-vertical-scroll {
+    //     margin-right: -40px;
+    //     padding-right: 25px;
+    // }
+
+}
+
+.card-chart {
+    width: 100%;
+    height: 412px;
+    @include media-breakpoint-down(xs) {
+        height: 180px;
+    }
+}
+
+.card-header-filters {
+    display: flex;
+    a {
+        color: $theme-color2;
+        font-weight: 300;
+        font-size: 0.8125rem;
+        display: block;
+        padding: 0.1875rem 0.5625rem;
+        cursor: pointer;
+        @include border-radius(0.75rem);
+        &.active {
+            color: #fff !important;
+            background-color: $theme-color;
+            text-align: center;
+        }
+    }
+    @include media-breakpoint-down(lg) {
+        display: none;
+        position: absolute;
+        top: 20px;
+        right: 0;
+        width: 300px;
+        background-color: #fff;
+        z-index: 10;
+        @include shadow(0 2px 4px 0 rgba(62, 45, 95, 0.23));
+        a {
+            padding: 13px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+            @include border-radius(0);
+        }
+    }
+}
+
+.card-tabs {
+    .card-tabs-item {
+        width: 50%;
+        &:first-child {
+            @include border-radius(0.25rem 0 0 0);
+            a {
+                @include border-radius(0.25rem 0 0 0);
+            }
+        }
+        &:last-child {
+            @include border-radius(0 0.25rem 0 0);
+            a {
+                @include border-radius(0 0.25rem 0 0);
+            }
+        }
+        a {
+            display: block;
+            text-align: center;
+            font-size: 1.125rem;
+            padding: 1rem 0.625rem;
+            background-color: $light-gray;
+            color: $theme-color;
+            &.active {
+                background-color: $theme-color;
+                color: #fff;
+            }
+        }
+    }
+}
+
+.banner-card {
+    max-width: 26rem;
+    width: 100%;
+    color: $theme-color2;
+    @include border-radius(0.625rem);
+    @include media-breakpoint-down(md) {
+        max-width: 100%;
+    }
+    .btn-primary {
+        min-width: 7.5rem;
+    }
+    .card-header {
+        padding: 0;
+        font-size: 0.877rem;
+    }
+
+    &.tab-navigation .tab-head {
+        .tab-head-item {
+            width: 50%;
+            margin-left: 0;
+            color: $theme-color4;
+            border-left: 1px solid $form-border-color;
+            &.active {
+                border-bottom-color: $theme-color;
+            }
+            &:first-child {
+                border-left: none;
+            }
+        }
+    }
+    .select2-container .select2-choice {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    @include border-radius(0.375rem 0 0 0.375rem);
+    }
+    .select2-drop {
+    margin-top: -8px;
+    margin-left: -1px;
+}
+}
+
+.banner-card-form {
+    display: flex;
+    li {
+        padding: 0.9375rem 1.5rem;
+        flex: 1;
+        @include media-breakpoint-down(xs) {
+            padding: 0.9375rem;
+        }
+        &.form-select {
+            flex: 1.1;
+            padding: 0;
+            border-right: 1px solid $form-border-color;
+            display: flex;
+            align-items: center;
+            max-width: 5rem;
+            
+            .ui-select-container {
+            width: 100%;
+            }
+            select {
+                border: none;
+                width: 100%;
+                appearance: none;
+            }
+            .select2-container .selection {
+                height: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            .select2-container .select2-selection--single .select2-selection__rendered {
+                font-size: 14px;
+                font-weight: 600;
+            }
+            .select2-container--default .select2-selection--single .select2-selection__arrow b {
+                border-width: 8px 6px 0 6px;
+                border-color: $theme-color4 transparent transparent transparent;
+            }
+            .select2-container--default .select2-selection--single {
+                padding-top: 21px;
+            }
+            .select2-container--default .select2-selection--single .select2-selection__arrow {
+                top: 20px;
+                right: 13px;
+            }
+            .select2-container--default .select2-selection--single,
+            .select2-container {
+                border: none !important;
+                height: 100% !important;
+                outline: none !important;
+            }
+        }
+    }
+}
+
+.orderbook-card {
+    .compact-table th {
+        width: 29%
+    }
+    .card-header .select2 {
+        position: absolute;
+        right: 0;
+        top: -5px;
+        height: 27px !important;
+    }
+}
+
+
+.cards-list {
+    display: flex;
+    @include media-breakpoint-down(sm) {
+        display: block;
+        .card {
+            width: 100% !important;
+        }
+    }
+    .card {
+        width: 50%;
+        border-left: none;
+        margin-bottom: 0;
+        @include border-radius(0);
+        &:first-child {
+            border-left: 1px solid $form-border-color;
+            @include border-radius(0.375rem 0 0 0.375rem);
+        }
+        &:last-child {
+            @include border-radius(0 0.375rem 0.375rem 0);
+        }
+        .card-body {
+            padding: 1rem 0.5rem;
+        }
+        .card-header {
+            padding-top: 0.6875rem;
+            padding-bottom: 0.6875rem;
+        }
+    }
+}
+
+
+.rates-card-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    @include media-breakpoint-up(xl) {
+        .card-separator {
+            margin: 0 0.3125rem;
+        }
+        .card-header,
+        .card-body {
+            padding: 0.8125rem;
+        }
+    }
+    .rates-card {
+        margin: 0.3125rem;
+        color: $theme-color;
+        width: calc(20% - 0.625rem);
+        @include media-breakpoint-down(lg) {
+            width: calc(50% - 1.875rem);
+            margin: 0.9375rem;
+        }
+        @include media-breakpoint-down(xs) {
+            width: calc(100%);
+        }
+    }
+
+    .card-header {
+        justify-content: center;
+        text-align: center
+    }
+    .card-title {
+        font-size: 0.9rem;
+        font-weight: normal;
+        color: #2e2e2e;
+        display: flex;
+        margin: 0;
+        align-items: center;
+        justify-content: center;
+        .card-title-icon {
+            margin-right: 0.625rem;
+        }
+        img {
+            width: 1.563rem;
+        }
+    }
+    .card-body {
+        font-weight: 600;
+    }
+    .text-success {
+        color: #74d96e !important;
+    }
+    .text-danger {
+        color: #e9394f !important;
+    }
+    .left-text {
+        font-size: 1rem;
+    }
+    .right-text {
+        padding-left: 0.9375rem;
+
+    }
+}
+
+.card-footer-btns {
+    flex-wrap: nowrap;
+    > li {
+        width: 50%;
+        margin-left: 10px;
+        &:first-child {
+            margin-left: 0;
+        }
+        &.active {
+            background-color: $theme-color !important;
+        }
+    }
+    .has-nav-dropdown {
+        position: static;
+        .nav-dropdown {
+            right: inherit;
+            left: 0;
+            min-width: 100%;
+            top: 57px;
+        }
+    }
+}
+
+.trade-graph {
+  height: 360px;
+  @include extra-large {
+    height: 380px;
+  }
+}
+
+.trade-history-card {
+    .hidden-vertical-scroll {
+        max-height: 18rem;
+    }
+}
+
+.cards-list {
+    min-height: 29.8rem;
+    .hidden-vertical-scroll {
+        max-height: 24.875rem;
+    }
+}
+
+
+.orderbook-card .hidden-vertical-scroll {
+    max-height: 12.375rem
+}

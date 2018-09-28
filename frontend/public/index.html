@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" ng-app="app" ng-cloak>
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8" />
+    <meta name="description" content="FULEEX, Singapore-based Exchange, is a fast, secured, low cost, virtual payment and transfer utility using its FULX token coin within the cryptocurrency ecosystem. It will change B2B, P2P retail transaction payments, remittance and non-bank money transfers for the consumers and everyday business SME. Bitcoin, Bitshares, Bytecoin, EOS, Ethereum, Dash, Neo, Monero, NEM, Litecoin, Ripple, Vertcon, Coinbase, CEX, Localbitcoin, Coin Tiger, Millenniums, New Generation, Fintech, Cryptocurrency, digital currency, token, GBX, Bcoin, Numoney, coinone, bithumb, korbit, upbit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="keywords" content="Fuleex, fast, low cost, secure, FULX, coin, currency, market, trading, exchange, digital
+wallet, ewallet, virtual, digital platform, Bitcoin, Bitshares, Bytecoin, EOS, Ethereum, Dash, Neo, Monero, NEM, Litecoin, Ripple, Vertcoin, Coinbase, CEX, Localbitcoin, Coin Tiger, virtual currency news information,Fintech, Cryptocurrency, digital currency, token, GBX, Bcoin, Numoney, bithumb, coinone, upbit, korbit, Tenx, token, coin" />
+    <meta name="theme-color" content="#5e36b8" />
+    <base href="/">
+    <link rel="shortcut icon" href="assets/content/images/fevicon.jpg" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="assets/content/favicons/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/content/favicons/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/content/favicons/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/content/favicons/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/content/favicons/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/content/favicons/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/content/favicons/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/content/favicons/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/content/favicons/apple-touch-icon-180x180.png" />
+    <!-- Page Title & Favicon -->
+    <title ng-if="!$state.current.pageTitle">Welcome to Fuleex.io</title>
+    <title ng-if="$state.current.pageTitle" ng-bind="$state.current.pageTitle + ' | Fuleex'"></title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/js/toastr/angular-toastr.css" />
+    <link href="assets/js/ui-grid/ui-grid.min.css" rel="stylesheet">
+    <link href="assets/js/ng-intl-tel-input/intl-tel/css/intlTelInput.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/js/ui-select/select.min.css">
+    <link rel="stylesheet" href="assets/js/ui-select/select2.css">
+    <link rel="stylesheet" href="assets/js/ui-select/selecticize.default.css">
+    <link rel="stylesheet" href="assets/js/anychart/css/anychart-ui.min.css">
+    <link rel="stylesheet" href="assets/js/anychart/css/anychart-font.min.css">
+    <link rel="stylesheet" href="assets/content/css/site.css" />
+    <link rel="stylesheet" href="assets/content/css/custom.css" />
+    <script type="text/javascript" src="charting_library/charting_library.min.js"></script>
+    <script type="text/javascript" src="datafeeds/udf/dist/polyfills.js"></script>
+    <script type="text/javascript" src="datafeeds/udf/dist/bundle.js"></script>
+    <!-- Stylesheets -->
+</head>
+<body class="exchange-view-activated">
+    <div id="site-container">
+        <div ui-view="navbarView"></div>
+        <div ui-view="contentView"></div>
+        <div>
+            <!-- <toast></toast> -->
+        </div>
+        <div ui-view="footer"></div>
+    </div>
+    <script src="assets/scripts/jquery-3.2.1.min.js"></script>
+    <script src="assets/scripts/head.core.min.js"></script>
+    <script src="assets/scripts/jquery.nicescroll.min.js"></script>
+    <script src="assets/scripts/Custom.js"></script>
+    <script src="assets/scripts/bootstrap.min.js"></script>
+    <!--     <script src="//code.jquery.com/jquery-1.10.2.js"></script> -->
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <!-- angular dependencies -->
+    <script src="assets/js/angular/angular.min.js"></script>
+    <script src="assets/js/angular/angular-sanitize.min.js"></script>
+    <script src="assets/js/angular/angular-animate.min.js"></script>
+    <script src="assets/js/angular/angular-ui-router-min.js"></script>
+    <script src="assets/js/angular/angular-cookies.min.js"></script>
+    <script src="assets/js/angular/angular-touch.min.js"></script>
+    <script src="/socket.io/socket.io.js" type="text/javascript"></script>
+    <!-- socket file -->
+    <script src="assets/js/toastr/angular-toastr.tpls.js"></script>
+    <script src="assets/js/angular/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="assets/js/angular/moment.js"></script>
+    <script src="assets/js/angular/angular-moment.min.js"></script>
+    <script src="assets/js/angular/clipboard.min.js"></script>
+    <script src="assets/js/angular/ngclipboard.min.js"></script>
+    <script src="assets/js/angular/angular-file-saver.bundle.min.js"></script>
+    <script src="assets/js/angular/angular-file-saver.min.js"></script>
+    <script src="assets/js/angular/FileSaver.min.js"></script>
+    <script src="assets/js/angular/Blob.js"></script>
+    <script src="assets/js/angular/ng-file-upload-shim.min.js"></script>
+    <script src="assets/js/angular/ng-file-upload.min.js"></script>
+    <script src="assets/js/ui-grid/ui-grid.min.js"></script>
+    <script src="assets/js/ng-intl-tel-input/intl-tel/js/intlTelInput.min.js"></script>
+    <script src="assets/js/ng-intl-tel-input/intl-tel/js/utils.js"></script>
+    <script src="assets/js/ng-intl-tel-input/dist/ng-intl-tel-input.min.js"></script>
+    <script src="assets/scripts/plugins/select2/js/select2.full.min.js"></script>
+    <script src="assets/js/ui-grid/pdfmake.js"></script>
+    <script src="assets/js/ui-grid/vfs_fonts.js"></script>
+    <script src="assets/js/ui-select/select.min.js"></script>
+    <script src="assets/js/anychart/anychart-base.min.js" type="text/javascript"></script>
+    <script src="assets/js/anychart/anychart-core.min.js" type="text/javascript"></script>
+    <script src="assets/js/anychart/anychart-stock.min.js" type="text/javascript"></script>
+    <script src="assets/js/anychart/anychart-ui.min.js" type="text/javascript"></script>
+    <script src="assets/js/anychart/anychart-exports.min.js" type="text/javascript"></script>
+    <script src="assets/js/anychart/anychart-data-adapter.min.js" type="text/javascript"></script>
+    <script src="assets/js/anychart/dark_earth.min.js"></script> 
+    <script src="app/app.module.js"></script>
+    <script src="app/services/app.service.js"></script>
+    <script src="app/directives/app.directive.js"></script>
+    <script src="app/constants/app.constant.js"></script>
+    <script src="app/filters/app.filter.js"></script>
+    <script src="app/modules/login/login.module.js"></script>
+    <script src="app/modules/login/login.service.js"></script>
+    <script src="app/modules/login/login.controller.js"></script>
+    <script src="app/modules/dashboard/dashboard.module.js"></script>
+    <script src="app/modules/dashboard/services/trade.service.js"></script>
+    <script src="app/modules/dashboard/services/dashboard.service.js"></script>
+    <script src="app/modules/dashboard/services/faq.service.js"></script>
+    <script src="app/modules/dashboard/controllers/dashboard.controller.js"></script>
+    <script src="app/modules/dashboard/controllers/user.controller.js"></script>
+    <script src="app/modules/dashboard/controllers/accountact.controller.js"></script>
+    <script src="app/modules/dashboard/controllers/kyc.controller.js"></script>
+    <script src="app/modules/dashboard/controllers/deposit.controller.js"></script>
+    <script src="app/modules/dashboard/controllers/withdraw.controller.js"></script>
+    <script src="app/modules/dashboard/controllers/trade.controller.js"></script>
+    <script src="app/modules/dashboard/controllers/bank.controller.js"></script>
+    <script src="app/modules/dashboard/controllers/history.controller.js"></script>
+    <script src="app/modules/dashboard/controllers/portfolio.controller.js"></script>
+    <script src="app/modules/dashboard/controllers/faq.controller.js"></script>
+    <script src="app/modules/dashboard/controllers/support.controller.js"></script>
+
+    <script src="app/modules/webcontent/support_home.controller.js"></script>
+    <script src="assets/js/angular-recaptcha.min.js"></script>
+    <script src="app/modules/dashboard/controllers/notification.controller.js"></script>
+    <script src="https://test-api.sumsub.com/idensic/static/idensic.js"></script>
+    <div ng-include="'app/modules/login/views/common/spinner.html'"></div>
+    <style type="text/css">
+    .pane-legend-line.apply-overflow-tooltip {
+        font-size: 10px !important;
+    }
+    </style>
+</body>
+</html>

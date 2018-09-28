@@ -1,0 +1,632 @@
+<div id="body-content">
+
+    <!-- Home Banner -->
+    <div id="home-banner" class="site-banner">
+        <!-- <img src="assets/content/images/site-banner-bg.jpg"/> -->
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-8 col-sm-12 text-right">
+                    <img src="assets/content/images/banner_log-2.png" class="banner-txt common-banner register-banner signUpTab" />
+                </div>
+                <div class="col-md-6 col-lg-4 col-sm-12">
+                    <div class="card banner-card tab-navigation float-right float-none-md">
+                        <div class="card-header">
+                            <ul class="tab-head">
+                                <li data-tab=".loginTab" class="tab-head-item active">Log In</li>
+                                <li data-tab=".signUpTab" class="tab-head-item ">Sign Up</li>
+                            </ul>
+                        </div>
+                        <div class="card-body tab-content">
+                            <!-- Sign Up Tab Pane -->
+                            <div class="tab-pane loginTab active">
+                                <!-- Form -->
+                                <form class="form" name="vm.loginForm" ng-submit="vm.login();" novalidate>
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <label class="form-group-label">Email</label>
+                                        <input id="sign-in-email" type="text" class="form-control" required ng-model="vm.getUser.email" autofocus autocomplete="off"
+                                            name="loginemail" pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'>
+                                        <p class="error-msg" ng-if="vm.loginForm.loginemail.$error.required && vm.loginForm.$submitted">Please enter Email Address.</p>
+                                        <p class="error-msg" ng-if="vm.loginForm.loginemail.$error.pattern && vm.loginForm.loginemail.$touched">Please enter valid Email Address.</p>
+                                    </div>
+                                    <!-- Form Group -->
+                                    <!-- Form Group -->
+                                    <div class="form-group marB0">
+                                            <div class="has-form-group-icon">
+                                        <label class="form-group-label">Password</label>
+                                        <input id="sign-in-password" type="{{vm.inputType}}" class="form-control" required ng-model="vm.getUser.password" autocomplete="off"
+                                            name="loginpswd">
+                                        <i class="fa fa-eye form-group-icon" aria-hidden="true" ng-model="vm.passwordCheckbox" ng-click="vm.hideShowPassword()" ng-if="!vm.showPassword"></i>
+                                        <i class="fa fa-eye-slash form-group-icon" aria-hidden="true" ng-model="vm.passwordCheckbox" ng-click="vm.hideShowPassword()"
+                                            ng-if="vm.showPassword"></i>
+                                        <p class="error-msg" ng-if="vm.loginForm.loginpswd.$error.required && vm.loginForm.$submitted">Please enter Password.</p>
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="marB0 marT5 text-right">
+                                            <a ui-sref="forgotPwd" class="semibold">Forgot Password?</a>
+                                        </p>
+                                    </div>
+                                    <!-- Form Group -->
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <input ng-model="vm.getUser.device_ipAddress" style="display: none">
+                                        <input type="hidden" ng-model="vm.getUser.device_os" ng-init="vm.getUser.device_os =  vm.device_os">
+                                        <input type="hidden" ng-model="vm.getUser.device_name" ng-init="vm.getUser.device_name =  vm.device_name">
+                                        <input type="hidden" ng-model="vm.getUser.device_browser" ng-init="vm.getUser.device_browser =  vm.device_browser">
+                                        <!-- <div class="d-flex justify-content-center" on-create="vm.setWidgetIdL(widgetId)" ng-model="vm.getUser.g_recaptcha_response"
+                                            vc-recaptcha key="'6LdSvkYUAAAAAOeAtCz_vBfiZY6NqSmrTzxyr6Y8'" style="margin-bottom: 10px;"></div>
+                                        <p class="error-msg" ng-if="!vm.getUser.g_recaptcha_response && vm.loginForm.$submitted">Captcha is required</p> -->
+                                        <!--                                    <div class="g-recaptcha" data-sitekey="6LdSvkYUAAAAAOeAtCz_vBfiZY6NqSmrTzxyr6Y8"></div><br/>-->
+                                        <!-- <a class="btn btn-primary big-btn full-width" href="profile.html">Login</a>
+                            <p class="marB0 text-center marT30 theme-color">Forgot password? <a href="#" class="semibold">Click here</a></p> -->
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <input type="submit" class="btn btn-primary" value="Submit" />
+                                    </div>
+                                    <!-- Form Group -->
+                                </form>
+                                <!-- Form -->
+                            </div>
+                            <div class="tab-pane signUpTab">
+                                <!-- Form -->
+                                <form class="form" name="vm.registrationForm" ng-submit="vm.register()" novalidate>
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <label class="form-group-label">Full Name</label>
+                                        <input id="sign-up-name" type="text" class="form-control" required ng-model="vm.setUser.name" autocomplete="off" pattern="^[ a-zA-Z]*$"
+                                            name="fullname" maxlength="50" />
+                                        <p class="error-msg" ng-if="vm.registrationForm.fullname.$error.pattern && vm.registrationForm.fullname.$touched">Please enter valid name.</p>
+                                        <p class="error-msg" ng-if="vm.registrationForm.fullname.$error.required && vm.registrationForm.$submitted">Please enter Full Name.</p>
+                                    </div>
+                                    <!-- Form Group -->
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <label class="form-group-label">Email</label>
+                                        <input id="sign-up-email" type="text" class="form-control" required ng-model="vm.setUser.email" autocomplete="off" name="rgemail"
+                                            pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+                                        />
+                                        <p class="error-msg" ng-if="vm.registrationForm.rgemail.$error.required && vm.registrationForm.$submitted">Please enter Email Address.</p>
+                                        <p class="error-msg" ng-if="vm.registrationForm.rgemail.$error.pattern && vm.registrationForm.rgemail.$touched">Please enter valid Email Address.</p>
+                                    </div>
+                                    <!-- Form Group -->
+                                    <!-- Form Group -->
+                                    <div class="form-group">
+                                        <div class="has-form-group-icon">
+                                            <label class="form-group-label">Password <i class="fa fa-info-circle infoIcon" data-toggle="tooltip" data-placement="top" title="Password should contain minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character(@$!%*?&#^)"></i></label>
+                                            <input id="sign-up-password" type={{vm.inputType}} class="form-control" name="password" required ng-model="vm.setUser.password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%-_^*)|(?&#])[A-Za-z\d$@$!%-_^*)|(?&#]{8,}" autocomplete="off">
+                                            <i class="fa fa-eye form-group-icon" aria-hidden="true" ng-model="vm.passwordCheckbox" ng-click="vm.hideShowPassword()" ng-if="!vm.showPassword"></i>
+                                            <i class="fa fa-eye-slash form-group-icon" aria-hidden="true" ng-model="vm.passwordCheckbox" ng-click="vm.hideShowPassword()"
+                                                ng-if="vm.showPassword"></i>
+                                        </div>
+                                        <p class="error-msg" ng-if="vm.registrationForm.password.$error.required && vm.registrationForm.$submitted">Please enter Password.</p>
+                                        <p class="error-msg" ng-if="vm.registrationForm.password.$error.pattern && vm.registrationForm.password.$touched">Password should contain minimum 8 characters, at least one uppercase letter, one
+                                            lowercase letter, one number and one special character(@$!%*?&#^).</p>
+                                        <ul class="req-password">
+                                            <li>one uppercase</li>
+                                            <li>one lowercase</li>
+                                            <li>one number</li>
+                                            <li>special character</li>
+                                            <li>min 8 characters</li>
+
+                                        </ul>
+
+                                    </div>
+                                    <!-- Form Group -->
+                                    <!-- Form Group -->
+
+
+
+                                    <div class="form-group">
+                                        <div class="has-form-group-icon">
+                                            <label class="form-group-label">Mobile Number</label>
+                                            <input class="form-control" type="text" ng-model="vm.setUser.mobileNumber" ng-intl-tel-input data-initial-country="sg" required
+                                                name="tel" id="phone" autocomplete="off" numbr-only placeholder=" ">
+                                            <!--                         <a href="#" ng-show="vm.showSendButton" class="form-group-icon otp-link" ng-click="vm.sendRegistrationOTP()" ng-class="vm.OTPSent?'resend-otp-icon':'send-otp-icon'" title="Send OTP"></a> -->
+                                        </div>
+                                        <!-- <p ng-hide="vm.showSendButton">Resend in <span ng-bind="vm.timer"></span> sec</p> -->
+
+                                        <p class="error-msg" ng-if="vm.registrationForm.tel.$error.required && vm.registrationForm.$submitted">Please enter a Mobile Number.</p>
+                                        <p class="error-msg" ng-if="vm.registrationForm.tel.$error.ngIntlTelInput && vm.registrationForm.tel.$touched">Please enter valid Mobile Number.</p>
+                                        <!--                         <p class="error-msg" ng-if="!vm.OTPSent && vm.registrationForm.tel.$valid  && vm.registrationForm.$submitted">Please send OTP</p>
+ -->
+                                    </div>
+
+
+                                    <!-- <div class="form-group" ng-show="vm.OTPSent">
+                                <label class="form-group-label">OTP</label>
+                                <input class="form-control" type="text" numbr-only ng-model="vm.setUser.otp" required name="otp" id="otp" autocomplete="off" ng-minLength="6" ng-maxLength="10">
+                                <p class="error-msg" ng-if="!vm.registrationForm.otp.$valid && vm.registrationForm.otp.$touched">Please enter Valid OTP</p>
+                            </div> -->
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" ng-model="vm.acceptTerms" ng-true-value="'YES'" ng-false-value="'NO'" name="acceptTerms"
+                                                required style="width: 45px;flex: initial;">
+                                            <label class="form-check-label">I have read and agreed.&nbsp;&nbsp;
+                                                <a data-toggle="modal" data-target="#agreement"
+                                                    target="_blank" rel="noopener"> &lt;&lt;agreement&gt;&gt; </a>
+
+                                            </label>
+                                        </div>
+                                        <p class="error-msg" ng-if="vm.registrationForm.acceptTerms.$error.required && vm.registrationForm.$submitted">Please accept the Terms of Use.</p>
+                                    </div>
+                                    <!-- Form Group -->
+                                    <!-- Form Group -->
+
+
+                                    <div class="form-group">
+                                        <input ng-model="vm.setUser.device_ipAddress" style="display: none">
+                                        <input type="hidden" ng-model="vm.setUser.device_os" ng-init="vm.setUser.device_os =  vm.device_os">
+                                        <input type="hidden" ng-model="vm.setUser.device_name" ng-init="vm.setUser.device_name =  vm.device_name">
+                                        <input type="hidden" ng-model="vm.setUser.device_browser" ng-init="vm.setUser.device_browser =  vm.device_browser">
+                                        <!-- <div class="d-flex justify-content-center" on-create="vm.setWidgetIdR(widgetId)" ng-model="vm.setUser.g_recaptcha_response"
+                                            vc-recaptcha key="'6LdSvkYUAAAAAOeAtCz_vBfiZY6NqSmrTzxyr6Y8'"></div> -->
+                                        <!-- <p class="error-msg" ng-if="!vm.setUser.g_recaptcha_response && vm.registrationForm.$submitted">Captcha is required</p> -->
+                                        <!-- <a class="btn btn-primary big-btn full-width" href="profile.html">Submit</a> -->
+                                    </div>
+                                    <!-- Form Group -->
+                                    <!-- Form Group -->
+                                    <div class="form-group text-center">
+                                        <!-- <button type="button" class="btn btn-link">Cancel</button> -->
+                                        <input type="submit" class="btn btn-primary marL30" value="Submit" />
+                                    </div>
+                                    <!-- Form Group -->
+                                </form>
+                                <!-- Form -->
+                            </div>
+                            <!-- Sign Up Tab Pane -->
+                            <!-- Login Tab Pane -->
+
+                            <!-- Login Tab Pane -->
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <img src="assets/content/images/banner_log-2.png" class="login-banner common-banner loginTab active" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--start currency list-->
+        <div class="currency-list">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="rates-card-list">
+                            <li class="rates-card card">
+                                <header class="card-header">
+                                    <h4 class="card-title">
+                                        <span class="card-title-icon">
+                                            <img src="assets/content/images/f_icon.png" alt="FULX Icon">
+                                        </span>
+                                        FULX</h4>
+                                </header>
+                                <div class="card-body clearfix">
+                                    <span class="left-text pull-left">
+                                        <!-- {{vm.fulx.last_trade_price?vm.fulx.last_trade_price:0}} -->2 USD</span>
+
+                                        <!-- 0 USD</span> -->
+                                    <span ng-if='vm.fulx.changeInPrice>=0' class="text-success right-text pull-right">{{vm.fulx.changeInPrice}} </span>
+                                    <span ng-if='vm.fulx.changeInPrice<0' class="text-danger right-text pull-right">{{-1*vm.fulx.changeInPrice}} </span>
+                                </div>
+                            </li>
+                            <li class="rates-card card">
+                                <header class="card-header">
+                                    <h4 class="card-title">
+                                        <span class="card-title-icon">
+                                            <img src="assets/content/images/bitcoin-icon-widget.png" alt="Bitcoin Icon">
+                                        </span>
+                                        BTC</h4>
+                                </header>
+                                <div class="card-body clearfix">
+                                    <span class="left-text pull-left">
+                                        {{vm.btc.last_trade_price?vm.btc.last_trade_price:0}} USD</span>
+                                    <!-- <span class="text-danger right-text pull-right"> 0</span> -->
+                                    <span ng-if='vm.btc.changeInPrice>=0' class="text-success right-text pull-right">{{vm.btc.changeInPrice}} </span>
+                                    <span ng-if='vm.btc.changeInPrice<0' class="text-danger right-text pull-right">{{-1*vm.btc.changeInPrice}} </span>
+
+                                </div>
+                            </li>
+                            <li class="rates-card card">
+                                <header class="card-header">
+                                    <h4 class="card-title">
+                                        <span class="card-title-icon">
+                                            <img src="assets/content/images/ethereum-icon-widget.png" alt="ethereum Icon">
+                                        </span>
+                                        ETH</h4>
+                                </header>
+                                <div class="card-body clearfix">
+                                    <span class="left-text pull-left">{{vm.eth.last_trade_price?vm.eth.last_trade_price:0}} USD</span>
+                                    <!-- <span class="text-danger right-text pull-right"> 0</span> -->
+                                    <span ng-if='vm.eth.changeInPrice>=0' class="text-success right-text pull-right">{{vm.eth.changeInPrice}} </span>
+                                    <span ng-if='vm.eth.changeInPrice<0' class="text-danger right-text pull-right">{{-1*vm.eth.changeInPrice}} </span>
+
+                                </div>
+                            </li>
+                            <li class="rates-card card">
+                                <header class="card-header">
+                                    <h4 class="card-title">
+                                        <span class="card-title-icon">
+                                            <img src="assets/content/images/litecoin.png" alt="litecoin Icon">
+                                        </span>
+                                        LTC</h4>
+                                </header>
+                                <div class="card-body clearfix">
+                                    <span class="left-text pull-left">{{vm.ltc.last_trade_price?vm.ltc.last_trade_price:0}} USD</span>
+                                    <!-- <span class="text-danger right-text pull-right"> 0</span> -->
+                                    <span ng-if='vm.ltc.changeInPrice>=0' class="text-success right-text pull-right">{{vm.ltc.changeInPrice}} </span>
+                                    <span ng-if='vm.ltc.changeInPrice<0' class="text-danger right-text pull-right">{{-1*vm.ltc.changeInPrice}} </span>
+
+                                </div>
+                            </li>
+
+                            <!--li class="rates-card card">
+                                <header class="card-header">
+                                    <h4 class="card-title">
+                                        <span class="card-title-icon">
+                                            <img src="assets/content/images/active-users-icon-widget.png" alt="Active Icon">
+                                        </span>
+                                        Active User</h4>
+                                </header>
+                                <div class="card-body text-center">
+                                    <span class="left-text">{{active_users_nw}}</span>
+
+                                </div>
+                            </li-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- Home Banner -->
+    <!--<section class="section pb-3 pt-3 with-bg-color">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="rates-card-list">
+								 <li class="rates-card card">
+                                    <header class="card-header">
+                                        <h4 class="card-title"><span class="card-title-icon"><img src="assets/content/images/digital wallet icon FA export_white outline f.png" alt="FCEX Icon"></span>
+										FCEX</h4>
+                                    </header>
+                                    <div class="card-body clearfix">
+                                        <span class="left-text pull-left">
+										0 USD</span>
+										<span class="text-success right-text pull-right"> 0</span>                                   
+                                    </div>
+                                </li>
+                                <li class="rates-card card">
+                                    <header class="card-header">
+                                        <h4 class="card-title">
+										<span class="card-title-icon"><img src="assets/content/images/bitcoin-icon-widget.png" alt="Bitcoin Icon"></span>
+										Bitcoin</h4>
+                                    </header>
+                                    <div class="card-body clearfix">
+                                        <span class="left-text pull-left">
+										{{vm.btc.last_trade_price?vm.btc.last_trade_price:0}} USD</span>  
+										<span class="text-danger right-text pull-right"> 0</span>  										
+                                    </div>
+                                </li>
+                                <li class="rates-card card">
+                                    <header class="card-header">
+                                        <h4 class="card-title">
+										<span class="card-title-icon"><img src="assets/content/images/ethereum-icon-widget.png" alt="ethereum Icon"></span>
+										Ethereum</h4>
+                                    </header>
+                                    <div class="card-body clearfix">
+                                        <span class="left-text pull-left">{{vm.eth.last_trade_price?vm.eth.last_trade_price:0}} USD</span> 
+										<span class="text-danger right-text pull-right"> 0</span> 										
+                                    </div>
+                                </li>
+                                <li class="rates-card card">
+                                    <header class="card-header">
+                                        <h4 class="card-title"><span class="card-title-icon"><img src="assets/content/images/litecoin.png" alt="litecoin Icon"></span>
+										LiteCoin</h4>
+                                    </header>
+                                    <div class="card-body clearfix">
+                                        <span class="left-text pull-left">{{vm.ltc.last_trade_price?vm.ltc.last_trade_price:0}} USD</span>  
+										<span class="text-danger right-text pull-right"> 0</span> 										
+                                    </div>
+                                </li>
+                               
+                                <li class="rates-card card">
+                                    <header class="card-header">
+                                        <h4 class="card-title"><span class="card-title-icon"><img src="assets/content/images/active-users-icon-widget.png" alt="Active Icon"></span>
+										Active User</h4>
+                                    </header>
+                                    <div class="card-body text-center">
+                                        <span class="left-text">{{active_users_nw}}</span>
+										
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>-->
+
+
+    <!-- Section -->
+
+
+
+
+    <!-- Section -->
+
+    <section class="section text-center sign-sections">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 sign-boxs">
+                    <div class="sign-border">
+                        <h3>NO SIGN UP FEES.
+                            <br>
+                            <!-- NO WORRY.<br> -->
+                            QUICK & EASY.
+                            <br> REAL-TIME MARKET UPDATES.</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!--free account-->
+<!--section class="section account-top">
+	<div class="container">
+		<div class="row">
+		   <div class="col-sm-3 account-section">
+		      <div class="account-box">
+			    <h4>1. CREATE FREE ACCOUNT</h4>
+				<p>Register on the website and create your FREE
+account; ZERO charge and NO hidden fee.</p>
+			  </div>
+			  <div class="account-box">
+			    <h4>2. VERIFICATION FOR COMPLIANCE</h4>
+				<p>Just upload your ID (IC or Passport), Proof of Address Document, and a selfie photo of yourself holding your ID. Upon approval your account will be opened.</p>
+			  </div>
+		   </div>
+		   <div class="col-sm-3 account-section">
+		     <div class="account-box">
+			   <h4>3. ADD FUNDS TO ACCOUNT</h4>
+			   <p>Select amount you wish to trade or remit. Fuleex accepts any major fiat currency through our licensed remittance partners. Upload your bank deposit slip and once verified, you are ready to trade.</p>
+			 </div>
+		   </div>
+		    <div class="col-sm-3 account-section">
+		     <div class="account-box">
+			   <h4>4. BUY, TRADE, SELL, REMIT</h4>
+			   <p>Buy and Sell digital currencies, convert Fiat to digital currencies and vice versa.</p>
+			 </div>
+			  <div class="account-box">
+			   <h4>5. SEND, PAY and RECEIVE payment from anyone anywhere in real time.</h4> 
+			 </div>
+		   </div>
+		   
+		</div>
+	</div>
+</section-->
+
+
+<section class="section text-center  account-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="row section-steps justify-content-center">
+                    <li class="section-step col-md-3">
+                        <div class="section-step-figure card">
+                            <span class="section-step-count">01</span>
+                            <img src="assets/content/images/create-account-icon.png" alt="Create free account" />
+                        </div>
+                        <div class="section-step-content">
+                            <h3 class="section-step-heading">CREATE FREE ACCOUNT</h3>
+                            <p>Register on the website and create your FREE account; ZERO charge and NO hidden fee.</p>
+                        </div>
+                        <div class="section-step-border"></div>
+                    </li>
+                    <!-- Section Step -->
+
+
+                    <li class="section-step col-md-3">
+                        <div class="section-step-figure card">
+                            <span class="section-step-count">02</span>
+                            <img src="assets/content/images/cart_varification.png" alt="Add fund to account" />
+                        </div>
+                        <div class="section-step-content">
+                            <h3 class="section-step-heading">VERIFICATION FOR COMPLIANCE</h3>
+                            <p>Just upload your ID (IC or Passport), Proof of Address Document, and a selfie photo of yourself
+                                holding your ID. Upon approval your account will be opened.</p>
+                        </div>
+                        <div class="section-step-border"></div>
+                    </li>
+
+
+                    <li class="section-step col-md-3">
+                        <div class="section-step-figure card">
+                            <span class="section-step-count">03</span>
+                            <img src="assets/content/images/add-funds-icon.png" alt="Add fund to account" />
+                        </div>
+                        <div class="section-step-content">
+                            <h3 class="section-step-heading">ADD FUNDS TO ACCOUNT</h3>
+                            <p>Select amount you wish to trade or remit. Fuleex accepts any major fiat currency through our
+                                licensed remittance working partners. Upload your bank deposit slip and once verified, you
+                                are ready to trade.</p>
+                        </div>
+                        <div class="section-step-border"></div>
+                    </li>
+                    <!-- Section Step -->
+
+
+                    <li class="section-step col-md-3">
+                        <div class="section-step-figure card">
+                            <span class="section-step-count">04</span>
+                            <img src="assets/content/images/trade-icon.png" alt="Trade" />
+                        </div>
+                        <div class="section-step-content">
+                            <h3 class="section-step-heading"> BUY, TRADE, SELL, REMIT</h3>
+                            <p>Buy and Sell tokens, convert Fiat to tokens and vice versa.</p>
+							<a data-toggle="modal" data-target="#otc_eng" target="_blank" rel="noopener" class="btn btn-org">EN</a>
+							<a data-toggle="modal" data-target="#otc_cn" target="_blank" rel="noopener"  class="btn btn-org">CN</a>
+                        </div>
+                    </li>
+                    <li class="section-step col-md-12">
+                        <!--  <div class="section-step-figure card">
+                                        <span class="section-step-count">05</span>
+                                        <img src="assets/content/images/trade-icon.png" alt="Trade" />
+                                    </div> -->
+                        <div class="section-step-content">
+                            <h2 class="section-step-heading">Send, Pay and Receive Payment from Anyone, Anywhere In The World*</h2>
+                            <h3 class="section-step-heading-mini">*From our established partner remittance network.</h3>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section -->
+
+<!-- Section -->
+<!--<section class="section has-section-grid with-bg-color">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h2 class="section-heading">Fuleex.io 100% security.0% Worry</h2>
+				<p>Offering Scalability & Ease to a progressive investor</p>
+            </div>
+        </div>
+        <ul class="row no-list-style">
+            <li class="section-grid col-lg-4  col-md-6 col-xs-12">
+                <span class="section-grid-icon"><img src="assets/content/images/step-icon-1.png" alt="Icon" /></span>
+                <div class="section-grid-content">
+                    <h4 class="section-grid-heading">SAFE</h4>
+                    <p>Bank-level SSL secured connection. Distributed Offline Wallet.</p>
+                </div>
+            </li> 
+			<li class="section-grid col-lg-4  col-md-6 col-xs-12">
+                <span class="section-grid-icon"><img src="assets/content/images/step-icon-2.png" alt="Icon" /></span>
+                <div class="section-grid-content">
+                    <h4 class="section-grid-heading">ACCESS</h4>
+                    <p>Professional Customer Service Consultants are available daily from 9am to 9pm, 9am to 2pm on weekends.</p>
+                </div>
+            </li>
+			<li class="section-grid col-lg-4  col-md-6 col-xs-12">
+                <span class="section-grid-icon"><img src="assets/content/images/step-icon-3.png" alt="Icon" /></span>
+                <div class="section-grid-content">
+                    <h4 class="section-grid-heading">FAST</h4>
+                    <p>10 million per second High Performance Trading Engine.Fast, Easy and Convenient.</p>
+                </div>
+            </li>
+			<li class="section-grid col-lg-4  col-md-6 col-xs-12">
+                <span class="section-grid-icon"><img src="assets/content/images/step-icon-4.png" alt="Icon" /></span>
+                <div class="section-grid-content">
+                    <h4 class="section-grid-heading">ALL ENCOMPASSING</h4>
+                    <p>We support a large number of coins with dozens of chains integrated.</p>
+                </div>
+            </li>
+			<li class="section-grid col-lg-4  col-md-6 col-xs-12">
+                <span class="section-grid-icon"><img src="assets/content/images/step-icon-5.png" alt="Icon" /></span>
+                <div class="section-grid-content">
+                    <h4 class="section-grid-heading">SECURITY</h4>
+                    <p>Through private keys instead of storing on chains, we offer one of the most secure wallets in the industry.</p>
+                </div>
+            </li>
+            <li class="section-grid col-lg-4  col-md-6 col-xs-12">
+                <span class="section-grid-icon"><img src="assets/content/images/step-icon-4.png" alt="Icon" /></span>
+                <div class="section-grid-content">
+                    <h4 class="section-grid-heading">CONVENIENCE</h4>
+                    <p>Fee-less transfer from networked crypto-assets exchange to Fuleex.io, from wallet to wallet.</p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</section>-->
+<!-- Section -->
+
+</div>
+
+<div id="agreement" class="modal fade modal_terms" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <!-- <div class="modal-header text-center">
+				<h4 class="modal-title">Agreement</h4>
+				
+			</div> -->
+            <!-- Modal body -->
+            <form class="form" novalidate>
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" style="top:20px">&times;</button>
+                    <div class="form-group">
+                        <div class="has-form-group-icon">
+                            <img width="200" src="assets/content/images/logo_color.png" alt="Logo" class="">
+                            <label class="form-group-label text-center">
+                                <strong>PROMPT :</strong> it is recommended to use your real name and a registered mobile phone number
+                                to minimize risk and losses that could result from using a pseudo name</label>
+                            <p class="text-center">Please read the documents given below:</p>
+
+                            <ul class="btn-full">
+                                <li>
+                                    <a href="#" ng-click="$root.call_download(8);">Fund Deposit & Withdrawal</a>
+                                </li>
+                                <li>
+                                    <a href="#" ng-click="$root.call_download(1);">Online Trading Agreement</a>
+                                </li>
+                                <li>
+                                    <a href="#" ng-click="$root.call_download(3);">Privacy Document</a>
+                                </li>
+                                <!-- <li>
+                                    <a href="#" ng-click="$root.call_download(4);">Token Purchase / Sales Terms</a>
+                                </li> -->
+                            </ul>
+
+
+                            <div class="Disclaimer">
+                                <p>
+                                    <strong>Disclaimer </strong>
+                                    Fuleex.io, its subsidiaries, partners, its officers, employees, representatives or agents, (collectively referred to as "We")
+                                    shall not be held liable for any damages or injury resulting from your use of, access
+                                    to, or inability to access this Millenning's website, or from your reliance on any information
+                                    provided on this website or any accompanying literature or documentation</p>
+                                <p>The information and material provided on this website do not constitute an offer to sell
+                                    or the solicitation of an offer to buy, any currencies and must not be relied upon in
+                                    connection with any investment decision.</p>
+                                <p>Whilst we take reasonable care to keep the information on this website accurate and up to
+                                    date, to the extent permitted by law, we exclude all conditions, warranties, representations
+                                    and other terms, whether express or implied, which may apply to this website, or any
+                                    content on it. You therefore use or access this website at your sole risk and we will
+                                    not be liable for any loss or damage whatsoever and howsoever arising as a result of
+                                    your access to or use of or reliance upon the information contained on this website,
+                                    to the maximum extent permitted by law.</p>
+                                <p>We do not represent or warrant that this website will be always available and meet your requirements,
+                                    that access will be uninterrupted, that there will be no delays, failures, errors or
+                                    omissions or loss of transmitted information, that no viruses or other contaminating
+                                    destructive properties will be transmitted or that no damage will occur to your computer.
+                                    It is your sole responsibility to ensure you have adequate protection and back up of
+                                    data and equipment, as well as undertaking reasonable and appropriate precautions to
+                                    scan for computer viruses or other destructive properties.</p>
+                                <p>We make no representations or warranties regarding the accuracy, functionality or performance
+                                    of any third party software that may be used in connection with this website. To the
+                                    fullest extent permitted by law we, our representatives, agents and related entities
+                                    hereby exclude all conditions, warranties and other terms which otherwise might be implied
+                                    by statute, common law, or equity.</p>
+                                <p>Additionally we will not be liable for any direct, indirect or consequential loss or damage
+                                    incurred by you in connection with the website or in connection with the use, inability
+                                    to use, or results of the use of the website and any materials posted on it.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <!-- <div class="modal-footer justify-content-end">
+					<button type="button" class="btn btn-outline-primary" data-dismiss="modal" >Close</button>
+				</div> -->
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<style type="text/css">
+.textalignr{
+    text-align: justify;
+    border: 1px solid #ccc;
+    width: 80%;
+    float: right;
+    padding: 10px;
+    background:#ddd;
+}  
+
+.textalignl{
+    text-align: justify;
+    border: 1px solid #dedede;
+    width: 80%;
+    float: left;
+    padding: 10px;
+    background:#fafafa;
+}      
+
+.maintextalign{
+    width:100%;
+    float: left;
+}
+
+.maintextspan{
+    width: 90%;
+}
+
+</style>
+<h1 class="dashboard-main-heading d-none d-md-block">Support</h1>
+<div class="site-content">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+       <div class="card-header">
+        <div class="row align-items-center">
+        <div class="col-6">{{vm.pageHeading}} Support</div>
+        <div class="col-6 text-right"><a ui-sref="dashboard.support" class="btn btn-primary btn-xs">Back</a></div>
+        </div>
+     </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- Form controls -->
+            <div class="col-sm-12">
+                <div class="panel panel-bd lobidrag">
+                   
+                    <div class="panel-body">                                    
+                             
+                        
+                        <div class="form-group" >
+                               
+                               <p style="background: #c0c0c0; padding: 10px;"><b class="header-title">Query:</b>    {{ vm.description }}</p>
+                                                                        
+                            </div> 
+                           
+                            <div class="form-group"  when-Scrolled="coomentalldata()" style="height: 300px; overflow-y: scroll;" >
+                               
+                                    <p ng-if="maindata[0].comment" ng-repeat="commentdata in maindata"  class="maintextalign" >
+                                 
+                                        <span  ng-class="(commentdata.sender_id == vm.receiverId) ? 'textalignl' : 'textalignr'"> <b> {{(commentdata.sender_id == vm.receiverId) ? 'From: Customer' : 'From: Fuleex Support'}} </b><span style="text-align: right; float: right;">{{commentdata.created_at | date : 'dd-MM-yyyy HH:mm a'}}</span><br/> 
+                                           
+                                        {{ commentdata.comment }}    
+                                            </span>
+                                        
+                                    </p>                                       
+                            </div>
+                       
+                            <form autocomplete="off" ng-submit="vm.id ? vm.add() :''" name="vm.form" enctype="multipart/form-data"  ng-if="vm.status.id!=0"> 
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Message</label>
+                                 <sup class="asterik">*</sup>
+                                <textarea class="form-control" name="answer" required ng-model="vm.answer" placeholder="Enter answer"></textarea>
+                            </div>
+                                                                                   
+                            <input type="hidden" ng-model="vm.id" />
+                            <input type="hidden" ng-model="vm.assignId" />
+                            <input type="hidden" ng-model="vm.receiverId" />
+                            <button type="submit" class="btn btn-primary" ng-disabled="vm.form.$invalid">Submit</button>
+                            <button type="button" ng-click="vm.cancel()" class="btn btn-primary">Cancel</button>
+                        </form>
+                        <button ng-if="vm.status.id==0"type="button" ng-click="vm.reOpenTicketCu()" class="btn btn-primary">Re-Open</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Inline form -->                        
+            <!-- Textual inputs -->                        
+        </div>
+        <!-- Checkboxes & Radios -->
+    </section> <!-- /.content -->
+</div>

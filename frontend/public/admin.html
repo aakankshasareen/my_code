@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-cloak>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fuleex Admin Panel </title>
+	<link rel="shortcut icon" href="assets/content/images/fevicon.jpg" type="image/x-icon" />
+    <base href="/">
+    <link rel="stylesheet" href="assets/js/ui-select/selecticize.default.css">
+    <link rel="stylesheet" href="assets/js/toastr/angular-toastr.css" />
+    <link href="assets/js/ng-intl-tel-input/intl-tel/css/intlTelInput.css" rel="stylesheet">
+    <link href="assets_admin/css/style.css" rel="stylesheet">
+    <link href="assets_admin/css/custom.css" rel="stylesheet">
+    <!--<link href="assets_admin/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
+    <link href="assets_admin/js/ui-grid/ui-grid.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.0/css/simple-line-icons.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+
+<body class="header-fixed aside-menu-hidden">
+    <div ui-view="contentView" class="app"></div>
+    <!--        <div ui-view="navbarView"></div>
+        <div ui-view="contentView"></div>-->
+    <!--        <div>
+                    <toast></toast>
+                </div>-->
+    <!--<div ui-view="footer"></div>-->
+    <script src="assets_admin/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
+    <script src="assets_admin/plugins/jQuery/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="assets_admin/plugins/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="assets_admin/vendors/js/popper.min.js"></script>
+    <script src="assets_admin/bootstrap/js/bootstrap-4.0.0.min.js" type="text/javascript"></script>
+    <script src="assets_admin/plugins/lobipanel/lobipanel.min.js" type="text/javascript"></script>
+    <script src="assets_admin/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <script src="assets_admin/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="assets_admin/plugins/fastclick/fastclick.min.js" type="text/javascript"></script>
+    <script src="assets_admin/dist/js/frame.js" type="text/javascript"></script>
+    <script src="assets_admin/dist/js/dashboard.js" type="text/javascript"></script>
+    <script src="assets_admin/js/angular/angular.min.js"></script>
+    <!--        <script src="assets_admin/vendors/js/angular-animate.min.js"></script>
+        <script src="assets_admin/vendors/js/angular-sanitize.min.js"></script>-->
+    <script src="assets_admin/vendors/js/angular-ui-router.min.js"></script>
+    <script src="assets_admin/vendors/js/ocLazyLoad.min.js"></script>
+    <script src="assets_admin/vendors/js/angular-translate.min.js"></script>
+    <script src="assets_admin/vendors/js/angular-breadcrumb.min.js"></script>
+    <script src="assets_admin/vendors/js/loading-bar.min.js"></script>
+    <!--        <script src="assets_admin/vendors/js/popper.min.js"></script>                                -->
+    <script src="assets_admin/js/angular/angular-sanitize.min.js"></script>
+    <script src="assets_admin/js/angular/angular-animate.min.js"></script>
+    <script src="assets_admin/js/angular/angular-ui-router-min.js"></script>
+    <script src="assets_admin/js/angular/angular-cookies.min.js"></script>
+    <script src="assets_admin/js/angular/angular-touch.min.js"></script>
+    <script src="/socket.io/socket.io.js" type="text/javascript"></script>
+    <!-- socket file -->
+    <script src="assets/js/toastr/angular-toastr.tpls.js"></script>
+    <script src="assets_admin/js/angular/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="assets_admin/js/angular/moment.js"></script>
+    <script src="assets_admin/js/angular/angular-moment.min.js"></script>
+    <script src="assets_admin/js/angular/clipboard.min.js"></script>
+    <script src="assets_admin/js/angular/ngclipboard.min.js"></script>
+    <script src="assets_admin/js/angular/angular-file-saver.bundle.min.js"></script>
+    <script src="assets_admin/js/angular/angular-file-saver.min.js"></script>
+    <script src="assets_admin/js/angular/FileSaver.min.js"></script>
+    <script src="assets_admin/js/angular/Blob.js"></script>
+    <script src="assets_admin/js/angular/ng-infinite-scroll.min.js"></script>
+    <script src="assets_admin/js/angular/ng-file-upload-shim.min.js"></script>
+    <script src="assets_admin/js/angular/ng-file-upload.min.js"></script>
+    <script src="assets_admin/js/ui-grid/ui-grid.min.js"></script>
+    <script src="assets/js/ng-intl-tel-input/intl-tel/js/intlTelInput.min.js"></script>
+    <script src="assets/js/ng-intl-tel-input/intl-tel/js/utils.js"></script>
+    <script src="assets/js/ng-intl-tel-input/dist/ng-intl-tel-input.min.js"></script>
+    <script src="assets/js/ui-select/select.min.js"></script>
+    <script src="app/admin.app.module.js"></script>
+    <script src="app/services/app.service.js"></script>
+    <script src="app/directives/app.directive.js"></script>
+    <script src="app/directives/admin.directive.js"></script>
+    <script src="app/constants/app.constant.js"></script>
+    <script src="app/filters/app.filter.js"></script>
+    <script src="app/modules/admin/admin.module.js"></script>
+    <script src="app/modules/admin/admin.service.js"></script>
+    <script src="app/modules/admin/controllers/admin.controller.js"></script>
+    <script src="app/modules/admin/controllers/customer.controller.js"></script>
+    <script src="app/modules/admin/controllers/currency.controller.js"></script>
+    <script src="app/modules/admin/controllers/currency_pair.controller.js"></script>
+    <script src="app/modules/admin/controllers/commission.controller.js"></script>
+    <script src="app/modules/admin/controllers/trade_limit.controller.js"></script>
+    <script src="app/modules/admin/controllers/faq.controller.js"></script>
+    <script src="app/modules/admin/controllers/email_template.controller.js"></script>
+    <script src="app/modules/admin/controllers/sms_template.controller.js"></script>
+    <script src="app/modules/admin/controllers/withdraw_request.controller.js"></script>
+    <script src="app/modules/admin/controllers/deposit_request.controller.js"></script>
+    <script src="app/modules/admin/controllers/masters/country.controller.js"></script>
+    <script src="app/modules/admin/controllers/masters/state.controller.js"></script>
+    <script src="app/modules/admin/controllers/masters/city.controller.js"></script>
+    <script src="app/modules/admin/controllers/masters/kyc.controller.js"></script>
+    <script src="app/modules/admin/controllers/roles.controller.js"></script>
+    <script src="app/modules/admin/controllers/permissions.controller.js"></script>
+    <script src="app/modules/admin/controllers/user.controller.js"></script>
+    <script src="app/modules/admin/controllers/contact_us.controller.js"></script>
+    <script src="app/modules/admin/controllers/support.controller.js"></script>
+    <script src="app/modules/admin/controllers/customer.controller.js"></script>
+    <script src="app/modules/admin/controllers/admin_dashboard.controller.js"></script>
+    <script src="app/modules/admin/controllers/settings.controller.js"></script>
+    <script src="app/modules/admin/controllers/report/total_deposit.controller.js"></script>
+    <script src="app/modules/admin/controllers/report/total_withdraw.controller.js"></script>
+    <script src="app/modules/admin/controllers/report/deposit_report.controller.js"></script>
+    <script src="app/modules/admin/controllers/report/withdrawal_report.controller.js"></script>
+    <script src="app/modules/admin/controllers/my_profile.controller.js"></script>
+    <script src="app/modules/admin/controllers/transaction.controller.js"></script>
+    <script src="app/modules/admin/controllers/add_amount.controller.js"></script>
+    <script src="app/modules/admin/controllers/customer_bank.controller.js"></script>
+    <script src="app/modules/admin/controllers/customer_report.controller.js"></script>
+    <script src="app/modules/admin/controllers/notification.controller.js"></script>
+    <script src="app/modules/admin/controllers/order_book.controller.js"></script>
+     <script src="app/modules/admin/controllers/customer_report_details.controller.js"></script>
+     <script src="app/modules/admin/controllers/fee_report.controller.js"></script>
+     <script src="app/modules/admin/controllers/feeReport_fiat.controller.js"></script>
+    <script src="app/modules/admin/factory/pagination.js"></script>
+    <script src="assets/js/checklist-model.js"></script>
+    <script src="app/modules/login/login.module.js"></script>
+    <script src="app/modules/login/login.service.js"></script>
+    <script src="app/modules/login/login.controller.js"></script>
+    <script src="app/modules/dashboard/dashboard.module.js"></script>
+    <script src="app/modules/dashboard/services/trade.service.js"></script>
+    <script src="app/modules/dashboard/services/dashboard.service.js"></script>
+        <script src="app/modules/admin/controllers/activity_log.controller.js"></script>
+    <!-- PDF File  -->
+    <script src="assets/js/ui-grid/pdfmake.js"></script>
+    <script src="assets/js/ui-grid/vfs_fonts.js"></script>
+    <script src="assets/js/angular-recaptcha.min.js"></script>
+    <div ng-include="'app/modules/admin/views/common/spinner.html'"></div>
+</body>
+
+</html>

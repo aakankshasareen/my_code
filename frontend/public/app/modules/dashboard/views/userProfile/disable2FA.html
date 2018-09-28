@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h4 class="modal-title">Disable 2F Authentication</h4>
+    <button type="button" class="close" ng-click="cancelConfig();">&times;</button>
+</div>
+    <!-- logo -->
+        <form class="form" name="disable2FA" ng-submit="verifyToken(disable.verifyCode);" novalidate>
+            <div class="modal-body is-small">
+            <div class="form-group">
+                <label class="form-group-label">Enter your Authenticator 2FA Code</label>
+                <input class="form-control" type="text" ng-model="disable.verifyCode" autofocus autocomplete="off" name="twofa" required numbr-only>
+                <p class="error-msg" ng-if="disable2FA.twofa.$error.required && disable2FA.$submitted">Please enter 2FA code.</p>
+            </div>
+            </div>
+            <!-- <div class="form-group mb-5">
+                        <div class="checkbox checkbox-primary"><input type="checkbox" id="keep_me_logged_in"><label for="keep_me_logged_in">Keep me signed in</label></div>
+                    </div> -->
+            <div class="modal-footer justify-content-end">
+                <input type="submit" class="btn btn-primary" value="Submit" />
+            </div>
+        </form>

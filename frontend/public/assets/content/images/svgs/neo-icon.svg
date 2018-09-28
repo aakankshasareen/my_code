@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>E5417C91-A328-4E84-ABE5-B170FD2E566F</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="53856%" y1="-3432%" x2="53856%" y2="77792%" id="linearGradient-1">
+            <stop stop-color="#58BF00" offset="0%"></stop>
+            <stop stop-color="#58BF00" offset="23%"></stop>
+            <stop stop-color="#58BF00" offset="42%"></stop>
+            <stop stop-color="#29B800" offset="61%"></stop>
+            <stop stop-color="#00AE1D" offset="78%"></stop>
+            <stop stop-color="#00A62C" offset="99%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Portfolio_Op.1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-112.000000, -437.000000)">
+        <g id="neo-copy" transform="translate(112.000000, 437.000000)" fill-rule="nonzero">
+            <circle id="Oval" fill="url(#linearGradient-1)" cx="10" cy="10" r="10"></circle>
+            <path d="M16,14.7764862 L11.4766481,12.6594492 L11.4766481,7.96665406 L16,6.35432192 L16,14.7764862 Z M9.41493541,17 L5,14.9336344 L5,6.57263299 L9.41493541,8.6401147 L9.41493541,17 Z M15.8915835,6.05230262 L15.8189309,6.07819637 L11.4766481,7.62579418 L11.3682316,7.6646348 L9.52875021,8.3200144 L5.17454605,6.28155156 L11.3682316,4.07410968 L11.4224399,4.05468937 L11.5373793,4.01383976 L11.577417,4 L15.9316212,6.03823964 L15.8915835,6.05230262 Z" id="Shape" fill="#FFFFFF"></path>
+        </g>
+    </g>
+</svg>

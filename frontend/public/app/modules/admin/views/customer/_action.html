@@ -1,0 +1,15 @@
+<!-- <a ui-sref="admin.editCustomer({id:row.entity.id})"  data-placement="bottom" title="Edit Customer" class="text-primary">
+    <i class="fa fa-2x fa-edit"></i>
+</a> -->
+<a ui-sref="admin.editCustomerKYC({id:row.entity.id})" title="KYC Verification & Edit " class="text-primary">
+    <i class="fa fa-2x fa-edit"></i>
+</a>
+<a ui-sref="admin.editCustomerBankDetail({id:row.entity.id})" title="Bank Verification" class="text-success">
+    <i class="fa fa-2x fa-bank"></i>
+</a>
+
+<!--<button class="btn btn-danger btn-xs" ng-click="grid.appScope.vm.deleteRecord(row)"><i class="glyphicon glyphicon-trash"></i></button>-->
+
+
+<a ng-click="grid.appScope.vm.blockCustomer(row)" ng-if="row.entity.status == '1'" href="#" title="Block User"><i class="fa fa-unlock black-color text-success"></i></a>
+<a ng-click="grid.appScope.vm.unblockCustomer(row)" ng-if="row.entity.status == '0'" href="#" title="Unblock User"><i class="fa fa-lock blue-color text-danger"></i></a>

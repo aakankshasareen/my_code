@@ -1,0 +1,78 @@
+
+
+<div class="animated fadeIn">
+ 
+  <h1 class="page-title">{{vm.pageHeading}} Role</h1>
+        
+  <div class="card">
+           <div class="card-header">Roles</div>
+          <div class="card-body">
+    <!-- Main content -->
+        <section class="content">    
+           <div class="row">
+            <!-- Form controls -->
+            <div class="col-sm-12">
+                <div class="panel panel-bd lobidrag">
+                   
+                    <div class="panel-body">                        
+                        <form autocomplete="off" ng-submit="vm.assign()" id='PermissionsForm' name="vm.form" enctype="multipart/form-data" ng-if="vm.permissions">                            
+                            <div class='row pull-right' style="margin: 10px;">
+                                <button type="button" ng-click="vm.checkAll()" class="btn btn-primary">Check all</button>
+                                <button type="button" class="btn btn-secondary" ng-click="vm.uncheckAll()">Uncheck all</button>
+                            </div>
+                            <div class='clearfix'></div>
+                            <ul id="tree" style='min-height: 500px;'>
+                                <div ng-include="'app/modules/admin/views/permissions/partial_assign.html'" onload="subItems = vm.permissions" >
+                                    
+                                </div>
+                                
+                            </ul>
+                            
+                            <input type="hidden" ng-model="vm.id" />
+                            <div style='clear:both'>
+                                <button type="submit" class="btn btn-primary" ng-disabled="vm.form.$invalid">Submit</button>
+                                <button type="button" ng-click="vm.cancel()" class="btn btn-secondary">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Inline form -->                        
+            <!-- Textual inputs -->                        
+           </div>
+        <!-- Checkboxes & Radios -->
+       </section> <!-- /.content -->    
+    </div>
+  </div>
+</div> 
+<style>
+    
+    #PermissionsForm ul li {
+        float: left;
+        width: 32.33%;
+        margin: 0 1% 3px 0;
+        list-style-type: none;
+    }
+
+    #PermissionsForm label {
+        font-weight: normal;
+        font-size: 12px;
+    }
+    #PermissionsForm ul li input[type="checkbox"] {
+        margin-right: 8px;
+    }
+    #PermissionsForm ul li input[type="checkbox"] {
+        margin-right: 8px;
+    }
+
+    #PermissionsForm ul li ul li {
+        display: block;
+        width: 100%;
+    }
+    .show_div {
+        display: block !important;
+    }
+    .hide_div {
+        display: none !important;
+    }
+</style>

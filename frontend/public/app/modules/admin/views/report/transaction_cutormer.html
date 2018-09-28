@@ -1,0 +1,241 @@
+<style>
+/* .ui-grid-pager-panel {
+        margin-bottom: -22px !important;
+        margin-left: 6px;
+} */
+.marB18 {
+    margin-bottom: 18px;
+}
+.transaction-filters-item {
+    margin: 7px 0;
+}
+.selectize-control {
+    height: 42px;
+}
+
+.ui-select-focusser.ui-select-offscreen {
+    display: none !important;
+}
+.selectize-dropdown{
+    position: relative;
+}
+.ui-grid-filter-container .ui-grid-filter-button-select [class^="ui-grid-icon"]{
+    right:18px;
+}
+
+</style>
+
+<div class="content-wrapper animated fadeIn">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <!-- <h1 class="page-title">Manage FAQ</h1> -->
+  </section>
+  <div class="card">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col-sm-12"> <div class="row marB18 transaction-filters">
+                                <div class="col-md-3 col-sm-6 transaction-filters-item">
+                                <ui-select ng-model="vm.filter.customer.selected" theme="selectize" title="Choose Customer">
+                                    <ui-select-match placeholder="Select or search customer">{{$select.selected.name}}
+                                    <!-- <a uib-tooltip="Clear" class="fa fa-times clear-button"
+                                        ng-click="vm.clearUiSelect($event, $select)"></a> -->
+                                    </ui-select-match>
+
+                                    <ui-select-choices repeat="customer in vm.customer | filter: $select.search">
+                                        <span ng-bind-html="customer.name | highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <!--<div class="col-md-3 col-sm-6 transaction-filters-item">
+                                <ui-select ng-model="vm.filter.txn.selected" theme="selectize" title="Choose Transaction Type">
+                                    <ui-select-match placeholder="Select or search transaction type">{{$select.selected.name}}
+                                    <!-- <a uib-tooltip="Clear" class="fa fa-times clear-button"
+                                        ng-click="vm.clearUiSelect($event, $select)"></a>
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="type in vm.txnType | filter: $select.search">
+                                        <span ng-bind-html="type.name | highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div class="col-md-3 col-sm-6 transaction-filters-item">
+                                <ui-select ng-model="vm.filter.trade.selected" theme="selectize" title="Choose Trade Type">
+                                    <ui-select-match placeholder="Select or search trade type">{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="type in vm.tradeType | filter: $select.search">
+                                        <span ng-bind-html="type.name | highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div class="col-md-3 col-sm-6 transaction-filters-item">
+                                <ui-select ng-model="vm.filter.pair.selected" theme="selectize" title="Choose Pair">
+                                    <ui-select-match placeholder="Select or search pair">{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="pair in vm.pair| filter: $select.search">
+                                        <span ng-bind-html="pair.name | highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>-->
+                            <div class="col-md-3 col-sm-6 transaction-filters-item">
+                                <ui-select ng-model="vm.filter.status.selected" theme="selectize" title="Choose Status Type">
+                                    <ui-select-match placeholder="Select or search status type">{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="status in vm.statusType | filter: $select.search">
+                                        <span ng-bind-html="status.name | highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div class="col-md-3 col-sm-6 transaction-filters-item">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{$root.format}}" ng-model="vm.transaction.fromDate" is-open="vm.transaction.fromOpened" datepicker-options="vm.dateOptions" close-text="Close" autocomplete="off" onkeypress="return false;" placeholder="Select From Date" />
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="vm.transaction.fromOpened = true;"><i class="fa fa-calendar"></i></button>
+                                  </span></p>
+                                  <p ng-if="vm.showFromDateError && !vm.transaction.fromDate" class="error-msg">Please select From Date.</p>
+                                   <p ng-if="vm.showDateError" class="error-msg">From Date should be less than To Date.</p>
+                            </div>
+                            <div class="col-md-3 col-sm-6 transaction-filters-item">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup="{{$root.format}}" ng-model="vm.transaction.toDate" is-open="vm.transaction.toOpened" datepicker-options="vm.dateOptions" close-text="Close" autocomplete="off" onkeypress="return false;" placeholder="Select To Date" />
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="vm.transaction.toOpened = true;"><i class="fa fa-calendar"></i></button>
+                                  </span></p>
+                                  <p ng-if="vm.showToDateError && !vm.transaction.toDate" class="error-msg">Please select To Date.</p>
+                            </div>
+                            <div class="col-md-6 col-sm-6 transaction-filters-item">
+                            <ul class="list-inline">
+                            <li><button type="button" ng-click="vm.transactionFilter()" class="btn btn-primary">Search</button></li>
+                            <li><button type="button" ng-click="vm.clearFilters()" class="btn btn-primary">Clear All</button></li>
+                            </ul>
+                            </div>
+                        </div>
+                         </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col-sm-6"><h4>Manage Customer Report</h4> Customer Report List</div>
+            <div class="col-sm-6">
+                <ul class="list-inline justify-content-end">
+                  <li>
+                    <div class="btn-group">
+                      <button type="button" data-toggle="dropdown" class="btn dropdown-toggle btn-success">Export As
+                          <span class="caret"></span>
+                      </button>
+                      <div role="menu" class="dropdown-menu">
+                            <a class="dropdown-item" href="#" ng-click="export('pdf')"><i class="fa fa-file-pdf-o"></i>PDF</a>
+                            <a class="dropdown-item" href="#" ng-click="export('csv')"><i class="fa fa-file-excel-o"></i>EXCEL</a>
+                        </div>
+                  </div>
+                  </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+  <div ui-grid="gridOptions" ui-grid-exporter ui-grid-resize-columns ui-grid-auto-resize class="grid" style="{{tableHeight}}">  
+  <div class="watermark" ng-if="gridOptions.data.length==0">{{loadingText}}</div>                               
+
+                        <div role="contentinfo" class="ui-grid-pager-panel ng-scope">
+                            <div role="navigation" class="ui-grid-pager-container">
+                                <div role="menubar" class="ui-grid-pager-control">
+                                    <!-- Start Page -->
+                                    <button type="button" role="menuitem" class="ui-grid-pager-first" ui-grid-one-bind-title="aria.pageToFirst"
+
+                                            ui-grid-one-bind-aria-label="aria.pageToFirst"
+
+                                            ng-click="pagination.firstPage()"
+
+                                            ng-disabled="cantPageBackward()" title="Page to first" aria-label="Page to first"
+
+                                            disabled="disabled">
+                                        <div class="first-triangle">
+                                            <div class="first-bar"></div>
+                                        </div>
+                                    </button>
+
+                                    <!-- Prev Page -->
+                                    <button type="button" role="menuitem" class="ui-grid-pager-previous"
+
+                                            ui-grid-one-bind-title="aria.pageBack" ui-grid-one-bind-aria-label="aria.pageBack"
+
+                                            ng-click="pagination.previousPage()"
+
+                                            ng-disabled="cantPageBackward()" title="Page back" aria-label="Page back" disabled="disabled">
+                                        <div class="first-triangle prev-triangle"></div>
+                                    </button>
+
+                                    <input type="text" ui-grid-one-bind-title="aria.pageSelected" ui-grid-one-bind-aria-label="aria.pageSelected"
+
+                                           class="ui-grid-pager-control-input ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-min ng-valid-max ng-valid-required"
+
+                                           ng-model="pagination.pageNumber"
+
+                                           min="1" max="{{pagination.getTotalPages()}}" required="" title="Selected page"
+
+                                           aria-label="Selected page" ng-change="pagination.currentPage()" numbers-only >
+
+                                    <span class="ui-grid-pager-max-pages-number ng-binding"
+                                          ng-show="pagination.getTotalPages() > 0">
+                                        /
+                                        {{pagination.getTotalPages()}}
+                                    </span>
+
+                                    <!-- Next Page -->
+                                    <button type="button" role="menuitem" class="ui-grid-pager-next" ui-grid-one-bind-title="aria.pageForward"
+
+                                            ui-grid-one-bind-aria-label="aria.pageForward"
+
+                                            ng-click="pagination.nextPage()"
+
+                                            ng-disabled="cantPageForward()"
+
+                                            title="Page forward" aria-label="Page forward">
+                                        <div class="last-triangle next-triangle"></div>
+                                    </button>
+
+                                    <!-- Last Page -->
+                                    <button type="button" role="menuitem" class="ui-grid-pager-last"
+                                            ui-grid-one-bind-title="aria.pageToLast" ui-grid-one-bind-aria-label="aria.pageToLast"
+                                            ng-click="pagination.lastPage()" ng-disabled="cantPageToLast()" title="Page to last" aria-label="Page to last">
+                                        <div class="last-triangle"><div class="last-bar"></div></div>
+                                    </button>
+                                </div>
+                                <div class="ui-grid-pager-row-count-picker ng-scope">
+                                    <select ng-model="pagination.ddlpageSize"
+                                            ng-options="o as o for o in pagination.paginationPageSizes" ng-change="pagination.pageSizeChange()"
+                                            class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    </select>
+                                    <span class="ui-grid-pager-row-count-label ng-binding">&nbsp;items per page</span>
+                                </div>
+                            </div>
+                            <div class="ui-grid-pager-count-container">
+                                <div class="ui-grid-pager-count" ng-if="pagination.totalItems > 0">
+                                 <span ng-if="pagination.pageNumber">{{(pagination.pageNumber-1)*pagination.ddlpageSize+1}}</span>
+                                    <span ng-if="pagination.pageNumber"> 
+                                         <span ng-if="(pagination.pageNumber-1)*pagination.ddlpageSize+pagination.ddlpageSize<=pagination.totalItems">    
+                                         to {{(pagination.pageNumber-1)*pagination.ddlpageSize+pagination.ddlpageSize}}
+                                         </span>
+                                         <span ng-if="(pagination.pageNumber-1)*pagination.ddlpageSize+pagination.ddlpageSize>pagination.totalItems">
+                                                to {{pagination.totalItems}}
+                                         </span>
+                                     </span>
+                                     <span ng-if="pagination.totalItems">of {{pagination.totalItems}} items</span>
+                                     </div> 
+                             </div>
+                        </div>
+                        </div>
+    </div>
+</div>
+
+<style>
+    .searchbox { position: relative; }
+    .searchbox .search-input { padding-right: 40px; }
+    .searchbox .search-btn { position: absolute; right: 5px; top: 0; line-height: 1; height: 100%; }
+</style>
